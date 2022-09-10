@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
+import { getAnalytics} from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMyiotDw47oH_LAOTgM_oMZ6aYMV8Rkq0",
@@ -11,6 +12,14 @@ const firebaseConfig = {
   measurementId: "G-PFJ6C6L743"
 };
 
+// async function getCities(db) {
+//     const citiesCol = collection(db, 'cities');
+//     const citySnapshot = await getDocs(citiesCol);
+//     const cityList = citySnapshot.docs.map(doc => doc.data());
+//     return cityList;
+//   }
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
+export const db = getFirestore(app);
