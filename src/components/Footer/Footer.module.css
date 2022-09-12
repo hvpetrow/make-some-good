@@ -1,5 +1,11 @@
+footer {
+    width: 100%;
+    overflow: hidden;
+    color: white;
+}
+
 .bottom {
     opacity: 0.75;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     padding: 3rem 0;
 }
