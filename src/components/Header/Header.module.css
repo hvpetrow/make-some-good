@@ -1,4 +1,14 @@
-body {
+nav a {
+    margin: 0 0.5em;
+} 
+
+nav a:hover {
+    cursor: pointer;
+    color: rgb(51, 212, 186);
+    font-weight: bolder;
+}
+
+/* body {
     background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -45,7 +55,7 @@ footer {
 
 nav a {
     margin: 0 0.5em;
-}
+} 
 
 nav a:hover {
     cursor: pointer;
@@ -61,4 +71,4 @@ nav a:hover {
 #guest {
     margin: 0;
     padding: 0;
-}
+} */
