@@ -1,8 +1,31 @@
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import { db } from '../../firebase';
+
 export const Home = () => {
+    const citiesCol = collection(db, 'cities');
+
+    async function addCity() {
+        let data = {
+            city: 'New York',
+            population: '1599999',
+            territory: '150'
+        }
+        
+        try {
+            const citySnapshot = await addDoc(citiesCol,data);
+            console.log(citySnapshot); 
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    addCity();
+
     return (
         <div className="flex justify-center my-7">
             <div className="grid py-10 justify-center my-7 -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
-                
+
                 <div className="rounded-lg shadow-lg bg-white max-w-sm">
                     <a href="#!">
                         <img
