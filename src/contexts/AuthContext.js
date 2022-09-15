@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useContext } from 'react';
@@ -12,11 +12,13 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
-            console.log("mounted authContext");
+            setLoading(false);
+            console.log("mounted authContext and setted user");
         });
 
         return unsubscribe;
@@ -26,14 +28,19 @@ export const AuthProvider = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
+    function logIn(email, password) {
+        return signInWithEmailAndPassword(auth, email, password);
+    }
+
     const value = {
         currentUser,
-        signUp
+        signUp,
+        logIn
     }
 
     return (
         <AuthContext.Provider value={value}>
-            {children}
+            {!loading && children}
         </AuthContext.Provider>
     )
 }

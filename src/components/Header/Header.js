@@ -5,7 +5,10 @@ import { useAuth } from '../../contexts/AuthContext';
 export const Header = () => {
     const { currentUser } = useAuth();
 
-    console.log("Log from header" + currentUser);
+    if (currentUser) {
+        console.log("Log from header " + currentUser.email);
+        
+    }
 
     return (
         <>
