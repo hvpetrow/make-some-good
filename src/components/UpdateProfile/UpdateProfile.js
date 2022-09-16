@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
 
 export const UpdateProfile = () => {
-    const navigate = useNavigate();
-
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -13,11 +11,10 @@ export const UpdateProfile = () => {
     });
 
     const [error, setError] = useState('');
-
-    const [tac, setTac] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { signUp,currentUser } = useAuth();
+    const navigate = useNavigate();
+    const { updateEmailForCurrentUser, updatePasswordForCurrentUser, currentUser } = useAuth();
 
     const changeHandler = (e) => {
         setValues((oldValues) => ({
@@ -26,43 +23,42 @@ export const UpdateProfile = () => {
         }));
     }
 
-    const tacChangeHandler = (e) => {
-        setTac(e.target.checked);
-    }
-
-
-
-    const submitHandler = async (e) => {
+    const submitHandler = (e) => {
         e.preventDefault();
 
-        // if (values.password !== values.repass) {
-        //     setError('Passwords do not match')
-        //     return;
-        // }
+        if (values.password !== values.repass) {
+           return setError('Passwords do not match');
+        }
 
-        // if (!tac) {
-        //     setError('You must agree with terms and conditions')
-        //     return;
-        // }
+        console.log(values);
 
-        // console.log(values);
-        // console.log('tac ' + tac);
+        const promises = [];
 
-        // try {
-        //     setIsLoading(true);
-        //     await signUp(values.email, values.password);
-        //     navigate('/');
-        // } catch (error) {
-        //     setError('Failed to create an account');
-        // }
+        setIsLoading(true);
 
-        setIsLoading(false);
+        if (values.email !== currentUser.email) {
+            promises.push(updateEmailForCurrentUser(values.email));
+        }
+
+        if (values.password) {
+            promises.push(updatePasswordForCurrentUser(values.password));
+        }
+
+        console.log(promises);
+        Promise.all(promises).then(() => {
+            navigate('/');
+        }).catch(() => {
+            setError('Failed to update account');
+        }).finally(() => {
+            setIsLoading(false);
+        });
+
     }
 
     return (
 
         <section className="h-screen">
-            <div className="container px-6 py-12 h-full">
+            <div className="container px-6 py-12 -my-8 h-full">
                 <div className="flex justify-center items-center flex-wrap  h-full g-6 text-gray-800">
                     <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
                         <img
@@ -86,7 +82,6 @@ export const UpdateProfile = () => {
                                     placeholder="Email address"
                                     value={values.email}
                                     onChange={changeHandler}
-                                    defaultValue={currentUser.value}
                                 />
                             </div>
                             {/* Password input */}
@@ -95,7 +90,7 @@ export const UpdateProfile = () => {
                                     type="password"
                                     name="password"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    required placeholder="Leave blank to keep the same"
+                                    placeholder="Leave blank to keep the same"
                                     value={values.password}
                                     onChange={changeHandler}
                                 />
@@ -106,7 +101,7 @@ export const UpdateProfile = () => {
                                     type="password"
                                     name="repass"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    required placeholder="Leave blank to keep the same"
+                                    placeholder="Leave blank to keep the same"
                                     value={values.repass}
                                     onChange={changeHandler}
                                 />
@@ -115,34 +110,6 @@ export const UpdateProfile = () => {
                             <div className="show_info text-sm mb-4 w-max text-red-400" >
                                 <p>{error}</p>
                             </div>
-                            <div className="flex my-3 items-start">
-                                <div className="flex items-center h-5">
-                                    <input
-                                        id="terms"
-                                        aria-describedby="terms"
-                                        type="checkbox"
-                                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                                        required=""
-                                        value={tac}
-                                        onChange={tacChangeHandler}
-                                    />
-                                </div>
-                                <div className=" ml-3 text-sm">
-                                    <label
-                                        htmlFor="terms"
-                                        className="font-light text-gray-800 dark:text-gray-300"
-                                    >
-                                        I accept the{" "}
-                                        <Link
-                                            className="font-medium text-primary-600 hover:underline hover:text-blue-800 dark:text-primary-500"
-                                            to="#"
-                                        >
-                                            Terms and Conditions
-                                        </Link>
-                                    </label>
-                                </div>
-                            </div>
-
 
                             {/* Submit button */}
                             <button
@@ -152,20 +119,16 @@ export const UpdateProfile = () => {
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                             >
-                                Sign up
+                                Update
                             </button>
                             <div className="flex py-5 justify-center items-center mb-6">
-                                <p className=" text-gray-500 dark:text-gray-400">
-                                    Already have an account?{" "}
-                                    <Link
-                                        to="/login"
-                                        className="text-blue-600 hover:text-blue-800 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                                    >
-                                        Login here
-                                    </Link>
-                                </p>
+                                <Link
+                                    to="/"
+                                    className="text-blue-600 hover:text-blue-800 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
+                                >
+                                    Cancel
+                                </Link>
                             </div>
-
                         </form>
                     </div>
                 </div>
