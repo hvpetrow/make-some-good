@@ -7,6 +7,8 @@ import { Login } from './components/Login/Login';
 import { Logout } from './components/Logout/Logout';
 import { Register } from './components/Register/Register';
 import { AuthProvider } from './contexts/AuthContext';
+import { AuthenticatedGuard } from './guards/AuthenticatedGuard';
+import { UnAuthenticatedGuard } from './guards/UnAuthenticatedGuard';
 
 
 function App() {
@@ -16,10 +18,13 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
+                    <Route element={UnAuthenticatedGuard}>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        
+                    </Route>
                     <Route element={AuthenticatedGuard}>
-                    <Route path="/logout" element={<Logout />} />
+                        <Route path="/logout" element={<Logout />} />
 
                     </Route>
                 </Routes>
