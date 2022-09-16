@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 export const UnAuthenticatedGuard = ({ children }) => {
     const { currentUser } = useAuth();
 
-    if (!currentUser) {
+    if (currentUser) {
         return <Navigate to='/' />
     }
 
