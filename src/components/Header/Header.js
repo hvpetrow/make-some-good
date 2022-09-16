@@ -7,7 +7,6 @@ export const Header = () => {
 
     if (currentUser) {
         console.log("Log from header " + currentUser.email);
-        
     }
 
     return (
@@ -143,24 +142,24 @@ export const Header = () => {
                                         className=" bg-gray-900 text-white px-3 py-2 rounded-md text-lg font-medium"
                                         aria-current="page"
                                     >
-                                        Log in
+                                        Log In
                                     </Link>
                                     <Link
                                         to="/register"
                                         className="bg-gray-900 text-white px-3 py-2 rounded-md text-lg font-medium"
                                         aria-current="page"
                                     >
-                                        Sign up
+                                        Sign Up
                                     </Link>
                                 </>
 
                                 : <>
                                     <Link
-                                        to="#"
+                                        to="/logout"
                                         className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
                                         aria-current="page"
                                     >
-                                        Sign out
+                                        Log Out
                                     </Link>
                                 </>
                             }

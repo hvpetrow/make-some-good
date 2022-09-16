@@ -1,26 +1,33 @@
 import { addDoc, collection, getDocs } from "firebase/firestore";
+import { useAuth } from "../../contexts/AuthContext";
 import { db } from '../../firebase';
 
 export const Home = () => {
-    const citiesCol = collection(db, 'cities');
+    const { currentUser } = useAuth();
 
-    async function addCity() {
-        let data = {
-            city: 'New York',
-            population: '1599999',
-            territory: '150'
-        }
-        
-        try {
-            const citySnapshot = await addDoc(citiesCol,data);
-            console.log(citySnapshot); 
-            
-        } catch (error) {
-            console.log(error);
-        }
+    if (currentUser) {
+        console.log(currentUser);
     }
 
-    addCity();
+    // const citiesCol = collection(db, 'cities');
+
+    // async function addCity() {
+    //     let data = {
+    //         city: 'New York',
+    //         population: '1599999',
+    //         territory: '150'
+    //     }
+
+    //     try {
+    //         const citySnapshot = await addDoc(citiesCol, data);
+    //         console.log(citySnapshot);
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    // addCity();
 
     return (
         <div className="flex justify-center my-7">

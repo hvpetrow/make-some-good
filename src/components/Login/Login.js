@@ -1,21 +1,26 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 export const Login = () => {
+    const navigate = useNavigate();
 
     const [values, setValues] = useState({
         email: '',
         password: '',
-        repass: '',
     });
 
-    const { logIn,currentUser } = useAuth();
+    const { logIn, currentUser } = useAuth();
 
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-
+    const changeHandler = (e) => {
+        setValues((oldValues) => ({
+            ...oldValues,
+            [e.target.name]: e.target.value
+        }));
+    }
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -25,6 +30,7 @@ export const Login = () => {
         try {
             setIsLoading(true);
             await logIn(values.email, values.password);
+            navigate('/');
         } catch (error) {
             setError('Failed to sign in');
         }
@@ -44,11 +50,11 @@ export const Login = () => {
                         />
                     </div>
                     <div className="max-w-md  md:w-8/12 lg:w-5/12 lg:ml-20">
-                    <h2 className="flex justify-center font-bold text-4xl my-6 mx-4">Log In</h2>
+                        <h2 className="flex justify-center font-bold text-4xl my-6 mx-4">Log In</h2>
 
                         <div className="login">
                             <form onSubmit={submitHandler} >
-                                <label for="inputEmail" class="form-label my-2 mx-2 inline-block mb-2 text-gray-700">Email address</label>
+                                <label htmlFor="inputEmail" className="form-label my-2 mx-2 inline-block mb-2 text-gray-700">Email address</label>
                                 <div className="username flex border rounded text-gray-500 mb-4">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -65,13 +71,16 @@ export const Login = () => {
                                         />
                                     </svg>
                                     <input
+                                        name="email"
                                         className="outline-none px-2 h-full py-2 text-lg"
                                         type="text"
                                         placeholder="Enter email"
                                         id="inputEmail"
+                                        value={values.email}
+                                        onChange={changeHandler}
                                     />
                                 </div>
-                                <label for="inputPassword" class="form-label my-2 mx-2 inline-block mb-2 text-gray-700">Password</label>
+                                <label htmlFor="inputPassword" className="form-label my-2 mx-2 inline-block mb-2 text-gray-700">Password</label>
                                 <div className="password flex border rounded text-gray-500 mb-4">
 
                                     <svg
@@ -89,29 +98,28 @@ export const Login = () => {
                                         />
                                     </svg>
                                     <input
+                                        name="password"
                                         className="outline-none px-2 h-full py-2 text-lg"
                                         type="password"
                                         placeholder="Enter you password"
                                         id="inputPassword"
+                                        value={values.password}
+                                        onChange={changeHandler}
                                     />
                                 </div>
                                 <div className="show_info text-sm mb-4 w-max text-red-400" >
                                     <p>Here is the Error</p>
                                 </div>
                                 <div className="submit border rounded mb-4 bg-blue-600 text-white cursor-pointer">
-                                    <div className="wrapper flex w-max mx-auto">
-                                        <button
-
-                                            type="submit"
-                                            className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                                            data-mdb-ripple="true"
-                                            data-mdb-ripple-color="light"
-                                        >
-                                            Login
-                                        </button>
-                                        <div className="flex py-5 justify-center items-center mb-6">
-                                        </div>
-                                    </div>
+                                    <button
+                                        disabled={isLoading}
+                                        type="submit"
+                                        className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                                        data-mdb-ripple="true"
+                                        data-mdb-ripple-color="light"
+                                    >
+                                        Log In
+                                    </button>
                                 </div>
                                 <p className=" text-gray-500 dark:text-gray-400">
                                     Need an account?{" "}

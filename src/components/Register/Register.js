@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
 
 export const Register = () => {
+    const navigate = useNavigate();
 
     const [values, setValues] = useState({
         email: '',
@@ -23,7 +24,6 @@ export const Register = () => {
             ...oldValues,
             [e.target.name]: e.target.value
         }));
-
     }
 
     const tacChangeHandler = (e) => {
@@ -51,6 +51,7 @@ export const Register = () => {
         try {
             setIsLoading(true);
             await signUp(values.email, values.password);
+            navigate('/');
         } catch (error) {
             setError('Failed to create an account');
         }
