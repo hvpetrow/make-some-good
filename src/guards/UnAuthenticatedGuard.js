@@ -5,7 +5,7 @@ export const UnAuthenticatedGuard = ({ children }) => {
     const { currentUser } = useAuth();
 
     if (!currentUser) {
-        return <Navigate to='/login' />
+        return <Navigate to='/' />
     }
 
     return children ? children : <Outlet />
