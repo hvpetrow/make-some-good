@@ -1,9 +1,12 @@
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
-export const UnAuthenticatedGuard = () => {
-    const {currentUser} = useAuth();
+export const UnAuthenticatedGuard = ({ children }) => {
+    const { currentUser } = useAuth();
 
-  return (
-    <div>UnAuthenticatedGuard</div>
-  )
+    if (!currentUser) {
+        return <Navigate to='/login' />
+    }
+
+    return children ? children : <Outlet />
 }
