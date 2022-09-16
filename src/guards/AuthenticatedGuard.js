@@ -8,5 +8,5 @@ export const AuthenticatedGuard = ({ children }) => {
         return <Navigate to='/login' />
     }
 
-    return children ? children : <Outlet />
+    return <Outlet />
 }
