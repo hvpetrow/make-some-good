@@ -75,6 +75,7 @@ export const Login = () => {
                                         className="outline-none px-2 h-full py-2 text-lg"
                                         type="text"
                                         placeholder="Enter email"
+                                        required
                                         id="inputEmail"
                                         value={values.email}
                                         onChange={changeHandler}
@@ -102,6 +103,7 @@ export const Login = () => {
                                         className="outline-none px-2 h-full py-2 text-lg"
                                         type="password"
                                         placeholder="Enter you password"
+                                        required
                                         id="inputPassword"
                                         value={values.password}
                                         onChange={changeHandler}

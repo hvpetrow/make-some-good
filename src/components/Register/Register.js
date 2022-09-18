@@ -97,6 +97,7 @@ export const Register = () => {
                                     name="email"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Email address"
+                                    required
                                     value={values.email}
                                     onChange={changeHandler}
                                 />
@@ -107,6 +108,7 @@ export const Register = () => {
                                     name="firstName"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="First Name"
+                                    required
                                     value={values.displayName}
                                     onChange={changeHandler}
                                 />
@@ -117,6 +119,7 @@ export const Register = () => {
                                     name="lastName"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Last Name"
+                                    required
                                     value={values.displayName}
                                     onChange={changeHandler}
                                 />
@@ -128,6 +131,7 @@ export const Register = () => {
                                     name="password"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Password"
+                                    required
                                     value={values.password}
                                     onChange={changeHandler}
                                 />
@@ -139,6 +143,7 @@ export const Register = () => {
                                     name="repass"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Confirm password"
+                                    required
                                     value={values.repass}
                                     onChange={changeHandler}
                                 />
