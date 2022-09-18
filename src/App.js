@@ -6,6 +6,7 @@ import { Header } from './components/Header/Header';
 import { Home } from './components/Home/Home';
 import { Login } from './components/Login/Login';
 import { Logout } from './components/Logout/Logout';
+import { MyProfile } from './components/MyProfile/MyProfile';
 import { Register } from './components/Register/Register';
 import { UpdateProfile } from './components/UpdateProfile/UpdateProfile';
 import { AuthProvider } from './contexts/AuthContext';
@@ -27,8 +28,8 @@ function App() {
                     </Route>
                     <Route element={<AuthenticatedGuard />}>
                         <Route path="/update-profile" element={<UpdateProfile />} />
+                        <Route path="/my-profile" element={<MyProfile />} />
                         <Route path="/logout" element={<Logout />} />
-
                     </Route>
                 </Routes>
                 <Footer />

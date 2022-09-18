@@ -24,22 +24,13 @@ export const Header = () => {
     >
         {/* Active: "bg-gray-100", Not Active: "" */}
         <Link
-            to="#"
+            to="/my-profile"
             className="block px-4 py-2 text-sm text-gray-700"
             role="menuitem"
             tabIndex={-1}
             id="user-menu-item-0"
         >
             Your Profile
-        </Link>
-        <Link
-            to="#"
-            className="block px-4 py-2 text-sm text-gray-700"
-            role="menuitem"
-            tabIndex={-1}
-            id="user-menu-item-1"
-        >
-            Settings
         </Link>
         <Link
             to="/logout"
@@ -206,7 +197,7 @@ export const Header = () => {
                                         aria-expanded="false"
                                         aria-haspopup="true"
                                         onClick={dropdownHandler}
-                                        onBlur={dropdownHandler}
+                                        
                                     >
                                         <span className="sr-only">Open user menu</span>
                                         <img
