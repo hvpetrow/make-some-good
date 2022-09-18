@@ -8,7 +8,7 @@ import { Login } from './components/Login/Login';
 import { Logout } from './components/Logout/Logout';
 import { MyProfile } from './components/MyProfile/MyProfile';
 import { Register } from './components/Register/Register';
-import { UpdateProfile } from './components/UpdateProfile/UpdateProfile';
+import { ChangePassword } from './components/ChangePassword/ChangePassword';
 import { AuthProvider } from './contexts/AuthContext';
 import { AuthenticatedGuard } from './guards/AuthenticatedGuard';
 import { UnAuthenticatedGuard } from './guards/UnAuthenticatedGuard';
@@ -27,7 +27,7 @@ function App() {
 
                     </Route>
                     <Route element={<AuthenticatedGuard />}>
-                        <Route path="/update-profile" element={<UpdateProfile />} />
+                        <Route path="/change-password" element={<ChangePassword />} />
                         <Route path="/my-profile" element={<MyProfile />} />
                         <Route path="/logout" element={<Logout />} />
                     </Route>

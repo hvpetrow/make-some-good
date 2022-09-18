@@ -3,10 +3,9 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
 
-export const UpdateProfile = () => {
+export const ChangePassword = () => {
     const [values, setValues] = useState({
-        email: '',
-        password: '',
+        newPassword: '',
         repass: '',
     });
 
@@ -14,7 +13,7 @@ export const UpdateProfile = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
-    const { updateEmailForCurrentUser, updatePasswordForCurrentUser, currentUser } = useAuth();
+    const { logout, updatePasswordForCurrentUser, currentUser } = useAuth();
 
     const changeHandler = (e) => {
         setValues((oldValues) => ({
@@ -23,36 +22,48 @@ export const UpdateProfile = () => {
         }));
     }
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
 
-        if (values.password !== values.repass) {
+        if (values.newPassword !== values.repass) {
            return setError('Passwords do not match');
         }
 
         console.log(values);
 
-        const promises = [];
-
         setIsLoading(true);
+        
+        // const promises = [];
+        
+        // if (values.email !== currentUser.email) {
+        //     promises.push(updateEmailForCurrentUser(values.email));
+        // }
 
-        if (values.email !== currentUser.email) {
-            promises.push(updateEmailForCurrentUser(values.email));
-        }
+        if (values.newPassword && values.repass) {
+            try {
+                await updatePasswordForCurrentUser(values.newPassword);
+                await logout();
+                navigate('/login');
+            } catch (error) {
+                console.log(error);
+                    setError(setError(error.msg));
+            }
 
-        if (values.password) {
-            promises.push(updatePasswordForCurrentUser(values.password));
-        }
-
-        console.log(promises);
-        Promise.all(promises).then(() => {
-            navigate('/');
-        }).catch((err) => {
-            console.log(err);
-            setError(setError(err.msg));
-        }).finally(() => {
             setIsLoading(false);
-        });
+        }
+
+
+
+
+        // console.log(promises);
+        // Promise.all(promises).then(() => {
+        //     navigate('/');
+        // }).catch((err) => {
+        //     console.log(err);
+        //     setError(setError(err.msg));
+        // }).finally(() => {
+        //     setIsLoading(false);
+        // });
 
     }
 
@@ -61,40 +72,26 @@ export const UpdateProfile = () => {
         <section className="h-screen">
             <div className="container px-6 py-12 -my-8 h-full">
                 <div className="flex justify-center items-center flex-wrap  h-full g-6 text-gray-800">
-                    <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
+                    <div className="scale-75 md:w-8/12 lg:w-6/12 mb-14 md:mb-0">
                         <img
-                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                            src={require("../../assets/settings.jpg")}
                             className="w-full "
-                            alt="register"
+                            alt="settingsImg"
                         />
                     </div>
                     <div className="max-w-md  md:w-1/12 lg:w-5/12 lg:ml-20">
-                        <h2 className="flex justify-center font-bold text-4xl my-8 mx-4">Update Profile</h2>
-
-
+                        <h2 className="flex justify-center font-bold text-4xl my-8 mx-4">Change Password</h2>
                         {/* {error} */}
                         <form onSubmit={submitHandler}>
-                            {/* Email input */}
-                            <div className="mb-6">
-                        <label htmlFor="inputEmail" className="form-label my-2 mx-2 italic inline-block mb-2 text-gray-700"><p className="font-light">Your actual email:</p> {currentUser.email}</label>
-                                <input
-                                    type="text"
-                                    name="email"
-                                    id="inputEmail"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Email address"
-                                    value={values.email}
-                                    onChange={changeHandler}
-                                />
-                            </div>
                             {/* Password input */}
                             <div className="mb-6">
                                 <input
                                     type="password"
-                                    name="password"
+                                    name="newPassword"
+                                    required
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Leave blank to keep the same"
-                                    value={values.password}
+                                    placeholder="Your new password"
+                                    value={values.newPassword}
                                     onChange={changeHandler}
                                 />
 
@@ -103,8 +100,9 @@ export const UpdateProfile = () => {
                                 <input
                                     type="password"
                                     name="repass"
+                                    required
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Leave blank to keep the same"
+                                    placeholder="Repeat your new password"
                                     value={values.repass}
                                     onChange={changeHandler}
                                 />
@@ -126,7 +124,7 @@ export const UpdateProfile = () => {
                             </button>
                             <div className="flex py-5 justify-center items-center mb-6">
                                 <Link
-                                    to="/"
+                                    to="/my-profile"
                                     className="text-blue-600 hover:text-blue-800 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
                                 >
                                     Cancel

@@ -46,7 +46,7 @@ export const Login = () => {
                         <img
                             src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
                             className="w-full"
-                            alt="Phone image"
+                            alt="loginImg"
                         />
                     </div>
                     <div className="max-w-md  md:w-8/12 lg:w-5/12 lg:ml-20">

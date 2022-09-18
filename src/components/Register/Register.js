@@ -79,9 +79,9 @@ export const Register = () => {
                 <div className="flex justify-center items-center flex-wrap  h-full g-6 text-gray-800">
                     <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
                         <img
-                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                            className="w-full "
-                            alt="register"
+                            src={require("../../assets/register.jpg")}
+                            className="scale-75 mb-4"
+                            alt="registerImg"
                         />
                     </div>
                     <div className="max-w-md  md:w-1/12 lg:w-5/12 lg:ml-20">
