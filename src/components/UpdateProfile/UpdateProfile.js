@@ -47,8 +47,9 @@ export const UpdateProfile = () => {
         console.log(promises);
         Promise.all(promises).then(() => {
             navigate('/');
-        }).catch(() => {
-            setError('Failed to update account');
+        }).catch((err) => {
+            console.log(err);
+            setError(setError(err.msg));
         }).finally(() => {
             setIsLoading(false);
         });
@@ -69,15 +70,17 @@ export const UpdateProfile = () => {
                     </div>
                     <div className="max-w-md  md:w-1/12 lg:w-5/12 lg:ml-20">
                         <h2 className="flex justify-center font-bold text-4xl my-8 mx-4">Update Profile</h2>
-                        {currentUser && currentUser.email}
+
 
                         {/* {error} */}
                         <form onSubmit={submitHandler}>
                             {/* Email input */}
                             <div className="mb-6">
+                        <label htmlFor="inputEmail" className="form-label my-2 mx-2 italic inline-block mb-2 text-gray-700"><p className="font-light">Your actual email:</p> {currentUser.email}</label>
                                 <input
                                     type="text"
                                     name="email"
+                                    id="inputEmail"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Email address"
                                     value={values.email}

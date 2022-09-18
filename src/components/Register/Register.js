@@ -1,7 +1,10 @@
+import { updateProfile } from 'firebase/auth';
+import { addDoc, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
+import { db } from '../../firebase';
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -10,6 +13,8 @@ export const Register = () => {
         email: '',
         password: '',
         repass: '',
+        firstName: '',
+        lastName: ''
     });
 
     const [error, setError] = useState('');
@@ -17,8 +22,7 @@ export const Register = () => {
     const [tac, setTac] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { signUp,currentUser } = useAuth();
-
+    const { signUp, currentUser,setUserAdditionalInfo } = useAuth();
     const changeHandler = (e) => {
         setValues((oldValues) => ({
             ...oldValues,
@@ -45,18 +49,27 @@ export const Register = () => {
             return;
         }
 
-        console.log(values);
-        console.log('tac ' + tac);
-
-        try {
+         try {
             setIsLoading(true);
-            await signUp(values.email, values.password);
+            const { user } = await signUp(values.email, values.password);
+
+            const additionalUserData = {
+                firstName: values.firstName,
+                lastName: values.lastName
+            }
+
+            await  setUserAdditionalInfo(additionalUserData,user.uid)
+                 
+            // await updateProfile(user, {
+                //     displayName: values.displayName,
+                // });
+
             navigate('/');
         } catch (error) {
             setError('Failed to create an account');
-        }
+         }
 
-        setIsLoading(false);
+         setIsLoading(false);
     }
 
     return (
@@ -85,6 +98,26 @@ export const Register = () => {
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Email address"
                                     value={values.email}
+                                    onChange={changeHandler}
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    placeholder="First Name"
+                                    value={values.displayName}
+                                    onChange={changeHandler}
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    placeholder="Last Name"
+                                    value={values.displayName}
                                     onChange={changeHandler}
                                 />
                             </div>

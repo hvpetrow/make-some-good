@@ -1,14 +1,31 @@
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from '../../firebase';
 
 export const Home = () => {
     const { currentUser } = useAuth();
 
+    
+
     if (currentUser) {
-        console.log(currentUser);
+        console.log(currentUser.uid);
     }
 
+    async function test () {
+        // const additionalUserData = {
+        //     firstName: "Pesho3",
+        //     lastName: "Ivanov"
+        // }
+        // await setDoc(doc(db,"users",currentUser.uid), {
+        //     additionalUserData
+        // });
+
+    const docRef = doc(db, "users", "QL3DmB2Rti5DOzFnxqyj");
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap.data());
+    }
+
+    test();
     // const citiesCol = collection(db, 'cities');
 
     // async function addCity() {

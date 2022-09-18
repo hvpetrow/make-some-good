@@ -1,8 +1,9 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateEmail, updatePassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useContext } from 'react';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 
 const AuthContext = React.createContext();
 
@@ -48,6 +49,14 @@ export const AuthProvider = ({ children }) => {
         return updatePassword(currentUser,password);
     }
 
+    function setUserAdditionalInfo(data,uid){
+        console.log("setUserAdditionalInfo method");
+        return setDoc(doc(db,"users",uid), {
+            firstName: data.firstName,
+            lastName: data.lastName
+        });
+    }
+
     const value = {
         currentUser,
         signUp,
@@ -55,7 +64,8 @@ export const AuthProvider = ({ children }) => {
         logout,
         resetPassword,
         updateEmailForCurrentUser,
-        updatePasswordForCurrentUser
+        updatePasswordForCurrentUser,
+        setUserAdditionalInfo
     }
 
     return (
