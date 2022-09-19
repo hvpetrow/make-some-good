@@ -1,8 +1,41 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 
 export const MyProfile = () => {
-    const {currentUser} = useAuth();
+    const [photo, setPhoto] = useState(null);
+    const [photoURL, setPhotoURL] = useState('default picture');
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+
+
+    const { currentUser, uploadProfilePicture } = useAuth();
+
+    useEffect(() => {
+        if (currentUser?.photoURL) {
+            setPhotoURL(currentUser.photoURL);
+        }
+    }, [currentUser])
+
+    const browseHandler = (e) => {
+        setPhoto(e.target.files[0]);
+    }
+
+    const submitHandler = async () => {
+        try {
+            setIsLoading(true)
+            await uploadProfilePicture(photo, currentUser);
+
+        } catch (error) {
+            return setError('Uploding file failed');
+        }
+
+        setIsLoading(false);
+        console.log(currentUser);
+    }
+
+
 
     return (
         <div className="p-16">
@@ -30,33 +63,51 @@ export const MyProfile = () => {
                     </div>{" "}
                     <div className="relative">
                         {" "}
-                        <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-24 w-24"
+                        <div className="absolute inset-x-0 top-0 -mt-24 flex items-center justify-center ">
+                            <img
+                                src={photoURL}
+                                className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
+                                alt="profile"
                             >
-                                {" "}
-                                <path
-                                    fillRule="evenodd"
-                                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                    clipRule="evenodd"
-                                />
-                            </svg>{" "}
+                            </img>{" "}
                         </div>{" "}
                     </div>{" "}
                     <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
-                        <Link to="/" className="text-white py-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
+                    <div>
+                        <label
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="file_input"
+                        >
+                            Upload file
+                        </label>
+                        <input
+                            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            aria-describedby="file_input_help"
+                            id="file_input"
+                            type="file"
+                            onChange={browseHandler}
+                        />
+                        <p
+                            className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                            id="file_input_help"
+                        >
+                            SVG, PNG, JPG or GIF (MAX. 800x400px).
+                        </p>
+                    </div>
+
+                        <button to="/" disabled={isLoading || !photo} onClick={submitHandler} className="text-white py-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
                             {" "}
-                            Change Profile Picture
-                        </Link>{" "}
-                        <Link to="/change-password" className="text-white py-4 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
-                            {" "}
-                            Change Password
-                        </Link>{" "}
+                            Upload Profile Picture
+                        </button>{" "}
+
                     </div>
                 </div>{" "}
+                <Link to="/change-password" className="mx-20 my-20 text-white py-4 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
+                    {" "}
+                    Change Your Password
+                </Link>{" "}
                 <div className="mt-20 text-center border-b pb-12">
                     {" "}
                     <h1 className="text-4xl font-medium text-gray-700">

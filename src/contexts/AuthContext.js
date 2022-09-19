@@ -1,9 +1,10 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateEmail, updatePassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateEmail, updatePassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useContext } from 'react';
-import { auth, db } from '../firebase';
+import { auth, db, storage } from '../firebase';
 
 const AuthContext = React.createContext();
 
@@ -38,23 +39,32 @@ export const AuthProvider = ({ children }) => {
     }
 
     function resetPassword(email) {
-        return sendPasswordResetEmail(auth,email);
+        return sendPasswordResetEmail(auth, email);
     }
 
     function updateEmailForCurrentUser(email) {
-        return updateEmail(currentUser,email);
+        return updateEmail(currentUser, email);
     }
 
     function updatePasswordForCurrentUser(password) {
-        return updatePassword(currentUser,password);
+        return updatePassword(currentUser, password);
     }
 
-    function setUserAdditionalInfo(data,uid){
+    function setUserAdditionalInfo(data, uid) {
         console.log("setUserAdditionalInfo method");
-        return setDoc(doc(db,"users",uid), {
+        return setDoc(doc(db, "users", uid), {
             firstName: data.firstName,
             lastName: data.lastName
         });
+    }
+
+    async function uploadProfilePicture(file, currentUser, setLoading) {
+        const fileRef = ref(storage, `profilPictures/${currentUser.uid}.png`);
+        const snapshot = await uploadBytes(fileRef, file);
+        const photoURL = await getDownloadURL(fileRef);
+
+        updateProfile(currentUser, { photoURL })
+        alert("uploaded file!")
     }
 
     const value = {
@@ -65,7 +75,8 @@ export const AuthProvider = ({ children }) => {
         resetPassword,
         updateEmailForCurrentUser,
         updatePasswordForCurrentUser,
-        setUserAdditionalInfo
+        setUserAdditionalInfo,
+        uploadProfilePicture
     }
 
     return (
