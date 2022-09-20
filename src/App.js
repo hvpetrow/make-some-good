@@ -10,6 +10,8 @@ import { MyProfile } from './components/MyProfile/MyProfile';
 import { Register } from './components/Register/Register';
 import { ChangePassword } from './components/ChangePassword/ChangePassword';
 import { AuthProvider } from './contexts/AuthContext';
+import { CauseProvider } from './contexts/CauseContext';
+
 import { AuthenticatedGuard } from './guards/AuthenticatedGuard';
 import { UnAuthenticatedGuard } from './guards/UnAuthenticatedGuard';
 
@@ -17,22 +19,24 @@ function App() {
     return (
         <div>
             <AuthProvider>
-                <Header />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route element={<UnAuthenticatedGuard />}>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/forgot-password" element={<ForgotPassword />}/>
+                <CauseProvider>
+                    <Header />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route element={<UnAuthenticatedGuard />}>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/forgot-password" element={<ForgotPassword />} />
 
-                    </Route>
-                    <Route element={<AuthenticatedGuard />}>
-                        <Route path="/change-password" element={<ChangePassword />} />
-                        <Route path="/my-profile" element={<MyProfile />} />
-                        <Route path="/logout" element={<Logout />} />
-                    </Route>
-                </Routes>
-                <Footer />
+                        </Route>
+                        <Route element={<AuthenticatedGuard />}>
+                            <Route path="/change-password" element={<ChangePassword />} />
+                            <Route path="/my-profile" element={<MyProfile />} />
+                            <Route path="/logout" element={<Logout />} />
+                        </Route>
+                    </Routes>
+                    <Footer />
+                </CauseProvider>
             </AuthProvider>
         </div>
     );
