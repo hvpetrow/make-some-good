@@ -5,8 +5,8 @@ export const getAll = async (collectionRef) => {
 }
 
 export const getOne = async (collectionRef,id) => {
-    const causeDoc = doc(collectionRef,id)
-    return getDoc(causeDoc);
+    const oneDoc = doc(collectionRef,id)
+    return getDoc(oneDoc);
 }
 
 //automatic generated id

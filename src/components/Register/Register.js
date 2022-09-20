@@ -14,7 +14,8 @@ export const Register = () => {
         password: '',
         repass: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
+        country: ''
     });
 
     const [error, setError] = useState('');
@@ -22,7 +23,7 @@ export const Register = () => {
     const [tac, setTac] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { signUp, currentUser,setUserAdditionalInfo } = useAuth();
+    const { signUp, currentUser, setUserAdditionalInfo } = useAuth();
     const changeHandler = (e) => {
         setValues((oldValues) => ({
             ...oldValues,
@@ -49,26 +50,27 @@ export const Register = () => {
             return;
         }
 
-         try {
+        try {
             setIsLoading(true);
             const { user } = await signUp(values.email, values.password);
 
             const additionalUserData = {
                 firstName: values.firstName,
-                lastName: values.lastName
+                lastName: values.lastName,
+                country: values.country
             }
 
-            const settedUserWithAdditionalData = await  setUserAdditionalInfo(additionalUserData,user.uid)
+            const settedUserWithAdditionalData = await setUserAdditionalInfo(additionalUserData, user.uid)
             // await updateProfile(user, {
-                //     displayName: values.displayName,
-                // });
+            //     displayName: values.displayName,
+            // });
 
             navigate('/');
         } catch (error) {
             setError('Failed to create an account');
-         }
+        }
 
-         setIsLoading(false);
+        setIsLoading(false);
     }
 
     return (
@@ -120,6 +122,17 @@ export const Register = () => {
                                     placeholder="Last Name"
                                     required
                                     value={values.displayName}
+                                    onChange={changeHandler}
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <input
+                                    type="text"
+                                    name="country"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    placeholder="Country"
+                                    required
+                                    value={values.country}
                                     onChange={changeHandler}
                                 />
                             </div>

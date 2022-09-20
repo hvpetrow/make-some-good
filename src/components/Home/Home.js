@@ -155,7 +155,8 @@ export const Home = () => {
                             Details
                         </button>
                     </div>
-                </div> <div className="rounded-lg shadow-lg bg-white max-w-sm">
+                </div> 
+                <div className="rounded-lg shadow-lg bg-white max-w-sm">
                     <a href="#!">
                         <img
                             className="rounded-t-lg"

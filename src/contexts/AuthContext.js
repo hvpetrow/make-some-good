@@ -56,7 +56,8 @@ export const AuthProvider = ({ children }) => {
         console.log("setUserAdditionalInfo");
         return setDoc(doc(db, "users", uid), {
             firstName: data.firstName,
-            lastName: data.lastName
+            lastName: data.lastName,
+            country: data.country
         });
     }
 

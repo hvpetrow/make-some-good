@@ -1,14 +1,35 @@
+import { collection } from "firebase/firestore";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
+import { db } from "../../firebase";
+import { getOne } from "../../services/crudService";
+
+const usersCollectionRef = collection(db, 'users');
 
 export const MyProfile = () => {
+    const [userInfo,setUserInfo] = useState({
+        firstName:'',
+        lastName:'',
+        city:'',
+        country:''
+    });
+
     const [photo, setPhoto] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
     const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
+
+    useEffect(() => {
+        getOne(usersCollectionRef,currentUser.uid)
+        .then(docSnap => {
+            console.log(docSnap.data());
+
+            setUserInfo(docSnap.data());
+        });
+    },[currentUser.uid]) ;
 
     useEffect(() => {
         if (currentUser?.photoURL) {
@@ -38,7 +59,6 @@ export const MyProfile = () => {
         console.log(currentUser + "submitted profile picture ");
         refreshPage();
     }
-
 
 
 
@@ -116,9 +136,9 @@ export const MyProfile = () => {
                 <div className="mt-20 text-center border-b pb-12">
                     {" "}
                     <h1 className="text-4xl font-medium text-gray-700">
-                        Jessica Jones
+                        {userInfo.firstName} {userInfo.lastName}
                     </h1>{" "}
-                    <p className="font-light text-gray-600 mt-3">Bucharest, Romania</p>{" "}
+                    <p className="font-light text-gray-600 mt-3">{userInfo.country}</p>{" "}
                     <p className="mt-8 text-gray-500">
                         Solution Manager - Creative Tim Officer
                     </p>{" "}
