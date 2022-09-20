@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 export const Header = () => {
     const [dropdownClick,setDropdownClick] = useState(false);
-    const { currentUser } = useAuth();
+    const { currentUser,photoURL } = useAuth();
 
     if (currentUser) {
         console.log("Log from header " + currentUser.email);
@@ -202,7 +202,7 @@ export const Header = () => {
                                         <span className="sr-only">Open user menu</span>
                                         <img
                                             className="h-8 w-8 rounded-full"
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                            src={photoURL}
                                             alt=""
                                         />
                                     </button>

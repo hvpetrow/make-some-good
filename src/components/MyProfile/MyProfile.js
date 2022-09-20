@@ -5,18 +5,21 @@ import { useAuth } from "../../contexts/AuthContext"
 
 export const MyProfile = () => {
     const [photo, setPhoto] = useState(null);
-    const [photoURL, setPhotoURL] = useState('default picture');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
-
-    const { currentUser, uploadProfilePicture } = useAuth();
+    const { currentUser, uploadProfilePicture,photoURL,setPhotoURL } = useAuth();
 
     useEffect(() => {
         if (currentUser?.photoURL) {
             setPhotoURL(currentUser.photoURL);
         }
-    }, [currentUser])
+
+    }, [currentUser.photoURL,photoURL,setPhotoURL,photo])
+
+    function refreshPage(){ 
+        window.location.reload(); 
+    }
 
     const browseHandler = (e) => {
         setPhoto(e.target.files[0]);
@@ -32,8 +35,10 @@ export const MyProfile = () => {
         }
 
         setIsLoading(false);
-        console.log(currentUser);
+        console.log(currentUser + "submitted profile picture ") ;
+        refreshPage();
     }
+
 
 
 
