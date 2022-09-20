@@ -11,9 +11,9 @@ import { Register } from './components/Register/Register';
 import { ChangePassword } from './components/ChangePassword/ChangePassword';
 import { AuthProvider } from './contexts/AuthContext';
 import { CauseProvider } from './contexts/CauseContext';
-
 import { AuthenticatedGuard } from './guards/AuthenticatedGuard';
 import { UnAuthenticatedGuard } from './guards/UnAuthenticatedGuard';
+import { CreateCause } from './components/Causes/CreateCause/CreateCause';
 
 function App() {
     return (
@@ -32,6 +32,7 @@ function App() {
                         <Route element={<AuthenticatedGuard />}>
                             <Route path="/change-password" element={<ChangePassword />} />
                             <Route path="/my-profile" element={<MyProfile />} />
+                            <Route path="/create-cause" element={<CreateCause />} />
                             <Route path="/logout" element={<Logout />} />
                         </Route>
                     </Routes>
