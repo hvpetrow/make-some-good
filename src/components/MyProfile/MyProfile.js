@@ -8,17 +8,17 @@ export const MyProfile = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const { currentUser, uploadProfilePicture,photoURL,setPhotoURL } = useAuth();
+    const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
 
     useEffect(() => {
         if (currentUser?.photoURL) {
             setPhotoURL(currentUser.photoURL);
         }
 
-    }, [currentUser.photoURL,photoURL,setPhotoURL,photo])
+    }, [currentUser.photoURL, photoURL,currentUser])
 
-    function refreshPage(){ 
-        window.location.reload(); 
+    function refreshPage() {
+        window.location.reload();
     }
 
     const browseHandler = (e) => {
@@ -35,7 +35,7 @@ export const MyProfile = () => {
         }
 
         setIsLoading(false);
-        console.log(currentUser + "submitted profile picture ") ;
+        console.log(currentUser + "submitted profile picture ");
         refreshPage();
     }
 
@@ -80,27 +80,27 @@ export const MyProfile = () => {
                         </div>{" "}
                     </div>{" "}
                     <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
-                    <div>
-                        <label
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                            htmlFor="file_input"
-                        >
-                            Upload file
-                        </label>
-                        <input
-                            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                            aria-describedby="file_input_help"
-                            id="file_input"
-                            type="file"
-                            onChange={browseHandler}
-                        />
-                        <p
-                            className="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                            id="file_input_help"
-                        >
-                            SVG, PNG, JPG or GIF (MAX. 800x400px).
-                        </p>
-                    </div>
+                        <div>
+                            <label
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                htmlFor="file_input"
+                            >
+                                Upload file
+                            </label>
+                            <input
+                                className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                aria-describedby="file_input_help"
+                                id="file_input"
+                                type="file"
+                                onChange={browseHandler}
+                            />
+                            <p
+                                className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                                id="file_input_help"
+                            >
+                                SVG, PNG, JPG or GIF (MAX. 800x400px).
+                            </p>
+                        </div>
 
                         <button to="/" disabled={isLoading || !photo} onClick={submitHandler} className="text-white py-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
                             {" "}

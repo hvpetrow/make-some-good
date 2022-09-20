@@ -5,8 +5,6 @@ import { db } from '../../firebase';
 export const Home = () => {
     const { currentUser } = useAuth();
 
-    
-
     if (currentUser) {
         console.log(currentUser.uid);
     }

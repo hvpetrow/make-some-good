@@ -2,6 +2,7 @@ import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 export const Header = () => {
     const [dropdownClick,setDropdownClick] = useState(false);
@@ -10,7 +11,8 @@ export const Header = () => {
     if (currentUser) {
         console.log("Log from header " + currentUser.email);
     }
-    
+
+
     const dropdownHandler = () => {
         setDropdownClick(!dropdownClick);
     }
