@@ -1,16 +1,18 @@
 import { collection } from "firebase/firestore";
 import { useEffect } from "react";
 
-import { useAuth } from "../../contexts/AuthContext";
-import { useCausesContext } from "../../contexts/CauseContext";
-import { db } from "../../firebase";
-import { getAll } from "../../services/crudService";
+import { useAuth } from "../../../contexts/AuthContext";
+import { useCausesContext } from "../../../contexts/CauseContext";
+import { db } from "../../../firebase";
+import { getAll } from "../../../services/crudService";
 import { CardTemplate } from "./CardTemplate";
+
+
 
 const causesCollectionRef = collection(db, "causes");
 
 
-export const Home = () => {
+export const Catalog = () => {
     const { currentUser } = useAuth();
     const { causes,setCauses } = useCausesContext();
 
