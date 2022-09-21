@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { Footer } from './components/Footer/Footer';
 import { ForgotPassword } from './components/ForgotPassword/ForgotPassword';
@@ -36,6 +37,7 @@ function App() {
                             <Route path="/logout" element={<Logout />} />
                         </Route>
                     </Routes>
+                    <ToastContainer />
                     <Footer />
                 </CauseProvider>
             </AuthProvider>

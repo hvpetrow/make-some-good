@@ -1,6 +1,9 @@
 import { collection } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
 import { add} from '../../../services/crudService';
@@ -41,6 +44,7 @@ export const CreateCause = () => {
         try {
             setIsLoading(true);
             await add(causesCollectionRef, values);
+            toast.success('Successfully Created Cause!');
             navigate('/');
         } catch (error) {
             console.log(error);

@@ -1,10 +1,10 @@
-import { updateProfile } from 'firebase/auth';
-import { addDoc, collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useAuth } from '../../contexts/AuthContext'
-import { db } from '../../firebase';
 
 export const Register = () => {
     const navigate = useNavigate();
@@ -64,6 +64,7 @@ export const Register = () => {
             // await updateProfile(user, {
             //     displayName: values.displayName,
             // });
+            toast.success('Successfully Registered!');
 
             navigate('/');
         } catch (error) {

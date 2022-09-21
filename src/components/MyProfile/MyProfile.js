@@ -2,6 +2,9 @@ import { collection } from "firebase/firestore";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useAuth } from "../../contexts/AuthContext"
 import { db } from "../../firebase";
 import { getOne } from "../../services/crudService";
@@ -50,7 +53,8 @@ export const MyProfile = () => {
         try {
             setIsLoading(true)
             await uploadProfilePicture(photo, currentUser);
-
+            toast.success('Successfully uploaded profile picture!');
+            
         } catch (error) {
             return setError('Uploding file failed');
         }
