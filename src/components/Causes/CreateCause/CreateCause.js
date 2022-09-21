@@ -9,6 +9,7 @@ export const CreateCause = () => {
         purpose: '',
         place: '',
         date: '',
+        imgSrc: '',
         description: ''
     });
 
@@ -25,10 +26,9 @@ export const CreateCause = () => {
     return (
 
         <section className="h-screen">
-            <div className="container px-6 py-12 h-full">
-                <div className="flex justify-center items-center flex-wrap scale-90  h-full g-6 text-gray-800">
-
-                    <div className="max-w-md  md:w-1/12 lg:w-5/12 lg:ml-20">
+            <div className="container px-4 py-8 h-5/6">
+                <div className="flex justify-center items-center flex-wrap scale-90  h-5/6 g-6 text-gray-800">
+                    <div className="max-w-xl md:w-2/3 lg:w-3/4 lg:ml-20">
                         <h2 className="text-center text-4xl mb-12">Create Cause</h2>
                         {/* {currentUser && currentUser.email} */}
 
@@ -39,7 +39,7 @@ export const CreateCause = () => {
                                 <input
                                     type="text"
                                     name="title"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Title"
                                     required
                                     value={values.title}
@@ -51,7 +51,7 @@ export const CreateCause = () => {
                                 <input
                                     type="text"
                                     name="purpose"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Purpose"
                                     required
                                     value={values.purpose}
@@ -63,7 +63,7 @@ export const CreateCause = () => {
                                 <input
                                     type="text"
                                     name="place"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Place"
                                     required
                                     value={values.place}
@@ -75,7 +75,7 @@ export const CreateCause = () => {
                                 <input
                                     type="text"
                                     name="date"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Date"
                                     required
                                     value={values.date}
@@ -86,13 +86,12 @@ export const CreateCause = () => {
                             <div className="mb-6">
                                 <input
                                     type="text"
-                                    name="imgUrl"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="example: https://pixlr.eu/makeSomeGood.png"
+                                    name="imgSrc"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    placeholder="Example: https://pixlr.eu/makeSomeGood.png"
                                     required
-                                    value={values.date}
+                                    value={values.imgSrc}
                                     onChange={changeHandler}
-
                                 />
                             </div>
 
@@ -105,11 +104,12 @@ export const CreateCause = () => {
                                         Description
                                     </label>
                                     <textarea
-                                        className=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
+                                        className=" no-resize appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
                                         id="description"
-                                        defaultValue={""}
+                                        placeholder="Description"
+                                        value={values.description}
+                                        onChange={changeHandler}
                                     />
-
                                 </div>
                             </div>
 
