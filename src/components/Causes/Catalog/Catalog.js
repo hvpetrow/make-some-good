@@ -49,7 +49,7 @@ export const Catalog = () => {
         <div className="flex justify-center my-7">
             <div className="grid py-10 justify-center my-7 -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
             {causes.length
-                ? causes.map(c => <CardTemplate key={c.id} cause={c.fields} />)
+                ? causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />)
                 : <h3 className="no-articles">No articles yet</h3>
             }
             </div>
