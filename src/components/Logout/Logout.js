@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useAuth } from "../../contexts/AuthContext";
 
 export const Logout = () => {
@@ -10,6 +13,8 @@ export const Logout = () => {
     logout()
         .then(() => {
             navigate('/login', { replace: true });
+            toast.success('Successfull Logout!');
+
             console.log('logged out ' + currentUser.email);
         })
         .catch(() => {
