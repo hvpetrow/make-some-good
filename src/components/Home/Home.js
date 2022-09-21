@@ -1,183 +1,55 @@
-import { addDoc, collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { collection } from "firebase/firestore";
+import { useEffect } from "react";
+
 import { useAuth } from "../../contexts/AuthContext";
-import { db } from '../../firebase';
+import { useCausesContext } from "../../contexts/CauseContext";
+import { db } from "../../firebase";
+import { getAll } from "../../services/crudService";
+import { CardTemplate } from "./CardTemplate";
+
+const causesCollectionRef = collection(db, "causes");
+
 
 export const Home = () => {
     const { currentUser } = useAuth();
+    const { causes,setCauses } = useCausesContext();
 
-    if (currentUser) {
+    if (currentUser) { 
         console.log(currentUser.uid);
     }
 
-    async function test () {
-        // const additionalUserData = {
-        //     firstName: "Pesho3",
-        //     lastName: "Ivanov"
-        // }
-        // await setDoc(doc(db,"users",currentUser.uid), {
-        //     additionalUserData
-        // });
+    useEffect(() => {
+        try {
+            getAll(causesCollectionRef)
+                .then(docs => { 
+                    let arr = [];
 
-    const docRef = doc(db, "users", "QL3DmB2Rti5DOzFnxqyj");
-    const docSnap = await getDoc(docRef);
-    console.log(docSnap.data());
-    }
+                    docs.forEach((doc) => {
+                      let fields = doc.data();
 
-    test();
-    // const citiesCol = collection(db, 'cities');
+                      arr.push({
+                        id: doc.id,
+                        fields: fields
+                      });
+                      
+                    });
+                    
+                    setCauses(arr)
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
-    // async function addCity() {
-    //     let data = {
-    //         city: 'New York',
-    //         population: '1599999',
-    //         territory: '150'
-    //     }
-
-    //     try {
-    //         const citySnapshot = await addDoc(citiesCol, data);
-    //         console.log(citySnapshot);
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    // addCity();
+    console.log(causes);
 
     return (
         <div className="flex justify-center my-7">
             <div className="grid py-10 justify-center my-7 -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
-
-                <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                    <a href="#!">
-                        <img
-                            className="rounded-t-lg"
-                            src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                            alt=""
-                        />
-                    </a>
-                    <div className="p-6">
-                        <h5 className="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                        <p className="text-gray-700 text-base mb-4">
-                            Some quick example text to build on the card title and make up the bulk
-                            of the card's content.
-                        </p>
-                        <button
-                            type="button"
-                            className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                        >
-                            Details
-                        </button>
-                    </div>
-                </div>
-                <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                    <a href="#!">
-                        <img
-                            className="rounded-t-lg"
-                            src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                            alt=""
-                        />
-                    </a>
-                    <div className="p-6">
-                        <h5 className="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                        <p className="text-gray-700 text-base mb-4">
-                            Some quick example text to build on the card title and make up the bulk
-                            of the card's content.
-                        </p>
-                        <button
-                            type="button"
-                            className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                        >
-                            Details
-                        </button>
-                    </div>
-                </div>
-                <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                    <a href="#!">
-                        <img
-                            className="rounded-t-lg"
-                            src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                            alt=""
-                        />
-                    </a>
-                    <div className="p-6">
-                        <h5 className="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                        <p className="text-gray-700 text-base mb-4">
-                            Some quick example text to build on the card title and make up the bulk
-                            of the card's content.
-                        </p>
-                        <button
-                            type="button"
-                            className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                        >
-                            Details
-                        </button>
-                    </div>
-                </div> <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                    <a href="#!">
-                        <img
-                            className="rounded-t-lg"
-                            src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                            alt=""
-                        />
-                    </a>
-                    <div className="p-6">
-                        <h5 className="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                        <p className="text-gray-700 text-base mb-4">
-                            Some quick example text to build on the card title and make up the bulk
-                            of the card's content.
-                        </p>
-                        <button
-                            type="button"
-                            className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                        >
-                            Details
-                        </button>
-                    </div>
-                </div> <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                    <a href="#!">
-                        <img
-                            className="rounded-t-lg"
-                            src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                            alt=""
-                        />
-                    </a>
-                    <div className="p-6">
-                        <h5 className="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                        <p className="text-gray-700 text-base mb-4">
-                            Some quick example text to build on the card title and make up the bulk
-                            of the card's content.
-                        </p>
-                        <button
-                            type="button"
-                            className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                        >
-                            Details
-                        </button>
-                    </div>
-                </div> 
-                <div className="rounded-lg shadow-lg bg-white max-w-sm">
-                    <a href="#!">
-                        <img
-                            className="rounded-t-lg"
-                            src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                            alt=""
-                        />
-                    </a>
-                    <div className="p-6">
-                        <h5 className="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                        <p className="text-gray-700 text-base mb-4">
-                            Some quick example text to build on the card title and make up the bulk
-                            of the card's content.
-                        </p>
-                        <button
-                            type="button"
-                            className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                        >
-                            Details
-                        </button>
-                    </div>
-                </div>
+            {causes
+                ? causes.map(c => <CardTemplate key={c.id} cause={c.fields} />)
+                : <h3 className="no-articles">No articles yet</h3>
+            }
             </div>
         </div>
     );

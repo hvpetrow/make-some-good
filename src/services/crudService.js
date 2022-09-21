@@ -11,7 +11,6 @@ export const getOne = async (collectionRef,id) => {
 
 //automatic generated id
 export const add = async (collectionRef,data) => {
-    
     return addDoc(collectionRef, data);
 }
 

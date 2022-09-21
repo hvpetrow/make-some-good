@@ -13,10 +13,12 @@ export function useCausesContext() {
 export const CauseProvider = ({ children }) => {
     const [causes, setCauses] = useState([]);
 
-    useEffect(() => {
-        getAll(causesCollectionRef)
-            .then(result => { setCauses(result) });
-    }, []);
+    const useGetAllGames = () => {
+        useEffect(() => {
+            getAll(causesCollectionRef)
+                .then(result => { setCauses(result) });
+        }, []);
+    }
 
     // const useGetAllCauses = () => {
     //     useEffect(() => {
@@ -59,7 +61,7 @@ export const CauseProvider = ({ children }) => {
     // }
 
     return (
-        <CauseContext.Provider value={{ causes }}>
+        <CauseContext.Provider value={{ causes,setCauses, useGetAllGames }}>
             {children}
         </CauseContext.Provider>
     );
