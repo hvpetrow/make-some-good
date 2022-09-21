@@ -15,11 +15,8 @@ export const add = async (collectionRef,newDoc) => {
 }
 
 //manually setted id
-export function set(collectionRef,data, uid) {
-    return setDoc(doc(collectionRef,uid), {
-        firstName: data.firstName,
-        lastName: data.lastName
-    });
+export function set(collectionRef,data, id) {
+    return setDoc(doc(collectionRef,id), data);
 }
 
 export const update = async (collectionRef,id, updatedDoc) => {
@@ -28,6 +25,6 @@ export const update = async (collectionRef,id, updatedDoc) => {
 }
 
 export const deleteOne = async (collectionRef,id) => {
-    const causeDoc = doc(collectionRef, id);
-    return deleteDoc(causeDoc);
+    const deletedDoc = doc(collectionRef, id);
+    return deleteDoc(deletedDoc);
 }

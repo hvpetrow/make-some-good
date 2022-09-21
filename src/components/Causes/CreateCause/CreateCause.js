@@ -1,5 +1,11 @@
+import { collection } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { db } from '../../../firebase';
+import { set } from '../../../services/crudService';
+
+
+const usersCollectionRef = collection(db, 'causes');
 
 export const CreateCause = () => {
     const navigate = useNavigate();
@@ -9,11 +15,12 @@ export const CreateCause = () => {
         purpose: '',
         place: '',
         date: '',
-        imgSrc: '',
+        imgUrl: '',
         description: ''
     });
 
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const changeHandler = (e) => {
@@ -21,6 +28,22 @@ export const CreateCause = () => {
             ...oldValues,
             [e.target.name]: e.target.value
         }));
+    }
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+
+        console.log(values);
+
+        try {
+            setIsLoading(true);
+            await set(usersCollectionRef);
+            navigate('/');
+        } catch (error) {
+            setError('Failed to sign in');
+        }
+
+        setIsLoading(false);
     }
 
     return (
@@ -33,7 +56,7 @@ export const CreateCause = () => {
                         {/* {currentUser && currentUser.email} */}
 
                         {/* {error} */}
-                        <form >
+                        <form onSubmit={submitHandler}>
                             {/* Email input */}
                             <div className="mb-6">
                                 <input
@@ -86,11 +109,11 @@ export const CreateCause = () => {
                             <div className="mb-6">
                                 <input
                                     type="text"
-                                    name="imgSrc"
+                                    name="imgUrl"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Example: https://pixlr.eu/makeSomeGood.png"
                                     required
-                                    value={values.imgSrc}
+                                    value={values.imgUrl}
                                     onChange={changeHandler}
                                 />
                             </div>
