@@ -127,7 +127,7 @@ export const Header = () => {
                                 <div className="flex space-x-4">
                                     {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                                     <Link
-                                        to="/"
+                                        to="/catalog"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
                                     >
                                         Causes
@@ -160,7 +160,7 @@ export const Header = () => {
                                             </Link>
 
                                             <Link
-                                                to="#"
+                                                to="/my-causes"
                                                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
                                             >
                                                 My Causes

@@ -15,6 +15,8 @@ import { CauseProvider } from './contexts/CauseContext';
 import { AuthenticatedGuard } from './guards/AuthenticatedGuard';
 import { UnAuthenticatedGuard } from './guards/UnAuthenticatedGuard';
 import { CreateCause } from './components/Causes/CreateCause/CreateCause';
+import { Catalog } from './components/Causes/Catalog/Catalog';
+import { MyCauses } from './components/Causes/MyCauses/MyCauses';
 
 function App() {
     return (
@@ -24,6 +26,7 @@ function App() {
                     <Header />
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/catalog" element={<Catalog />} />
                         <Route element={<UnAuthenticatedGuard />}>
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
@@ -33,6 +36,7 @@ function App() {
                         <Route element={<AuthenticatedGuard />}>
                             <Route path="/change-password" element={<ChangePassword />} />
                             <Route path="/my-profile" element={<MyProfile />} />
+                            <Route path="/my-causes" element={<MyCauses />} />
                             <Route path="/create-cause" element={<CreateCause />} />
                             <Route path="/logout" element={<Logout />} />
                         </Route>
