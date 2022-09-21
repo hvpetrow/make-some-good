@@ -10,12 +10,13 @@ export const getOne = async (collectionRef,id) => {
 }
 
 //automatic generated id
-export const add = async (collectionRef,newDoc) => {
-    return addDoc(collectionRef, newDoc);
+export const add = async (collectionRef,data) => {
+    
+    return addDoc(collectionRef, data);
 }
 
 //manually setted id
-export function set(collectionRef,data, id) {
+export function set(collectionRef,id,data) {
     return setDoc(doc(collectionRef,id), data);
 }
 

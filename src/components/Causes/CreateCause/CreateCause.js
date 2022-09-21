@@ -1,14 +1,16 @@
 import { collection } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
-import { set } from '../../../services/crudService';
+import { add} from '../../../services/crudService';
 
 
-const usersCollectionRef = collection(db, 'causes');
+const causesCollectionRef = collection(db, 'causes');
 
 export const CreateCause = () => {
     const navigate = useNavigate();
+    const { currentUser } = useAuth();
 
     const [values, setValues] = useState({
         title: '',
@@ -16,7 +18,8 @@ export const CreateCause = () => {
         place: '',
         date: '',
         imgUrl: '',
-        description: ''
+        description: '',
+        creator: currentUser.uid
     });
 
     const [error, setError] = useState('');
@@ -37,9 +40,10 @@ export const CreateCause = () => {
 
         try {
             setIsLoading(true);
-            await set(usersCollectionRef);
+            await add(causesCollectionRef, values);
             navigate('/');
         } catch (error) {
+            console.log(error);
             setError('Failed to sign in');
         }
 
@@ -129,6 +133,7 @@ export const CreateCause = () => {
                                     <textarea
                                         className=" no-resize appearance-none block w-full bg-white text-gray-700 border border-gray-400 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
                                         id="description"
+                                        name="description"
                                         placeholder="Description"
                                         value={values.description}
                                         onChange={changeHandler}
