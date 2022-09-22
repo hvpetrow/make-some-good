@@ -7,6 +7,8 @@ import { getAll } from "../../../services/crudService";
 import { db } from "../../../firebase";
 import { CardTemplate } from "../Catalog/CardTemplate";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { Spinner } from "../../../shared/Spinner";
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -14,6 +16,7 @@ const causesCollectionRef = collection(db, "causes");
 export const MyCauses = () => {
     const { currentUser } = useAuth();
     const { causes, setCauses } = useCausesContext();
+    const [isLoading, setIsLoading] = useState(true);
     const [myCauses, setMyCauses] = useState([]);
 
     if (currentUser) {
@@ -43,10 +46,13 @@ export const MyCauses = () => {
                         setMyCauses(myCausesArr);
                     }
 
+                }).then(() => {
+                    setIsLoading(false);
                 });
         } catch (error) {
             console.log(error);
         }
+
     }, []);
 
 
@@ -56,12 +62,14 @@ export const MyCauses = () => {
 
     return (
         <>
-            <h1 className="flex justify-center text-center my-7">My causes Page</h1>
+            <h1 className="flex justify-center text-center my-7 font-medium leading-tight text-5xl text-blue-700">My causes Page</h1>
             <div className="flex justify-center my-7">
-                <div className="grid py-10 justify-center my-7 -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
-                    {myCauses.length
-                        ? causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />)
-                        : <h3 className="no-articles">You do not have added causes yet</h3>
+                <div className="grid py-10 justify-center my-7 -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-14">
+                    {isLoading
+                        ? (<Spinner />)
+                        : myCauses.length !== 0
+                            ? (causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
+                            : (<h3 className="no-articles">No articles yet</h3>)
                     }
                 </div>
             </div>
