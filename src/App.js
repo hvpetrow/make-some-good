@@ -20,7 +20,7 @@ import { MyCauses } from './components/Causes/MyCauses/MyCauses';
 
 function App() {
     return (
-        <div>
+        <div className="flex flex-col min-h-screen">
             <AuthProvider>
                 <CauseProvider>
                     <Header />

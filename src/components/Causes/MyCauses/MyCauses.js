@@ -61,7 +61,7 @@ export const MyCauses = () => {
     console.log(myCauses);
 
     return (
-        <>
+        <div>
             <h1 className="flex justify-center text-center my-7 font-medium leading-tight text-5xl text-blue-700">My causes Page</h1>
             <div className="flex justify-center my-7">
                 <div className="grid py-10 justify-center my-7 -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-14">
@@ -69,10 +69,10 @@ export const MyCauses = () => {
                         ? (<Spinner />)
                         : myCauses.length !== 0
                             ? (causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
-                            : (<h3 className="no-articles">No articles yet</h3>)
+                            : (<h3 className="font-medium leading-tight text-xl">No articles yet</h3>)
                     }
                 </div>
             </div>
-        </>
+        </div>
     );
 }
