@@ -133,19 +133,19 @@ export const Header = () => {
                                         Causes
                                     </Link>
                                     <Link
-                                        to="#"
+                                        to="/superHeroes"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
                                     >
                                         Superheroes
                                     </Link>
                                     <Link
-                                        to="#"
+                                        to="/search"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
                                     >
                                         Search
                                     </Link>
                                     <Link
-                                        to="#"
+                                        to="/donate"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
                                     >
                                         Donate
