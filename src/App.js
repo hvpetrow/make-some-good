@@ -18,6 +18,7 @@ import { CreateCause } from './components/Causes/CreateCause/CreateCause';
 import { Catalog } from './components/Causes/Catalog/Catalog';
 import { MyCauses } from './components/Causes/MyCauses/MyCauses';
 import { Search } from './components/Search/Search';
+import { Donate } from './components/Donate/Donate';
 
 function App() {
     return (
@@ -28,8 +29,9 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/catalog" element={<Catalog />} />
+                        <Route path="/donate" element={<Donate />} />
                         <Route path="/search" element={<Search />} />
-                        
+
                         <Route element={<UnAuthenticatedGuard />}>
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
