@@ -16,9 +16,10 @@ export const BackToTheTopButton = (props) => {
     }
 
     useEffect(() => {
-        window.addEventListener('scroll', handleVisibleButton)
+        window.addEventListener('scroll', handleVisibleButton);
         console.log("add scroll event listner to window");
         console.log("render first time");
+        
         return () => {
             window.removeEventListener('scroll',handleVisibleButton);
         }
