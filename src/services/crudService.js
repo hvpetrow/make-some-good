@@ -28,3 +28,4 @@ export const deleteOne = async (collectionRef,id) => {
     const deletedDoc = doc(collectionRef, id);
     return deleteDoc(deletedDoc);
 }
+

@@ -2,7 +2,7 @@ import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "
 import { db } from "../firebase";
 
 
-const causesCollectionRef = collection(db, 'causes')
+const causesCollectionRef = collection(db, 'causes');
 
 export const getAllCauses = async () => {
     return getDocs(causesCollectionRef);
@@ -25,4 +25,8 @@ export const updateCause = async (id, updatedCause) => {
 export const deleteCause = async (id) => {
     const causeDoc = doc(db, 'causes', id);
     return deleteDoc(causeDoc);
+}
+
+export const loadMore = async (collectionRef,id) => {
+    
 }

@@ -1,4 +1,4 @@
-import { collection, limit, orderBy, query } from "firebase/firestore";
+import { collection, limit, orderBy, query, startAfter } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 import { useAuth } from "../../contexts/AuthContext";
@@ -12,12 +12,13 @@ import { CardTemplate } from "./CardTemplate";
 
 
 export const Home = () => {
-    const causesCollectionRef = collection(db, "causes");
-    const orderedQuery = query(causesCollectionRef,orderBy("createdAt"),limit(6));
-
     const { currentUser } = useAuth();
     const { causes, setCauses } = useCausesContext();
     const [isLoading, setIsLoading] = useState(true);
+    const [latestDoc,setLatestDoc] = useState(0);
+
+    const causesCollectionRef = collection(db, "causes");
+    const orderedQuery = query(causesCollectionRef,orderBy("title"),startAfter(latestDoc || 0),limit(2));
 
     if (currentUser) {
         console.log(currentUser.uid);
@@ -39,8 +40,11 @@ export const Home = () => {
                         console.log(doc.id, " => ", doc.data());
                     });
 
-                    setCauses(arr)
-            
+                    const lastDoc = docs.docs[docs.docs.length-1]
+                    console.log("LAST DOC !!!",lastDoc);
+                    setCauses(arr);
+                    setLatestDoc(docs.docs[docs.docs.length-1]);
+                    console.log("LATEST DOC" , latestDoc);
             }).then(() => {
                 setIsLoading(false);
             });
@@ -48,6 +52,42 @@ export const Home = () => {
             console.log(error);
         }
     }, []);
+
+    const loadMoreClickHandler = async () => {
+        console.log("load more clicked");
+        try {
+            getAll(orderedQuery)
+                .then(docs => {
+                    let arr = [];
+
+                    docs.forEach((doc) => {
+                        let fields = doc.data();
+
+                        arr.push({
+                            id: doc.id,
+                            fields: fields
+                        });
+                        console.log(doc.id, " => ", doc.data());
+                    });
+
+                    
+                    setCauses(oldArr => [
+                        ...oldArr,
+                        ...arr
+                    ]);
+
+                    console.log(docs.docs.length);
+                    console.log(docs.docs.length-1);
+                    console.log("LATEST DOC" , latestDoc);
+
+                    setLatestDoc(docs.docs[docs.docs.length-1]);
+            }).then(() => {
+                setIsLoading(false);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     console.log(causes);
 
@@ -64,6 +104,7 @@ export const Home = () => {
                     }
                 </div>
             </div>
+            <button onClick={loadMoreClickHandler}>load more</button>
             <BackToTheTopButton />
         </>
     );
