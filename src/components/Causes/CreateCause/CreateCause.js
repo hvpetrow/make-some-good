@@ -1,4 +1,4 @@
-import { collection } from 'firebase/firestore';
+import { collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -42,7 +42,12 @@ export const CreateCause = () => {
 
         try {
             setIsLoading(true);
-            await add(causesCollectionRef, values);
+           const addedDoc = await add(causesCollectionRef, values);
+           
+            const updateTimestamp = await updateDoc(addedDoc, {
+                timestamp: serverTimestamp()
+            });
+            console.log(updateTimestamp);
             toast.success('Successfully Created Cause!');
             navigate('/');
         } catch (error) {
