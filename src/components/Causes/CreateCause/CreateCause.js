@@ -43,11 +43,11 @@ export const CreateCause = () => {
         try {
             setIsLoading(true);
            const addedDoc = await add(causesCollectionRef, values);
-           
+
             const updateTimestamp = await updateDoc(addedDoc, {
-                timestamp: serverTimestamp()
+                createdAt: serverTimestamp()
             });
-            console.log(updateTimestamp);
+
             toast.success('Successfully Created Cause!');
             navigate('/');
         } catch (error) {
