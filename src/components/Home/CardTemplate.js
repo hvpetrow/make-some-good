@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export const CardTemplate = ({id,cause}) => {
-    console.log(cause);
     return (
         <div className="rounded-lg shadow-lg bg-white max-w-sm transition duration-500 hover:scale-105 hover:bg-gray-300">
             <Link to={`/details/${id}`}>

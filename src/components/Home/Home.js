@@ -1,4 +1,4 @@
-import { collection } from "firebase/firestore";
+import { collection, limit, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 import { useAuth } from "../../contexts/AuthContext";
@@ -9,10 +9,12 @@ import { BackToTheTopButton } from "../../shared/BackToTheTopButton";
 import { Spinner } from "../../shared/Spinner";
 import { CardTemplate } from "./CardTemplate";
 
-const causesCollectionRef = collection(db, "causes");
 
 
 export const Home = () => {
+    const causesCollectionRef = collection(db, "causes");
+    const orderedQuery = query(causesCollectionRef,orderBy("createdAt"),limit(6));
+
     const { currentUser } = useAuth();
     const { causes, setCauses } = useCausesContext();
     const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +25,7 @@ export const Home = () => {
 
     useEffect(() => {
         try {
-            getAll(causesCollectionRef)
+            getAll(orderedQuery)
                 .then(docs => {
                     let arr = [];
 
@@ -34,7 +36,7 @@ export const Home = () => {
                             id: doc.id,
                             fields: fields
                         });
-
+                        console.log(doc.id, " => ", doc.data());
                     });
 
                     setCauses(arr)
