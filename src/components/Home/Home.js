@@ -8,6 +8,8 @@ import { getAll } from "../../services/crudService";
 import { BackToTheTopButton } from "../../shared/BackToTheTopButton";
 import { Spinner } from "../../shared/Spinner";
 import { CardTemplate } from "./CardTemplate";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -16,9 +18,12 @@ export const Home = () => {
     const { causes, setCauses } = useCausesContext();
     const [isLoading, setIsLoading] = useState(true);
     const [latestDoc,setLatestDoc] = useState(0);
+    const [clickable,setClickable] = useState(true);
+    const [visible,setVisible] = useState(true);
+
 
     const causesCollectionRef = collection(db, "causes");
-    const orderedQuery = query(causesCollectionRef,orderBy("title"),startAfter(latestDoc || 0),limit(2));
+    const orderedQuery = query(causesCollectionRef,orderBy("title"),startAfter(latestDoc || 0),limit(3));
 
     if (currentUser) {
         console.log(currentUser.uid);
@@ -40,8 +45,7 @@ export const Home = () => {
                         console.log(doc.id, " => ", doc.data());
                     });
 
-                    const lastDoc = docs.docs[docs.docs.length-1]
-                    console.log("LAST DOC !!!",lastDoc);
+
                     setCauses(arr);
                     setLatestDoc(docs.docs[docs.docs.length-1]);
                     console.log("LATEST DOC" , latestDoc);
@@ -53,11 +57,15 @@ export const Home = () => {
         }
     }, []);
 
-    const loadMoreClickHandler = async () => {
+    const loadMoreClickHandler = async (e) => {
         console.log("load more clicked");
         try {
             getAll(orderedQuery)
                 .then(docs => {
+                    if (docs.empty) {
+                       setClickable(false);
+                        return;
+                    }
                     let arr = [];
 
                     docs.forEach((doc) => {
@@ -76,8 +84,7 @@ export const Home = () => {
                         ...arr
                     ]);
 
-                    console.log(docs.docs.length);
-                    console.log(docs.docs.length-1);
+
                     console.log("LATEST DOC" , latestDoc);
 
                     setLatestDoc(docs.docs[docs.docs.length-1]);
@@ -104,7 +111,12 @@ export const Home = () => {
                     }
                 </div>
             </div>
-            <button onClick={loadMoreClickHandler}>load more</button>
+            {visible &&
+            <button id="load-more-button" onClick={clickable ? loadMoreClickHandler : () => {
+                    toast.warning('No more causes');
+                    setVisible(false);
+                    }}>load more</button>
+                }
             <BackToTheTopButton />
         </>
     );
