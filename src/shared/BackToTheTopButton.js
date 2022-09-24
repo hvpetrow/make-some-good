@@ -29,7 +29,7 @@ console.log("rerender");
     return (
         <>
             <button id="to-top-button" onClick={handleScrollUp} title="Go To Top"
-                className={showGoTop ? "block fixed z-90 bottom-8 right-8 border-0 w-16 h-16 rounded-full drop-shadow-md bg-indigo-500 text-white text-3xl font-bold" : ""}>&uarr;</button>
+                className={showGoTop ? "block fixed z-90 bottom-8 right-8 border-0 w-16 h-16 rounded-full drop-shadow-md bg-indigo-500 text-white text-3xl font-bold" : ""}></button>
         </>
 
     )
