@@ -1,4 +1,4 @@
-import { collection, updateDoc } from 'firebase/firestore';
+import { arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react'
@@ -14,7 +14,7 @@ const usersCollectionRef = collection(db, 'users');
 export const Details = () => {
     const [cause, setCause] = useState('');
     const [creator, setCreator] = useState('');
-    const [docRef, setDocRef] = useState(null);
+    const [docId, setDocId] = useState(null);
     const [isParticipant, setIsParticipant] = useState(false);
     const { currentUser } = useAuth();
     const { causeId } = useParams();
@@ -27,13 +27,12 @@ export const Details = () => {
             getOneCause(causeId)
                 .then(doc => {
                     setCause(doc.data());
-
+                    setDocId(doc.id);
                 });
 
             if (cause.creator) {
                 getOne(usersCollectionRef, cause.creator)
                     .then(doc => {
-                        setDocRef(doc);
                         setCreator(doc.data());
                     });
             }
@@ -42,33 +41,32 @@ export const Details = () => {
         } catch (error) {
             console.log(error);
         }
-    }, [causeId, cause.creator])
+    }, [causeId, cause.creator]);
 
-    if (cause?.participants) {
-        const foundedParticipant = cause.participants.find(c => currentUser.uid === c);
-        if (foundedParticipant) {
-            setIsParticipant(true);
-            console.log(foundedParticipant);
+    useEffect(() => {
+        if (cause?.participants?.length>0) {
+            const foundedParticipant = cause.participants.find(c => currentUser.uid === c);
+            if (foundedParticipant) {
+                setIsParticipant(true);
+                console.log(foundedParticipant);
+            }
         }
-    }
+
+    },[cause.participants]);
 
     const joinHandler = async () => {
-        const causeParticipantsArr = [
-            ...cause.participants,
-            currentUser.uid
-        ]
+        const currentCauseRef = doc(db,"causes", docId);
 
         try {
-            await updateDoc(docRef,{
-                participants: causeParticipantsArr
+            await updateDoc(currentCauseRef,{
+                participants: arrayUnion(currentUser.uid)
             });
             toast.success('Successfully Joined Cause!');
+            setIsParticipant(true);
             
         } catch (error) {
             console.log(error);
         }
-
-            setIsParticipant(true);
     }
 
 
