@@ -19,6 +19,7 @@ import { Catalog } from './components/Causes/Catalog/Catalog';
 import { MyCauses } from './components/Causes/MyCauses/MyCauses';
 import { Search } from './components/Search/Search';
 import { Donate } from './components/Donate/Donate';
+import { Details } from './components/Causes/Details/Details';
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/catalog" element={<Catalog />} />
+                        <Route path="/details/:causeId" element={<Details />} />
                         <Route path="/donate" element={<Donate />} />
                         <Route path="/search" element={<Search />} />
 
