@@ -1,8 +1,7 @@
-import { collection } from "firebase/firestore";
+import { collection, limit, orderBy, query, startAfter, where } from "firebase/firestore";
 import { useEffect } from "react";
 
 import { useAuth } from "../../../contexts/AuthContext";
-import { useCausesContext } from "../../../contexts/CauseContext";
 import { getAll } from "../../../services/crudService";
 import { db } from "../../../firebase";
 import { CardTemplate } from "../Catalog/CardTemplate";
@@ -15,17 +14,17 @@ const causesCollectionRef = collection(db, "causes");
 
 export const MyCauses = () => {
     const { currentUser } = useAuth();
-    const { causes, setCauses } = useCausesContext();
     const [isLoading, setIsLoading] = useState(true);
+    const [clickable, setClickable] = useState(true);
+    const [visible, setVisible] = useState(true);
     const [myCauses, setMyCauses] = useState([]);
+    const [latestDoc, setLatestDoc] = useState(0);
 
-    if (currentUser) {
-        console.log(currentUser.uid);
-    }
+    const orderedQuery = query(causesCollectionRef,where("creator","==",currentUser.uid),orderBy("createdAt"), startAfter(latestDoc || 0), limit(3));
 
     useEffect(() => {
         try {
-            getAll(causesCollectionRef)
+            getAll(orderedQuery)
                 .then(docs => {
                     let arr = [];
 
@@ -39,12 +38,10 @@ export const MyCauses = () => {
 
                     });
 
-                    setCauses(arr);
 
-                    if (arr.length > 0) {
-                        const myCausesArr = arr.filter(c => c.fields.creator === currentUser.uid);
-                        setMyCauses(myCausesArr);
-                    }
+                        setMyCauses(arr);
+                    setLatestDoc(docs.docs[docs.docs.length - 1]);
+
 
                 }).then(() => {
                     setIsLoading(false);
@@ -55,9 +52,44 @@ export const MyCauses = () => {
 
     }, []);
 
+    const loadMoreClickHandler = async (e) => {
+        console.log("load more clicked");
+
+        try {
+            getAll(orderedQuery)
+                .then(docs => {
+                    if (docs.empty) {
+                        setClickable(false);
+                        return;
+                    }
+                    let arr = [];
+
+                    docs.forEach((doc) => {
+                        let fields = doc.data();
+
+                        arr.push({
+                            id: doc.id,
+                            fields: fields
+                        });
+                    });
 
 
-    console.log(causes);
+                    setMyCauses(oldArr => [
+                        ...oldArr,
+                        ...arr
+                    ]);
+
+
+                    console.log("LATEST DOC", latestDoc);
+                    setLatestDoc(docs.docs[docs.docs.length - 1]);
+                }).then(() => {
+                    setIsLoading(false);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     console.log(myCauses);
 
     return (
@@ -68,11 +100,24 @@ export const MyCauses = () => {
                     {isLoading
                         ? (<Spinner />)
                         : myCauses.length !== 0
-                            ? (causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
+                            ? (myCauses.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
                             : (<h3 className="font-medium leading-tight text-xl">No articles yet</h3>)
                     }
                 </div>
             </div>
+            {visible &&
+                    <div className="flex justify-center m-y-5">
+                        <button id="load-more-button" className="inline-block px-7 py-3 max-w-sm bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                            data-mdb-ripple="true"
+                            data-mdb-ripple-color="light"
+                            onClick={clickable ? loadMoreClickHandler : () => {
+                                toast.warning('No more causes', {
+                                    position: toast.POSITION.BOTTOM_CENTER
+                                });
+                                setVisible(false);
+                            }}>load more</button>
+                    </div>
+                }
         </div>
     );
 }

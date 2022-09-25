@@ -24,7 +24,6 @@ export const Catalog = () => {
     const [visible, setVisible] = useState(true);
 
 
-    const causesCollectionRef = collection(db, "causes");
     const orderedQuery = query(causesCollectionRef, orderBy("title"), startAfter(latestDoc || 0), limit(3));
 
     if (currentUser) {
@@ -79,7 +78,6 @@ export const Catalog = () => {
                             id: doc.id,
                             fields: fields
                         });
-                        console.log(doc.id, " => ", doc.data());
                     });
 
 
