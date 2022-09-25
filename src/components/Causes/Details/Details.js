@@ -1,8 +1,9 @@
-import { collection } from 'firebase/firestore';
+import { collection, updateDoc } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
 import { getOneCause } from '../../../services/causesService'
@@ -13,6 +14,8 @@ const usersCollectionRef = collection(db, 'users');
 export const Details = () => {
     const [cause, setCause] = useState('');
     const [creator, setCreator] = useState('');
+    const [docRef, setDocRef] = useState(null);
+    const [isParticipant, setIsParticipant] = useState(false);
     const { currentUser } = useAuth();
     const { causeId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
@@ -30,11 +33,8 @@ export const Details = () => {
             if (cause.creator) {
                 getOne(usersCollectionRef, cause.creator)
                     .then(doc => {
-                        console.log(doc);
-                        console.log(doc.data());
-
+                        setDocRef(doc);
                         setCreator(doc.data());
-                        console.log(creator);
                     });
             }
 
@@ -43,6 +43,33 @@ export const Details = () => {
             console.log(error);
         }
     }, [causeId, cause.creator])
+
+    if (cause?.participants) {
+        const foundedParticipant = cause.participants.find(c => currentUser.uid === c);
+        if (foundedParticipant) {
+            setIsParticipant(true);
+            console.log(foundedParticipant);
+        }
+    }
+
+    const joinHandler = async () => {
+        const causeParticipantsArr = [
+            ...cause.participants,
+            currentUser.uid
+        ]
+
+        try {
+            await updateDoc(docRef,{
+                participants: causeParticipantsArr
+            });
+            toast.success('Successfully Joined Cause!');
+            
+        } catch (error) {
+            console.log(error);
+        }
+
+            setIsParticipant(true);
+    }
 
 
 
@@ -172,25 +199,27 @@ export const Details = () => {
                                                 </div>
                                                 Remove
                                             </a>
-                                            </>
+                                        </>
                                     }
-                                            <a className="text-[#9c428c] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
-                                                <div className="mr-2">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        height="20px"
-                                                        viewBox="0 0 24 24"
-                                                        width="20px"
-                                                        fill="#9c428c"
-                                                    >
-                                                        <path d="M0 0h24v24H0z" fill="none" />
-                                                        <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                                                    </svg>
-                                                </div>
-                                                Join
-                                            </a>
-                                        
-                            </div>
+                                    {!isParticipant &&
+                                    <button onClick={joinHandler} className="text-[#9c428c] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
+                                        <div className="mr-2">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                height="20px"
+                                                viewBox="0 0 24 24"
+                                                width="20px"
+                                                fill="#9c428c"
+                                            >
+                                                <path d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                                            </svg>
+                                        </div>
+                                        Join
+                                    </button>
+                                    }
+
+                                </div>
                             </div>
                         }
                     </div>

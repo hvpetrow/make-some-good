@@ -22,6 +22,9 @@ export const CreateCause = () => {
         date: '',
         imgUrl: '',
         description: '',
+        participants:[
+
+        ],
         creator: currentUser.uid
     });
 
