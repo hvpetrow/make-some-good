@@ -1,11 +1,17 @@
+import { collection } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+import { db } from '../../../firebase';
 import { getOneCause } from '../../../services/causesService'
+import { getOne } from '../../../services/crudService';
+
+const usersCollectionRef = collection(db, 'users');
 
 export const Details = () => {
     const [cause, setCause] = useState('');
+    const [creator, setCreator] = useState('');
     const { causeId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
 
@@ -16,25 +22,40 @@ export const Details = () => {
             getOneCause(causeId)
                 .then(doc => {
                     setCause(doc.data());
-                }).then(() => {
-                    setIsLoading(false);
+                    
                 });
-        } catch (error) {
+
+                if (cause.creator) {            
+                    getOne(usersCollectionRef,cause.creator)
+                    .then(doc => {
+                        console.log(doc);
+                        console.log(doc.data());
+                        
+                        setCreator(doc.data());
+                        console.log(creator);
+                    });
+                }
+
+                setIsLoading(false);
+            } catch (error) {
             console.log(error);
         }
-    }, [causeId])
+    }, [causeId,cause.creator])
 
+
+
+    console.log(cause);
     return (
         <>
             {/* This is an example component */}
             <div className="flex flex-col border rounded-lg overflow-hidden bg-white">
                 <div className="grid grid-cols-1 sm:grid-cols-4">
                     <div className="flex flex-col border-b sm:border-b-0 items-center p-8 sm:px-4 sm:h-full sm:justify-center">
-                    <img
-                    className="rounded-lg"
-                    src={cause.imgUrl}
-                    alt="causeImg"
-                />
+                        <img
+                            className="rounded-lg"
+                            src={cause.imgUrl}
+                            alt="causeImg"
+                        />
                     </div>
                     <div className="flex flex-col sm:border-l col-span-3">
                         <div className="flex flex-col space-y-4  p-6 text-gray-600">
@@ -58,9 +79,9 @@ export const Details = () => {
                                 </span>
                                 <p className="flex items-center  text-gray-500">
                                     <span className="font-semibold mr-2 text-xs uppercase">
-                                        Name:
+                                        Title:
                                     </span>
-                                    <span>Jane Doe</span>
+                                    <span>{cause.title}</span>
                                 </p>
                             </div>
                             <div className="flex flex-row text-sm">
@@ -78,84 +99,29 @@ export const Details = () => {
                                 </span>
                                 <p className="flex items-center  text-gray-500">
                                     <span className="font-semibold mr-2 text-xs uppercase">
-                                        Date of birth:
+                                        Date:
                                     </span>
-                                    <span>26 April 2022</span>
+                                    <span>{cause.date}</span>
                                 </p>
                             </div>
                             <div className="flex flex-row text-sm">
-                                <span className="mr-3">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        enableBackground="new 0 0 24 24"
-                                        height="20px"
-                                        viewBox="0 0 24 24"
-                                        width="20px"
-                                        fill="#64748b"
-                                    >
-                                        <rect fill="none" height={24} width={24} />
-                                        <g>
-                                            <path d="M6,3c0-1.1,0.9-2,2-2s2,0.9,2,2c0,1.1-0.9,2-2,2S6,4.1,6,3z M20.06,1h-2.12L15.5,3.44l1.06,1.06L20.06,1z M22,23v-2h-1 c-1.04,0-2.08-0.35-3-1c-1.83,1.3-4.17,1.3-6,0c-1.83,1.3-4.17,1.3-6,0c-0.91,0.65-1.96,1-3,1H2l0,2h1c1.03,0,2.05-0.25,3-0.75 c1.89,1,4.11,1,6,0c1.89,1,4.11,1,6,0h0c0.95,0.5,1.97,0.75,3,0.75H22z M21,13.28c0,1.44-2.19,3.62-5.04,5.58 C15.65,18.95,15.33,19,15,19c-1.2,0-2.27-0.66-3-1.5c-0.73,0.84-1.8,1.5-3,1.5c-0.94,0-1.81-0.41-2.49-0.99 c0.46-0.39,0.96-0.78,1.49-1.17l-1.55-2.97C6.15,13.3,6,12.64,6,12V8c0-1.1,0.9-2,2-2h3c1.38,0,2.63-0.56,3.54-1.46l1.41,1.41 C14.68,7.21,12.93,8,11,8H9.6l0,3.5h2.8l1.69,1.88c1.95-0.84,3.77-1.38,5.06-1.38C19.99,12,21,12.25,21,13.28z M12.2,14.27 l-0.7-0.77L9,13.6l0.83,2.01C10.42,15.23,11.64,14.55,12.2,14.27z" />
-                                        </g>
-                                    </svg>{" "}
-                                </span>
                                 <p className="flex items-center  text-gray-500">
                                     <span className="font-semibold mr-2 text-xs uppercase">
-                                        Hobbies:
+                                        Place:
                                     </span>
-                                    <span>Cooking, Fishing, Darwing</span>
+                                    <span>{cause.place}</span>
+                                </p>
+                            </div>
+                            <div className="flex flex-row text-sm">
+                                <p className="flex items-center  text-gray-500">
+                                    <span className="font-semibold mr-2 text-xs uppercase">
+                                        Creator:
+                                    </span>
+                                    <span>{creator.firstName} {creator.lastName}</span>
                                 </p>
                             </div>
                         </div>
-                        <div className="flex flex-col w-full relative bottom-0">
-                            <div className="grid grid-cols-3 border-t divide-x text-[#0ed3cf]  bg-gray-50 dark:bg-transparent py-3">
-                                <a className=" cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
-                                    <div className="mr-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            height="20px"
-                                            viewBox="0 0 24 24"
-                                            width="20px"
-                                            fill="#0ed3cf"
-                                        >
-                                            <path d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-                                        </svg>
-                                    </div>
-                                    Update
-                                </a>
-                                <a className="cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
-                                    <div className="mr-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            height="20px"
-                                            viewBox="0 0 24 24"
-                                            width="20px"
-                                            fill="#0ed3cf"
-                                        >
-                                            <path d="M0 0h24v24H0V0z" fill="none" />
-                                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z" />
-                                        </svg>
-                                    </div>
-                                    Remove
-                                </a>
-                                <a className="cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
-                                    <div className="mr-2">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            height="20px"
-                                            viewBox="0 0 24 24"
-                                            width="20px"
-                                            fill="#0ed3cf"
-                                        >
-                                            <path d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                                        </svg>
-                                    </div>
-                                    View
-                                </a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -165,29 +131,20 @@ export const Details = () => {
                         <div className="flex flex-col space-y-4  p-6 text-gray-600">
                             <div className="flex flex-row text-sm">
                                 <p className="flex items-center text-gray-500">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting
-                                    industry. Lorem Ipsum has been the industry's standard dummy text
-                                    ever since the 1500s, when an unknown printer took a galley of
-                                    type and scrambled it to make a type specimen book. It has
-                                    survived not only five centuries, but also the leap into
-                                    electronic typesetting, remaining essentially unchanged. It was
-                                    popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop
-                                    publishing software like Aldus PageMaker including versions of
-                                    Lorem Ipsum.
+                                    {cause.description}
                                 </p>
                             </div>
                         </div>
                         <div className="flex flex-col w-full relative bottom-0">
-                            <div className="grid grid-cols-3 border-t divide-x text-gray-500  bg-gray-50 dark:bg-transparent py-3">
-                                <a className=" cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
-                                    <div className="mr-2">
+                            <div className="grid grid-cols-3 border-t divide-x text-[#64748b] bg-gray-50 dark:bg-transparent py-3">
+                                <a className="text-[#079c9a] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
+                                    <div className="mr-2 ">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             height="20px"
                                             viewBox="0 0 24 24"
                                             width="20px"
-                                            fill="#64748b"
+                                            fill="#079c9a"
                                         >
                                             <path d="M0 0h24v24H0z" fill="none" />
                                             <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
@@ -195,14 +152,14 @@ export const Details = () => {
                                     </div>
                                     Update
                                 </a>
-                                <a className="cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
+                                <a className="text-[#D2042D] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
                                     <div className="mr-2">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             height="20px"
                                             viewBox="0 0 24 24"
                                             width="20px"
-                                            fill="#64748b"
+                                            fill="#D2042D"
                                         >
                                             <path d="M0 0h24v24H0V0z" fill="none" />
                                             <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4z" />
@@ -210,20 +167,20 @@ export const Details = () => {
                                     </div>
                                     Remove
                                 </a>
-                                <a className="cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
+                                <a className="text-[#9c428c] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
                                     <div className="mr-2">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             height="20px"
                                             viewBox="0 0 24 24"
                                             width="20px"
-                                            fill="#64748b"
+                                            fill="#9c428c"
                                         >
                                             <path d="M0 0h24v24H0z" fill="none" />
                                             <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
                                         </svg>
                                     </div>
-                                    View
+                                    Join
                                 </a>
                             </div>
                         </div>
