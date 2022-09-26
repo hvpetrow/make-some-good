@@ -2,7 +2,7 @@ import { arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
@@ -44,25 +44,25 @@ export const Details = () => {
     }, [causeId, cause.creator]);
 
     useEffect(() => {
-        if (cause?.participants?.length>0) {
+        if (cause?.participants?.length > 0) {
             const foundedParticipant = cause.participants.find(c => currentUser.uid === c);
             if (foundedParticipant) {
                 setIsParticipant(true);
             }
         }
 
-    },[cause.participants]);
+    }, [cause.participants]);
 
     const joinHandler = async () => {
-        const currentCauseRef = doc(db,"causes", docId);
+        const currentCauseRef = doc(db, "causes", docId);
 
         try {
-            await updateDoc(currentCauseRef,{
+            await updateDoc(currentCauseRef, {
                 participants: arrayUnion(currentUser.uid)
             });
             toast.success('Successfully Joined Cause!');
             setIsParticipant(true);
-            
+
         } catch (error) {
             console.log(error);
         }
@@ -163,7 +163,7 @@ export const Details = () => {
                                 <div className="grid grid-cols-3 border-t divide-x text-[#64748b] bg-gray-50 dark:bg-transparent py-3">
                                     {currentUser.uid === cause.creator &&
                                         <>
-                                            <a className="text-[#079c9a] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
+                                            <Link to={`/edit/${causeId}`} className="text-[#079c9a] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
                                                 <div className="mr-2 ">
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -177,8 +177,8 @@ export const Details = () => {
                                                     </svg>
                                                 </div>
                                                 Update
-                                            </a>
-                                            <a className="text-[#D2042D] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
+                                            </ Link>
+                                            <Link to={`/delete/${causeId}`} className="text-[#D2042D] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
                                                 <div className="mr-2">
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -192,25 +192,25 @@ export const Details = () => {
                                                     </svg>
                                                 </div>
                                                 Remove
-                                            </a>
+                                            </Link>
                                         </>
                                     }
                                     {!isParticipant &&
-                                    <button onClick={joinHandler} className="text-[#9c428c] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
-                                        <div className="mr-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                height="20px"
-                                                viewBox="0 0 24 24"
-                                                width="20px"
-                                                fill="#9c428c"
-                                            >
-                                                <path d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                                            </svg>
-                                        </div>
-                                        Join
-                                    </button>
+                                        <button onClick={joinHandler} className="text-[#9c428c] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
+                                            <div className="mr-2">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    height="20px"
+                                                    viewBox="0 0 24 24"
+                                                    width="20px"
+                                                    fill="#9c428c"
+                                                >
+                                                    <path d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                                                </svg>
+                                            </div>
+                                            Join
+                                        </button>
                                     }
 
                                 </div>

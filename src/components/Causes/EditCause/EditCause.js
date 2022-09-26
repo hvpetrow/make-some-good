@@ -1,17 +1,19 @@
-import { collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { collection, serverTimestamp, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
-import { add} from '../../../services/crudService';
+import { getOneCause } from '../../../services/causesService';
 
 
 const causesCollectionRef = collection(db, 'causes');
 
 export const EditCause = () => {
+    const {causeId} = useParams();
     const navigate = useNavigate();
     const { currentUser } = useAuth();
 
@@ -22,21 +24,15 @@ export const EditCause = () => {
         date: '',
         imgUrl: '',
         description: '',
-        participants:[
-
-        ],
-        creator: currentUser.uid
     });
 
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const changeHandler = (e) => {
-        setValues((oldValues) => ({
-            ...oldValues,
-            [e.target.name]: e.target.value
-        }));
-    }
+    useEffect(() => {
+        getOneCause()
+            .then()
+    },[]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -45,9 +41,7 @@ export const EditCause = () => {
 
         try {
             setIsLoading(true);
-           const addedDoc = await add(causesCollectionRef, values);
-
-            const updateTimestamp = await updateDoc(addedDoc, {
+          await updateDoc(addedDoc, {
                 createdAt: serverTimestamp()
             });
 
@@ -72,7 +66,6 @@ export const EditCause = () => {
 
                         {/* {error} */}
                         <form onSubmit={submitHandler}>
-                            {/* Email input */}
                             <div className="mb-6">
                                 <input
                                     type="text"
@@ -80,8 +73,7 @@ export const EditCause = () => {
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Title"
                                     required
-                                    value={values.title}
-                                    onChange={changeHandler}
+                                    defaultValue={cause.title}
 
                                 />
                             </div>
@@ -92,8 +84,7 @@ export const EditCause = () => {
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Purpose"
                                     required
-                                    value={values.purpose}
-                                    onChange={changeHandler}
+                                    defaultValue={cause.purpose}
 
                                 />
                             </div>
@@ -104,8 +95,7 @@ export const EditCause = () => {
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Place"
                                     required
-                                    value={values.place}
-                                    onChange={changeHandler}
+                                    defaultValue={cause.place}
 
                                 />
                             </div>
@@ -116,8 +106,7 @@ export const EditCause = () => {
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Date"
                                     required
-                                    value={values.date}
-                                    onChange={changeHandler}
+                                    defaultValue={cause.date}
 
                                 />
                             </div>
@@ -128,8 +117,7 @@ export const EditCause = () => {
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-400 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Example: https://pixlr.eu/makeSomeGood.png"
                                     required
-                                    value={values.imgUrl}
-                                    onChange={changeHandler}
+                                    defaultValue={cause.imgUrl}
                                 />
                             </div>
 
@@ -146,8 +134,7 @@ export const EditCause = () => {
                                         id="description"
                                         name="description"
                                         placeholder="Description"
-                                        value={values.description}
-                                        onChange={changeHandler}
+                                        defaultValue={cause.description}
                                     />
                                 </div>
                             </div>
