@@ -11,7 +11,7 @@ export const RemoveCause = () => {
 
     deleteCause(causeId)
         .then(() => {
-            navigate('/my-cause', { replace: true });
+            navigate('/my-causes', { replace: true });
             toast.success('Successfully removed cause!');
         })
         .catch(() => {

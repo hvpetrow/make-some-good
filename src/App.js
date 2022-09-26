@@ -21,6 +21,7 @@ import { Search } from './components/Search/Search';
 import { Donate } from './components/Donate/Donate';
 import { Details } from './components/Causes/Details/Details';
 import { EditCause } from './components/Causes/EditCause/EditCause';
+import { RemoveCause } from './components/Causes/RemoveCause/RemoveCause';
 
 function App() {
     return (
@@ -46,8 +47,10 @@ function App() {
                             <Route path="/my-profile" element={<MyProfile />} />
                             <Route path="/my-causes" element={<MyCauses />} />
                             <Route path="/create-cause" element={<CreateCause />} />
-                            <Route path="/edit/:causeId" element={<EditCause />} />
                             <Route path="/logout" element={<Logout />} />
+
+                            <Route path="/edit/:causeId" element={<EditCause />} />
+                            <Route path="/delete/:causeId" element={<RemoveCause />} />
                         </Route>
                     </Routes>
                     <ToastContainer />
