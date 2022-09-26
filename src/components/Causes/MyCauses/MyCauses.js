@@ -41,8 +41,6 @@ export const MyCauses = () => {
 
                         setMyCauses(arr);
                     setLatestDoc(docs.docs[docs.docs.length - 1]);
-
-
                 }).then(() => {
                     setIsLoading(false);
                 });
@@ -53,8 +51,6 @@ export const MyCauses = () => {
     }, []);
 
     const loadMoreClickHandler = async (e) => {
-        console.log("load more clicked");
-
         try {
             getAll(orderedQuery)
                 .then(docs => {

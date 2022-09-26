@@ -48,7 +48,6 @@ export const Details = () => {
             const foundedParticipant = cause.participants.find(c => currentUser.uid === c);
             if (foundedParticipant) {
                 setIsParticipant(true);
-                console.log(foundedParticipant);
             }
         }
 
@@ -69,9 +68,6 @@ export const Details = () => {
         }
     }
 
-
-
-    console.log(cause);
     return (
         <>
             {/* This is an example component */}
