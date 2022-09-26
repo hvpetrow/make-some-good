@@ -22,6 +22,7 @@ import { Donate } from './components/Donate/Donate';
 import { Details } from './components/Causes/Details/Details';
 import { EditCause } from './components/Causes/EditCause/EditCause';
 import { RemoveCause } from './components/Causes/RemoveCause/RemoveCause';
+import { OwnerGuard } from './guards/OwnerGuard';
 
 function App() {
     return (
@@ -49,8 +50,10 @@ function App() {
                             <Route path="/create-cause" element={<CreateCause />} />
                             <Route path="/logout" element={<Logout />} />
 
-                            <Route path="/edit/:causeId" element={<EditCause />} />
-                            <Route path="/delete/:causeId" element={<RemoveCause />} />
+                            <Route element={<OwnerGuard />}>
+                                <Route path="/edit/:causeId" element={<EditCause />} />
+                                <Route path="/delete/:causeId" element={<RemoveCause />} />
+                            </Route>
                         </Route>
                     </Routes>
                     <ToastContainer />

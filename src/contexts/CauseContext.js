@@ -1,6 +1,8 @@
 import { collection } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { db } from "../firebase";
+import { getOneCause } from "../services/causesService";
 import { getAll } from "../services/crudService";
 
 const CauseContext = createContext();
@@ -12,13 +14,23 @@ export function useCausesContext() {
 
 export const CauseProvider = ({ children }) => {
     const [causes, setCauses] = useState([]);
+    const [cause, setCause] = useState([]);
 
-    const useGetAllGames = () => {
+    const { causeId } = useParams();
+
+    const useGetAllCauses = () => {
         useEffect(() => {
             getAll(causesCollectionRef)
                 .then(result => { setCauses(result) });
         }, []);
     }
+
+
+    useEffect(() => {
+        getOneCause(causeId)
+            .then(doc => { setCause(doc.data()) });
+    }, []);
+
 
     // const useGetAllCauses = () => {
     //     useEffect(() => {
@@ -61,7 +73,7 @@ export const CauseProvider = ({ children }) => {
     // }
 
     return (
-        <CauseContext.Provider value={{ causes,setCauses, useGetAllGames }}>
+        <CauseContext.Provider value={{ causes, setCauses, useGetAllCauses,cause }}>
             {children}
         </CauseContext.Provider>
     );
