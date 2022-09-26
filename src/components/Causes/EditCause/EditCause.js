@@ -1,55 +1,52 @@
-import { collection, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
 import { getOneCause } from '../../../services/causesService';
 
-
-const causesCollectionRef = collection(db, 'causes');
-
 export const EditCause = () => {
-    const {causeId} = useParams();
+    const { causeId } = useParams();
     const navigate = useNavigate();
-    const { currentUser } = useAuth();
 
-    const [values, setValues] = useState({
-        title: '',
-        purpose: '',
-        place: '',
-        date: '',
-        imgUrl: '',
-        description: '',
-    });
-
+    const [cause, setCause] = useState('');
+    const [docId, setDocId] = useState(null);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        getOneCause()
-            .then()
-    },[]);
+        try {
+            getOneCause(causeId)
+                .then(doc => {
+                    setDocId(doc.id);
+                    setCause(doc.data());
+                });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        console.log(values);
+        const editedCause = Object.fromEntries(new FormData(e.target));
+
+        console.log(editedCause);
 
         try {
+            const currentCauseRef = doc(db, "causes", docId);
             setIsLoading(true);
-          await updateDoc(addedDoc, {
-                createdAt: serverTimestamp()
-            });
+            await updateDoc(currentCauseRef, editedCause);
 
-            toast.success('Successfully Created Cause!');
-            navigate('/');
+            toast.success('Successfully Updated Cause!');
+            navigate(`/details/${causeId}`);
         } catch (error) {
             console.log(error);
-            setError('Failed to sign in');
+            setError('Failed to updated');
         }
 
         setIsLoading(false);
@@ -61,7 +58,7 @@ export const EditCause = () => {
             <div className="container px-4 py-8 h-5/6">
                 <div className="flex justify-center items-center flex-wrap scale-90  h-5/6 g-6 text-gray-800">
                     <div className="max-w-xl md:w-2/3 lg:w-3/4 lg:ml-20">
-                        <h2 className="text-center text-4xl mb-12">Create Cause</h2>
+                        <h2 className="text-center text-4xl mb-12">Update Cause</h2>
                         {/* {currentUser && currentUser.email} */}
 
                         {/* {error} */}
@@ -145,17 +142,14 @@ export const EditCause = () => {
 
                             {/* Submit button */}
                             <button
-
                                 type="submit"
                                 className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                                 disabled={isLoading}
                             >
-                                Create
+                                Update
                             </button>
-
-
                         </form>
                     </div>
                 </div>
