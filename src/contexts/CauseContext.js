@@ -15,8 +15,7 @@ export function useCausesContext() {
 export const CauseProvider = ({ children }) => {
     const [causes, setCauses] = useState([]);
     const [cause, setCause] = useState([]);
-
-    const { causeId } = useParams();
+    const[id,setId] = useState('');
 
     const useGetAllCauses = () => {
         useEffect(() => {
@@ -24,13 +23,6 @@ export const CauseProvider = ({ children }) => {
                 .then(result => { setCauses(result) });
         }, []);
     }
-
-
-    useEffect(() => {
-        getOneCause(causeId)
-            .then(doc => { setCause(doc.data()) });
-    }, []);
-
 
     // const useGetAllCauses = () => {
     //     useEffect(() => {
@@ -73,7 +65,7 @@ export const CauseProvider = ({ children }) => {
     // }
 
     return (
-        <CauseContext.Provider value={{ causes, setCauses, useGetAllCauses,cause }}>
+        <CauseContext.Provider value={{ causes, setCauses, useGetAllCauses,cause,id,setId }}>
             {children}
         </CauseContext.Provider>
     );

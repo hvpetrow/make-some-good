@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../../contexts/AuthContext';
+import { useCausesContext } from '../../../contexts/CauseContext';
 import { db } from '../../../firebase';
 import { getOneCause } from '../../../services/causesService'
 import { getOne } from '../../../services/crudService';
@@ -19,7 +20,6 @@ export const Details = () => {
     const { currentUser } = useAuth();
     const { causeId } = useParams();
     const [isLoading, setIsLoading] = useState(true);
-
 
 
     useEffect(() => {
