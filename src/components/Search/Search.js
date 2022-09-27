@@ -20,8 +20,8 @@ export const Search = () => {
 
     const onSearchSubmit = (e) => {
         e.preventDefault();
+        
         setIsLoading(true);
-        e.preventDefault();
         setFilteredCauses(searchCause(search));
         setSearch('');
         setIsLoading(false);
