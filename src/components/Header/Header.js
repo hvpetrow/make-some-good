@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 export const Header = () => {
-    const [dropdownClick,setDropdownClick] = useState(false);
-    const { currentUser,photoURL } = useAuth();
+    const [dropdownClick, setDropdownClick] = useState(false);
+    const { currentUser, photoURL } = useAuth();
 
     if (currentUser) {
         console.log("Log from header " + currentUser.email);
@@ -158,13 +158,6 @@ export const Header = () => {
                                             >
                                                 Suggest Cause
                                             </Link>
-
-                                            <Link
-                                                to="/my-causes"
-                                                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
-                                            >
-                                                My Causes
-                                            </Link>
                                         </>
                                     }
                                 </div>
@@ -190,34 +183,42 @@ export const Header = () => {
                                 </>
 
                                 : <>
-                                <div className="relative ml-3">
-                                <div>
-                                    <button
-                                        type="button"
-                                        className="flex rounded-full bg-gray-800 text-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                        id="user-menu-button"
-                                        aria-expanded="false"
-                                        aria-haspopup="true"
-                                        onClick={dropdownHandler}
-                                        
+                                    <Link
+                                        to="/my-causes"
+                                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
                                     >
-                                        <span className="sr-only">Open user menu</span>
-                                        <img
-                                            className="h-8 w-8 rounded-full"
-                                            src={photoURL}
-                                            alt=""
-                                        />
-                                    </button>
-                                </div>
-                                {dropdownClick && dropdownMenu}
-                               
+                                        My Causes
+                                    </Link>
+                                    <div className="relative ml-3">
 
-                            </div>
-                                   
+                                        <div>
+
+                                            <button
+                                                type="button"
+                                                className="flex rounded-full bg-gray-800 text-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                                id="user-menu-button"
+                                                aria-expanded="false"
+                                                aria-haspopup="true"
+                                                onClick={dropdownHandler}
+
+                                            >
+                                                <span className="sr-only">Open user menu</span>
+                                                <img
+                                                    className="h-8 w-8 rounded-full"
+                                                    src={photoURL}
+                                                    alt=""
+                                                />
+                                            </button>
+                                        </div>
+                                        {dropdownClick && dropdownMenu}
+
+
+                                    </div>
+
                                 </>
                             }
                             {/* Profile dropdown */}
-                            
+
                         </div>
                     </div>
                 </div>
