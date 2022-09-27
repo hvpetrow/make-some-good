@@ -2,10 +2,11 @@ import { arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import yesno from "yesno-dialog"
+
 import { useAuth } from '../../../contexts/AuthContext';
-import { useCausesContext } from '../../../contexts/CauseContext';
 import { db } from '../../../firebase';
 import { getOneCause } from '../../../services/causesService'
 import { getOne } from '../../../services/crudService';
@@ -19,6 +20,7 @@ export const Details = () => {
     const [isParticipant, setIsParticipant] = useState(false);
     const { currentUser } = useAuth();
     const { causeId } = useParams();
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -66,6 +68,14 @@ export const Details = () => {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const removeHandler =async () => {
+        // const confirmation = window.confirm('Are you sure to delete this cause?');
+        const yes = await yesno({bodyText:"Are you sure to delete this cause?"});
+          if (yes) {
+              navigate(`/delete/${causeId}`);
+          }
     }
 
     return (
@@ -178,7 +188,7 @@ export const Details = () => {
                                                 </div>
                                                 Update
                                             </ Link>
-                                            <Link to={`/delete/${causeId}`} className="text-[#D2042D] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
+                                            <button onClick={removeHandler} className="text-[#D2042D] cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold">
                                                 <div className="mr-2">
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -192,7 +202,7 @@ export const Details = () => {
                                                     </svg>
                                                 </div>
                                                 Remove
-                                            </Link>
+                                            </button>
                                         </>
                                     }
                                     {!isParticipant &&

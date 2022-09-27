@@ -8,16 +8,16 @@ export const RemoveCause = () => {
     const navigate = useNavigate();
     const { causeId } = useParams();
 
+        deleteCause(causeId)
+            .then(() => {
+                navigate('/my-causes', { replace: true });
+                toast.success('Successfully removed cause!');
+            })
+            .catch(() => {
+                setError('Failed deleting');
+                navigate('/', { replace: true });
+            });
+        
 
-    deleteCause(causeId)
-        .then(() => {
-            navigate('/my-causes', { replace: true });
-            toast.success('Successfully removed cause!');
-        })
-        .catch(() => {
-            setError('Failed deleting');
-            navigate('/', { replace: true });
-        });
-
-    return null;
+        return null;
 }
