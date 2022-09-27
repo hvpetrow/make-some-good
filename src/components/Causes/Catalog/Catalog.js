@@ -25,7 +25,7 @@ export const Catalog = () => {
     const [visible, setVisible] = useState(true);
 
 
-    const orderedQuery = query(causesCollectionRef, orderBy("title"), startAfter(latestDoc || 0), limit(3));
+    const orderedQuery = query(causesCollectionRef, orderBy("createdAt"), startAfter(latestDoc || 0), limit(3));
 
     if (currentUser) {
         console.log(currentUser.uid);
@@ -103,7 +103,6 @@ export const Catalog = () => {
     return (
         <>
             <div className="m-y-7">
-                    <Search/>
                 <div className=" flex justify-center my-7 ">
                     <div className="grid py-10 justify-center my-7  -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
                         {isLoading

@@ -1,4 +1,4 @@
-import { collection } from "firebase/firestore";
+import { collection, orderBy, query } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
@@ -13,15 +13,38 @@ export function useCausesContext() {
 }
 
 export const CauseProvider = ({ children }) => {
+    const [allCauses, setAllCauses] = useState([]);
     const [causes, setCauses] = useState([]);
     const [cause, setCause] = useState([]);
     const[id,setId] = useState('');
 
-    const useGetAllCauses = () => {
+
+    const orderedQuery = query(causesCollectionRef, orderBy("createdAt"));
+
+    
         useEffect(() => {
-            getAll(causesCollectionRef)
-                .then(result => { setCauses(result) });
+            getAll(orderedQuery)
+            .then(docs => {
+                let arr = [];
+
+                docs.forEach((doc) => {
+                    let fields = doc.data();
+
+                    arr.push({
+                        id: doc.id,
+                        fields: fields
+                    });
+                });
+
+                setAllCauses(arr);
+            })
         }, []);
+    
+
+    const searchCause = (text, criteria = 'title') => {
+        allCauses.forEach(x => console.log(x.fields[criteria]));
+      return allCauses.filter(x => x.fields[criteria].toLowerCase().includes(text.toLowerCase()));
+    //   return allCauses.filter(x => x.fields[criteria].toLowerCase().startsWith(text.toLowerCase()));
     }
 
     // const useGetAllCauses = () => {
@@ -31,41 +54,9 @@ export const CauseProvider = ({ children }) => {
     //     }, []);
     // }
 
-    // const editGameHandler = (editedGame) => {
-    //     setGames(games => {
-    //         return [
-    //             ...games.map(g => g._id !== editedGame._id ? g : editedGame)
-    //         ]
-    //     });
-    // }
-
-    // const selectGame = (gameId) => {
-    //     return games.find(g => g._id === gameId);
-    // }
-
-    // const addComment = (gameId, comment) => {
-    //     setGames(state => {
-    //         const game = state.find(g => g._id === gameId);
-
-    //         const comments = game.comments || [];
-    //         comments.push(comment);
-
-    //         return [
-    //             ...state.filter(x => x._id !== gameId),
-    //             { ...game, comments }
-    //         ]
-    //     })
-    // }
-
-    // const addGameHandler = (gameData) => {
-    //     setGames(state => [
-    //         ...state,
-    //         gameData
-    //     ]);
-    // }
 
     return (
-        <CauseContext.Provider value={{ causes, setCauses, useGetAllCauses,cause,id,setId }}>
+        <CauseContext.Provider value={{ causes, setCauses, searchCause,cause,id,setId }}>
             {children}
         </CauseContext.Provider>
     );
