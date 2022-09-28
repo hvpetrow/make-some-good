@@ -24,6 +24,7 @@ import { EditCause } from './components/Causes/EditCause/EditCause';
 import { RemoveCause } from './components/Causes/RemoveCause/RemoveCause';
 import { OwnerGuard } from './guards/OwnerGuard';
 import { Page404 } from './components/Page404/Page404';
+import { JoinedCauses } from './components/Causes/MyCauses/JoinedCauses';
 
 function App() {
     return (
@@ -48,6 +49,7 @@ function App() {
                             <Route path="/change-password" element={<ChangePassword />} />
                             <Route path="/my-profile" element={<MyProfile />} />
                             <Route path="/my-causes" element={<MyCauses />} />
+                            <Route path="/joinedCauses" element={<JoinedCauses />} />
                             <Route path="/create-cause" element={<CreateCause />} />
                             <Route path="/logout" element={<Logout />} />
 

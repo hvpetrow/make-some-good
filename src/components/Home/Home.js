@@ -26,7 +26,7 @@ export const Home = () => {
     const orderedQuery = query(causesCollectionRef, orderBy("title"), startAfter(latestDoc || 0), limit(3));
 
     if (currentUser) {
-        console.log(currentUser.uid);
+        console.log("CurrentUserId",currentUser.uid);
     }
 
     useEffect(() => {
