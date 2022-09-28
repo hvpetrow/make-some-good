@@ -70,6 +70,14 @@ export const AuthProvider = ({ children }) => {
         alert("uploaded file!")
     }
 
+    async function getProfilePicture (userId){
+        const profilePictureRef = ref(storage, `profilPictures/${userId}.png`);
+        // if (!profilePictureRef) {
+        // return 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png';   
+        // }
+        return await getDownloadURL(profilePictureRef);
+    }
+
     const value = {
         currentUser,
         photoURL,
@@ -81,7 +89,8 @@ export const AuthProvider = ({ children }) => {
         updateEmailForCurrentUser,
         updatePasswordForCurrentUser,
         setUserAdditionalInfo,
-        uploadProfilePicture
+        uploadProfilePicture,
+        getProfilePicture
     }
 
     return (

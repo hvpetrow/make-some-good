@@ -216,7 +216,7 @@ export const Header = () => {
                                                 <img
                                                     className="h-8 w-8 rounded-full"
                                                     src={photoURL}
-                                                    alt=""
+                                                    alt="profile"
                                                 />
                                             </button>
                                         </div>
