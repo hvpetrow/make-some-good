@@ -12,41 +12,55 @@ import { getOne } from "../../services/crudService";
 const usersCollectionRef = collection(db, 'users');
 
 export const MyProfile = () => {
-    const [userInfo,setUserInfo] = useState({
-        firstName:'',
-        lastName:'',
-        city:'',
-        country:''
+    const [userInfo, setUserInfo] = useState({
+        firstName: '',
+        lastName: '',
+        city: '',
+        country: ''
     });
 
     const [photo, setPhoto] = useState(null);
+    const [active, setActive] = useState(true);
+
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
     const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
 
-    useEffect(() => {
-        getOne(usersCollectionRef,currentUser.uid)
-        .then(docSnap => {
-            console.log(docSnap.data());
 
-            setUserInfo(docSnap.data());
-        });
-    },[currentUser.uid]) ;
+
+    useEffect(() => {
+        getOne(usersCollectionRef, currentUser.uid)
+            .then(docSnap => {
+                console.log(docSnap.data());
+
+                setUserInfo(docSnap.data());
+            });
+    }, [currentUser.uid]);
 
     useEffect(() => {
         if (currentUser?.photoURL) {
             setPhotoURL(currentUser.photoURL);
         }
 
-    }, [currentUser.photoURL, photoURL,currentUser])
+    }, [currentUser.photoURL, photoURL, currentUser])
 
     function refreshPage() {
         window.location.reload();
     }
 
     const browseHandler = (e) => {
-        setPhoto(e.target.files[0]);
+        if (e.target.files[0]?.size > 1048576) {
+            alert("File is too big");
+            setActive(true);
+        } else if (e.target.files[0]?.size === 0) {
+            alert("No uploaded file");
+            setActive(true)
+        }
+        else{
+            setPhoto(e.target.files[0]);
+            setActive(false);
+        }
     }
 
     const submitHandler = async () => {
@@ -54,7 +68,7 @@ export const MyProfile = () => {
             setIsLoading(true)
             await uploadProfilePicture(photo, currentUser);
             toast.success('Successfully uploaded profile picture!');
-            
+
         } catch (error) {
             return setError('Uploding file failed');
         }
@@ -63,7 +77,6 @@ export const MyProfile = () => {
         console.log(currentUser + "submitted profile picture ");
         refreshPage();
     }
-
 
 
     return (
@@ -122,11 +135,11 @@ export const MyProfile = () => {
                                 className="mt-1 text-sm text-gray-500 dark:text-gray-300"
                                 id="file_input_help"
                             >
-                                SVG, PNG, JPG or GIF (MAX. 800x400px).
+                                PNG,JPG (MAX. 1MB and 800x600)
                             </p>
                         </div>
 
-                        <button to="/" disabled={isLoading || !photo} onClick={submitHandler} className="text-white py-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
+                        <button to="/" disabled={active || isLoading} onClick={submitHandler} className="text-white py-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
                             {" "}
                             Upload Profile Picture
                         </button>{" "}

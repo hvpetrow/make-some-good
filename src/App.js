@@ -25,6 +25,7 @@ import { RemoveCause } from './components/Causes/RemoveCause/RemoveCause';
 import { OwnerGuard } from './guards/OwnerGuard';
 import { Page404 } from './components/Page404/Page404';
 import { JoinedCauses } from './components/Causes/MyCauses/JoinedCauses';
+import { ForeignProfile } from './components/ForeignProfile/ForeignProfile';
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/catalog" element={<Catalog />} />
                         <Route path="/details/:causeId" element={<Details />} />
+                        <Route path="/foreignProfile/:userId" element={<ForeignProfile />} />
                         <Route path="/donate" element={<Donate />} />
                         <Route path="/search" element={<Search />} />
 

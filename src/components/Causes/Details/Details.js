@@ -25,7 +25,6 @@ export const Details = () => {
     const [isLoading, setIsLoading] = useState(true);
 
 
-
     useEffect(() => {
         try {
             getOneCause(causeId)
