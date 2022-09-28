@@ -150,16 +150,7 @@ export const Header = () => {
                                     >
                                         Donate
                                     </Link>
-                                    {currentUser &&
-                                        <>
-                                            <Link
-                                                to="/create-cause"
-                                                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
-                                            >
-                                                Suggest Cause
-                                            </Link>
-                                        </>
-                                    }
+                                   
                                 </div>
                             </div>
                         </div>
@@ -183,6 +174,14 @@ export const Header = () => {
                                 </>
 
                                 : <>
+                                  <>
+                                            <Link
+                                                to="/create-cause"
+                                                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
+                                            >
+                                                Suggest Cause
+                                            </Link>
+                                        </>
                                     <Link
                                         to="/my-causes"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
