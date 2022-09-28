@@ -23,6 +23,7 @@ import { Details } from './components/Causes/Details/Details';
 import { EditCause } from './components/Causes/EditCause/EditCause';
 import { RemoveCause } from './components/Causes/RemoveCause/RemoveCause';
 import { OwnerGuard } from './guards/OwnerGuard';
+import { Page404 } from './components/Page404/Page404';
 
 function App() {
     return (
@@ -55,6 +56,7 @@ function App() {
                                 <Route path="/delete/:causeId" element={<RemoveCause />} />
                             </Route>
                         </Route>
+                        <Route path="*" element={<Page404 />} />
                     </Routes>
                     <ToastContainer />
                     <Footer />
