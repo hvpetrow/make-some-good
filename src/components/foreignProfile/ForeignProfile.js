@@ -15,15 +15,16 @@ export const ForeignProfile = () => {
     const { userId } = useParams();
 
     useEffect(() => {
-        const promises = [getProfilePicture(userId),getOne(usersCollectionRef, userId) ];
+        const promises = [getProfilePicture(userId), getOne(usersCollectionRef, userId)];
 
         Promise.all(promises)
             .then(([url, doc]) => {
                 setProfilePicture(url)
                 setUserInfo(doc.data());
-                setIsLoading(false);
             }).catch((error) => {
                 console.log(error);
+            }).finally(() => {
+                setIsLoading(false);
             })
     }, [userId]);
 
@@ -49,10 +50,10 @@ export const ForeignProfile = () => {
     console.log(userInfo);
 
     return (
-        <div className="p-16">
-            <div className="p-8 bg-white shadow mt-24">
+         <div className="p-16">
+          {!isLoading &&  <div className="p-8 bg-white shadow mt-24">
                 {" "}
-                <div className="grid grid-cols-1 md:grid-cols-3">
+                 <div className="grid grid-cols-1 md:grid-cols-3">
                     {" "}
                     <div className="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
                         {" "}
@@ -105,7 +106,8 @@ export const ForeignProfile = () => {
                         Show more
                     </button>
                 </div>
+            </div>}
             </div>
-        </div>
+        
     )
 }
