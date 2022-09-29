@@ -16,9 +16,9 @@ export function useCausesContext() {
 export const CauseProvider = ({ children }) => {
     const [allCauses, setAllCauses] = useState([]);
     const [causes, setCauses] = useState([]);
-    const [cause, setCause] = useState([]);
-    const [id, setId] = useState('');
+    const [joinedCauses, setJoinedCauses] = useState([]);
     const { currentUser } = useAuth();
+    const [id, setId] = useState('');
 
     const orderedQuery = query(causesCollectionRef, orderBy("createdAt"));
 
@@ -43,17 +43,21 @@ export const CauseProvider = ({ children }) => {
 
     const searchCause = (text, criteria = 'title') => {
         return allCauses.filter(x => x.fields[criteria].toLowerCase().includes(text.toLowerCase()));
-        //   return allCauses.filter(x => x.fields[criteria].toLowerCase().startsWith(text.toLowerCase()));
+        //or concrete search - return allCauses.filter(x => x.fields[criteria].toLowerCase().startsWith(text.toLowerCase()));
     }
 
     const filterForeignUserCauses = (userId) => {
-        console.log(allCauses);
         return allCauses.filter(x => x.fields.creator === userId);
     }
 
-    const filterCurrentUserCauses = () => {
-        return allCauses.filter(x => x.creator === currentUser.uid);
+    // const filterCurrentUserCauses = () => {
+    //     return allCauses.filter(x => x.creator === currentUser.uid);
+    // }
+
+    const filterUserJoinedCauses = (userId) => { 
+        return allCauses.filter(x => x.fields.participants.some(p => p === userId) );
     }
+   
 
     // const useGetAllCauses = () => {
     //     useEffect(() => {
@@ -62,9 +66,8 @@ export const CauseProvider = ({ children }) => {
     //     }, []);
     // }
 
-
     return (
-        <CauseContext.Provider value={{ causes, setCauses, searchCause, cause, id, setId,filterForeignUserCauses,filterCurrentUserCauses }}>
+        <CauseContext.Provider value={{ causes, setCauses, searchCause, id, setId,filterForeignUserCauses,joinedCauses, setJoinedCauses,filterUserJoinedCauses }}>
             {children}
         </CauseContext.Provider>
     );

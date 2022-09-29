@@ -1,5 +1,6 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { getAll } from "./crudService";
 
 
 const causesCollectionRef = collection(db, 'causes');
@@ -27,6 +28,33 @@ export const deleteCause = async (id) => {
     return deleteDoc(causeDoc);
 }
 
-export const loadMore = async (collectionRef,id) => {
-    
+export function loadThreeMyCauses(orderedQuery,setMyCauses,setLatestDoc,setIsLoading,setClickable) {
+    getAll(orderedQuery)
+        .then(docs => {
+            if (docs.empty) {
+                setClickable(false);
+                return;
+            }
+            let arr = [];
+
+            docs.forEach((doc) => {
+                let fields = doc.data();
+                
+                arr.push({
+                    id: doc.id,
+                    fields: fields
+                });
+            });
+
+            setMyCauses(oldArr => [
+                ...oldArr,
+                ...arr
+            ]);
+
+            setLatestDoc(docs.docs[docs.docs.length - 1]);
+        }).then(() => {
+            setIsLoading(false);
+        }).catch((error) => {
+            console.log(error);
+        })
 }

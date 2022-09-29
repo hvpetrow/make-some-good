@@ -2,6 +2,7 @@ import { collection, limit, orderBy, query, startAfter, where } from 'firebase/f
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { useAuth } from '../../../contexts/AuthContext';
+import { useCausesContext } from '../../../contexts/CauseContext';
 import { db } from '../../../firebase';
 import { getAll } from '../../../services/crudService';
 import { Spinner } from '../../../shared/Spinner';
@@ -12,6 +13,8 @@ const causesCollectionRef = collection(db, "causes");
 
 export const JoinedCauses = () => {
     const { currentUser } = useAuth();
+    const { joinedCauses,setJoinedCauses } = useCausesContext();
+
     const [isLoading, setIsLoading] = useState(true);
     const [clickable, setClickable] = useState(true);
     const [visible, setVisible] = useState(true);
@@ -35,7 +38,6 @@ export const JoinedCauses = () => {
                         });
 
                     });
-
 
                         setMyCauses(arr);
                     setLatestDoc(docs.docs[docs.docs.length - 1]);

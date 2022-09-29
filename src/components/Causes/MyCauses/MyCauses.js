@@ -8,6 +8,7 @@ import { CardTemplate } from "../Catalog/CardTemplate";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Spinner } from "../../../shared/Spinner";
+import { loadThreeMyCauses } from "../../../services/causesService";
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -20,73 +21,23 @@ export const MyCauses = () => {
     const [myCauses, setMyCauses] = useState([]);
     const [latestDoc, setLatestDoc] = useState(0);
 
-    const orderedQuery = query(causesCollectionRef,where("creator","==",currentUser.uid),orderBy("createdAt"), startAfter(latestDoc || 0), limit(3));
+    const orderedQuery = query(causesCollectionRef, where("creator", "==", currentUser.uid), orderBy("createdAt"), startAfter(latestDoc || 0), limit(3));
 
     useEffect(() => {
         try {
-            getAll(orderedQuery)
-                .then(docs => {
-                    let arr = [];
-
-                    docs.forEach((doc) => {
-                        let fields = doc.data();
-
-                        arr.push({
-                            id: doc.id,
-                            fields: fields
-                        });
-
-                    });
-
-
-                        setMyCauses(arr);
-                    setLatestDoc(docs.docs[docs.docs.length - 1]);
-                }).then(() => {
-                    setIsLoading(false);
-                });
+            loadThreeMyCauses(orderedQuery,setMyCauses,setLatestDoc,setIsLoading,setClickable);    
         } catch (error) {
             console.log(error);
         }
-
     }, []);
 
     const loadMoreClickHandler = async (e) => {
         try {
-            getAll(orderedQuery)
-                .then(docs => {
-                    if (docs.empty) {
-                        setClickable(false);
-                        return;
-                    }
-                    let arr = [];
-
-                    docs.forEach((doc) => {
-                        let fields = doc.data();
-
-                        arr.push({
-                            id: doc.id,
-                            fields: fields
-                        });
-                    });
-
-
-                    setMyCauses(oldArr => [
-                        ...oldArr,
-                        ...arr
-                    ]);
-
-
-                    console.log("LATEST DOC", latestDoc);
-                    setLatestDoc(docs.docs[docs.docs.length - 1]);
-                }).then(() => {
-                    setIsLoading(false);
-                });
+            loadThreeMyCauses(orderedQuery,setMyCauses,setLatestDoc,setIsLoading,setClickable);
         } catch (error) {
             console.log(error);
         }
     }
-
-    console.log(myCauses);
 
     return (
         <div>
@@ -102,18 +53,18 @@ export const MyCauses = () => {
                 </div>
             </div>
             {visible &&
-                    <div className="flex justify-center m-y-5">
-                        <button id="load-more-button" className="inline-block px-7 py-3 max-w-sm bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                            data-mdb-ripple="true"
-                            data-mdb-ripple-color="light"
-                            onClick={clickable ? loadMoreClickHandler : () => {
-                                toast.warning('No more causes', {
-                                    position: toast.POSITION.BOTTOM_CENTER
-                                });
-                                setVisible(false);
-                            }}>load more</button>
-                    </div>
-                }
+                <div className="flex justify-center m-y-5">
+                    <button id="load-more-button" className="inline-block px-7 py-3 max-w-sm bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                        data-mdb-ripple="true"
+                        data-mdb-ripple-color="light"
+                        onClick={clickable ? loadMoreClickHandler : () => {
+                            toast.warning('No more causes', {
+                                position: toast.POSITION.BOTTOM_CENTER
+                            });
+                            setVisible(false);
+                        }}>load more</button>
+                </div>
+            }
         </div>
     );
 }

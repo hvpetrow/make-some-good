@@ -14,11 +14,13 @@ export const ForeignProfile = () => {
     const [userInfo, setUserInfo] = useState('');
     const [profilePicture, setProfilePicture] = useState("https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png");
     const { getProfilePicture } = useAuth();
-    const { filterForeignUserCauses } = useCausesContext();
+    const { filterForeignUserCauses,filterUserJoinedCauses } = useCausesContext();
 
     const [isLoading, setIsLoading] = useState(true);
     const [isClicked, setIsClicked] = useState(false);
     const [foreignUserCauses, setForeignUserCauses] = useState([]);
+    const [userJoinedCauses,setUserJoinedCauses] = useState([]);
+
 
     const { userId } = useParams();
 
@@ -36,6 +38,7 @@ export const ForeignProfile = () => {
             })
 
             setForeignUserCauses(filterForeignUserCauses(userId));
+            setUserJoinedCauses(filterUserJoinedCauses(userId));
     }, [userId]);
 
     // useEffect(() => {
@@ -68,7 +71,7 @@ export const ForeignProfile = () => {
                         {" "}
                         <div>
                             {" "}
-                            <p className="font-bold text-gray-700 text-xl">22</p>{" "}
+                            <p className="font-bold text-gray-700 text-xl">{userJoinedCauses.length}</p>{" "}
                             <p className="text-gray-400">Joined Causes</p>{" "}
                         </div>{" "}
                         <div>
@@ -101,10 +104,7 @@ export const ForeignProfile = () => {
                         {userInfo.firstName} {userInfo.lastName}
                     </h1>{" "}
                     <p className="font-light text-gray-600 mt-3">{userInfo.country}</p>{" "}
-                    <p className="mt-8 text-gray-500">
-                        Solution Manager - Creative Tim Officer
-                    </p>{" "}
-                    <p className="mt-2 text-gray-500">University of Computer Science</p>
+
                 </div>{" "}
                 {!isClicked &&
                 <div className="mt-12 flex justify-center">
@@ -125,7 +125,7 @@ export const ForeignProfile = () => {
                             ? (<Spinner />)
                             : foreignUserCauses.length !== 0
                                 ? (foreignUserCauses.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
-                                : (<h3 className="no-articles">No articles yet</h3>)
+                                : (<h3 className="no-articles">No Created Causes yet</h3>)
                         }
                     </div>
                 </div>
