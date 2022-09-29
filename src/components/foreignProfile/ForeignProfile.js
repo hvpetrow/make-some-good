@@ -34,15 +34,9 @@ export const ForeignProfile = () => {
             }).finally(() => {
                 setIsLoading(false);
             })
+
+            setForeignUserCauses(filterForeignUserCauses(userId));
     }, [userId]);
-
-
-const clickHandler = () => {
-    setIsClicked(true);
-    const s = filterForeignUserCauses(userId);
-    console.log(s);
-    setForeignUserCauses(filterForeignUserCauses(userId));
-}
 
     // useEffect(() => {
     //     getOne(usersCollectionRef, userId)
@@ -79,7 +73,7 @@ const clickHandler = () => {
                         </div>{" "}
                         <div>
                             {" "}
-                            <p className="font-bold text-gray-700 text-xl">10</p>{" "}
+                            <p className="font-bold text-gray-700 text-xl">{foreignUserCauses.length}</p>{" "}
                             <p className="text-gray-400">My Causes</p>{" "}
                         </div>{" "}
 
@@ -114,7 +108,8 @@ const clickHandler = () => {
                 </div>{" "}
                 {!isClicked &&
                 <div className="mt-12 flex justify-center">
-                    <button onClick={clickHandler}
+    
+                    <button onClick={() => setIsClicked(true)}
                         className="bg-pink-500 active:bg-pink-600 w-48 md:w-64 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                         type="button"
                     >
