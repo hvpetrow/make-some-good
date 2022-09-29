@@ -2,8 +2,11 @@ import { collection } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext';
+import { useCausesContext } from '../../contexts/CauseContext';
 import { db } from '../../firebase';
 import { getOne } from '../../services/crudService';
+import { Spinner } from '../../shared/Spinner';
+import { CardTemplate } from '../Home/CardTemplate';
 
 const usersCollectionRef = collection(db, 'users');
 
@@ -11,7 +14,12 @@ export const ForeignProfile = () => {
     const [userInfo, setUserInfo] = useState('');
     const [profilePicture, setProfilePicture] = useState("https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png");
     const { getProfilePicture } = useAuth();
+    const { filterForeignUserCauses } = useCausesContext();
+
     const [isLoading, setIsLoading] = useState(true);
+    const [isClicked, setIsClicked] = useState(false);
+    const [foreignUserCauses, setForeignUserCauses] = useState([]);
+
     const { userId } = useParams();
 
     useEffect(() => {
@@ -28,6 +36,13 @@ export const ForeignProfile = () => {
             })
     }, [userId]);
 
+
+const clickHandler = () => {
+    setIsClicked(true);
+    const s = filterForeignUserCauses(userId);
+    console.log(s);
+    setForeignUserCauses(filterForeignUserCauses(userId));
+}
 
     // useEffect(() => {
     //     getOne(usersCollectionRef, userId)
@@ -50,32 +65,28 @@ export const ForeignProfile = () => {
     console.log(userInfo);
 
     return (
-         <div className="p-16">
-          {!isLoading &&  <div className="p-8 bg-white shadow mt-24">
+        <div className="p-16">
+            {!isLoading && <div className="p-8 bg-white shadow mt-24">
                 {" "}
-                 <div className="grid grid-cols-1 md:grid-cols-3">
+                <div className="grid grid-cols-1 md:grid-cols-1">
                     {" "}
-                    <div className="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
+                    <div className="grid grid-cols-2 -mx-16 text-center order-last md:order-first mt-20 md:mt-0">
                         {" "}
                         <div>
                             {" "}
                             <p className="font-bold text-gray-700 text-xl">22</p>{" "}
-                            <p className="text-gray-400">Causes</p>{" "}
+                            <p className="text-gray-400">Joined Causes</p>{" "}
                         </div>{" "}
                         <div>
                             {" "}
                             <p className="font-bold text-gray-700 text-xl">10</p>{" "}
                             <p className="text-gray-400">My Causes</p>{" "}
                         </div>{" "}
-                        <div>
-                            {" "}
-                            <p className="font-bold text-gray-700 text-xl">89</p>{" "}
-                            <p className="text-gray-400">Rating</p>{" "}
-                        </div>{" "}
+
                     </div>{" "}
-                    <div className="relative">
+                    <div className="relative ">
                         {" "}
-                        <div className="absolute inset-x-0 top-0 -mt-24 flex items-center justify-center ">
+                        <div className="absolute inset-x-0 top-0 -mt-36  flex items-center justify-center ">
                             <img
                                 src={profilePicture}
                                 className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl"
@@ -86,6 +97,7 @@ export const ForeignProfile = () => {
                             </img>{" "}
                         </div>{" "}
                     </div>{" "}
+
 
                 </div>{" "}
 
@@ -100,14 +112,30 @@ export const ForeignProfile = () => {
                     </p>{" "}
                     <p className="mt-2 text-gray-500">University of Computer Science</p>
                 </div>{" "}
-                <div className="mt-12 flex flex-col justify-center">
-                    <button className="text-indigo-500 py-2 px-4  font-medium mt-4">
-                        {" "}
-                        Show more
+                {!isClicked &&
+                <div className="mt-12 flex justify-center">
+                    <button onClick={clickHandler}
+                        className="bg-pink-500 active:bg-pink-600 w-48 md:w-64 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                    >
+                        User Causes
                     </button>
                 </div>
+}
             </div>}
-            </div>
-        
+            {isClicked &&
+                 <div className=" flex justify-center my-7 ">
+                    <div className="grid py-10 justify-center my-7  -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
+                        {isLoading
+                            ? (<Spinner />)
+                            : foreignUserCauses.length !== 0
+                                ? (foreignUserCauses.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
+                                : (<h3 className="no-articles">No articles yet</h3>)
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
     )
 }
