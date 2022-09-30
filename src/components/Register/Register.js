@@ -5,10 +5,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useAuth } from '../../contexts/AuthContext'
+import userValidation from '../../validation/userValidation';
 
 export const Register = () => {
     const navigate = useNavigate();
-
+    const [errors, setErrors] = useState({});
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -19,11 +20,25 @@ export const Register = () => {
     });
 
     const [error, setError] = useState('');
-
     const [tac, setTac] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const { signUp, currentUser, setUserAdditionalInfo } = useAuth();
+
+    console.log(errors);
+
+    const emailValidator = (e) => {
+        console.log(values[e.currentTarget]);
+        console.log(values[e.target.name]);
+        console.log(values.email);
+
+
+        setErrors((state) => ({
+            ...state,
+            [e.target.name]: userValidation.emailIsValid(values[e.target.name]),
+        }));
+    };
+
     const changeHandler = (e) => {
         setValues((oldValues) => ({
             ...oldValues,
@@ -58,7 +73,7 @@ export const Register = () => {
                 firstName: values.firstName,
                 lastName: values.lastName,
                 country: values.country
-                
+
             }
 
             const settedUserWithAdditionalData = await setUserAdditionalInfo(additionalUserData, user.uid)
@@ -74,6 +89,8 @@ export const Register = () => {
 
         setIsLoading(false);
     }
+
+
 
     return (
 
@@ -94,16 +111,22 @@ export const Register = () => {
                         {/* {error} */}
                         <form onSubmit={submitHandler}>
                             {/* Email input */}
-                            <div className="mb-6">
+                            <div className="mb-6 ">
                                 <input
-                                    type="text"
+                                    type="email"
                                     name="email"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Email address"
+                                    id="email"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    placeholder="user@gmail.com"
                                     required
                                     value={values.email}
                                     onChange={changeHandler}
-                                />
+                                    onBlur={(e) => emailValidator(e)}
+                                    />
+                                    {!errors.email && (
+                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Email is not valid!!</p>
+                                            )}
+                               
                             </div>
                             <div className="mb-6">
                                 <input

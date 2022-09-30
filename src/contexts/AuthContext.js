@@ -14,7 +14,6 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
-    const [photoUrlChanged, setPhotoUrlChanged] = useState('');
     const [photoURL, setPhotoURL] = useState('https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png');
     const [loading, setLoading] = useState(true);
 
