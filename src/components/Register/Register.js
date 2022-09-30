@@ -10,6 +10,8 @@ import userValidation from '../../validation/userValidation';
 export const Register = () => {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
+    const [hasTouched, setHasTouched] = useState(false);
+
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -25,19 +27,42 @@ export const Register = () => {
 
     const { signUp, currentUser, setUserAdditionalInfo } = useAuth();
 
-    console.log(errors);
 
     const emailValidator = (e) => {
-        console.log(values[e.currentTarget]);
-        console.log(values[e.target.name]);
-        console.log(values.email);
+        setHasTouched(true);
+        setErrors((state) => ({
+            ...state,
+            [e.target.name]: userValidation.emailIsValid(values[e.target.name])
+        }));
+    };
 
+    const nameValidator = (e) => {
+        setHasTouched(true);
 
         setErrors((state) => ({
             ...state,
-            [e.target.name]: userValidation.emailIsValid(values[e.target.name]),
+            [e.target.name]: userValidation.nameIsLength(values[e.target.name])
         }));
     };
+
+    const passwordValidator = (e) => {
+        setHasTouched(true);
+
+        setErrors((state) => ({
+            ...state,
+            [e.target.name]: userValidation.isEqual(values.password,values[e.target.name])
+        }));
+    };
+
+    const rePassValidator = (e) => {
+        setHasTouched(true);
+
+        setErrors((state) => ({
+            ...state,
+            [e.target.name]: userValidation.passwordIsLength(values[e.target.name])
+        }));
+    };
+
 
     const changeHandler = (e) => {
         setValues((oldValues) => ({
@@ -50,7 +75,7 @@ export const Register = () => {
         setTac(e.target.checked);
     }
 
-
+console.log(errors);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -90,8 +115,11 @@ export const Register = () => {
         setIsLoading(false);
     }
 
+    const { email, firstName,lastName,country, password, repass } = values;
+    const required = email && firstName && lastName && country && password && repass;
 
-
+    const isFormValid = required && !Object.values(errors).some((x) => x);
+    
     return (
 
         <section className="h-screen">
@@ -123,10 +151,10 @@ export const Register = () => {
                                     onChange={changeHandler}
                                     onBlur={(e) => emailValidator(e)}
                                     />
-                                    {!errors.email && (
+                                    {(!errors.email && hasTouched) && (
                                                 <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Email is not valid!!</p>
                                             )}
-                               
+
                             </div>
                             <div className="mb-6">
                                 <input
@@ -137,7 +165,11 @@ export const Register = () => {
                                     required
                                     value={values.displayName}
                                     onChange={changeHandler}
+                                    onBlur={(e) => nameValidator(e)}
                                 />
+                                    {(!errors.firstName && hasTouched) && (
+                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">First Name is not valid!!</p>
+                                            )}
                             </div>
                             <div className="mb-6">
                                 <input
@@ -148,7 +180,11 @@ export const Register = () => {
                                     required
                                     value={values.displayName}
                                     onChange={changeHandler}
+                                    onBlur={(e) => nameValidator(e)}
                                 />
+                                 {(!errors.lastName && hasTouched) && (
+                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Last Name is not valid!!</p>
+                                            )}
                             </div>
                             <div className="mb-6">
                                 <input
@@ -159,7 +195,11 @@ export const Register = () => {
                                     required
                                     value={values.country}
                                     onChange={changeHandler}
+                                    onBlur={(e) => nameValidator(e)}
                                 />
+                                 {(!errors.country && hasTouched) && (
+                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Country is not valid!!</p>
+                                            )}
                             </div>
                             {/* Password input */}
                             <div className="mb-6">
@@ -171,8 +211,11 @@ export const Register = () => {
                                     required
                                     value={values.password}
                                     onChange={changeHandler}
+                                    onBlur={(e) => passwordValidator(e)}
                                 />
-
+                                 {(!errors.password && hasTouched) && (
+                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Password is not valid!!</p>
+                                            )}
                             </div>
                             <div className="mb-6">
                                 <input
@@ -183,7 +226,11 @@ export const Register = () => {
                                     required
                                     value={values.repass}
                                     onChange={changeHandler}
+                                    onBlur={(e) => rePassValidator(e)}
                                 />
+                                  {(!errors.repass && hasTouched) && (
+                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Repass is not valid!!</p>
+                                            )}
 
                             </div>
                             <div className="show_info text-sm mb-4 w-max text-red-400" >
