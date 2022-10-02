@@ -12,11 +12,12 @@ export const Register = () => {
     const [errors, setErrors] = useState({});
     const [hasTouched, setHasTouched] = useState({
         email: false,
-        password: '',
-        repass: '',
-        firstName: '',
-        lastName: '',
-        country: ''
+        password: false,
+        repass: false,
+        firstName: false,
+        lastName: false,
+        country: false,
+        terms: false
     });
 
     const [values, setValues] = useState({
@@ -28,7 +29,6 @@ export const Register = () => {
         country: ''
     });
 
-    const [error, setError] = useState('');
     const [tac, setTac] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { signUp, currentUser, setUserAdditionalInfo } = useAuth();
@@ -46,7 +46,7 @@ export const Register = () => {
     };
 
     const nameValidator = (e) => {
-           setHasTouched((state) => ({
+        setHasTouched((state) => ({
             ...state,
             [e.target.name]: true
         }));
@@ -65,7 +65,7 @@ export const Register = () => {
 
         setErrors((state) => ({
             ...state,
-            [e.target.name]: userValidation.isEqual(values.password, values[e.target.name])
+            [e.target.name]: userValidation.passwordIsLength(values[e.target.name])
         }));
     };
 
@@ -77,7 +77,7 @@ export const Register = () => {
 
         setErrors((state) => ({
             ...state,
-            [e.target.name]: userValidation.passwordIsLength(values[e.target.name])
+            [e.target.name]: userValidation.isEqual(values.password, values[e.target.name])
         }));
     };
 
@@ -90,19 +90,28 @@ export const Register = () => {
 
     const tacChangeHandler = (e) => {
         setTac(e.target.checked);
+        setErrors((state) => ({
+            ...state,
+            [e.target.name]: e.target.checked
+        }));
     }
+
 
 
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        if (values.password !== values.repass) {
-            setError('Passwords do not match')
+        if (password !== repass) {
+            setErrors((state) => ({
+                ...state,
+                repass: false
+            }))
+
             return;
         }
 
-        if (!tac) {
-            setError('You must agree with terms and conditions')
+        if (!isFormValid) {
+            toast.error('Failed to create an account');
             return;
         }
 
@@ -114,20 +123,27 @@ export const Register = () => {
                 lastName: values.lastName,
                 country: values.country
             }
+
             const settedUserWithAdditionalData = await setUserAdditionalInfo(additionalUserData, user.uid)
             toast.success('Successfully Registered!');
             navigate('/');
         } catch (error) {
-            setError('Failed to create an account');
+            toast.error('Failed to create an account');
         }
 
         setIsLoading(false);
     }
 
     const { email, firstName, lastName, country, password, repass } = values;
-    const required = email && firstName && lastName && country && password && repass;
-    const isFormValid = required && Object.values(errors).every(x => x === true);
 
+    let required;
+    if (email && firstName && lastName && country && password && repass) {
+        required = true;
+    }
+    
+    const isFormValid = required && tac && Object.values(errors).every(x => x === true);
+    console.log(errors);
+    console.log(required);
     return (
 
         <section className="h-screen">
@@ -237,11 +253,8 @@ export const Register = () => {
                                     onBlur={(e) => rePassValidator(e)}
                                 />
                                 {(!errors.repass && hasTouched.repass) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Do not match with Password!!</p>
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Passwords do not match!!</p>
                                 )}
-                            </div>
-                            <div className="show_info text-sm mb-4 w-max text-red-400" >
-                                <p>{error}</p>
                             </div>
                             <div className="flex my-3 items-start">
                                 <div className="flex items-center h-5">
@@ -249,6 +262,7 @@ export const Register = () => {
                                         id="terms"
                                         aria-describedby="terms"
                                         type="checkbox"
+                                        name="terms"
                                         className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                                         required=""
                                         value={tac}
