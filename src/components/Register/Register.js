@@ -10,7 +10,14 @@ import userValidation from '../../validation/userValidation';
 export const Register = () => {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
-    const [hasTouched, setHasTouched] = useState(false);
+    const [hasTouched, setHasTouched] = useState({
+        email: false,
+        password: '',
+        repass: '',
+        firstName: '',
+        lastName: '',
+        country: ''
+    });
 
     const [values, setValues] = useState({
         email: '',
@@ -29,7 +36,11 @@ export const Register = () => {
 
 
     const emailValidator = (e) => {
-        setHasTouched(true);
+        setHasTouched((state) => ({
+            ...state,
+            [e.target.name]: true
+        }));
+
         setErrors((state) => ({
             ...state,
             [e.target.name]: userValidation.emailIsValid(values[e.target.name])
@@ -37,7 +48,10 @@ export const Register = () => {
     };
 
     const nameValidator = (e) => {
-        setHasTouched(true);
+           setHasTouched((state) => ({
+            ...state,
+            [e.target.name]: true
+        }));
 
         setErrors((state) => ({
             ...state,
@@ -46,16 +60,22 @@ export const Register = () => {
     };
 
     const passwordValidator = (e) => {
-        setHasTouched(true);
+        setHasTouched((state) => ({
+            ...state,
+            [e.target.name]: true
+        }));
 
         setErrors((state) => ({
             ...state,
-            [e.target.name]: userValidation.isEqual(values.password,values[e.target.name])
+            [e.target.name]: userValidation.isEqual(values.password, values[e.target.name])
         }));
     };
 
     const rePassValidator = (e) => {
-        setHasTouched(true);
+        setHasTouched((state) => ({
+            ...state,
+            [e.target.name]: true
+        }));
 
         setErrors((state) => ({
             ...state,
@@ -75,7 +95,6 @@ export const Register = () => {
         setTac(e.target.checked);
     }
 
-console.log(errors);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -115,11 +134,15 @@ console.log(errors);
         setIsLoading(false);
     }
 
-    const { email, firstName,lastName,country, password, repass } = values;
+    const { email, firstName, lastName, country, password, repass } = values;
     const required = email && firstName && lastName && country && password && repass;
 
-    const isFormValid = required && !Object.values(errors).some((x) => x);
-    
+    const isFormValid = required && Object.values(errors).every(x => x === true);
+
+    console.log(errors);
+    console.log(isFormValid);
+    console.log(isLoading);
+
     return (
 
         <section className="h-screen">
@@ -150,10 +173,10 @@ console.log(errors);
                                     value={values.email}
                                     onChange={changeHandler}
                                     onBlur={(e) => emailValidator(e)}
-                                    />
-                                    {(!errors.email && hasTouched) && (
-                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Email is not valid!!</p>
-                                            )}
+                                />
+                                {(!errors.email && hasTouched.email) && (
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Email is not valid!!</p>
+                                )}
 
                             </div>
                             <div className="mb-6">
@@ -167,9 +190,9 @@ console.log(errors);
                                     onChange={changeHandler}
                                     onBlur={(e) => nameValidator(e)}
                                 />
-                                    {(!errors.firstName && hasTouched) && (
-                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">First Name is not valid!!</p>
-                                            )}
+                                {(!errors.firstName && hasTouched.firstName) && (
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">First Name is not valid!!</p>
+                                )}
                             </div>
                             <div className="mb-6">
                                 <input
@@ -182,9 +205,9 @@ console.log(errors);
                                     onChange={changeHandler}
                                     onBlur={(e) => nameValidator(e)}
                                 />
-                                 {(!errors.lastName && hasTouched) && (
-                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Last Name is not valid!!</p>
-                                            )}
+                                {(!errors.lastName && hasTouched.lastName) && (
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Last Name is not valid!!</p>
+                                )}
                             </div>
                             <div className="mb-6">
                                 <input
@@ -197,9 +220,9 @@ console.log(errors);
                                     onChange={changeHandler}
                                     onBlur={(e) => nameValidator(e)}
                                 />
-                                 {(!errors.country && hasTouched) && (
-                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Country is not valid!!</p>
-                                            )}
+                                {(!errors.country && hasTouched.country) && (
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Country is not valid!!</p>
+                                )}
                             </div>
                             {/* Password input */}
                             <div className="mb-6">
@@ -213,9 +236,9 @@ console.log(errors);
                                     onChange={changeHandler}
                                     onBlur={(e) => passwordValidator(e)}
                                 />
-                                 {(!errors.password && hasTouched) && (
-                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Password is not valid!!</p>
-                                            )}
+                                {(!errors.password && hasTouched.password) && (
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Password is not valid!!</p>
+                                )}
                             </div>
                             <div className="mb-6">
                                 <input
@@ -228,9 +251,9 @@ console.log(errors);
                                     onChange={changeHandler}
                                     onBlur={(e) => rePassValidator(e)}
                                 />
-                                  {(!errors.repass && hasTouched) && (
-                                                <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Repass is not valid!!</p>
-                                            )}
+                                {(!errors.repass && hasTouched.repass) && (
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Repass is not valid!!</p>
+                                )}
 
                             </div>
                             <div className="show_info text-sm mb-4 w-max text-red-400" >
@@ -267,7 +290,7 @@ console.log(errors);
 
                             {/* Submit button */}
                             <button
-                                disabled={isLoading}
+                                disabled={isLoading || !isFormValid}
                                 type="submit"
                                 className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                                 data-mdb-ripple="true"
