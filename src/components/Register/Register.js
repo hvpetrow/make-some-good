@@ -176,7 +176,7 @@ export const Register = () => {
                                     onBlur={(e) => nameValidator(e)}
                                 />
                                 {(!errors.firstName && hasTouched.firstName) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">First Name is not valid!!</p>
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">First Name must be at least 2 characters long!!</p>
                                 )}
                             </div>
                             <div className="mb-6">
@@ -191,7 +191,7 @@ export const Register = () => {
                                     onBlur={(e) => nameValidator(e)}
                                 />
                                 {(!errors.lastName && hasTouched.lastName) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Last Name is not valid!!</p>
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Last Name must be at least 2 characters long!!</p>
                                 )}
                             </div>
                             <div className="mb-6">
@@ -222,7 +222,7 @@ export const Register = () => {
                                     onBlur={(e) => passwordValidator(e)}
                                 />
                                 {(!errors.password && hasTouched.password) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Password is not valid!!</p>
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Password must be at least 6 characters long!!</p>
                                 )}
                             </div>
                             <div className="mb-6">
@@ -237,9 +237,8 @@ export const Register = () => {
                                     onBlur={(e) => rePassValidator(e)}
                                 />
                                 {(!errors.repass && hasTouched.repass) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Repass is not valid!!</p>
+                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Do not match with Password!!</p>
                                 )}
-
                             </div>
                             <div className="show_info text-sm mb-4 w-max text-red-400" >
                                 <p>{error}</p>
@@ -272,7 +271,6 @@ export const Register = () => {
                                 </div>
                             </div>
 
-
                             {/* Submit button */}
                             <button
                                 disabled={isLoading || !isFormValid}
@@ -294,7 +292,6 @@ export const Register = () => {
                                     </Link>
                                 </p>
                             </div>
-
                         </form>
                     </div>
                 </div>
