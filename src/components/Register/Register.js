@@ -10,6 +10,8 @@ import userValidation from '../../validation/userValidation';
 export const Register = () => {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
+    const [showRepeatPassword, setShowRepeatPassword] = useState(false);
     const [hasTouched, setHasTouched] = useState({
         email: false,
         password: false,
@@ -32,6 +34,14 @@ export const Register = () => {
     const [tac, setTac] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { signUp, currentUser, setUserAdditionalInfo } = useAuth();
+
+    const showPasswordHandler = () => {
+        setShowPassword(state => !state);
+    };
+
+    const showRepeatPasswordHandler = () => {
+        setShowRepeatPassword(state => !state);
+    };
 
     const emailValidator = (e) => {
         setHasTouched((state) => ({
@@ -140,7 +150,7 @@ export const Register = () => {
     if (email && firstName && lastName && country && password && repass) {
         required = true;
     }
-    
+
     const isFormValid = required && tac && Object.values(errors).every(x => x === true);
     console.log(errors);
     console.log(required);
@@ -228,7 +238,7 @@ export const Register = () => {
                             {/* Password input */}
                             <div className="mb-6">
                                 <input
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     name="password"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Password"
@@ -243,7 +253,7 @@ export const Register = () => {
                             </div>
                             <div className="mb-6">
                                 <input
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     name="repass"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="Confirm password"
@@ -252,10 +262,26 @@ export const Register = () => {
                                     onChange={changeHandler}
                                     onBlur={(e) => rePassValidator(e)}
                                 />
+
+                                <span onClick={showPasswordHandler}>
+                                    {showPassword
+                                        ? <img
+                                            src={require("../../assets/eye.png")}
+                                            className=""
+                                            alt=""
+                                        />
+                                        : <img
+                                            src={require("../../assets/eye.png")}
+                                            className=""
+                                            alt=""
+                                        />
+                                    }
+                                </span>
                                 {(!errors.repass && hasTouched.repass) && (
                                     <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Passwords do not match!!</p>
                                 )}
                             </div>
+
                             <div className="flex my-3 items-start">
                                 <div className="flex items-center h-5">
                                     <input
