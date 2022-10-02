@@ -31,9 +31,7 @@ export const Register = () => {
     const [error, setError] = useState('');
     const [tac, setTac] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
     const { signUp, currentUser, setUserAdditionalInfo } = useAuth();
-
 
     const emailValidator = (e) => {
         setHasTouched((state) => ({
@@ -83,7 +81,6 @@ export const Register = () => {
         }));
     };
 
-
     const changeHandler = (e) => {
         setValues((oldValues) => ({
             ...oldValues,
@@ -112,20 +109,13 @@ export const Register = () => {
         try {
             setIsLoading(true);
             const { user } = await signUp(values.email, values.password);
-
             const additionalUserData = {
                 firstName: values.firstName,
                 lastName: values.lastName,
                 country: values.country
-
             }
-
             const settedUserWithAdditionalData = await setUserAdditionalInfo(additionalUserData, user.uid)
-            // await updateProfile(user, {
-            //     displayName: values.displayName,
-            // });
             toast.success('Successfully Registered!');
-
             navigate('/');
         } catch (error) {
             setError('Failed to create an account');
@@ -136,12 +126,7 @@ export const Register = () => {
 
     const { email, firstName, lastName, country, password, repass } = values;
     const required = email && firstName && lastName && country && password && repass;
-
     const isFormValid = required && Object.values(errors).every(x => x === true);
-
-    console.log(errors);
-    console.log(isFormValid);
-    console.log(isLoading);
 
     return (
 
