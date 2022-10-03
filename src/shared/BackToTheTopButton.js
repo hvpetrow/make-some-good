@@ -8,7 +8,6 @@ export const BackToTheTopButton = (props) => {
 
     const handleVisibleButton = () => {
         setShowGoTop(window.scrollY > 200);
-        console.log("set window scrollY > 200");
     }
 
     const handleScrollUp = () => {
@@ -17,15 +16,12 @@ export const BackToTheTopButton = (props) => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleVisibleButton);
-        console.log("add scroll event listner to window");
-        console.log("render first time");
         
         return () => {
             window.removeEventListener('scroll',handleVisibleButton);
         }
     }, []);
 
-console.log("rerender");
     return (
         <>
             <button id="to-top-button" onClick={handleScrollUp} title="Go To Top"
