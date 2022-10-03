@@ -163,12 +163,6 @@ export const MyProfile = () => {
                     </p>{" "}
                     <p className="mt-2 text-gray-500">University of Computer Science</p>
                 </div>{" "}
-                <div className="mt-12 flex flex-col justify-center">
-                    <button className="text-indigo-500 py-2 px-4  font-medium mt-4">
-                        {" "}
-                        Show more
-                    </button>
-                </div>
             </div>
         </div>
     )
