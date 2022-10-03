@@ -36,6 +36,8 @@ export const MyProfile = () => {
         getOne(usersCollectionRef, currentUser.uid)
             .then(docSnap => {
                 setUserInfo(docSnap.data());
+            }).catch(err => {
+                console.log(err);
             });
 
             setCurrentUserCauses(filterCurrentUserCauses());
