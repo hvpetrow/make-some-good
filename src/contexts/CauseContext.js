@@ -1,8 +1,6 @@
-import { collection, orderBy, query, where } from "firebase/firestore";
+import { collection, orderBy, query } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { db } from "../firebase";
-import { getOneCause } from "../services/causesService";
 import { getAll } from "../services/crudService";
 import { useAuth } from "./AuthContext";
 
@@ -40,7 +38,6 @@ export const CauseProvider = ({ children }) => {
             })
     }, []);
 
-
     const searchCause = (text, criteria = 'title') => {
         return allCauses.filter(x => x.fields[criteria].toLowerCase().includes(text.toLowerCase()));
         //or concrete search - return allCauses.filter(x => x.fields[criteria].toLowerCase().startsWith(text.toLowerCase()));
@@ -50,24 +47,16 @@ export const CauseProvider = ({ children }) => {
         return allCauses.filter(x => x.fields.creator === userId);
     }
 
-    // const filterCurrentUserCauses = () => {
-    //     return allCauses.filter(x => x.creator === currentUser.uid);
-    // }
+    const filterCurrentUserCauses = () => {
+        return allCauses.filter(x => x.creator === currentUser.uid);
+    }
 
     const filterUserJoinedCauses = (userId) => { 
         return allCauses.filter(x => x.fields.participants.some(p => p === userId) );
     }
    
-
-    // const useGetAllCauses = () => {
-    //     useEffect(() => {
-    //         getAll(causesCollectionRef)
-    //             .then(result => { setCauses(result) });
-    //     }, []);
-    // }
-
     return (
-        <CauseContext.Provider value={{ causes, setCauses, searchCause, id, setId,filterForeignUserCauses,joinedCauses, setJoinedCauses,filterUserJoinedCauses }}>
+        <CauseContext.Provider value={{ causes, setCauses, searchCause, id, setId,filterForeignUserCauses,joinedCauses, setJoinedCauses,filterUserJoinedCauses,filterCurrentUserCauses }}>
             {children}
         </CauseContext.Provider>
     );

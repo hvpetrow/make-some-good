@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useAuth } from "../../contexts/AuthContext"
+import { useCausesContext } from "../../contexts/CauseContext";
 import { db } from "../../firebase";
 import { getOne } from "../../services/crudService";
 
@@ -19,6 +20,9 @@ export const MyProfile = () => {
         country: ''
     });
 
+    const[currentUserCauses,setCurrentUserCauses] = useState();
+    const[currentUserJoinedCauses,setCurrentUserJoinedCauses] = useState();
+
     const [photo, setPhoto] = useState(null);
     const [active, setActive] = useState(true);
 
@@ -26,16 +30,16 @@ export const MyProfile = () => {
     const [error, setError] = useState('');
 
     const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
-
-
+    const {filterCurrentUserCauses,filterUserJoinedCauses} = useCausesContext();
 
     useEffect(() => {
         getOne(usersCollectionRef, currentUser.uid)
             .then(docSnap => {
-                console.log(docSnap.data());
-
                 setUserInfo(docSnap.data());
             });
+
+            setCurrentUserCauses(filterCurrentUserCauses());
+            setCurrentUserJoinedCauses(filterUserJoinedCauses(currentUser.uid));
     }, [currentUser.uid]);
 
     useEffect(() => {
@@ -78,6 +82,9 @@ export const MyProfile = () => {
         refreshPage();
     }
 
+    console.log(currentUserCauses);
+    console.log(currentUserJoinedCauses);
+
 
     return (
         <div className="p-16">
@@ -89,18 +96,13 @@ export const MyProfile = () => {
                         {" "}
                         <div>
                             {" "}
-                            <p className="font-bold text-gray-700 text-xl">22</p>{" "}
-                            <p className="text-gray-400">Causes</p>{" "}
-                        </div>{" "}
-                        <div>
-                            {" "}
-                            <p className="font-bold text-gray-700 text-xl">10</p>{" "}
+                            <p className="font-bold text-gray-700 text-xl">{currentUserCauses?.length}</p>{" "}
                             <p className="text-gray-400">My Causes</p>{" "}
                         </div>{" "}
                         <div>
                             {" "}
-                            <p className="font-bold text-gray-700 text-xl">89</p>{" "}
-                            <p className="text-gray-400">Rating</p>{" "}
+                            <p className="font-bold text-gray-700 text-xl">{currentUserJoinedCauses?.length}</p>{" "}
+                            <p className="text-gray-400">Joined Causes</p>{" "}
                         </div>{" "}
                     </div>{" "}
                     <div className="relative">

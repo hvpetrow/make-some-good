@@ -71,12 +71,12 @@ export const ForeignProfile = () => {
                         {" "}
                         <div>
                             {" "}
-                            <p className="font-bold text-gray-700 text-xl">{userJoinedCauses.length}</p>{" "}
+                            <p className="font-bold text-gray-700 text-xl">{userJoinedCauses?.length}</p>{" "}
                             <p className="text-gray-400">Joined Causes</p>{" "}
                         </div>{" "}
                         <div>
                             {" "}
-                            <p className="font-bold text-gray-700 text-xl">{foreignUserCauses.length}</p>{" "}
+                            <p className="font-bold text-gray-700 text-xl">{foreignUserCauses?.length}</p>{" "}
                             <p className="text-gray-400">My Causes</p>{" "}
                         </div>{" "}
 

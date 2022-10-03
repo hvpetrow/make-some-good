@@ -69,14 +69,11 @@ export const JoinedCauses = () => {
                         });
                     });
 
-
                     setMyCauses(oldArr => [
                         ...oldArr,
                         ...arr
                     ]);
 
-
-                    console.log("LATEST DOC", latestDoc);
                     setLatestDoc(docs.docs[docs.docs.length - 1]);
                 }).then(() => {
                     setIsLoading(false);
@@ -85,8 +82,6 @@ export const JoinedCauses = () => {
             console.log(error);
         }
     }
-
-    console.log(myCauses);
 
     return (
         <div>
