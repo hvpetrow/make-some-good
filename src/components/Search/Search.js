@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { toast } from 'react-toastify';
 import { useCausesContext } from '../../contexts/CauseContext';
 import { BackToTheTopButton } from '../../shared/BackToTheTopButton';
 import { Spinner } from '../../shared/Spinner';
