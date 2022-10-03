@@ -210,7 +210,7 @@ export const Header = () => {
                                                 aria-expanded="false"
                                                 aria-haspopup="true"
                                                 onClick={dropdownHandler}
-
+                                                onBlur={dropdownHandler}
                                             >
                                                 <span className="sr-only">Open user menu</span>
                                                 <img
