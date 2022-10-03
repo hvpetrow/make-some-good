@@ -21,7 +21,6 @@ export const Home = () => {
     const [clickable, setClickable] = useState(true);
     const [visible, setVisible] = useState(true);
 
-
     const causesCollectionRef = collection(db, "causes");
     const orderedQuery = query(causesCollectionRef, orderBy("title"), startAfter(latestDoc || 0), limit(3));
 
@@ -30,8 +29,6 @@ export const Home = () => {
     }
 
     useEffect(() => {
-        // const debounceHandleScroll = debounce(loadMoreScrollHandler, 1000); // for infinite scroll
-        // window.addEventListener('scroll', debounceHandleScroll);
         try {
             getAll(orderedQuery)
                 .then(docs => {
@@ -77,7 +74,6 @@ export const Home = () => {
                             id: doc.id,
                             fields: fields
                         });
-                        console.log(doc.id, " => ", doc.data());
                     });
 
 
@@ -85,9 +81,7 @@ export const Home = () => {
                         ...oldArr,
                         ...arr
                     ]);
-
-
-                    console.log("LATEST DOC", latestDoc);
+                    
                     setLatestDoc(docs.docs[docs.docs.length - 1]);
                 }).then(() => {
                     setIsLoading(false);
@@ -96,9 +90,6 @@ export const Home = () => {
             console.log(error);
         }
     }
-
-
-    console.log(causes);
 
     return (
         <>
