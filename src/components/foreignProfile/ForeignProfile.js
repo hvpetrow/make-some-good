@@ -1,6 +1,6 @@
 import { collection } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext';
 import { useCausesContext } from '../../contexts/CauseContext';
 import { db } from '../../firebase';
