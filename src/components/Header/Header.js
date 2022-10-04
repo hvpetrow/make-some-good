@@ -2,7 +2,6 @@ import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useState } from 'react';
-import { useEffect } from 'react';
 
 export const Header = () => {
     const [dropdownClick, setDropdownClick] = useState(false);
@@ -23,6 +22,8 @@ export const Header = () => {
         aria-orientation="vertical"
         aria-labelledby="user-menu-button"
         tabIndex={-1}
+        onBlur={dropdownHandler}
+
     >
         {/* Active: "bg-gray-100", Not Active: "" */}
         <Link
@@ -188,11 +189,11 @@ export const Header = () => {
                                         Create Cause
                                     </Link>
                                     <Link
-                                                to="/joinedCauses"
-                                                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
-                                            >
-                                                Joined Causes
-                                            </Link>
+                                        to="/joinedCauses"
+                                        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
+                                    >
+                                        Joined Causes
+                                    </Link>
                                     <Link
                                         to="/my-causes"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium"
@@ -201,7 +202,7 @@ export const Header = () => {
                                     </Link>
                                     <div className="relative ml-3">
 
-                                        <div>
+                                        <div >
 
                                             <button
                                                 type="button"
@@ -210,7 +211,9 @@ export const Header = () => {
                                                 aria-expanded="false"
                                                 aria-haspopup="true"
                                                 onClick={dropdownHandler}
-                                                onBlur={dropdownHandler}
+                                                // onBlur={dropdownHandler}
+
+
                                             >
                                                 <span className="sr-only">Open user menu</span>
                                                 <img
