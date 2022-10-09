@@ -276,7 +276,7 @@ export const Register = () => {
                             <div className="mb-6">
                                 <label htmlFor="repass" className='mb-10 text-xl'>Repeat Password:</label>
                                 <input
-                                    type={showPassword ? 'text' : 'password'}
+                                    type={showRepeatPassword ? 'text' : 'password'}
                                     name="repass"
                                     id="repass"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -287,8 +287,8 @@ export const Register = () => {
                                     onBlur={(e) => rePassValidator(e)}
                                 />
 
-                                <span className={styles['password-icon']} onClick={showPasswordHandler}>
-                                    {showPassword
+                                <span className={styles['password-icon']} onClick={showRepeatPasswordHandler}>
+                                    {showRepeatPassword
                                         ? <FontAwesomeIcon icon={faEye} />
                                         : <FontAwesomeIcon icon={faEyeSlash} />
                                     }
