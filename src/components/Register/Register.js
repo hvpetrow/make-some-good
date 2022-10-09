@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye,faEyeSlash,faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import styles from './Register.module.css';
 
 import { useAuth } from '../../contexts/AuthContext'
@@ -161,16 +161,16 @@ export const Register = () => {
 
         <section className="h-screen">
             <div className="container px-6 py-12 h-full">
-                <div className="flex justify-center items-center flex-wrap  h-full g-6 text-gray-800">
+                <div className="flex justify-center items-center flex-wrap h-full g-6 scale-95 text-gray-800">
                     <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
                         <img
                             src={require("../../assets/register.jpg")}
-                            className="scale-75 mb-4"
+                            className="scale-80 mb-18"
                             alt="registerImg"
                         />
                     </div>
                     <div className="max-w-md  md:w-1/12 lg:w-5/12 lg:ml-20">
-                        <h2 className=" text-4xl mb-10">Sign Up</h2>
+                        <h2 className="text-4xl mb-16 text-center">Sign Up</h2>
                         {currentUser && currentUser.email}
 
                         {/* {error} */}
@@ -178,10 +178,6 @@ export const Register = () => {
                             {/* Email input */}
                             <div className="mb-6 ">
                                 <label htmlFor="email" className='text-xl'>Email:</label>
-                                <span className={styles['email-icon']}>
-                            <FontAwesomeIcon icon={faEnvelope} />
-                            </span>
-
                                 <input
                                     type="email"
                                     name="email"
@@ -199,7 +195,7 @@ export const Register = () => {
                                 )}
                             </div>
                             <div className="mb-6">
-                            <label htmlFor="firstName" className='mb-10 text-xl'>First Name:</label>
+                                <label htmlFor="firstName" className='mb-10 text-xl'>First Name:</label>
                                 <input
                                     type="text"
                                     name="firstName"
@@ -210,14 +206,14 @@ export const Register = () => {
                                     value={values.displayName}
                                     onChange={changeHandler}
                                     onBlur={(e) => nameValidator(e)}
-                                    />
-                                   
+                                />
+
                                 {(!errors.firstName && hasTouched.firstName) && (
                                     <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">First Name must be at least 2 characters long!!</p>
                                 )}
                             </div>
                             <div className="mb-6">
-                            <label htmlFor="email" className='mb-10 text-xl'>Last Name:</label>
+                                <label htmlFor="email" className='mb-10 text-xl'>Last Name:</label>
 
                                 <input
                                     type="text"
@@ -235,7 +231,7 @@ export const Register = () => {
                                 )}
                             </div>
                             <div className="mb-6">
-                            <label htmlFor="country" className='mb-10 text-xl'>Country:</label>
+                                <label htmlFor="country" className='mb-10 text-xl'>Country:</label>
 
                                 <input
                                     type="text"
@@ -253,8 +249,9 @@ export const Register = () => {
                                 )}
                             </div>
                             {/* Password input */}
-                            <div className="mb-6">
-                            <label htmlFor="password" className='mb-10 text-xl'>Password:</label>
+                            <div className="mb-2">
+                                <label htmlFor="password" className='mb-10 text-xl'>Password:</label>
+
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
@@ -266,24 +263,31 @@ export const Register = () => {
                                     onChange={changeHandler}
                                     onBlur={(e) => passwordValidator(e)}
                                 />
+                                 <span className={styles['password-icon']} onClick={showPasswordHandler}>
+                                    {showPassword
+                                        ? <FontAwesomeIcon icon={faEye} />
+                                        : <FontAwesomeIcon icon={faEyeSlash} />
+                                    }
+                                </span>
                                 {(!errors.password && hasTouched.password) && (
                                     <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Password must be at least 6 characters long!!</p>
                                 )}
                             </div>
                             <div className="mb-6">
-                            <label htmlFor="country" className='mb-10 text-xl'>Repeat Password:</label>
+                                <label htmlFor="repass" className='mb-10 text-xl'>Repeat Password:</label>
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     name="repass"
+                                    id="repass"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Confirm password"
+                                    placeholder="******"
                                     required
                                     value={values.repass}
                                     onChange={changeHandler}
                                     onBlur={(e) => rePassValidator(e)}
                                 />
 
-                                <span onClick={showPasswordHandler}>
+                                <span className={styles['password-icon']} onClick={showPasswordHandler}>
                                     {showPassword
                                         ? <FontAwesomeIcon icon={faEye} />
                                         : <FontAwesomeIcon icon={faEyeSlash} />
