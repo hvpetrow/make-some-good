@@ -165,7 +165,7 @@ export const Register = () => {
                     <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
                         <img
                             src={require("../../assets/register.jpg")}
-                            className="scale-80 mb-18"
+                            className="mb-24"
                             alt="registerImg"
                         />
                     </div>
