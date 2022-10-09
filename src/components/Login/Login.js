@@ -45,7 +45,7 @@ export const Login = () => {
 
     return (
         <section className="h-screen">
-            <div className="container px-6 py-12 h-full">
+            <div className="container -my-2 px-6 py-10 h-full">
                 <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
                     <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
                         <img
@@ -55,11 +55,11 @@ export const Login = () => {
                         />
                     </div>
                     <div className="max-w-md  md:w-8/12 lg:w-5/12 lg:ml-20">
-                        <h2 className="flex justify-center font-bold text-4xl my-6 mx-4">Log In</h2>
+                        <h2 className="text-center font-bold text-4xl mb-16 mx-4">Login</h2>
 
                         <div className="login">
                             <form onSubmit={submitHandler} >
-                                <label htmlFor="inputEmail" className="form-label my-2 mx-2 inline-block mb-2 text-gray-700">Email address</label>
+                                <label htmlFor="inputEmail" className="form-label text-xl my-2 mx-2 inline-block mb-2 text-gray-700">Email address</label>
                                 <div className="username flex border rounded text-gray-500 mb-4">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -79,14 +79,14 @@ export const Login = () => {
                                         name="email"
                                         className="outline-none px-2 h-full py-2 text-lg"
                                         type="text"
-                                        placeholder="Enter email"
+                                        placeholder="user@gmail.com"
                                         required
                                         id="inputEmail"
                                         value={values.email}
                                         onChange={changeHandler}
                                     />
                                 </div>
-                                <label htmlFor="inputPassword" className="form-label my-2 mx-2 inline-block mb-2 text-gray-700">Password</label>
+                                <label htmlFor="inputPassword" className="form-label text-xl my-2 mx-2 inline-block mb-2 text-gray-700">Password</label>
                                 <div className="password flex border rounded text-gray-500 mb-4">
 
                                     <svg
@@ -107,7 +107,7 @@ export const Login = () => {
                                         name="password"
                                         className="outline-none px-2 h-full py-2 text-lg"
                                         type="password"
-                                        placeholder="Enter you password"
+                                        placeholder="******"
                                         required
                                         id="inputPassword"
                                         value={values.password}

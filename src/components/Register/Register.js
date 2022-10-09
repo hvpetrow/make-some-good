@@ -170,7 +170,7 @@ export const Register = () => {
                         />
                     </div>
                     <div className="max-w-md  md:w-1/12 lg:w-5/12 lg:ml-20">
-                        <h2 className="text-4xl mb-16 text-center">Sign Up</h2>
+                        <h2 className="text-4xl mb-16 font-bold text-center">Sign Up</h2>
                         {currentUser && currentUser.email}
 
                         {/* {error} */}
@@ -182,7 +182,7 @@ export const Register = () => {
                                     type="email"
                                     name="email"
                                     id="email"
-                                    className="form-control block w-full px-10 py-2 text-xl font-normal  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    className="form-control block w-full px-4 py-2 text-xl font-normal  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="user@gmail.com"
                                     required
                                     value={values.email}
