@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye,faEyeSlash,faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import styles from './Register.module.css';
 
 import { useAuth } from '../../contexts/AuthContext'
 import userValidation from '../../validation/userValidation';
@@ -167,50 +170,61 @@ export const Register = () => {
                         />
                     </div>
                     <div className="max-w-md  md:w-1/12 lg:w-5/12 lg:ml-20">
-                        <h2 className=" text-3xl mb-6">Sign Up</h2>
+                        <h2 className=" text-4xl mb-10">Sign Up</h2>
                         {currentUser && currentUser.email}
 
                         {/* {error} */}
                         <form onSubmit={submitHandler}>
                             {/* Email input */}
                             <div className="mb-6 ">
+                                <label htmlFor="email" className='text-xl'>Email:</label>
+                                <span className={styles['email-icon']}>
+                            <FontAwesomeIcon icon={faEnvelope} />
+                            </span>
+
                                 <input
                                     type="email"
                                     name="email"
                                     id="email"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                    className="form-control block w-full px-10 py-2 text-xl font-normal  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                     placeholder="user@gmail.com"
                                     required
                                     value={values.email}
                                     onChange={changeHandler}
                                     onBlur={(e) => emailValidator(e)}
                                 />
+
                                 {(!errors.email && hasTouched.email) && (
                                     <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Email is not valid!!</p>
                                 )}
-
                             </div>
                             <div className="mb-6">
+                            <label htmlFor="firstName" className='mb-10 text-xl'>First Name:</label>
                                 <input
                                     type="text"
                                     name="firstName"
+                                    id="firstName"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="First Name"
+                                    placeholder="Max"
                                     required
                                     value={values.displayName}
                                     onChange={changeHandler}
                                     onBlur={(e) => nameValidator(e)}
-                                />
+                                    />
+                                   
                                 {(!errors.firstName && hasTouched.firstName) && (
                                     <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">First Name must be at least 2 characters long!!</p>
                                 )}
                             </div>
                             <div className="mb-6">
+                            <label htmlFor="email" className='mb-10 text-xl'>Last Name:</label>
+
                                 <input
                                     type="text"
                                     name="lastName"
+                                    id="lastName"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Last Name"
+                                    placeholder="Mustermann"
                                     required
                                     value={values.displayName}
                                     onChange={changeHandler}
@@ -221,11 +235,14 @@ export const Register = () => {
                                 )}
                             </div>
                             <div className="mb-6">
+                            <label htmlFor="country" className='mb-10 text-xl'>Country:</label>
+
                                 <input
                                     type="text"
                                     name="country"
+                                    id="country"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Country"
+                                    placeholder="Germany"
                                     required
                                     value={values.country}
                                     onChange={changeHandler}
@@ -237,11 +254,13 @@ export const Register = () => {
                             </div>
                             {/* Password input */}
                             <div className="mb-6">
+                            <label htmlFor="password" className='mb-10 text-xl'>Password:</label>
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
+                                    id="password"
                                     className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Password"
+                                    placeholder="******"
                                     required
                                     value={values.password}
                                     onChange={changeHandler}
@@ -252,6 +271,7 @@ export const Register = () => {
                                 )}
                             </div>
                             <div className="mb-6">
+                            <label htmlFor="country" className='mb-10 text-xl'>Repeat Password:</label>
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     name="repass"
@@ -265,16 +285,8 @@ export const Register = () => {
 
                                 <span onClick={showPasswordHandler}>
                                     {showPassword
-                                        ? <img
-                                            src={require("../../assets/eye.png")}
-                                            className=""
-                                            alt=""
-                                        />
-                                        : <img
-                                            src={require("../../assets/eye.png")}
-                                            className=""
-                                            alt=""
-                                        />
+                                        ? <FontAwesomeIcon icon={faEye} />
+                                        : <FontAwesomeIcon icon={faEyeSlash} />
                                     }
                                 </span>
                                 {(!errors.repass && hasTouched.repass) && (
@@ -295,7 +307,7 @@ export const Register = () => {
                                         onChange={tacChangeHandler}
                                     />
                                 </div>
-                                <div className=" ml-3 text-sm">
+                                <div className="ml-3 text-sm">
                                     <label
                                         htmlFor="terms"
                                         className="font-light text-gray-800 dark:text-gray-300"
