@@ -263,7 +263,7 @@ export const Register = () => {
                                     onChange={changeHandler}
                                     onBlur={(e) => passwordValidator(e)}
                                 />
-                                 <span className={styles['password-icon']} onClick={showPasswordHandler}>
+                                <span className={styles['password-icon']} onClick={showPasswordHandler}>
                                     {showPassword
                                         ? <FontAwesomeIcon icon={faEye} />
                                         : <FontAwesomeIcon icon={faEyeSlash} />

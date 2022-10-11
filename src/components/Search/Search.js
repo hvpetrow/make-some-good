@@ -28,10 +28,10 @@ export const Search = () => {
 
     return (
         <>
-            <div className="m-y-7">
+            <div className="my-7">
                 <SearchElement onSearchSubmit={onSearchSubmit} onSearchChange={onSearchChange} search={search} />
-                <div className=" flex justify-center my-7 ">
-                    <div className="grid py-10 justify-center my-7  -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
+                <div className="flex justify-center my-7 ">
+                    <div className="grid py-10 justify-center my-20 -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
                         {isLoading
                             ? (<Spinner />)
                             : filteredCauses.length !== 0
@@ -42,7 +42,6 @@ export const Search = () => {
                         }
                     </div>
                 </div>
-                <BackToTheTopButton />
             </div>
         </>
     )
