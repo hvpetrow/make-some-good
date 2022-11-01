@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useCausesContext } from '../../contexts/CauseContext';
-import { BackToTheTopButton } from '../../shared/BackToTheTopButton';
 import { Spinner } from '../../shared/Spinner';
 import { CardTemplate } from '../Home/CardTemplate';
 import { SearchElement } from './SearchElement'
