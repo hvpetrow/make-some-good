@@ -47,6 +47,7 @@ export const Header = () => {
 
     return (
         <header>
+
             <div className="left-side">
                 <ul>
                     <li>
