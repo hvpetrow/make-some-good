@@ -1,5 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,400);
 
+header {
+    margin-bottom: 70px;
+}
+
 nav {
     display: flex;
     justify-content: space-evenly;
@@ -10,10 +14,10 @@ nav {
     width: 100%;
     min-width: 535px;
     background-color: #343e48;
-    position: relative;
-    position: fixed;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    z-index: 100000;
 }
+
 .nav-items {
     position: relative;
     display: flex;
