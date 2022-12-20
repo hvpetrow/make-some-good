@@ -47,6 +47,7 @@ a {
     text-shadow: 1px 0px rgba(0, 0, 0, 0.4);
     color: #7d8a99;
     font-weight: bold;
+    color: green;
     letter-spacing: 0.2em;
 }
 a:hover {
