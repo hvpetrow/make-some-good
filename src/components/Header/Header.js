@@ -1,4 +1,4 @@
-import styles from './Header.module.css';
+import './Header.module.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useState } from 'react';
@@ -27,7 +27,6 @@ export const Header = () => {
         {/* Active: "bg-gray-100", Not Active: "" */}
         <Link
             to="/my-profile"
-            className="block px-4 py-2 text-sm text-gray-700"
             role="menuitem"
             tabIndex={-1}
             id="user-menu-item-0"
@@ -36,7 +35,6 @@ export const Header = () => {
         </Link>
         <Link
             to="/logout"
-            className="block px-4 py-2 text-sm text-gray-700"
             role="menuitem"
             tabIndex={-1}
             id="user-menu-item-2"
@@ -47,102 +45,28 @@ export const Header = () => {
 
     return (
         <header>
-
-            <div className="left-side">
-                <ul>
-                    <li>
-                        <Link
-                            to="/"
-                            className=""
-                        >
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/catalog"
-                            className=""
-                        >
-                            Causes
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/superHeroes"
-                            className=""
-                        >
-                            Superheroes
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/search"
-                            className=""
-                        >
-                            Search
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/donate"
-                            className=""
-                        >
-                            Donate
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-            {/*RIGHT SIDE className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0  */}
-            <div className="right-side">
-                {!currentUser
-                    ? <ul className='unlogged-ul'>
-                        <li>
-                            <Link
-                                to="/login"
-                                className=""
-                                aria-current="page"
-                            >
-                                Log In
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/register"
-                                className=""
-                                aria-current="page"
-                            >
-                                Sign Up
-                            </Link>
-                        </li>
+            <nav>
+                <div className="left-side">
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/catalog">Causes</Link></li>
+                        <li><Link to="/superHeroes">Superheroes</Link></li>
+                        <li><Link to="/search">Search</Link></li>
+                        <li><Link to="/donate">Donate</Link></li>
                     </ul>
-
-                    : <ul className='unlogged-ul'>
-                        <li>
-                            <Link
-                                to="/create-cause"
-                                className=""
-                            >
-                                Create Cause
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/joinedCauses"
-                                className=""
-                            >
-                                Joined Causes
-                            </Link>
-
-                        </li>
-                        <li>
-                            <Link
-                                to="/my-causes"
-                                className=""
-                            >
-                                My Causes
-                            </Link>
-                        </li>
-                        <div className="relative ml-3">
+                </div>
+                {/*RIGHT SIDE className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0  */}
+                <div className="right-side">
+                    {!currentUser
+                        ? <ul className='unlogged-ul'>
+                            <li><Link to="/login" aria-current="page">Log In</Link></li>
+                            <li><Link to="/register" aria-current="page">Sign Up</Link></li>
+                        </ul>
+                        : <ul className='unlogged-ul'>
+                            <li><Link to="/create-cause">Create Cause</Link></li>
+                            <li><Link to="/joinedCauses">Joined Causes</Link></li>
+                            <li><Link to="/my-causes">My Causes</Link></li>
+                            {/* <div className="relative ml-3">
                             <div>
                                 <button
                                     type="button"
@@ -162,10 +86,11 @@ export const Header = () => {
                                 </button>
                             </div>
                             {dropdownClick && dropdownMenu}
-                        </div>
-                    </ul>
-                }
-            </div>
+                        </div> */}
+                        </ul>
+                    }
+                </div>
+            </nav>
         </header>
     );
 }

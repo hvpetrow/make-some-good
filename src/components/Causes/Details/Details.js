@@ -105,6 +105,7 @@ export const Details = () => {
             });
             toast.success('Successfully Joined Cause!');
             setIsParticipant(true);
+            //TODO: is Participant logic update
 
         } catch (error) {
             console.log(error);

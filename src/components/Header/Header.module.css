@@ -1,9 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,400);
 
-header {
-    background-color: #343e48;
+nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     text-align: center;
     margin: 0 auto;
@@ -22,38 +21,14 @@ header {
     justify-content: center;
 }
 
-nav a {
-    margin: 0 0.5em;
-}
-
-nav a:hover {
-    cursor: pointer;
-    color: rgb(51, 212, 186);
-    font-weight: bolder;
-}
-
-/* new nav*/
-
 ul {
     display: block;
     text-align: center;
     margin: 0 auto;
     padding: 0;
     width: 100%;
-    min-width: 535px;
     background-color: #343e48;
     position: relative;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
-}
-ul:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.5;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB9JREFUeNpiZmBg6AZiDiBWZ4YyQMCOCcYA4kMAAQYAHyYCCUdxidgAAAAASUVORK5CYII=");
 }
 
 li {
@@ -70,41 +45,15 @@ a {
     position: relative;
     z-index: 2;
     text-shadow: 1px 0px rgba(0, 0, 0, 0.4);
-    color: #686f77;
+    color: #7d8a99;
+    font-weight: bold;
     letter-spacing: 0.2em;
-    text-decoration: none;
-    transition: color 200ms;
-    transform-style: preserve-3d;
 }
 a:hover {
-    color: #343e48;
-}
-a:after {
-    content: attr(data-title);
-    position: absolute;
-    display: block;
-    text-shadow: none;
-    top: 29%;
-    left: 18px;
-    padding: 5px 7px;
-    color: transparent;
-    background: #4795c3;
-    transform-origin: 50% 0%;
-    backface-visibility: hidden;
-    transform: translate3d(0px, 105%, 0px) rotateX(-112deg);
-    transform-style: preserve-3d;
-    transition: all 200ms ease;
-    z-index: -1;
-}
-li:nth-child(2) a:after {
-    background: #ecc64b;
-}
-li:nth-child(3) a:after {
-    background: #0b9ea6;
-}
-li:nth-child(4) a:after {
-    background: #f26667;
-}
-a:hover:after {
-    transform: rotateX(0deg) translateZ(0px);
+    color: rgb(85, 128, 248);
+    transition-property: color, background-color, border-color,
+        text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+    /* background-color: rgb(29 78 216); */
 }
