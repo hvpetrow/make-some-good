@@ -1,21 +1,10 @@
+import styles from './Footer.module.css';
 
 export const Footer = () => {
     return (
-        <div className="mt-20 relative top-10">
-            <footer className="bg-gray-800 text-center lg:text-left">
-                <div
-                    className="text-center bg-gray-800 p-4"
-                    style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
-                >
-                    <p className="text-gray-300">All rights reserved | Copyright &copy; {new Date().getFullYear()} </p>
-
-                    <a className="text-gray-200" href="https://softuni.bg/">
-                        Software University
-                    </a>
-                    <p className="text-gray-100">Hristo Petrov</p>
-                </div>
-            </footer>
-        </div>
-
+        <footer className={styles['footer']}>
+            <p className={styles['footer-content']}>All rights reserved | Hristo Petrov | Copyright &copy; {new Date().getFullYear()}</p>
+            <a className={styles['footer-link']} href="https://softuni.bg/">Software University</a>
+        </footer>
     );
 }

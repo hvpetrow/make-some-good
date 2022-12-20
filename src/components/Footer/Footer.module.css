@@ -1,19 +1,30 @@
-/* footer {
+.footer {
+    background-color: #343e48;
     width: 100%;
-    overflow: hidden;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0rem 4rem 0 3rem;
+    margin: 0%;
+    height: 60px;
+    bottom: 0;
+    position: fixed;
+    height: 100px;
 }
 
-.bottom {
-    opacity: 0.75;
-    font-size: 1.1rem;
-    padding: 4rem 0;
+.footer-content {
+    font-family: Roboto;
+    margin-top: 10px;
+    color: #7d8a99;
 }
 
-return (
-    <footer className="bg-gray-800 ">
-        <div>
-            <p className={styles['bottom']}>All rights reserved | Copyright &copy; {new Date().getFullYear()} </p>
-        </div>
-    </footer>
-); */
+.footer-link {
+    font-size: 18px;
+    padding: 10px;
+}
+
+.footer-link:hover {
+    color: rgb(85, 128, 248);
+}
