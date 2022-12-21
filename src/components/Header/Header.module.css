@@ -45,14 +45,14 @@ li {
 
 a {
     display: block;
-    padding: 25px;
+    padding: 25px 15px 25px 15px;
     text-transform: uppercase;
     position: relative;
     z-index: 2;
     text-shadow: 1px 0px rgba(0, 0, 0, 0.4);
     color: #7d8a99;
     font-weight: bold;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
 }
 a:hover {
     color: rgb(85, 128, 248);

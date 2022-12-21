@@ -128,7 +128,6 @@ export const Details = () => {
     }
 
     const removeHandler = async () => {
-        // const confirmation = window.confirm('Are you sure to delete this cause?');
         const yes = await yesno({ bodyText: "Are you sure to delete this cause?" });
         if (yes) {
             navigate(`/delete/${causeId}`);
@@ -137,7 +136,6 @@ export const Details = () => {
 
     return (
         <>
-            {/* This is an example component */}
             {!isLoading && <div>
                 <div className="flex flex-col border rounded-lg overflow-hidden bg-white">
                     <div className="grid grid-cols-1 sm:grid-cols-4">
