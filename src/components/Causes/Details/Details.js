@@ -242,7 +242,7 @@ export const Details = () => {
                                     </p>
                                 </div>
                             </div>
-                            {currentUser.uid &&
+                            {currentUser?.uid &&
                                 <div className="flex flex-col w-full relative bottom-0">
                                     <div className="grid grid-cols-3 border-t divide-x text-[#64748b] bg-gray-50 dark:bg-transparent py-3">
                                         {currentUser.uid === cause.creator &&
