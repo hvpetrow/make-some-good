@@ -16,16 +16,16 @@ export const BackToTheTopButton = (props) => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleVisibleButton);
-        
+
         return () => {
-            window.removeEventListener('scroll',handleVisibleButton);
+            window.removeEventListener('scroll', handleVisibleButton);
         }
     }, []);
 
     return (
         <>
             <button id="to-top-button" onClick={handleScrollUp} title="Go To Top"
-                className={showGoTop ? "block fixed z-90 bottom-8 right-8 border-0 w-16 h-16 rounded-full drop-shadow-md bg-indigo-500 text-white text-3xl font-bold" : ""}>&uarr;</button>
+                className={showGoTop ? "block fixed mb-16 z-90 bottom-8 right-8 border-0 w-16 h-16 rounded-full drop-shadow-md bg-indigo-500 text-white text-3xl font-bold" : ""}>&uarr;</button>
         </>
 
     )
