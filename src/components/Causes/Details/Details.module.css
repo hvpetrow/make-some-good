@@ -1,0 +1,30 @@
+.details-card-container {
+    display: flex;
+    overflow: hidden;
+    background-color: #ffffff;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    border-width: 1px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.details-img-container {
+    display: flex;
+    flex-direction: column;
+    border-bottom-width: 1px;
+}
+
+.details-img {
+    border-radius: 4px;
+}
+
+.details-content-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* grid-area: auto; */

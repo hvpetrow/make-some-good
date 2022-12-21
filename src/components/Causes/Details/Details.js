@@ -1,3 +1,5 @@
+import styles from './Details.module.css'
+
 import { arrayRemove, arrayUnion, collection, doc, updateDoc } from 'firebase/firestore';
 import React from 'react'
 import { useState } from 'react';
@@ -137,96 +139,54 @@ export const Details = () => {
     return (
         <>
             {!isLoading && <div>
-                <div className="flex flex-col border rounded-lg overflow-hidden bg-white">
-                    <div className="grid grid-cols-1 sm:grid-cols-4">
-                        <div className="flex flex-col border-b sm:border-b-0 items-center p-8 sm:px-4 sm:h-full sm:justify-center">
+                <div className={styles['details-card-container']}>
+                    <div className={styles['details-grid']}>
+                        <div className={styles['details-img-container']}>
                             <img
-                                className="rounded-lg"
+                                className={styles['details-img']}
                                 src={cause.imgUrl}
                                 alt="causeImg"
                             />
                         </div>
-                        <div className="flex flex-col sm:border-l col-span-3">
+                        <div className={styles['details-content-container']}>
                             <div className="flex flex-col space-y-4  p-6 text-gray-600">
-                                <div className="flex flex-row text-sm">
-                                    <span className="mr-3">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            enableBackground="new 0 0 24 24"
-                                            height="20px"
-                                            viewBox="0 0 24 24"
-                                            width="20px"
-                                            fill="#64748b"
-                                        >
-                                            <g>
-                                                <rect fill="none" height={24} width={24} />
-                                            </g>
-                                            <g>
-                                                <path d="M20,7h-5V4c0-1.1-0.9-2-2-2h-2C9.9,2,9,2.9,9,4v3H4C2.9,7,2,7.9,2,9v11c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V9 C22,7.9,21.1,7,20,7z M9,12c0.83,0,1.5,0.67,1.5,1.5S9.83,15,9,15s-1.5-0.67-1.5-1.5S8.17,12,9,12z M12,18H6v-0.75c0-1,2-1.5,3-1.5 s3,0.5,3,1.5V18z M13,9h-2V4h2V9z M18,16.5h-4V15h4V16.5z M18,13.5h-4V12h4V13.5z" />
-                                            </g>
-                                        </svg>
+                                <p className="flex items-center  text-gray-500">
+                                    <span className="font-semibold mr-2 text-xs uppercase">
+                                        Title:
                                     </span>
-                                    <p className="flex items-center  text-gray-500">
-                                        <span className="font-semibold mr-2 text-xs uppercase">
-                                            Title:
-                                        </span>
-                                        <span>{cause.title}</span>
-                                    </p>
-                                </div>
-                                <div className="flex flex-row text-sm">
-                                    <span className="mr-3">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            height="20px"
-                                            viewBox="0 0 24 24"
-                                            width="20px"
-                                            fill="#64748b"
-                                        >
-                                            <path d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
-                                        </svg>
+                                    <span>{cause.title}</span>
+                                </p>
+                                <p className="flex items-center  text-gray-500">
+                                    <span className="font-semibold mr-2 text-xs uppercase">
+                                        Date:
                                     </span>
-                                    <p className="flex items-center  text-gray-500">
-                                        <span className="font-semibold mr-2 text-xs uppercase">
-                                            Date:
-                                        </span>
-                                        <span>{cause.date}</span>
-                                    </p>
-                                </div>
+                                    <span>{cause.date}</span>
+                                </p>
+                                <p className="flex items-center  text-gray-500">
+                                    <span className="font-semibold mr-2 text-xs uppercase">
+                                        Place:
+                                    </span>
+                                    <span>{cause.place}</span>
+                                </p>
                                 <div className="flex flex-row text-sm">
                                     <p className="flex items-center  text-gray-500">
-                                        <span className="font-semibold mr-2 text-xs uppercase">
-                                            Place:
+                                        <span className="font-semibold mr-2 text-xs uppercase ">
+                                            Creator:
                                         </span>
-                                        <span>{cause.place}</span>
                                     </p>
-                                </div>
-                                <div className="flex flex-row text-sm">
-                                    <div>
-                                        <p className="flex items-center  text-gray-500">
-                                            <Link to={`/foreignProfile/${cause.creator}`} className="hover:scale-105">
-                                                <span className="font-semibold mr-2 text-xs uppercase ">
-                                                    Creator:
-                                                </span>
-                                            </Link>
-                                            <Link className='hover:text-blue-800 hover:underline hover:scale-105 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out' to={`/foreignProfile/${cause.creator}`}>{creator.firstName} {creator.lastName}</Link>
-                                        </p>
-                                    </div>
-                                    <div className="mx-4">
-                                        <Link to={`/foreignProfile/${cause.creator}`}>
-                                            <img
-                                                src={profilePicture}
-                                                className="h-8 w-8 rounded-full bg-indigo-100 mx-auto shadow-2xl transition duration-500 hover:scale-150 "
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                                alt="profile"
-                                            >
-                                            </img>
-                                        </Link>
-                                    </div>
+                                    <Link className='hover:text-blue-800 hover:underline hover:scale-105 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out' to={`/foreignProfile/${cause.creator}`}>{creator.firstName} {creator.lastName}</Link>
+                                    <Link to={`/foreignProfile/${cause.creator}`}>
+                                        <img
+                                            src={profilePicture}
+                                            className="h-8 w-8 rounded-full bg-indigo-100 mx-auto shadow-2xl transition duration-500 hover:scale-150 "
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            alt="profile"
+                                        >
+                                        </img>
+                                    </Link>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
