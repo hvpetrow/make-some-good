@@ -33,7 +33,7 @@ export const Search = () => {
     }
 
     return (
-        <section className="search">
+        <section className={styles['search']}>
             <SearchElement onSearchSubmit={onSearchSubmit} onSearchChange={onSearchChange} search={search} />
             <div className={styles['results-container']}>
                 {isLoading

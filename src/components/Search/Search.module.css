@@ -1,15 +1,21 @@
+.search {
+    margin-top: 120px;
+    padding-bottom: 200px;
+}
+
 .results-container {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 100px;
+    margin-top: 120px;
 }
 
 .no-articles {
     text-align: center;
-    margin-top: 120px;
+    margin-top: 100px;
     font-size: 30px;
     margin-bottom: 50px;
 }
