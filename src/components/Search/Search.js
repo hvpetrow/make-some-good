@@ -3,6 +3,7 @@ import { useCausesContext } from '../../contexts/CauseContext';
 import { Spinner } from '../../shared/Spinner';
 import { CardTemplate } from '../Home/CardTemplate';
 import { SearchElement } from './SearchElement'
+import { toast } from 'react-toastify';
 
 export const Search = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -13,15 +14,19 @@ export const Search = () => {
 
     const onSearchChange = (e) => {
         setSearch(e.target.value);
-        setFilteredCauses(searchCause(e.target.value));
     }
 
     const onSearchSubmit = (e) => {
         e.preventDefault();
-        
         setIsLoading(true);
-        setFilteredCauses(searchCause(search));
-        setSearch('');
+
+        if (search === '') {
+            toast.warning('You must add search criteria!');
+        } else {
+            setFilteredCauses(searchCause(search));
+            setSearch('');
+        }
+
         setIsLoading(false);
     }
 
