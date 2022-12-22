@@ -1,3 +1,5 @@
+import styles from './Search.module.css';
+
 import React, { useState } from 'react'
 import { useCausesContext } from '../../contexts/CauseContext';
 import { Spinner } from '../../shared/Spinner';
@@ -31,22 +33,18 @@ export const Search = () => {
     }
 
     return (
-        <>
-            <div className="my-7">
-                <SearchElement onSearchSubmit={onSearchSubmit} onSearchChange={onSearchChange} search={search} />
-                <div className="flex justify-center my-7 ">
-                    <div className="grid py-10 justify-center my-20 -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
-                        {isLoading
-                            ? (<Spinner />)
-                            : filteredCauses.length !== 0
-                                ? (filteredCauses.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
-                                : filteredCauses === ''
-                                    ? ''
-                                    : (<h3 className="no-articles">No matches</h3>)
-                        }
-                    </div>
-                </div>
+        <section className="search">
+            <SearchElement onSearchSubmit={onSearchSubmit} onSearchChange={onSearchChange} search={search} />
+            <div className={styles['results-container']}>
+                {isLoading
+                    ? (<Spinner />)
+                    : filteredCauses.length !== 0
+                        ? (filteredCauses.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
+                        : filteredCauses === ''
+                            ? ''
+                            : (<h3 className={styles['no-articles']}>No matches for your search.</h3>)
+                }
             </div>
-        </>
+        </section>
     )
 }

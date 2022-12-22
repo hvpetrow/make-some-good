@@ -1,3 +1,5 @@
+import styles from './Catalog.module.css';
+
 import { collection, limit, orderBy, query, startAfter } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -8,7 +10,6 @@ import { db } from "../../../firebase";
 import { getAll } from "../../../services/crudService";
 import { BackToTheTopButton } from "../../../shared/BackToTheTopButton";
 import { Spinner } from "../../../shared/Spinner";
-import { Search } from "../../Search/Search";
 import { CardTemplate } from "./CardTemplate";
 
 
@@ -32,8 +33,6 @@ export const Catalog = () => {
     }
 
     useEffect(() => {
-        // const debounceHandleScroll = debounce(loadMoreScrollHandler, 1000); // for infinite scroll
-        // window.addEventListener('scroll', debounceHandleScroll);
         try {
             getAll(orderedQuery)
                 .then(docs => {
@@ -102,20 +101,20 @@ export const Catalog = () => {
 
     return (
         <>
-            <div className="m-y-7">
-                <div className=" flex justify-center my-7 ">
-                    <div className="grid py-10 justify-center my-7  -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
-                        {isLoading
-                            ? (<Spinner />)
-                            : causes.length !== 0
-                                ? (causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
-                                : (<h3 className="no-articles">No articles yet</h3>)
-                        }
-                    </div>
+            <div className={styles['catalog']}>
+                <h1 className={styles['catalog-title']}>Make some good.</h1>
+                <div className={styles['catalog-container']}>
+                    {isLoading
+                        ? (<Spinner />)
+                        : causes.length !== 0
+                            ? (causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
+                            : (<h3 className="no-articles">No articles yet</h3>)
+                    }
                 </div>
                 {visible &&
-                    <div className="flex justify-center m-y-5">
-                        <button id="load-more-button" className="inline-block px-7 py-3 max-w-sm bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                    <div className={styles['load-more-btn-cont']}>
+                        <button id="load-more-button" className={styles['load-more-button']}
+                            type="button"
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
                             onClick={clickable ? loadMoreClickHandler : () => {

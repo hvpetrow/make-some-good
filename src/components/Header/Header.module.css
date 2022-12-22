@@ -1,9 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:100,400);
 
-header {
-    margin-bottom: 70px;
-}
-
 nav {
     display: flex;
     justify-content: space-evenly;

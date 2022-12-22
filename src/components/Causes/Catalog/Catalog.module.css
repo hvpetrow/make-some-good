@@ -1,4 +1,4 @@
-.home {
+.catalog {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -7,7 +7,7 @@
     margin-top: 100px;
 }
 
-.home-title {
+.catalog-title {
     font-size: 4.1rem;
     margin: 0 auto;
     position: relative;
@@ -21,7 +21,7 @@
     text-align: center;
 }
 
-.home-container {
+.catalog-container {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
