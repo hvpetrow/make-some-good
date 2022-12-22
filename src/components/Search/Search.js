@@ -6,13 +6,47 @@ import { Spinner } from '../../shared/Spinner';
 import { CardTemplate } from '../Home/CardTemplate';
 import { SearchElement } from './SearchElement'
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+import { getAll } from '../../services/crudService';
+import { collection } from 'firebase/firestore';
+import { db } from '../../firebase';
+
+
 
 export const Search = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [search, setSearch] = useState('');
+    const [causes, setCauses] = useState([]);
     const [filteredCauses, setFilteredCauses] = useState('');
 
     const { searchCause } = useCausesContext();
+
+    const causesCollectionRef = collection(db, "causes");
+
+    useEffect(() => {
+        try {
+            getAll(causesCollectionRef)
+                .then(docs => {
+                    let arr = [];
+
+                    docs.forEach((doc) => {
+                        let fields = doc.data();
+
+                        arr.push({
+                            id: doc.id,
+                            fields: fields
+                        });
+                        console.log(doc.id, " => ", doc.data());
+                    });
+
+                    setCauses(arr);
+                }).then(() => {
+                    setIsLoading(false);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
 
     const onSearchChange = (e) => {
         setSearch(e.target.value);
@@ -25,7 +59,7 @@ export const Search = () => {
         if (search === '') {
             toast.warning('You must add search criteria!');
         } else {
-            setFilteredCauses(searchCause(search));
+            setFilteredCauses(searchCause(search, causes));
             setSearch('');
         }
 

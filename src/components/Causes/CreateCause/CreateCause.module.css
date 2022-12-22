@@ -1,0 +1,71 @@
+.create-cause-ctn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    height: 80%;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.title {
+    margin-bottom: 3rem;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    text-align: center;
+}
+
+.form-input {
+    display: block;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0;
+    background-clip: padding-box;
+    background-color: #ffffff;
+    transition-property: background-color, border-color, color, fill, stroke,
+        opacity, box-shadow, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    color: #374151;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+    width: 100%;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    border-color: #9ca3af;
+    border-style: solid;
+}
+
+.form-input:focus {
+    background-color: #ffffff;
+    color: #374151;
+    border-color: #2563eb;
+    outline: 0;
+}
+
+.form-desc {
+    display: block;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 0.75rem;
+    background-color: #ffffff;
+    color: #374151;
+    line-height: 1.25;
+    width: 100%;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    border-color: #9ca3af;
+    appearance: none;
+}
+
+.form-desc:focus {
+    background-color: #ffffff;
+    height: 12rem;
+    border-color: #6b7280;
+    outline: 0;
+    resize: none;
+}

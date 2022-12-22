@@ -1,14 +1,12 @@
 import styles from './Home.module.css';
-import { collection, limit, orderBy, query, startAfter } from "firebase/firestore";
+import { collection, limit, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCausesContext } from "../../contexts/CauseContext";
 import { db } from "../../firebase";
 import { getAll } from "../../services/crudService";
-import { BackToTheTopButton } from "../../shared/BackToTheTopButton";
 import { Spinner } from "../../shared/Spinner";
 import { CardTemplate } from "./CardTemplate";
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -18,12 +16,9 @@ export const Home = () => {
     const { currentUser } = useAuth();
     const { causes, setCauses } = useCausesContext();
     const [isLoading, setIsLoading] = useState(true);
-    const [latestDoc, setLatestDoc] = useState(0);
-    const [clickable, setClickable] = useState(true);
-    const [visible, setVisible] = useState(true);
 
     const causesCollectionRef = collection(db, "causes");
-    const orderedQuery = query(causesCollectionRef, orderBy("title"), startAfter(latestDoc || 0), limit(3));
+    const orderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), limit(3));
 
     if (currentUser) {
         console.log("CurrentUserId", currentUser.uid);
@@ -34,7 +29,6 @@ export const Home = () => {
             getAll(orderedQuery)
                 .then(docs => {
                     let arr = [];
-
                     docs.forEach((doc) => {
                         let fields = doc.data();
 
@@ -42,12 +36,9 @@ export const Home = () => {
                             id: doc.id,
                             fields: fields
                         });
-                        console.log(doc.id, " => ", doc.data());
                     });
 
                     setCauses(arr);
-                    setLatestDoc(docs.docs[docs.docs.length - 1]);
-                    console.log("LATEST DOC", latestDoc);
                 }).then(() => {
                     setIsLoading(false);
                 });
@@ -56,46 +47,11 @@ export const Home = () => {
         }
     }, []);
 
-    const loadMoreClickHandler = async (e) => {
-        console.log("load more clicked");
-
-        try {
-            getAll(orderedQuery)
-                .then(docs => {
-                    if (docs.empty) {
-                        setClickable(false);
-                        return;
-                    }
-                    let arr = [];
-
-                    docs.forEach((doc) => {
-                        let fields = doc.data();
-
-                        arr.push({
-                            id: doc.id,
-                            fields: fields
-                        });
-                    });
-
-
-                    setCauses(oldArr => [
-                        ...oldArr,
-                        ...arr
-                    ]);
-
-                    setLatestDoc(docs.docs[docs.docs.length - 1]);
-                }).then(() => {
-                    setIsLoading(false);
-                });
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     return (
         <>
             <div className={styles['home']}>
-                <h1 className={styles['home-title']}>Make some good.</h1>
+                <h1 className={styles['home-title']}>Make some good</h1>
+                <h2 className={styles['latest-topics-title']}>Latest Topics.</h2>
                 <div className={styles['home-container']}>
                     {isLoading
                         ? (<Spinner />)
@@ -104,22 +60,6 @@ export const Home = () => {
                             : (<h3 className="no-articles">No articles yet</h3>)
                     }
                 </div>
-                {visible &&
-                    <div className={styles['load-more-btn-cont']}>
-                        <button id="load-more-button" className={styles['load-more-button']}
-                            type="button"
-                            data-mdb-ripple="true"
-                            data-mdb-ripple-color="light"
-                            onClick={clickable ? loadMoreClickHandler : () => {
-                                toast.warning('No more causes', {
-                                    position: toast.POSITION.BOTTOM_CENTER
-                                });
-                                setVisible(false);
-                            }}>load more</button>
-                    </div>
-                }
-
-                <BackToTheTopButton />
             </div>
         </>
     );

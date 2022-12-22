@@ -25,8 +25,7 @@ export const Catalog = () => {
     const [clickable, setClickable] = useState(true);
     const [visible, setVisible] = useState(true);
 
-
-    const orderedQuery = query(causesCollectionRef, orderBy("createdAt"), startAfter(latestDoc || 0), limit(3));
+    const orderedQuery = query(causesCollectionRef, orderBy('createdAt'), startAfter(latestDoc || 0), limit(3));
 
     if (currentUser) {
         console.log(currentUser.uid);
@@ -40,6 +39,7 @@ export const Catalog = () => {
 
                     docs.forEach((doc) => {
                         let fields = doc.data();
+                        console.log(doc.data());
 
                         arr.push({
                             id: doc.id,

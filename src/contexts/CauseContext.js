@@ -18,7 +18,7 @@ export const CauseProvider = ({ children }) => {
     const { currentUser } = useAuth();
     const [id, setId] = useState('');
 
-    const orderedQuery = query(causesCollectionRef, orderBy("createdAt"));
+    const orderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'));
 
     useEffect(() => {
         getAll(orderedQuery)
@@ -38,9 +38,9 @@ export const CauseProvider = ({ children }) => {
             })
     }, []);
 
-    const searchCause = (text, criteria = 'title') => {
-        return allCauses.filter(x => x.fields[criteria].toLowerCase().includes(text.toLowerCase()));
-        //or concrete search - return allCauses.filter(x => x.fields[criteria].toLowerCase().startsWith(text.toLowerCase()));
+    const searchCause = (text, causes, criteria = 'title') => {
+        return causes.filter(x => x.fields[criteria].toLowerCase().includes(text.toLowerCase()));
+        //or concrete search - return causes.filter(x => x.fields[criteria].toLowerCase().startsWith(text.toLowerCase()));
     }
 
     const filterForeignUserCauses = (userId) => {
@@ -51,12 +51,12 @@ export const CauseProvider = ({ children }) => {
         return allCauses.filter(x => x.creator === currentUser.uid);
     }
 
-    const filterUserJoinedCauses = (userId) => { 
-        return allCauses.filter(x => x.fields.participants.some(p => p === userId) );
+    const filterUserJoinedCauses = (userId) => {
+        return allCauses.filter(x => x.fields.participants.some(p => p === userId));
     }
-   
+
     return (
-        <CauseContext.Provider value={{ causes, setCauses, searchCause, id, setId,filterForeignUserCauses,joinedCauses, setJoinedCauses,filterUserJoinedCauses,filterCurrentUserCauses }}>
+        <CauseContext.Provider value={{ causes, setCauses, searchCause, id, setId, filterForeignUserCauses, joinedCauses, setJoinedCauses, filterUserJoinedCauses, filterCurrentUserCauses }}>
             {children}
         </CauseContext.Provider>
     );
