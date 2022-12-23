@@ -20,8 +20,8 @@ export const MyProfile = () => {
         country: ''
     });
 
-    const[currentUserCauses,setCurrentUserCauses] = useState();
-    const[currentUserJoinedCauses,setCurrentUserJoinedCauses] = useState();
+    const [currentUserCauses, setCurrentUserCauses] = useState();
+    const [currentUserJoinedCauses, setCurrentUserJoinedCauses] = useState();
 
     const [photo, setPhoto] = useState(null);
     const [active, setActive] = useState(true);
@@ -30,7 +30,7 @@ export const MyProfile = () => {
     const [error, setError] = useState('');
 
     const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
-    const {filterCurrentUserCauses,filterUserJoinedCauses} = useCausesContext();
+    const { filterCurrentUserCauses, filterUserJoinedCauses } = useCausesContext();
 
     useEffect(() => {
         getOne(usersCollectionRef, currentUser.uid)
@@ -40,8 +40,8 @@ export const MyProfile = () => {
                 console.log(err);
             });
 
-            setCurrentUserCauses(filterCurrentUserCauses());
-            setCurrentUserJoinedCauses(filterUserJoinedCauses(currentUser.uid));
+        setCurrentUserCauses(filterCurrentUserCauses());
+        setCurrentUserJoinedCauses(filterUserJoinedCauses(currentUser.uid));
     }, [currentUser.uid]);
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export const MyProfile = () => {
             alert("No uploaded file");
             setActive(true)
         }
-        else{
+        else {
             setPhoto(e.target.files[0]);
             setActive(false);
         }
@@ -157,9 +157,9 @@ export const MyProfile = () => {
                 <div className="mt-20 text-center border-b pb-12">
                     {" "}
                     <h1 className="text-4xl font-medium text-gray-700">
-                        {userInfo.firstName} {userInfo.lastName}
+                        {userInfo?.firstName} {userInfo?.lastName}
                     </h1>{" "}
-                    <p className="font-light text-gray-600 mt-3">{userInfo.country}</p>{" "}
+                    <p className="font-light text-gray-600 mt-3">{userInfo?.country}</p>{" "}
                     <p className="mt-8 text-gray-500">
                         Solution Manager - Creative Tim Officer
                     </p>{" "}

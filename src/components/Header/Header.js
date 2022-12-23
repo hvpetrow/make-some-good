@@ -1,4 +1,4 @@
-import './Header.module.css';
+import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useState } from 'react';
@@ -15,29 +15,42 @@ export const Header = () => {
         setDropdownClick(!dropdownClick);
     }
 
+    const onBlurDropdownHandler = (e) => {
+
+        console.log(e.currentTarget);
+
+        setDropdownClick(true);
+    }
+
+    const closeDropdownHandler = () => {
+        setDropdownClick(false);
+    }
+
     const dropdownMenu = <div
-        className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        className={styles['dropdown']}
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="user-menu-button"
         tabIndex={-1}
-        onBlur={dropdownHandler}
+        onBlur={onBlurDropdownHandler}
 
+        id="dropDownMenu"
     >
-        {/* Active: "bg-gray-100", Not Active: "" */}
         <Link
             to="/my-profile"
             role="menuitem"
             tabIndex={-1}
             id="user-menu-item-0"
+            onClick={closeDropdownHandler}
         >
-            Your Profile
+            My Profile
         </Link>
         <Link
             to="/logout"
             role="menuitem"
             tabIndex={-1}
             id="user-menu-item-2"
+            onClick={closeDropdownHandler}
         >
             Sign out
         </Link>
@@ -62,32 +75,32 @@ export const Header = () => {
                             <li><Link to="/login" aria-current="page">Log In</Link></li>
                             <li><Link to="/register" aria-current="page">Sign Up</Link></li>
                         </ul>
-                        : <ul className='unlogged-ul'>
-                            <li><Link to="/create-cause">Create Cause</Link></li>
-                            <li><Link to="/joinedCauses">Joined Causes</Link></li>
-                            <li><Link to="/my-causes">My Causes</Link></li>
-                            {/* <div className="relative ml-3">
-                            <div>
-                                <button
-                                    type="button"
-                                    className="flex rounded-full bg-gray-800 text-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                    id="user-menu-button"
-                                    aria-expanded="false"
-                                    aria-haspopup="true"
-                                    onClick={dropdownHandler}
-                                    onBlur={dropdownHandler}
-                                >
-                                    <span className="sr-only">Open user menu</span>
-                                    <img
-                                        className="h-8 w-8 rounded-full"
-                                        src={photoURL}
-                                        alt="profile"
-                                    />
-                                </button>
-                            </div>
-                            {dropdownClick && dropdownMenu}
-                        </div> */}
-                        </ul>
+                        : <div className="logged-in">
+                            <ul className={styles['logged-ul']}>
+                                <li><Link to="/create-cause">Create Cause</Link></li>
+                                <li><Link to="/joinedCauses">Joined Causes</Link></li>
+                                <li><Link to="/my-causes">My Causes</Link></li>
+                                <div>
+                                    <li className={styles['profile']}>
+                                        <button
+                                            type="button"
+                                            className={styles['profile-btn']}
+                                            id="user-menu-button"
+                                            aria-expanded="false"
+                                            aria-haspopup="true"
+                                            onClick={dropdownHandler}
+                                        >
+                                            <img
+                                                className={styles['profile-img']}
+                                                src={photoURL}
+                                                alt="profilePicture"
+                                            />
+                                        </button>
+                                    </li>
+                                    {dropdownClick && dropdownMenu}
+                                </div>
+                            </ul>
+                        </div>
                     }
                 </div>
             </nav>

@@ -147,7 +147,7 @@ export const Register = () => {
         setIsLoading(false);
     }
 
-    const { email, firstName, lastName, country, password, repass } = values;
+    const { email, firstName, lastName, country, password, repass } = hasTouched;
 
     let required;
     if (email && firstName && lastName && country && password && repass) {
