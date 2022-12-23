@@ -1,6 +1,6 @@
 import styles from './CreateCause.module.css';
 
-import { collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { collection, serverTimestamp, updateDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -132,7 +132,7 @@ export const CreateCause = () => {
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full px-3">
                             <label
-                                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                className={styles['label']}
                                 htmlFor="description"
                             >
                                 Description

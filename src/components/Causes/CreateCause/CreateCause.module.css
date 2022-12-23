@@ -71,6 +71,16 @@
     resize: none;
 }
 
+.label {
+    display: block;
+    color: #374151;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+}
+
 .btn-container {
     text-align: center;
 }
