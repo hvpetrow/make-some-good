@@ -59,6 +59,7 @@ export const Header = () => {
     return (
         <header>
             <nav>
+                {/*LEFT SIDE */}
                 <div className="left-side">
                     <ul>
                         <li><Link to="/">Home</Link></li>
@@ -68,7 +69,7 @@ export const Header = () => {
                         <li><Link to="/donate">Donate</Link></li>
                     </ul>
                 </div>
-                {/*RIGHT SIDE className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0  */}
+                {/*RIGHT SIDE */}
                 <div className="right-side">
                     {!currentUser
                         ? <ul className='unlogged-ul'>
