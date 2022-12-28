@@ -1,0 +1,95 @@
+#donate {
+    position: absolute;
+    top: 50%;
+    right: 30%;
+    transform: translate(0, -50%);
+}
+
+#donate .donate-ctn {
+    overflow: hidden;
+    padding: 1rem 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    max-width: 32rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+        0 8px 10px -6px rgb(0 0 0 / 0.1);
+    border: 5px #f3f3f3ba solid;
+}
+
+#donate .reasons-ctn {
+    margin-bottom: 2rem;
+}
+
+#donate .reasons-title {
+    color: #374151;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    margin-bottom: 1rem;
+}
+
+#donate .reasons-content {
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+#donate .curr-work-ctn {
+    padding: 1rem;
+    background-color: #e5e7eb;
+    border-radius: 0.5rem;
+}
+
+#donate .curr-work-title {
+    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+
+#donate .p-ctn {
+    color: #4b5563;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+#donate .p-ctn p {
+    margin-bottom: 4px;
+}
+
+#donate .btn-ctn {
+    padding-top: 2.5rem;
+}
+
+#donate .btn {
+    display: block;
+    padding: 0.75rem 2rem;
+    background-color: #4f46e5;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    color: #ffffff;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    border-radius: 0.25rem;
+    outline: 0;
+}
+
+#donate .btn:hover {
+    background-color: #4338ca;
+}
+
+#donate .btn:focus {
+    padding: 0.75rem 2rem;
+    color: #ffffff;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    border-radius: 0.25rem;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}

@@ -155,6 +155,7 @@ export const Register = () => {
     const isFormValid = required && tac && Object.values(errors).every(x => x === true);
     console.log(errors);
     console.log(required);
+    console.log('isFormValid' + isFormValid);
     return (
 
         <section id={styles['register']}>
@@ -314,7 +315,7 @@ export const Register = () => {
 
                     {/* Submit button */}
                     <button
-                        disabled={isLoading || !isFormValid}
+                        disabled={!isFormValid}
                         type="submit"
                         className={styles['btn']}
                         data-mdb-ripple="true"
