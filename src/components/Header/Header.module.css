@@ -14,7 +14,7 @@ nav {
     z-index: 100000;
 }
 
-.nav-items {
+nav .nav-items {
     position: relative;
     display: flex;
     padding: 0.8rem;
@@ -22,7 +22,7 @@ nav {
     justify-content: center;
 }
 
-ul {
+nav ul {
     display: block;
     text-align: center;
     margin: 0 auto;
@@ -32,8 +32,9 @@ ul {
     position: relative;
 }
 
-li {
-    margin: 0 auto;
+nav li {
+    margin-right: 1rem;
+    margin-left: 1rem;
     display: inline-block;
     list-style: none;
     padding: 0;
