@@ -51,81 +51,73 @@ export const Login = () => {
     }
 
     return (
-        <section className={styles['login']}>
-            <div className="container -my-2 px-6 py-10 h-full">
-                <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-                    <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-                            className="w-full scale-110"
-                            alt="loginImg"
-                        />
-                    </div>
-                    <div className="max-w-md  md:w-8/12 lg:w-5/12 lg:ml-20">
-                        <h2 className="text-center font-bold text-4xl mb-16 mx-4">Login</h2>
-
-                        <div className="login">
-                            <form onSubmit={submitHandler} >
-                                <label htmlFor="inputEmail" className="form-label text-xl my-2 mx-2 inline-block mb-2 text-gray-700">Email address</label>
-                                <div className="username flex border rounded text-gray-500 mb-4">
-                                    <input
-                                        name="email"
-                                        className="outline-none px-2 h-full py-2 text-lg"
-                                        type="text"
-                                        placeholder="user@gmail.com"
-                                        required
-                                        id="inputEmail"
-                                        value={values.email}
-                                        onChange={changeHandler}
-                                    />
-                                </div>
-                                <label htmlFor="inputPassword" className="form-label text-xl my-2 mx-2 inline-block mb-2 text-gray-700">Password</label>
-                                <div className="password flex border rounded text-gray-500 mb-4">
-                                    <input
-                                        name="password"
-                                        className="outline-none px-2 h-full py-2 text-lg"
-                                        type="password"
-                                        placeholder="******"
-                                        required
-                                        id="inputPassword"
-                                        value={values.password}
-                                        onChange={changeHandler}
-                                    />
-                                </div>
-                                <div className="show_info text-sm mb-4 w-max text-red-400" >
-                                    <p>Here is the Error</p>
-                                </div>
-                                <div className="submit border rounded mb-4 bg-blue-600 text-white cursor-pointer">
-                                    <button
-                                        disabled={isLoading}
-                                        type="submit"
-                                        className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                                        data-mdb-ripple="true"
-                                        data-mdb-ripple-color="light"
-                                    >
-                                        Log In
-                                    </button>
-                                </div>
-                                <div className="flex justify-center -mt-1 mb-7">
-                                    <Link
-                                        to="/forgot-password"
-                                        className="text-blue-600 hover:text-blue-800 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                                    >
-                                        Forgot Password?
-                                    </Link>
-                                </div>
-                                <p className="flex justify-center text-gray-500 dark:text-gray-400">
-                                    Need an account?&nbsp;
-                                    <Link
-                                        to="/register"
-                                        className="text-blue-600 hover:text-blue-800 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                                    >
-                                        Sign Up
-                                    </Link>
-                                </p>
-                            </form>
+        <section id={styles['login']} >
+            <div className={styles['login-ctn']}>
+                <div className={styles['img-ctn']}>
+                    <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                        className={styles['img']}
+                        alt="loginImg"
+                    />
+                </div>
+                <div className={styles['content-ctn']}>
+                    <h2 className={styles['title']}>Login</h2>
+                    <form id='login-form' onSubmit={submitHandler} >
+                        <label htmlFor="inputEmail" className={styles['label']}>Email address</label>
+                        <div className={styles['input-ctn']}>
+                            <input
+                                name="email"
+                                className={styles['input']}
+                                type="text"
+                                placeholder="user@gmail.com"
+                                required
+                                id="inputEmail"
+                                value={values.email}
+                                onChange={changeHandler}
+                            />
                         </div>
-                    </div>
+                        <label htmlFor="inputPassword" className={styles['label']}>Password</label>
+                        <div className={styles['input-ctn']}>
+                            <input
+                                name="password"
+                                className={styles['input']}
+                                type="password"
+                                placeholder="******"
+                                required
+                                id="inputPassword"
+                                value={values.password}
+                                onChange={changeHandler}
+                            />
+                        </div>
+                        <div className={styles['btn-ctn']}>
+                            <button
+                                disabled={isLoading}
+                                type="submit"
+                                className={styles['btn']}
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                            >
+                                Log In
+                            </button>
+                        </div>
+                        <Link
+                            to="/forgot-password"
+                            className={styles['link']}
+                        >
+                            Forgot Password?
+                        </Link>
+                        <div>
+                            <span className={styles['span']}>
+                                Need an account?&nbsp;
+                            </span>
+                            <Link
+                                to="/register"
+                                className={styles['link']}
+                            >
+                                Sign Up
+                            </Link>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
