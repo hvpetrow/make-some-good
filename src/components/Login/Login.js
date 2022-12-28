@@ -106,13 +106,13 @@ export const Login = () => {
                         >
                             Forgot Password?
                         </Link>
-                        <div>
+                        <div className={styles['link-span-ctn']}>
                             <span className={styles['span']}>
                                 Need an account?&nbsp;
                             </span>
                             <Link
                                 to="/register"
-                                className={styles['link']}
+                                className={styles['link', 'link-span']}
                             >
                                 Sign Up
                             </Link>

@@ -20,7 +20,7 @@
 }
 
 #login .content-ctn {
-    width: 30%;
+    width: 25%;
 }
 
 #login .content-ctn .title {
@@ -128,7 +128,6 @@
     color: #2563eb;
     text-align: center;
     padding-left: 0px;
-    display: inline-block;
 }
 
 #login .link:hover {
@@ -147,7 +146,16 @@
     color: #1e40af;
 }
 
+#login .link-span-ctn {
+    text-align: center;
+}
+
 #login .span {
     color: #6b7280;
     margin-right: 0.5rem;
+}
+
+#login .link-span {
+    display: inline-block;
+    color: #2563eb;
 }
