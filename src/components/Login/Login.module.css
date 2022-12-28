@@ -55,13 +55,23 @@
 }
 
 #login .input {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    height: 100%;
+    padding: 0.5rem 1rem;
+    background-clip: padding-box;
+    transition-property: background-color, border-color, color, fill, stroke,
+        opacity, box-shadow, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    color: #374151;
+    font-size: 1.25rem;
+    width: 100%;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    border-color: #d1d5db;
+    border-style: solid;
+}
+
+#login .input:focus {
+    color: #374151;
+    border-color: #2563eb;
     outline: 0;
 }
 
@@ -78,10 +88,7 @@
 
 #login .btn {
     display: inline-block;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
+    padding: 0.75rem 1.75rem;
     background-color: #2563eb;
     color: #ffffff;
     font-size: 0.875rem;

@@ -159,198 +159,182 @@ export const Register = () => {
     console.log(required);
     return (
 
-        <section className="h-screen">
-            <div className="container px-6 py-12 h-full">
-                <div className="flex justify-center items-center flex-wrap h-full g-6 scale-95 text-gray-800">
-                    <div className="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
-                        <img
-                            src={require("../../assets/register.jpg")}
-                            className="mb-24"
-                            alt="registerImg"
+        <section id={styles['register']}>
+            <div className={styles['img-ctn']}>
+                <img
+                    src={require("../../assets/register.jpg")}
+                    alt="registerImg"
+                />
+            </div>
+            <div className={styles['content-ctn']}>
+                <h2 className={styles['title']}>Sign Up</h2>
+                {currentUser && currentUser.email}
+                <form onSubmit={submitHandler}>
+                    {/* Email input */}
+                    <div className={styles['input-ctn']}>
+                        <label htmlFor="email" className={styles['label']}>Email:</label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            className={styles['input']}
+                            placeholder="user@gmail.com"
+                            required
+                            value={values.email}
+                            onChange={changeHandler}
+                            onBlur={(e) => emailValidator(e)}
                         />
+
+                        {(!errors.email && hasTouched.email) && (
+                            <p className={styles['alert']}>Email is not valid!!</p>
+                        )}
                     </div>
-                    <div className="max-w-md  md:w-1/12 lg:w-5/12 lg:ml-20">
-                        <h2 className="text-4xl mb-16 font-bold text-center">Sign Up</h2>
-                        {currentUser && currentUser.email}
+                    {/* First Name input */}
+                    <div className={styles['input-ctn']}>
+                        <label htmlFor="firstName" className={styles['label']}>First Name:</label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            id="firstName"
+                            className={styles['input']}
+                            placeholder="Max"
+                            required
+                            value={values.displayName}
+                            onChange={changeHandler}
+                            onBlur={(e) => nameValidator(e)}
+                        />
 
-                        {/* {error} */}
-                        <form onSubmit={submitHandler}>
-                            {/* Email input */}
-                            <div className="mb-6 ">
-                                <label htmlFor="email" className='text-xl'>Email:</label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal  text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="user@gmail.com"
-                                    required
-                                    value={values.email}
-                                    onChange={changeHandler}
-                                    onBlur={(e) => emailValidator(e)}
-                                />
-
-                                {(!errors.email && hasTouched.email) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Email is not valid!!</p>
-                                )}
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="firstName" className='mb-10 text-xl'>First Name:</label>
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    id="firstName"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Max"
-                                    required
-                                    value={values.displayName}
-                                    onChange={changeHandler}
-                                    onBlur={(e) => nameValidator(e)}
-                                />
-
-                                {(!errors.firstName && hasTouched.firstName) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">First Name must be at least 2 characters long!!</p>
-                                )}
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="email" className='mb-10 text-xl'>Last Name:</label>
-
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    id="lastName"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Mustermann"
-                                    required
-                                    value={values.displayName}
-                                    onChange={changeHandler}
-                                    onBlur={(e) => nameValidator(e)}
-                                />
-                                {(!errors.lastName && hasTouched.lastName) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Last Name must be at least 2 characters long!!</p>
-                                )}
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="country" className='mb-10 text-xl'>Country:</label>
-
-                                <input
-                                    type="text"
-                                    name="country"
-                                    id="country"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Germany"
-                                    required
-                                    value={values.country}
-                                    onChange={changeHandler}
-                                    onBlur={(e) => nameValidator(e)}
-                                />
-                                {(!errors.country && hasTouched.country) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Country is not valid!!</p>
-                                )}
-                            </div>
-                            {/* Password input */}
-                            <div className="mb-2">
-                                <label htmlFor="password" className='mb-10 text-xl'>Password:</label>
-
-                                <input
-                                    type={showPassword ? 'text' : 'password'}
-                                    name="password"
-                                    id="password"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="******"
-                                    required
-                                    value={values.password}
-                                    onChange={changeHandler}
-                                    onBlur={(e) => passwordValidator(e)}
-                                />
-                                <span className={styles['password-icon']} onClick={showPasswordHandler}>
-                                    {showPassword
-                                        ? <FontAwesomeIcon icon={faEye} />
-                                        : <FontAwesomeIcon icon={faEyeSlash} />
-                                    }
-                                </span>
-                                {(!errors.password && hasTouched.password) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Password must be at least 6 characters long!!</p>
-                                )}
-                            </div>
-                            <div className="mb-6">
-                                <label htmlFor="repass" className='mb-10 text-xl'>Repeat Password:</label>
-                                <input
-                                    type={showRepeatPassword ? 'text' : 'password'}
-                                    name="repass"
-                                    id="repass"
-                                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="******"
-                                    required
-                                    value={values.repass}
-                                    onChange={changeHandler}
-                                    onBlur={(e) => rePassValidator(e)}
-                                />
-
-                                <span className={styles['password-icon']} onClick={showRepeatPasswordHandler}>
-                                    {showRepeatPassword
-                                        ? <FontAwesomeIcon icon={faEye} />
-                                        : <FontAwesomeIcon icon={faEyeSlash} />
-                                    }
-                                </span>
-                                {(!errors.repass && hasTouched.repass) && (
-                                    <p className=" flex items-center font-medium tracking-wide text-red-500  mt-1 ml-1 ">Passwords do not match!!</p>
-                                )}
-                            </div>
-
-                            <div className="flex my-3 items-start">
-                                <div className="flex items-center h-5">
-                                    <input
-                                        id="terms"
-                                        aria-describedby="terms"
-                                        type="checkbox"
-                                        name="terms"
-                                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                                        required=""
-                                        value={tac}
-                                        onChange={tacChangeHandler}
-                                    />
-                                </div>
-                                <div className="ml-3 text-sm">
-                                    <label
-                                        htmlFor="terms"
-                                        className="font-light text-gray-800 dark:text-gray-300"
-                                    >
-                                        I accept the{" "}
-                                        <Link
-                                            className="font-medium text-primary-600 hover:underline hover:text-blue-800 dark:text-primary-500"
-                                            to="#"
-                                        >
-                                            Terms and Conditions
-                                        </Link>
-                                    </label>
-                                </div>
-                            </div>
-
-                            {/* Submit button */}
-                            <button
-                                disabled={isLoading || !isFormValid}
-                                type="submit"
-                                className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                                data-mdb-ripple="true"
-                                data-mdb-ripple-color="light"
-                            >
-                                Sign up
-                            </button>
-                            <div className="flex py-5 justify-center items-center mb-6">
-                                <p className=" text-gray-500 dark:text-gray-400">
-                                    Already have an account?{" "}
-                                    <Link
-                                        to="/login"
-                                        className="text-blue-600 hover:text-blue-800 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                                    >
-                                        Login here
-                                    </Link>
-                                </p>
-                            </div>
-                        </form>
+                        {(!errors.firstName && hasTouched.firstName) && (
+                            <p className={styles['alert']}>First Name must be at least 2 characters long!!</p>
+                        )}
                     </div>
-                </div>
+                    {/* Last Name input */}
+                    <div className={styles['input-ctn']}>
+                        <label htmlFor="lastName" className={styles['label']}>Last Name:</label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            id="lastName"
+                            className={styles['input']}
+                            placeholder="Mustermann"
+                            required
+                            value={values.displayName}
+                            onChange={changeHandler}
+                            onBlur={(e) => nameValidator(e)}
+                        />
+                        {(!errors.lastName && hasTouched.lastName) && (
+                            <p className={styles['alert']}>Last Name must be at least 2 characters long!!</p>
+                        )}
+                    </div>
+                    {/* Country input */}
+                    <div className={styles['input-ctn']}>
+                        <label htmlFor="country" className={styles['label']}>Country:</label>
+                        <input
+                            type="text"
+                            name="country"
+                            id="country"
+                            className={styles['input']}
+                            placeholder="Germany"
+                            required
+                            value={values.country}
+                            onChange={changeHandler}
+                            onBlur={(e) => nameValidator(e)}
+                        />
+                        {(!errors.country && hasTouched.country) && (
+                            <p className={styles['alert']}>Country is not valid!!</p>
+                        )}
+                    </div>
+                    {/* Password input */}
+                    <div className={styles['input-ctn']}>
+                        <label htmlFor="password" className={styles['label']}>Password:</label>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            name="password"
+                            id="password"
+                            className={styles['input']}
+                            placeholder="******"
+                            required
+                            value={values.password}
+                            onChange={changeHandler}
+                            onBlur={(e) => passwordValidator(e)}
+                        />
+                        <span className={styles['password-icon']} onClick={showPasswordHandler}>
+                            {showPassword
+                                ? <FontAwesomeIcon icon={faEye} />
+                                : <FontAwesomeIcon icon={faEyeSlash} />
+                            }
+                        </span>
+                        {(!errors.password && hasTouched.password) && (
+                            <p className={styles['alert']}>Password must be at least 6 characters long!!</p>
+                        )}
+                    </div>
+                    <div className={styles['input-ctn']}>
+                        <label htmlFor="repass" className={styles['label']}>Repeat Password:</label>
+                        <input
+                            type={showRepeatPassword ? 'text' : 'password'}
+                            name="repass"
+                            id="repass"
+                            className={styles['input']}
+                            placeholder="******"
+                            required
+                            value={values.repass}
+                            onChange={changeHandler}
+                            onBlur={(e) => rePassValidator(e)}
+                        />
+
+                        <span className={styles['password-icon']} onClick={showRepeatPasswordHandler}>
+                            {showRepeatPassword
+                                ? <FontAwesomeIcon icon={faEye} />
+                                : <FontAwesomeIcon icon={faEyeSlash} />
+                            }
+                        </span>
+                        {(!errors.repass && hasTouched.repass) && (
+                            <p className={styles['alert']}>Passwords do not match!!</p>
+                        )}
+                    </div>
+                    {/* Terms and Conditions */}
+                    <div className={styles['tac-ctn']}>
+                        <input
+                            id="terms"
+                            aria-describedby="terms"
+                            type="checkbox"
+                            name="terms"
+                            className={styles['tac-input']}
+                            required
+                            value={tac}
+                            onChange={tacChangeHandler}
+                        />
+                        <span>I accept the</span>
+                        <Link
+                            className={styles['link']}
+                            to="/tac"
+                        >
+                            Terms and Conditions
+                        </Link>
+                    </div>
+
+                    {/* Submit button */}
+                    <button
+                        disabled={isLoading || !isFormValid}
+                        type="submit"
+                        className={styles['btn']}
+                        data-mdb-ripple="true"
+                        data-mdb-ripple-color="light"
+                    >
+                        Sign up
+                    </button>
+                    <div className={styles['log-link-ctn']}>
+                        <span className={styles['span']}>
+                            Already have an account?{" "}
+                        </span>
+                        <Link
+                            to="/login"
+                            className={styles['login-link']}
+                        >
+                            Login here
+                        </Link>
+                    </div>
+                </form>
             </div>
         </section>
     )
