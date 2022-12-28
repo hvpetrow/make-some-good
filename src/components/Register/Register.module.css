@@ -1,13 +1,10 @@
 #register {
     width: 100%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
     height: 100%;
+    padding: 3rem 1.5rem;
+    margin-top: 3.5rem;
+    margin-bottom: 5rem;
     display: flex;
-    --transform-scale-x: 0.95;
-    --transform-scale-y: 0.95;
     color: #1f2937;
     flex-wrap: wrap;
     justify-content: center;
@@ -16,6 +13,13 @@
 
 #register .img-ctn {
     width: 50%;
+    height: 100%;
+    margin-bottom: 12rem;
+}
+
+#register .img-ctn .img {
+    width: 100%;
+    height: 100%;
 }
 
 #register .content-ctn {

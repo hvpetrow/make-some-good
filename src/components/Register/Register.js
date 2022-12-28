@@ -109,8 +109,6 @@ export const Register = () => {
         }));
     }
 
-
-
     const submitHandler = async (e) => {
         e.preventDefault();
 
@@ -163,6 +161,7 @@ export const Register = () => {
             <div className={styles['img-ctn']}>
                 <img
                     src={require("../../assets/register.jpg")}
+                    className={styles['img']}
                     alt="registerImg"
                 />
             </div>
