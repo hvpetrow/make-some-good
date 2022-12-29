@@ -1,3 +1,5 @@
+import styles from './MyProfile.module.css';
+
 import { collection } from "firebase/firestore";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -89,83 +91,72 @@ export const MyProfile = () => {
 
 
     return (
-        <div className="p-16">
-            <div className="p-8 bg-white shadow mt-24">
-                {" "}
-                <div className="grid grid-cols-1 md:grid-cols-3">
-                    {" "}
-                    <div className="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
-                        {" "}
-                        <div>
-                            {" "}
-                            <p className="font-bold text-gray-700 text-xl">{currentUserCauses?.length}</p>{" "}
-                            <p className="text-gray-400">My Causes</p>{" "}
-                        </div>{" "}
-                        <div>
-                            {" "}
-                            <p className="font-bold text-gray-700 text-xl">{currentUserJoinedCauses?.length}</p>{" "}
-                            <p className="text-gray-400">Joined Causes</p>{" "}
-                        </div>{" "}
-                    </div>{" "}
-                    <div className="relative">
-                        {" "}
-                        <div className="absolute inset-x-0 top-0 -mt-24 flex items-center justify-center ">
-                            <img
-                                src={photoURL}
-                                className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                alt="profile"
-                            >
-                            </img>{" "}
-                        </div>{" "}
-                    </div>{" "}
-                    <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
-                        <div>
-                            <label
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                htmlFor="file_input"
-                            >
-                                Upload file
-                            </label>
-                            <input
-                                className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                aria-describedby="file_input_help"
-                                id="file_input"
-                                type="file"
-                                onChange={browseHandler}
-                            />
-                            <p
-                                className="mt-1 text-sm text-gray-500 dark:text-gray-300"
-                                id="file_input_help"
-                            >
-                                PNG,JPG (MAX. 1MB and 800x600)
-                            </p>
-                        </div>
-
-                        <button to="/" disabled={active || isLoading} onClick={submitHandler} className="text-white py-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
-                            {" "}
-                            Upload Profile Picture
-                        </button>{" "}
-
+        <section id={styles['my-profile']}>
+            <div className={styles['content-ctn']}>
+                <div className={styles['causes-ctn']}>
+                    <div>
+                        <p className={styles['causes-count']}>{currentUserCauses?.length}</p>
+                        <p className={styles['causes-title']}>My Causes</p>
                     </div>
+                    <div>
+                        <p className={styles['causes-count']}>{currentUserJoinedCauses?.length}</p>
+                        <p className={styles['causes-title']}>Joined Causes</p>
+                    </div>
+                </div>
+                <div className={styles['center']}>
+                    <div className={styles['img-ctn']}>
+                        <img
+                            src={photoURL}
+                            className={styles['img']}
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            alt="profileImg"
+                        >
+                        </img>{" "}
+                    </div>{" "}
                 </div>{" "}
-                <Link to="/change-password" className="mx-20 my-20 text-white py-4 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
-                    {" "}
-                    Change Your Password
-                </Link>{" "}
-                <div className="mt-20 text-center border-b pb-12">
-                    {" "}
-                    <h1 className="text-4xl font-medium text-gray-700">
-                        {userInfo?.firstName} {userInfo?.lastName}
-                    </h1>{" "}
-                    <p className="font-light text-gray-600 mt-3">{userInfo?.country}</p>{" "}
-                    <p className="mt-8 text-gray-500">
-                        Solution Manager - Creative Tim Officer
-                    </p>{" "}
-                    <p className="mt-2 text-gray-500">University of Computer Science</p>
-                </div>{" "}
-            </div>
-        </div>
+                <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
+                    <div>
+                        <label
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            htmlFor="file_input"
+                        >
+                            Upload file
+                        </label>
+                        <input
+                            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            aria-describedby="file_input_help"
+                            id="file_input"
+                            type="file"
+                            onChange={browseHandler}
+                        />
+                        <p
+                            className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                            id="file_input_help"
+                        >
+                            PNG,JPG (MAX. 1MB and 800x600)
+                        </p>
+                    </div>
+
+                    <button to="/" disabled={active || isLoading} onClick={submitHandler} className="text-white py-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
+                        Upload Profile Picture
+                    </button>{" "}
+
+                </div>
+            </div>{" "}
+            <Link to="/change-password" className="mx-20 my-20 text-white py-4 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
+                Change Your Password
+            </Link>{" "}
+            <div className="mt-20 text-center border-b pb-12">
+                <h1 className="text-4xl font-medium text-gray-700">
+                    {userInfo?.firstName} {userInfo?.lastName}
+                </h1>{" "}
+                <p className="font-light text-gray-600 mt-3">{userInfo?.country}</p>{" "}
+                <p className="mt-8 text-gray-500">
+                    Solution Manager - Creative Tim Officer
+                </p>{" "}
+                <p className="mt-2 text-gray-500">University of Computer Science</p>
+            </div>{" "}
+        </section>
     )
 }

@@ -103,6 +103,10 @@
     width: 100%;
 }
 
+#login .btn:disabled {
+    opacity: 0.5;
+}
+
 #login .btn:hover,
 .btn-ctn:hover {
     background-color: #1d4ed8;

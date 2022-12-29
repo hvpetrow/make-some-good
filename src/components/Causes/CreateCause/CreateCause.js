@@ -17,7 +17,7 @@ export const CreateCause = () => {
     const navigate = useNavigate();
     const { currentUser } = useAuth();
 
-    const [values, setValues] = useState({
+    let [values, setValues] = useState({
         title: '',
         purpose: '',
         place: '',
@@ -47,6 +47,9 @@ export const CreateCause = () => {
 
         try {
             setIsLoading(true);
+            if (values.imgUrl == '') {
+                values = { ...values, imgUrl: 'https://media.istockphoto.com/id/1253505221/vector/stylized-volunteers-help-charity-and-sharing-hope.jpg?s=612x612&w=0&k=20&c=Fx6iI85QcfatEHM9DkKIyDF0q4SvDJtbf8Wj5lbJhPQ=' }
+            }
             const addedDoc = await add(causesCollectionRef, values);
 
             const updateTimestamp = await updateDoc(addedDoc, {
@@ -123,7 +126,7 @@ export const CreateCause = () => {
                             name="imgUrl"
                             className={styles['form-input']}
                             placeholder="Example: https://pixlr.eu/makeSomeGood.png"
-                            required
+                            // required
                             value={values.imgUrl}
                             onChange={changeHandler}
                         />

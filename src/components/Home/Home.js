@@ -50,8 +50,10 @@ export const Home = () => {
     return (
         <>
             <div className={styles['home']}>
-                <h1 className={styles['home-title']}>Make some good</h1>
-                <h2 className={styles['latest-topics-title']}>Latest Topics.</h2>
+                <h1 className={styles['home-title']}>Make Some Good</h1>
+                <h1 className={styles['home-quote']}>“No one has ever become poor by giving.”</h1>
+                <h1 className={styles['home-quote-author']}>― Anne Frank</h1>
+                <h2 className={styles['latest-topics-title']}>Latest Causes</h2>
                 <div className={styles['home-container']}>
                     {isLoading
                         ? (<Spinner />)
