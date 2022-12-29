@@ -97,34 +97,37 @@ export const Catalog = () => {
     console.log(causes);
 
     return (
-        <>
-            <div className={styles['catalog']}>
-                <h1 className={styles['catalog-title']}>Make some good</h1>
-                <div className={styles['catalog-container']}>
-                    {isLoading
-                        ? (<Spinner />)
-                        : causes.length !== 0
-                            ? (causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
-                            : (<h3 className="no-articles">No articles yet</h3>)
-                    }
-                </div>
-                {visible &&
-                    <div className={styles['load-more-btn-cont']}>
-                        <button id="load-more-button" className={styles['load-more-button']}
-                            type="button"
-                            data-mdb-ripple="true"
-                            data-mdb-ripple-color="light"
-                            onClick={clickable ? loadMoreClickHandler : () => {
-                                toast.warning('No more causes', {
-                                    position: toast.POSITION.BOTTOM_CENTER
-                                });
-                                setVisible(false);
-                            }}>load more</button>
+        <section className={styles['catalog']}>
+            <h1 className={styles['catalog-title']}>Make some good</h1>
+            {isLoading
+                ? (<Spinner />)
+                : (<>
+                    <div className={styles['catalog-container']}>
+                        {isLoading
+                            ? (<Spinner />)
+                            : causes.length !== 0
+                                ? (causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
+                                : (<h3 className="no-articles">No articles yet</h3>)
+                        }
                     </div>
-                }
+                    {visible &&
+                        <div className={styles['load-more-btn-cont']}>
+                            <button id="load-more-button" className={styles['load-more-button']}
+                                type="button"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                                onClick={clickable ? loadMoreClickHandler : () => {
+                                    toast.warning('No more causes', {
+                                        position: toast.POSITION.BOTTOM_CENTER
+                                    });
+                                    setVisible(false);
+                                }}>load more</button>
+                        </div>
+                    }
 
-                <BackToTheTopButton />
-            </div>
-        </>
+                    <BackToTheTopButton />
+                </>)
+            }
+        </section>
     );
 }
