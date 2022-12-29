@@ -1,20 +1,22 @@
 #my-profile {
     padding: 2rem;
-    margin-top: 12rem;
+    margin-top: 14rem;
     background-color: #ffffff;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    margin-bottom: 7rem;
 }
 
 #my-profile .content-ctn {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
 }
 
 #my-profile .causes-ctn {
     display: grid;
     text-align: center;
     order: -9999;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 #my-profile .causes-count {
@@ -36,8 +38,7 @@
     position: absolute;
     right: 0;
     left: 0;
-    top: 0;
-    margin-top: -6rem;
+    bottom: 10px;
 }
 
 #my-profile .img-ctn .img {
@@ -51,7 +52,6 @@
 
 #my-profile .upload-ctn {
     display: flex;
-    margin-left: 2rem;
     justify-content: center;
 }
 
@@ -86,4 +86,68 @@
     color: #6b7280;
     font-size: 0.875rem;
     line-height: 1.25rem;
+}
+
+#my-profile .upload-ctn .upload-btn {
+    padding: 1rem;
+    margin-left: 3rem;
+    background-color: #60a5fa;
+    color: #ffffff;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+}
+
+#my-profile .upload-ctn .upload-btn:hover {
+    background-color: #3b82f6;
+    transition-property: background-color, border-color, color, fill, stroke,
+        opacity, box-shadow, transform;
+    --transform-translate-y: -0.125rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+#my-profile .change-password-btn {
+    padding: 1rem;
+    margin: 5rem auto;
+    background-color: #374151;
+    color: #ffffff;
+    border-radius: 0.25rem;
+    width: 24%;
+    text-align: center;
+}
+
+#my-profile .change-password-btn:hover {
+    background-color: #1f2937;
+    transition-property: background-color, border-color, color, fill, stroke,
+        opacity, box-shadow, transform;
+    --transform-translate-y: -0.125rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+#my-profile .user-info {
+    padding-bottom: 3rem;
+    margin-top: 5rem;
+    text-align: center;
+    border-bottom-width: 1px;
+}
+
+#my-profile .user-info .user-names {
+    color: #374151;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 500;
+}
+
+#my-profile .user-info .user-country {
+    margin-top: 0.75rem;
+    color: #4b5563;
+    font-weight: 300;
+}
+
+#my-profile .user-info .user-addInfo {
+    margin-top: 2rem;
+    color: #6b7280;
 }

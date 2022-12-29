@@ -24,13 +24,10 @@ export const MyProfile = () => {
 
     const [currentUserCauses, setCurrentUserCauses] = useState();
     const [currentUserJoinedCauses, setCurrentUserJoinedCauses] = useState();
-
     const [photo, setPhoto] = useState(null);
     const [active, setActive] = useState(true);
-
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-
     const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
     const { filterCurrentUserCauses, filterUserJoinedCauses } = useCausesContext();
 
@@ -89,7 +86,6 @@ export const MyProfile = () => {
     console.log(currentUserCauses);
     console.log(currentUserJoinedCauses);
 
-
     return (
         <section id={styles['my-profile']}>
             <div className={styles['content-ctn']}>
@@ -137,26 +133,21 @@ export const MyProfile = () => {
                             PNG,JPG (MAX. 1MB and 800x600)
                         </p>
                     </div>
-
-                    <button to="/" disabled={active || isLoading} onClick={submitHandler} className="text-white py-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
+                    <button to="/" disabled={active || isLoading} onClick={submitHandler} className={styles['upload-btn']}>
                         Upload Profile Picture
-                    </button>{" "}
-
+                    </button>
                 </div>
-            </div>{" "}
-            <Link to="/change-password" className="mx-20 my-20 text-white py-4 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-sm transition transform hover:-translate-y-0.5">
+            </div>
+            <Link to="/change-password" className={styles['change-password-btn']}>
                 Change Your Password
-            </Link>{" "}
-            <div className="mt-20 text-center border-b pb-12">
-                <h1 className="text-4xl font-medium text-gray-700">
+            </Link>
+            <div className={styles['user-info']}>
+                <h1 className={styles['user-names']}>
                     {userInfo?.firstName} {userInfo?.lastName}
-                </h1>{" "}
-                <p className="font-light text-gray-600 mt-3">{userInfo?.country}</p>{" "}
-                <p className="mt-8 text-gray-500">
-                    Solution Manager - Creative Tim Officer
-                </p>{" "}
-                <p className="mt-2 text-gray-500">University of Computer Science</p>
-            </div>{" "}
+                </h1>
+                <p className={styles['user-country']}>{userInfo?.country}</p>
+                <p className={styles['user-addInfo']}>University of Computer Science</p>
+            </div>
         </section>
     )
 }
