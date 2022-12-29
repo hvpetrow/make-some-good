@@ -26,34 +26,10 @@ export const Header = () => {
         setDropdownClick(false);
     }
 
-    const dropdownMenu = <div
-        className={styles['dropdown']}
-        role="menu"
-        aria-orientation="vertical"
-        aria-labelledby="user-menu-button"
-        tabIndex={-1}
-        onBlur={onBlurDropdownHandler}
-
-        id="dropDownMenu"
-    >
-        <Link
-            to="/my-profile"
-            role="menuitem"
-            tabIndex={-1}
-            id="user-menu-item-0"
-            onClick={closeDropdownHandler}
-        >
-            My Profile
-        </Link>
-        <Link
-            to="/logout"
-            role="menuitem"
-            tabIndex={-1}
-            id="user-menu-item-2"
-            onClick={closeDropdownHandler}
-        >
-            Sign out
-        </Link>
+    const dropdownMenu = <div className={styles['dropdown']} onBlur={onBlurDropdownHandler}>
+        <Link to="/my-profile" onClick={closeDropdownHandler}>My Profile</Link>
+        <Link to="/my-causes" onClick={closeDropdownHandler}>My Causes</Link>
+        <Link to="/logout" onClick={closeDropdownHandler}>Sign out</Link>
     </div>;
 
     return (
@@ -64,7 +40,6 @@ export const Header = () => {
                     <ul>
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/catalog">Causes</Link></li>
-                        <li><Link to="/superHeroes">Superheroes</Link></li>
                         <li><Link to="/search">Search</Link></li>
                         <li><Link to="/donate">Donate</Link></li>
                     </ul>
@@ -80,7 +55,6 @@ export const Header = () => {
                             <ul className={styles['logged-ul']}>
                                 <li><Link to="/create-cause">Create Cause</Link></li>
                                 <li><Link to="/joinedCauses">Joined Causes</Link></li>
-                                <li><Link to="/my-causes">My Causes</Link></li>
                                 <div>
                                     <li className={styles['profile']}>
                                         <button
