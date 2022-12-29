@@ -98,7 +98,7 @@ export const JoinedCauses = () => {
             </div>
             {visible && myCauses.length !== 0 &&
                 <div className={styles['btn-ctn']}>
-                    <button id="load-more-button" className={styles['btn']}
+                    <button id="load-more-button" className={styles['load-more-btn']}
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
                         onClick={clickable ? loadMoreClickHandler : () => {
