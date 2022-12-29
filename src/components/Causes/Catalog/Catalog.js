@@ -61,7 +61,6 @@ export const Catalog = () => {
 
     const loadMoreClickHandler = async (e) => {
         console.log("load more clicked");
-
         try {
             getAll(orderedQuery)
                 .then(docs => {
@@ -80,12 +79,10 @@ export const Catalog = () => {
                         });
                     });
 
-
                     setCauses(oldArr => [
                         ...oldArr,
                         ...arr
                     ]);
-
 
                     console.log("LATEST DOC", latestDoc);
                     setLatestDoc(docs.docs[docs.docs.length - 1]);
@@ -102,7 +99,7 @@ export const Catalog = () => {
     return (
         <>
             <div className={styles['catalog']}>
-                <h1 className={styles['catalog-title']}>Make some good.</h1>
+                <h1 className={styles['catalog-title']}>Make some good</h1>
                 <div className={styles['catalog-container']}>
                     {isLoading
                         ? (<Spinner />)
