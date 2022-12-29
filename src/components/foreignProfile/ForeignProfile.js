@@ -59,7 +59,7 @@ export const ForeignProfile = () => {
                         <div>
                             {" "}
                             <p className="font-bold text-gray-700 text-xl">{foreignUserCauses?.length}</p>{" "}
-                            <p className="text-gray-400">My Causes</p>{" "}
+                            <p className="text-gray-400">Causes</p>{" "}
                         </div>{" "}
 
                     </div>{" "}
