@@ -112,26 +112,26 @@ export const MyProfile = () => {
                             fill="currentColor"
                             alt="profileImg"
                         >
-                        </img>{" "}
-                    </div>{" "}
-                </div>{" "}
-                <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
+                        </img>
+                    </div>
+                </div>
+                <div className={styles['upload-ctn']}>
                     <div>
                         <label
-                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                            className={styles['upload-label']}
                             htmlFor="file_input"
                         >
                             Upload file
                         </label>
                         <input
-                            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                            className={styles['upload-input']}
                             aria-describedby="file_input_help"
                             id="file_input"
                             type="file"
                             onChange={browseHandler}
                         />
                         <p
-                            className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                            className={styles['upload-desc']}
                             id="file_input_help"
                         >
                             PNG,JPG (MAX. 1MB and 800x600)

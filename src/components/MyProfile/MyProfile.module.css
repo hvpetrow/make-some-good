@@ -48,3 +48,42 @@
     border-radius: 9999px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
+
+#my-profile .upload-ctn {
+    display: flex;
+    margin-left: 2rem;
+    justify-content: center;
+}
+
+#my-profile .upload-ctn .upload-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #111827;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+}
+
+#my-profile .upload-ctn .upload-input {
+    display: block;
+    background-color: #f9fafb;
+    color: #111827;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-color: #d1d5db;
+    cursor: pointer;
+}
+
+#my-profile .upload-ctn .upload-input:focus {
+    outline: 0;
+}
+
+#my-profile .upload-ctn .upload-desc {
+    margin-top: 0.25rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
