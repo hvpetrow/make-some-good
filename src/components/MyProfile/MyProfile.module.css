@@ -89,12 +89,12 @@
 }
 
 #my-profile .upload-ctn .upload-btn {
-    padding: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     margin-left: 3rem;
     background-color: #60a5fa;
     color: #ffffff;
     text-transform: uppercase;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
 }
 
 #my-profile .upload-ctn .upload-btn:hover {
@@ -112,7 +112,7 @@
     margin: 5rem auto;
     background-color: #374151;
     color: #ffffff;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     width: 24%;
     text-align: center;
 }
