@@ -47,7 +47,7 @@ export const CreateCause = () => {
 
         try {
             setIsLoading(true);
-            if (values.imgUrl == '') {
+            if (values.imgUrl === '') {
                 values = { ...values, imgUrl: 'https://media.istockphoto.com/id/1253505221/vector/stylized-volunteers-help-charity-and-sharing-hope.jpg?s=612x612&w=0&k=20&c=Fx6iI85QcfatEHM9DkKIyDF0q4SvDJtbf8Wj5lbJhPQ=' }
             }
             const addedDoc = await add(causesCollectionRef, values);

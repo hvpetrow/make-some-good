@@ -128,7 +128,6 @@ export const EditCause = () => {
                                 name="description"
                                 placeholder="Description"
                                 defaultValue={cause.description}
-
                             />
                         </div>
                     </div>

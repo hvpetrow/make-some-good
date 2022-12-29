@@ -1,17 +1,17 @@
+import styles from './MyCauses.module.css';
+
 import { collection, limit, orderBy, query, startAfter, where } from "firebase/firestore";
 import { useEffect } from "react";
 
 import { useAuth } from "../../../contexts/AuthContext";
-import { getAll } from "../../../services/crudService";
 import { db } from "../../../firebase";
-import { CardTemplate } from "../Catalog/CardTemplate";
+import { CardTemplate } from "../../Home/CardTemplate";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Spinner } from "../../../shared/Spinner";
 import { loadThreeMyCauses } from "../../../services/causesService";
 
 const causesCollectionRef = collection(db, "causes");
-
 
 export const MyCauses = () => {
     const { currentUser } = useAuth();
@@ -25,7 +25,7 @@ export const MyCauses = () => {
 
     useEffect(() => {
         try {
-            loadThreeMyCauses(orderedQuery,setMyCauses,setLatestDoc,setIsLoading,setClickable);    
+            loadThreeMyCauses(orderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable);
         } catch (error) {
             console.log(error);
         }
@@ -33,28 +33,26 @@ export const MyCauses = () => {
 
     const loadMoreClickHandler = async (e) => {
         try {
-            loadThreeMyCauses(orderedQuery,setMyCauses,setLatestDoc,setIsLoading,setClickable);
+            loadThreeMyCauses(orderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable);
         } catch (error) {
             console.log(error);
         }
     }
 
     return (
-        <div>
-            <h1 className="flex justify-center text-center my-7 font-medium leading-tight text-5xl text-blue-700">My causes Page</h1>
-            <div className="flex justify-center my-7">
-                <div className="grid py-10 justify-center my-7 -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-14">
-                    {isLoading
-                        ? (<Spinner />)
-                        : myCauses.length !== 0
-                            ? (myCauses.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
-                            : (<h3 className="font-medium leading-tight text-xl">No articles yet</h3>)
-                    }
-                </div>
+        <section id={styles['my-causes']}>
+            <h1 className={styles['my-causes-title']}>My causes Page</h1>
+            <div className={styles['causes-ctn']}>
+                {isLoading
+                    ? (<Spinner />)
+                    : myCauses.length !== 0
+                        ? (myCauses.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
+                        : (<h3 className={styles['no-articles-title']}>No articles yet</h3>)
+                }
             </div>
             {visible && myCauses.length !== 0 &&
-                <div className="flex justify-center m-y-5">
-                    <button id="load-more-button" className="inline-block px-7 py-3 max-w-sm bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                <div className={styles['btn-ctn']}>
+                    <button id="load-more-button" className={styles['load-more-btn']}
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
                         onClick={clickable ? loadMoreClickHandler : () => {
@@ -65,6 +63,6 @@ export const MyCauses = () => {
                         }}>load more</button>
                 </div>
             }
-        </div>
+        </section>
     );
 }

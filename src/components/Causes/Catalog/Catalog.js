@@ -10,7 +10,7 @@ import { db } from "../../../firebase";
 import { getAll } from "../../../services/crudService";
 import { BackToTheTopButton } from "../../../shared/BackToTheTopButton";
 import { Spinner } from "../../../shared/Spinner";
-import { CardTemplate } from "./CardTemplate";
+import { CardTemplate } from "../../Home/CardTemplate";
 
 
 
