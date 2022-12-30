@@ -1,4 +1,5 @@
 #foreign-profile {
+    margin-top: 5rem;
     padding: 5rem;
 }
 
@@ -14,4 +15,108 @@
     order: -9999;
     gap: 3rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#foreign-profile .causes-count {
+    color: #374151;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+}
+
+#foreign-profile .causes-text {
+    color: #9ca3af;
+}
+
+#foreign-profile .center {
+    position: relative;
+}
+
+#foreign-profile .img-ctn {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 10px;
+}
+
+#foreign-profile .img-ctn .img {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e0e7ff;
+    height: 12rem;
+    border-radius: 9999px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+#foreign-profile .user-info {
+    padding-bottom: 3rem;
+    margin-top: 5rem;
+    text-align: center;
+    border-bottom-width: 1px;
+}
+
+#foreign-profile .user-info .user-names {
+    color: #374151;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 500;
+}
+
+#foreign-profile .user-info .user-country {
+    margin-top: 0.75rem;
+    color: #4b5563;
+    font-weight: 300;
+}
+
+#foreign-profile .btn-ctn {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#foreign-profile .btn {
+    background-color: #ec4899;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    width: 24%;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    line-height: 1.1rem;
+    letter-spacing: 0.18em;
+}
+
+#foreign-profile .btn:hover {
+    transition-property: all;
+    transition-duration: 150ms;
+    transition-timing-function: linear;
+    outline: 0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #db2777;
+}
+
+#foreign-profile .btn:focus {
+    background-color: #ec4899;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    width: 16rem;
+    outline: 0;
+}
+
+#foreign-profile .btn:active {
+    background-color: #db2777;
+    width: 12rem;
+}
+
+#foreign-profile .causes-ctn {
+    margin-top: 8rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
 }

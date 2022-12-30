@@ -50,59 +50,51 @@ export const ForeignProfile = () => {
             {!isLoading && <div className={styles['user-ctn']}>
                 <div className={styles['joined-ctn']}>
                     <div>
-                        <p className="font-bold text-gray-700 text-xl">{userJoinedCauses?.length}</p>
-                        <p className="text-gray-400">Joined Causes</p>
+                        <p className={styles['causes-count']}>{userJoinedCauses?.length}</p>
+                        <p className={styles['causes-text']}>Joined Causes</p>
                     </div>
                     <div>
-                        {" "}
-                        <p className="font-bold text-gray-700 text-xl">{foreignUserCauses?.length}</p>{" "}
-                        <p className="text-gray-400">Causes</p>{" "}
-                    </div>{" "}
-
-                </div>{" "}
-                <div className="relative ">
-                    {" "}
-                    <div className="absolute inset-x-0 top-0 -mt-36  flex items-center justify-center ">
+                        <p className={styles['causes-count']}>{foreignUserCauses?.length}</p>
+                        <p className={styles['causes-text']}>Causes</p>
+                    </div>
+                </div>
+                <div className={styles['center']}>
+                    <div className={styles['img-ctn']}>
                         <img
                             src={profilePicture}
-                            className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl"
+                            className={styles['img']}
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            alt="profile"
+                            alt="profileImg"
                         >
-                        </img>{" "}
-                    </div>{" "}
-                </div>{" "}
-                <div className="mt-20 text-center border-b pb-12">
-                    {" "}
-                    <h1 className="text-4xl font-medium text-gray-700">
-                        {userInfo.firstName} {userInfo.lastName}
-                    </h1>{" "}
-                    <p className="font-light text-gray-600 mt-3">{userInfo.country}</p>{" "}
-
-                </div>{" "}
-                {!isClicked &&
-                    <div className="mt-12 flex justify-center">
-
-                        <button onClick={() => setIsClicked(true)}
-                            className="bg-pink-500 active:bg-pink-600 w-48 md:w-64 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-                            type="button"
-                        >
-                            User Causes
-                        </button>
+                        </img>
                     </div>
+                </div>
+                <div className={styles['user-info']}>
+                    <h1 className={styles['user-names']}>
+                        {userInfo?.firstName} {userInfo?.lastName}
+                    </h1>
+                    <p className={styles['user-country']}>{userInfo?.country}</p>
+                </div>
+
+                {!isClicked && <div className={styles['btn-ctn']}>
+                    <button onClick={() => setIsClicked(true)}
+                        className={styles['btn']}
+                        type="button"
+                    >
+                        User Causes
+                    </button>
+                </div>
                 }
             </div>}
             {isClicked &&
-                <div className=" flex justify-center my-7 ">
-                    <div className="grid py-10 justify-center my-7  -space-x-15 grid-cols-1  sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-14">
-                        {isLoading
-                            ? (<Spinner />)
-                            : foreignUserCauses.length !== 0
-                                ? (foreignUserCauses.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
-                                : (<h3 className="no-articles">No Created Causes yet</h3>)
-                        }
-                    </div>
+                <div className={styles['causes-ctn']}>
+                    {isLoading
+                        ? (<Spinner />)
+                        : foreignUserCauses.length !== 0
+                            ? (foreignUserCauses.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
+                            : (<h3 className="no-articles">No Created Causes yet</h3>)
+                    }
                 </div>
             }
         </section>
