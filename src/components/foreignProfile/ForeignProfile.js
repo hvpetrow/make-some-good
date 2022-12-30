@@ -1,3 +1,5 @@
+import styles from './ForeignProfile.module.css';
+
 import { collection } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -44,42 +46,33 @@ export const ForeignProfile = () => {
     console.log(userInfo);
 
     return (
-        <div className="p-16">
-            {!isLoading && <div className="p-8 bg-white shadow mt-24">
-                {" "}
-                <div className="grid grid-cols-1 md:grid-cols-1">
-                    {" "}
-                    <div className="grid grid-cols-2 -mx-16 text-center order-last md:order-first mt-20 md:mt-0">
+        <section id={styles['foreign-profile']}>
+            {!isLoading && <div className={styles['user-ctn']}>
+                <div className={styles['joined-ctn']}>
+                    <div>
+                        <p className="font-bold text-gray-700 text-xl">{userJoinedCauses?.length}</p>
+                        <p className="text-gray-400">Joined Causes</p>
+                    </div>
+                    <div>
                         {" "}
-                        <div>
-                            {" "}
-                            <p className="font-bold text-gray-700 text-xl">{userJoinedCauses?.length}</p>{" "}
-                            <p className="text-gray-400">Joined Causes</p>{" "}
-                        </div>{" "}
-                        <div>
-                            {" "}
-                            <p className="font-bold text-gray-700 text-xl">{foreignUserCauses?.length}</p>{" "}
-                            <p className="text-gray-400">Causes</p>{" "}
-                        </div>{" "}
-
+                        <p className="font-bold text-gray-700 text-xl">{foreignUserCauses?.length}</p>{" "}
+                        <p className="text-gray-400">Causes</p>{" "}
                     </div>{" "}
-                    <div className="relative ">
-                        {" "}
-                        <div className="absolute inset-x-0 top-0 -mt-36  flex items-center justify-center ">
-                            <img
-                                src={profilePicture}
-                                className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                alt="profile"
-                            >
-                            </img>{" "}
-                        </div>{" "}
-                    </div>{" "}
-
 
                 </div>{" "}
-
+                <div className="relative ">
+                    {" "}
+                    <div className="absolute inset-x-0 top-0 -mt-36  flex items-center justify-center ">
+                        <img
+                            src={profilePicture}
+                            className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            alt="profile"
+                        >
+                        </img>{" "}
+                    </div>{" "}
+                </div>{" "}
                 <div className="mt-20 text-center border-b pb-12">
                     {" "}
                     <h1 className="text-4xl font-medium text-gray-700">
@@ -112,7 +105,7 @@ export const ForeignProfile = () => {
                     </div>
                 </div>
             }
-        </div>
+        </section>
 
     )
 }

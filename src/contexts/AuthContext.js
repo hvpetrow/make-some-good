@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
             setCurrentUser(user);
             setLoading(false);
             console.log("mounted authContext and setted user");
-        },[]);
+        }, []);
 
         return unsubscribe;
     }, [])
@@ -69,12 +69,13 @@ export const AuthProvider = ({ children }) => {
         alert("uploaded file!")
     }
 
-    async function getProfilePicture (userId){
-        const profilePictureRef = ref(storage, `profilPictures/${userId}.png`);
-        // if (!profilePictureRef) {
-        // return 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png';   
-        // }
-        return await getDownloadURL(profilePictureRef);
+    async function getProfilePicture(userId) {
+        try {
+            const profilePictureRef = ref(storage, `profilPictures/${userId}.png`);
+            return await getDownloadURL(profilePictureRef);
+        } catch (err) {
+            return 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png';
+        }
     }
 
     const value = {

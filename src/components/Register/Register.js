@@ -31,7 +31,7 @@ export const Register = () => {
         repass: '',
         firstName: '',
         lastName: '',
-        country: ''
+        country: '',
     });
 
     const [tac, setTac] = useState(false);

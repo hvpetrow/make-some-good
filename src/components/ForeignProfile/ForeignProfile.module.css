@@ -1,0 +1,17 @@
+#foreign-profile {
+    padding: 5rem;
+}
+
+#foreign-profile .user-ctn {
+    margin-top: 6rem;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+#foreign-profile .joined-ctn {
+    display: grid;
+    text-align: center;
+    order: -9999;
+    gap: 3rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}

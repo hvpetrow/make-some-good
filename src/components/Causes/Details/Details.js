@@ -136,6 +136,9 @@ export const Details = () => {
         }
     }
 
+    console.log(cause);
+    console.log(creator);
+
     return (
         <>
             {!isLoading && <div>
@@ -174,7 +177,7 @@ export const Details = () => {
                                             Creator:
                                         </span>
                                     </p>
-                                    <Link className='hover:text-blue-800 hover:underline hover:scale-105 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out' to={`/foreignProfile/${cause.creator}`}>{creator.firstName} {creator.lastName}</Link>
+                                    <Link className='hover:text-blue-800 hover:underline hover:scale-105 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out' to={`/foreignProfile/${cause.creator}`}>{creator?.firstName} {creator.lastName}</Link>
                                     <Link to={`/foreignProfile/${cause.creator}`}>
                                         <img
                                             src={profilePicture}

@@ -93,7 +93,7 @@ a:hover {
 }
 
 .profile-btn {
-    background-color: #1f2937;
+    background-color: transparent;
     font-size: 1.125rem;
     line-height: 1.75rem;
     border-radius: 9999px;
