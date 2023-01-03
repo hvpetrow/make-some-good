@@ -146,7 +146,6 @@ export const MyProfile = () => {
                     {userInfo?.firstName} {userInfo?.lastName}
                 </h1>
                 <p className={styles['user-country']}>{userInfo?.country}</p>
-                <p className={styles['user-addInfo']}>University of Computer Science</p>
             </div>
         </section>
     )
