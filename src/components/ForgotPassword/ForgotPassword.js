@@ -1,3 +1,5 @@
+import styles from './ForgotPassword.module.css';
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -43,7 +45,7 @@ export const ForgotPassword = () => {
         <section className="h-screen">
             <div className="container px-6 py-12 h-full">
                 <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-                    
+
                     <div className="max-w-md -mt-16  md:w-8/12 lg:w-5/12 lg:ml-20">
                         <h2 className="flex justify-center font-bold text-4xl mb-16 mx-4">Password Reset</h2>
 
