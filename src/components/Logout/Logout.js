@@ -6,8 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../contexts/AuthContext";
 
 export const Logout = () => {
-    const [error, setError] = useState('');
-    const { currentUser,logout } = useAuth();
+    const { currentUser, logout } = useAuth();
     const navigate = useNavigate();
 
     logout()
@@ -18,10 +17,10 @@ export const Logout = () => {
             console.log('logged out ' + currentUser.email);
         })
         .catch(() => {
-            setError('Failed to logout');
+            toast.error('Failed to logout');
             navigate('/', { replace: true });
         });
- 
-        console.log(currentUser.email);
+
+    console.log(currentUser.email);
     return null;
 }

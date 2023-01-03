@@ -16,7 +16,6 @@ export const EditCause = () => {
 
     const [cause, setCause] = useState('');
     const [docId, setDocId] = useState(null);
-    const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -49,7 +48,7 @@ export const EditCause = () => {
             navigate(`/details/${causeId}`);
         } catch (error) {
             console.log(error);
-            setError('Failed to updated');
+            toast.error('Failed to edit this cause');
         }
 
         setIsLoading(false);

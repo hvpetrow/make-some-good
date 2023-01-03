@@ -27,7 +27,6 @@ export const MyProfile = () => {
     const [photo, setPhoto] = useState(null);
     const [active, setActive] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
     const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
     const { filterCurrentUserCauses, filterUserJoinedCauses } = useCausesContext();
 
@@ -75,7 +74,7 @@ export const MyProfile = () => {
             toast.success('Successfully uploaded profile picture!');
 
         } catch (error) {
-            return setError('Uploding file failed');
+            return toast.error('Uploding file failed');
         }
 
         setIsLoading(false);

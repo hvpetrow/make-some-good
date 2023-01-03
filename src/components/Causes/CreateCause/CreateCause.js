@@ -30,7 +30,6 @@ export const CreateCause = () => {
         creator: currentUser.uid
     });
 
-    const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     const changeHandler = (e) => {
@@ -60,7 +59,7 @@ export const CreateCause = () => {
             navigate('/');
         } catch (error) {
             console.log(error);
-            setError('Failed to sign in');
+            toast.error('Failed to create a new cause');
         }
 
         setIsLoading(false);

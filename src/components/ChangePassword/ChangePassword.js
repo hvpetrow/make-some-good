@@ -7,6 +7,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import userValidation from '../../validation/userValidation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 
 export const ChangePassword = () => {
     const [values, setValues] = useState({
@@ -19,7 +20,6 @@ export const ChangePassword = () => {
         repass: false
     });
 
-    const [error, setError] = useState('');
     const [errors, setErrors] = useState({});
 
     const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +73,7 @@ export const ChangePassword = () => {
         e.preventDefault();
 
         if (values.newPassword !== values.repass) {
-            return setError('Passwords do not match');
+            return toast.error('Passwords do not match');
         }
 
         setIsLoading(true);
@@ -85,7 +85,7 @@ export const ChangePassword = () => {
                 navigate('/login');
             } catch (error) {
                 console.log(error);
-                setError(setError(error.msg));
+                toast.error(error.msg);
             }
 
             setIsLoading(false);
@@ -150,9 +150,6 @@ export const ChangePassword = () => {
                         {(!errors.repass && hasTouched.repass) && (
                             <p className={styles['alert']}>Passwords do not match!!</p>
                         )}
-                    </div>
-                    <div className="show_info text-sm mb-4 w-max text-red-400" >
-                        <p>{error}</p>
                     </div>
                     {/* Submit button */}
                     <div className={styles['btn-ctn']}>

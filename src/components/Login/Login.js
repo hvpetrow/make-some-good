@@ -9,15 +9,11 @@ import { useAuth } from "../../contexts/AuthContext";
 
 export const Login = () => {
     const navigate = useNavigate();
-
     const [values, setValues] = useState({
         email: '',
         password: '',
     });
-
-    const { logIn, currentUser } = useAuth();
-
-    const [error, setError] = useState('');
+    const { logIn } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
     const changeHandler = (e) => {
@@ -30,8 +26,6 @@ export const Login = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        console.log(values);
-
         if (values.email === '' || values.password === '') {
             return;
         }
@@ -43,7 +37,6 @@ export const Login = () => {
 
             navigate('/');
         } catch (error) {
-            setError('Failed to sign in');
             toast.error('Wrong email or password');
         }
 
@@ -121,6 +114,5 @@ export const Login = () => {
                 </div>
             </div>
         </section>
-
     );
 }

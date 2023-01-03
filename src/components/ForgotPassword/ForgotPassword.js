@@ -3,6 +3,7 @@ import styles from './ForgotPassword.module.css';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { toast } from 'react-toastify';
 
 export const ForgotPassword = () => {
     const navigate = useNavigate();
@@ -11,11 +12,7 @@ export const ForgotPassword = () => {
         email: '',
     });
 
-    const { resetPassword, currentUser } = useAuth();
-
-    const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
-
+    const { resetPassword } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
     const changeHandler = (e) => {
@@ -33,9 +30,10 @@ export const ForgotPassword = () => {
         try {
             setIsLoading(true);
             await resetPassword(values.email);
-            setMessage("Check your inbox for further instructions");
+            toast.success('You have successfuly reseted your password')
+            toast.warning("Check your inbox for further instructions");
         } catch (error) {
-            setError('Failed to reset');
+            toast.error('Failed to reset password');
         }
 
         setIsLoading(false);
