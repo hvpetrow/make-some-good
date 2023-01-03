@@ -152,43 +152,34 @@ export const Details = () => {
                             />
                         </div>
                         <div className={styles['details-content-container']}>
-                            <div className="flex flex-col space-y-4  p-6 text-gray-600">
-                                <p className="flex items-center  text-gray-500">
-                                    <span className="font-semibold mr-2 text-xs uppercase">
-                                        Title:
+                            <p className={styles['content-elem']}>
+                                <span className={styles['content-title']}>
+                                    Title:
+                                </span>
+                                <span>{cause.title}</span>
+                            </p>
+                            <p className={styles['content-elem']}>
+                                <span className={styles['content-title']}>
+                                    Date:
+                                </span>
+                                <span>{cause.date}</span>
+                            </p>
+                            <p className={styles['content-elem']}>
+                                <span className={styles['content-title']}>
+                                    Place:
+                                </span>
+                                <span>{cause.place}</span>
+                            </p>
+                            <div className={`${styles['content-elem']} ${styles['content-elem-creator']}`}>
+                                <p className="flex items-center">
+                                    <span className={styles['content-title']}>
+                                        Creator:
                                     </span>
-                                    <span>{cause.title}</span>
                                 </p>
-                                <p className="flex items-center  text-gray-500">
-                                    <span className="font-semibold mr-2 text-xs uppercase">
-                                        Date:
-                                    </span>
-                                    <span>{cause.date}</span>
-                                </p>
-                                <p className="flex items-center  text-gray-500">
-                                    <span className="font-semibold mr-2 text-xs uppercase">
-                                        Place:
-                                    </span>
-                                    <span>{cause.place}</span>
-                                </p>
-                                <div className="flex flex-row text-sm">
-                                    <p className="flex items-center  text-gray-500">
-                                        <span className="font-semibold mr-2 text-xs uppercase ">
-                                            Creator:
-                                        </span>
-                                    </p>
-                                    <Link className='hover:text-blue-800 hover:underline hover:scale-105 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out' to={`/foreignProfile/${cause.creator}`}>{creator?.firstName} {creator.lastName}</Link>
-                                    <Link to={`/foreignProfile/${cause.creator}`}>
-                                        <img
-                                            src={profilePicture}
-                                            className="h-8 w-8 rounded-full bg-indigo-100 mx-auto shadow-2xl transition duration-500 hover:scale-150 "
-                                            viewBox="0 0 20 20"
-                                            fill="currentColor"
-                                            alt="profile"
-                                        >
-                                        </img>
-                                    </Link>
-                                </div>
+                                <Link className={styles['content-profile-link']} to={`/foreignProfile/${cause.creator}`}>{creator?.firstName} {creator.lastName}</Link>
+                                <Link className={styles['content-profile-link']} to={`/foreignProfile/${cause.creator}`}>
+                                    <img src={profilePicture} className={styles['creator-img']} alt="profileImg"></img>
+                                </Link>
                             </div>
                         </div>
                     </div>

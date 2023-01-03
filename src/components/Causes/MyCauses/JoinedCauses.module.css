@@ -46,14 +46,12 @@
 
 #joined-causes .load-more-btn {
     display: inline-block;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
+    width: 25%;
+    padding: 0.75rem 1.75rem;
+    margin-top: 3rem;
     background-color: #2563eb;
     color: #ffffff;
     font-size: 0.875rem;
-    line-height: 1.25rem;
     font-weight: 500;
     line-height: 1.375;
     text-transform: uppercase;
