@@ -4,6 +4,9 @@ import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'
+import userValidation from '../../validation/userValidation';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export const ChangePassword = () => {
     const [values, setValues] = useState({
@@ -11,8 +14,18 @@ export const ChangePassword = () => {
         repass: '',
     });
 
+    const [hasTouched, setHasTouched] = useState({
+        newPassword: false,
+        repass: false
+    });
+
     const [error, setError] = useState('');
+    const [errors, setErrors] = useState({});
+
     const [isLoading, setIsLoading] = useState(false);
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
     const navigate = useNavigate();
     const { logout, updatePasswordForCurrentUser } = useAuth();
@@ -23,6 +36,38 @@ export const ChangePassword = () => {
             [e.target.name]: e.target.value
         }));
     }
+
+    const passwordValidator = (e) => {
+        setHasTouched((state) => ({
+            ...state,
+            [e.target.name]: true
+        }));
+
+        setErrors((state) => ({
+            ...state,
+            [e.target.name]: userValidation.passwordIsLength(values[e.target.name])
+        }));
+    };
+
+    const rePassValidator = (e) => {
+        setHasTouched((state) => ({
+            ...state,
+            [e.target.name]: true
+        }));
+
+        setErrors((state) => ({
+            ...state,
+            [e.target.name]: userValidation.isEqual(values.password, values[e.target.name])
+        }));
+    };
+
+    const showPasswordHandler = () => {
+        setShowPassword(state => !state);
+    };
+
+    const showRepeatPasswordHandler = () => {
+        setShowRepeatPassword(state => !state);
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -71,7 +116,17 @@ export const ChangePassword = () => {
                             placeholder="Your new password"
                             value={values.newPassword}
                             onChange={changeHandler}
+                            onBlur={(e) => passwordValidator(e)}
                         />
+                        <span className={styles['password-icon']} onClick={showPasswordHandler}>
+                            {showPassword
+                                ? <FontAwesomeIcon icon={faEye} />
+                                : <FontAwesomeIcon icon={faEyeSlash} />
+                            }
+                        </span>
+                        {(!errors.password && hasTouched.password) && (
+                            <p className={styles['alert']}>Password must be at least 6 characters long!!</p>
+                        )}
                     </div>
                     <label htmlFor="inputRepass" className={styles['label']}>Repeat Password</label>
                     <div className={styles['input-ctn']}>
@@ -84,30 +139,39 @@ export const ChangePassword = () => {
                             placeholder="Repeat your new password"
                             value={values.repass}
                             onChange={changeHandler}
+                            onBlur={(e) => rePassValidator(e)}
                         />
+                        <span className={styles['password-icon']} onClick={showRepeatPasswordHandler}>
+                            {showRepeatPassword
+                                ? <FontAwesomeIcon icon={faEye} />
+                                : <FontAwesomeIcon icon={faEyeSlash} />
+                            }
+                        </span>
+                        {(!errors.repass && hasTouched.repass) && (
+                            <p className={styles['alert']}>Passwords do not match!!</p>
+                        )}
                     </div>
                     <div className="show_info text-sm mb-4 w-max text-red-400" >
                         <p>{error}</p>
                     </div>
-
                     {/* Submit button */}
-                    <button
-                        disabled={isLoading}
-                        type="submit"
-                        className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                        data-mdb-ripple="true"
-                        data-mdb-ripple-color="light"
-                    >
-                        Update
-                    </button>
-                    <div className="flex py-5 justify-center items-center mb-6">
-                        <Link
-                            to="/my-profile"
-                            className="text-blue-600 hover:text-blue-800 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
+                    <div className={styles['btn-ctn']}>
+                        <button
+                            disabled={isLoading}
+                            type="submit"
+                            className={styles['btn']}
+                            data-mdb-ripple="true"
+                            data-mdb-ripple-color="light"
                         >
-                            Cancel
-                        </Link>
+                            Submit
+                        </button>
                     </div>
+                    <Link
+                        to="/my-profile"
+                        className={styles['link']}
+                    >
+                        Cancel
+                    </Link>
                 </form>
             </div>
         </section>
