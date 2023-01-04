@@ -55,12 +55,14 @@
     flex-direction: row;
     gap: 8px;
 }
+
 .content-title {
     margin-right: 0.5rem;
     font-size: 0.85rem;
     line-height: 1rem;
     font-weight: 700;
     text-transform: uppercase;
+    color: #5c5e61;
 }
 
 .content-profile-link {
