@@ -140,7 +140,7 @@ export const Details = () => {
     console.log(creator);
 
     return (
-        <>
+        <section id={styles['details']}>
             {!isLoading && <div>
                 <div className={styles['details-card-container']}>
                     <div className={styles['details-grid']}>
@@ -261,6 +261,6 @@ export const Details = () => {
                 </div>
             </div>
             }
-        </>
+        </section>
     )
 }
