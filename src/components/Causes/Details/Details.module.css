@@ -111,4 +111,42 @@
     align-items: center;
 }
 
+.down-part-ctn .btns-ctn {
+    display: grid;
+    background-color: #f9fafb;
+    border: 1px solid #6b7280;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    color: #64748b;
+    margin-bottom: 5rem;
+}
+
+.btns-ctn .btn {
+    display: flex;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #6b7280;
+}
+
+.btns-ctn .update-btn {
+    color: #079c9a;
+}
+
+.btns-ctn .remove-btn {
+    color: #d2042d;
+}
+
+.btns-ctn .join-btn {
+    color: #9c428c;
+}
+
+.btns.ctn .cancel-ctn {
+    color: #ada02b;
+}
+
 /* grid-area: auto; */
