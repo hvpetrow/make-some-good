@@ -36,7 +36,6 @@ export const Search = () => {
                             id: doc.id,
                             fields: fields
                         });
-                        console.log(doc.id, " => ", doc.data());
                     });
 
                     setCauses(arr);

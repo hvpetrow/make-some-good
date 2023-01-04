@@ -3,6 +3,8 @@
     top: 50%;
     right: 30%;
     transform: translate(0, -50%);
+    box-shadow: inset 5px 5px 5px #0003, inset -5px -5px 15px #ffffff1a,
+        5px 5px 15px #0000004d, -5px -5px 15px #ffffff1a;
 }
 
 #donate .donate-ctn {
