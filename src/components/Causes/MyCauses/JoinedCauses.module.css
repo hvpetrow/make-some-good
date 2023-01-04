@@ -10,6 +10,7 @@
     text-align: center;
     justify-content: center;
     flex-direction: column;
+    gap: 5rem;
 }
 
 #joined-causes .title {
@@ -28,7 +29,7 @@
     margin-top: 1.75rem;
     margin-bottom: 1.75rem;
     justify-content: center;
-    gap: 5rem;
+    gap: 100px;
 }
 
 #joined-causes .no-articles-title {
