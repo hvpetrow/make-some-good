@@ -42,7 +42,7 @@ export const MyCauses = () => {
 
     return (
         <section id={styles['my-causes']}>
-            <h1 className={styles['my-causes-title']}>My Causes Page</h1>
+            <h1 className={styles['my-causes-title']}>My Causes</h1>
             <div className={styles['causes-ctn']}>
                 {isLoading
                     ? (<Spinner />)
