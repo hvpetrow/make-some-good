@@ -97,7 +97,7 @@ export const JoinedCauses = () => {
                         : (<h3 className={styles['no-articles-title']}>No articles yet</h3>)
                 }
             </div>
-            {clickable && myCauses.length !== 0 &&
+            {(clickable && myCauses.length !== 0) &&
                 <div className={styles['btn-ctn']}>
                     <button id="load-more-button" className={styles['load-more-btn']}
                         data-mdb-ripple="true"
