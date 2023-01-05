@@ -2,7 +2,6 @@
     display: flex;
     margin-top: 1.75rem;
     margin-bottom: 1.75rem;
-    color: #1d4ed8;
     font-size: 3rem;
     line-height: 1;
     font-weight: 500;
@@ -18,7 +17,7 @@
 #joined-causes .title {
     margin-top: 1.75rem;
     margin-bottom: 1.75rem;
-    color: #1d4ed8;
+    color: #343e48;
     font-size: 3rem;
     line-height: 1;
     font-weight: 500;

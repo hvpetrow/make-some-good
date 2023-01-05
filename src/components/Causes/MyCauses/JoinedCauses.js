@@ -85,7 +85,7 @@ export const JoinedCauses = () => {
 
     return (
         <section id={styles['joined-causes']}>
-            <h1 className={styles['title']}>Joined Causes Page</h1>
+            <h1 className={styles['title']}>Joined Causes</h1>
             <div className={styles['causes-ctn']}>
                 {isLoading
                     ? (<Spinner />)
