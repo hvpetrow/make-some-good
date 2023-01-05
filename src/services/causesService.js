@@ -10,7 +10,7 @@ export const getAllCauses = async () => {
 }
 
 export const getOneCause = async (id) => {
-    const causeDoc = doc(db,'causes',id)
+    const causeDoc = doc(db, 'causes', id)
     return getDoc(causeDoc);
 }
 
@@ -28,10 +28,15 @@ export const deleteCause = async (id) => {
     return deleteDoc(causeDoc);
 }
 
-export function loadThreeMyCauses(orderedQuery,setMyCauses,setLatestDoc,setIsLoading,setClickable) {
+export function loadThreeMyCauses(orderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast) {
     getAll(orderedQuery)
         .then(docs => {
             if (docs.empty) {
+                if (docs.empty) {
+                    setClickable(false);
+                    toast.warning('There are no more causes!');
+                    return;
+                }
                 setClickable(false);
                 return;
             }
@@ -39,7 +44,7 @@ export function loadThreeMyCauses(orderedQuery,setMyCauses,setLatestDoc,setIsLoa
 
             docs.forEach((doc) => {
                 let fields = doc.data();
-                
+
                 arr.push({
                     id: doc.id,
                     fields: fields

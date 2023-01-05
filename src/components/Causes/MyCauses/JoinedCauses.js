@@ -17,7 +17,6 @@ export const JoinedCauses = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [clickable, setClickable] = useState(true);
-    const [visible, setVisible] = useState(true);
     const [myCauses, setMyCauses] = useState([]);
     const [latestDoc, setLatestDoc] = useState(0);
 

@@ -17,23 +17,24 @@ export const MyCauses = () => {
     const { currentUser } = useAuth();
     const [isLoading, setIsLoading] = useState(true);
     const [clickable, setClickable] = useState(true);
-    const [visible, setVisible] = useState(true);
     const [myCauses, setMyCauses] = useState([]);
     const [latestDoc, setLatestDoc] = useState(0);
 
-    const orderedQuery = query(causesCollectionRef, where("creator", "==", currentUser.uid), orderBy("createdAt"), startAfter(latestDoc || 0), limit(3));
+    const startingOrderedQuery = query(causesCollectionRef, where("creator", "==", currentUser.uid), orderBy("createdAt", 'desc'), limit(3));
 
     useEffect(() => {
         try {
-            loadThreeMyCauses(orderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable);
+            loadThreeMyCauses(startingOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
         } catch (error) {
             console.log(error);
         }
     }, []);
 
     const loadMoreClickHandler = async (e) => {
+        const nextOrderedQuery = query(causesCollectionRef, where("creator", "==", currentUser.uid), orderBy("createdAt", 'desc'), startAfter(latestDoc), limit(3));
+
         try {
-            loadThreeMyCauses(orderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable);
+            loadThreeMyCauses(nextOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
         } catch (error) {
             console.log(error);
         }
@@ -50,17 +51,12 @@ export const MyCauses = () => {
                         : (<h3 className={styles['no-articles-title']}>No articles yet</h3>)
                 }
             </div>
-            {visible && myCauses.length !== 0 &&
+            {(clickable && myCauses.length !== 0) &&
                 <div className={styles['btn-ctn']}>
                     <button id="load-more-button" className={styles['load-more-btn']}
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
-                        onClick={clickable ? loadMoreClickHandler : () => {
-                            toast.warning('No more causes', {
-                                position: toast.POSITION.BOTTOM_CENTER
-                            });
-                            setVisible(false);
-                        }}>load more</button>
+                        onClick={loadMoreClickHandler}>load more</button>
                 </div>
             }
         </section>

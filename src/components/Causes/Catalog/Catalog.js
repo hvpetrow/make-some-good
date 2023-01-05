@@ -100,7 +100,7 @@ export const Catalog = () => {
                                 : (<h3 className="no-articles">No articles yet</h3>)
                         }
                     </div>
-                    {clickable &&
+                    {(clickable && causes.length !== 0) &&
                         <div className={styles['load-more-btn-cont']}>
                             <button id="load-more-button" className={styles['load-more-button']}
                                 type="button"
