@@ -1,6 +1,5 @@
 #joined-causes {
     display: flex;
-    margin-top: 1.75rem;
     margin-bottom: 1.75rem;
     font-size: 3rem;
     line-height: 1;
@@ -27,6 +26,10 @@
 
 #joined-causes .causes-ctn {
     display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
     margin-top: 1.75rem;
     margin-bottom: 1.75rem;
     justify-content: center;

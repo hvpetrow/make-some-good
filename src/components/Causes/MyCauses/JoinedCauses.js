@@ -21,11 +21,11 @@ export const JoinedCauses = () => {
     const [myCauses, setMyCauses] = useState([]);
     const [latestDoc, setLatestDoc] = useState(0);
 
-    const orderedQuery = query(causesCollectionRef, where("participants", "array-contains", currentUser.uid), orderBy("createdAt"), startAfter(latestDoc || 0), limit(3));
+    const startingOrderedQuery = query(causesCollectionRef, where("participants", "array-contains", currentUser.uid), orderBy("createdAt", 'desc'), limit(3));
 
     useEffect(() => {
         try {
-            getAll(orderedQuery)
+            getAll(startingOrderedQuery)
                 .then(docs => {
                     let arr = [];
 
@@ -51,11 +51,14 @@ export const JoinedCauses = () => {
     }, []);
 
     const loadMoreClickHandler = async (e) => {
+        const nextOrderedQuery = query(causesCollectionRef, where("participants", "array-contains", currentUser.uid), orderBy('createdAt', 'desc'), startAfter(latestDoc), limit(3));
+
         try {
-            getAll(orderedQuery)
+            getAll(nextOrderedQuery)
                 .then(docs => {
                     if (docs.empty) {
                         setClickable(false);
+                        toast.warning('There are no more causes!');
                         return;
                     }
                     let arr = [];
@@ -94,17 +97,12 @@ export const JoinedCauses = () => {
                         : (<h3 className={styles['no-articles-title']}>No articles yet</h3>)
                 }
             </div>
-            {visible && myCauses.length !== 0 &&
+            {clickable && myCauses.length !== 0 &&
                 <div className={styles['btn-ctn']}>
                     <button id="load-more-button" className={styles['load-more-btn']}
                         data-mdb-ripple="true"
                         data-mdb-ripple-color="light"
-                        onClick={clickable ? loadMoreClickHandler : () => {
-                            toast.warning('No more causes', {
-                                position: toast.POSITION.BOTTOM_CENTER
-                            });
-                            setVisible(false);
-                        }}>load more</button>
+                        onClick={loadMoreClickHandler}>load more</button>
                 </div>
             }
         </section>

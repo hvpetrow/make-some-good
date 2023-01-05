@@ -21,12 +21,13 @@ export const Catalog = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [latestDoc, setLatestDoc] = useState(0);
     const [clickable, setClickable] = useState(true);
+    const [visible, setVisible] = useState(true);
 
-    const startingOrderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), limit(3));
+    const orderedQuery = query(causesCollectionRef, orderBy('createdAt'), startAfter(latestDoc || 0), limit(3));
 
     useEffect(() => {
         try {
-            getAll(startingOrderedQuery)
+            getAll(orderedQuery)
                 .then(docs => {
                     let arr = [];
 
@@ -38,10 +39,13 @@ export const Catalog = () => {
                             id: doc.id,
                             fields: fields
                         });
+                        console.log(doc.id, " => ", doc.data());
                     });
 
                     setCauses(arr);
                     setLatestDoc(docs.docs[docs.docs.length - 1]);
+                    console.log("Docs " + docs.docs.length);
+                    console.log("LATEST DOC", latestDoc);
                 }).then(() => {
                     setIsLoading(false);
                 });
@@ -51,14 +55,12 @@ export const Catalog = () => {
     }, []);
 
     const loadMoreClickHandler = async (e) => {
-        const nextOrderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), startAfter(latestDoc), limit(3));
-
+        console.log("load more clicked");
         try {
-            getAll(nextOrderedQuery)
+            getAll(orderedQuery)
                 .then(docs => {
                     if (docs.empty) {
                         setClickable(false);
-                        toast.warning('There are no more causes!');
                         return;
                     }
                     let arr = [];
@@ -77,6 +79,7 @@ export const Catalog = () => {
                         ...arr
                     ]);
 
+                    console.log("LATEST DOC", latestDoc);
                     setLatestDoc(docs.docs[docs.docs.length - 1]);
                 }).then(() => {
                     setIsLoading(false);
@@ -85,6 +88,8 @@ export const Catalog = () => {
             console.log(error);
         }
     }
+
+    console.log(causes);
 
     return (
         <section className={styles['catalog']}>
@@ -100,14 +105,18 @@ export const Catalog = () => {
                                 : (<h3 className="no-articles">No articles yet</h3>)
                         }
                     </div>
-                    {clickable &&
+                    {visible &&
                         <div className={styles['load-more-btn-cont']}>
                             <button id="load-more-button" className={styles['load-more-button']}
                                 type="button"
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
-                                onClick={loadMoreClickHandler}
-                            >load more</button>
+                                onClick={clickable ? loadMoreClickHandler : () => {
+                                    toast.warning('No more causes', {
+                                        position: toast.POSITION.BOTTOM_CENTER
+                                    });
+                                    setVisible(false);
+                                }}>load more</button>
                         </div>
                     }
 
