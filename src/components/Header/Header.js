@@ -13,20 +13,24 @@ export const Header = () => {
 
     const dropdownHandler = () => {
         setDropdownClick(!dropdownClick);
+
+        setTimeout(() => {
+            setDropdownClick(false);
+        }, 5000)
     }
 
     const onBlurDropdownHandler = (e) => {
 
         console.log(e.currentTarget);
 
-        setDropdownClick(true);
+        setDropdownClick(false);
     }
 
     const closeDropdownHandler = () => {
         setDropdownClick(false);
     }
 
-    const dropdownMenu = <div className={styles['dropdown']} onBlur={onBlurDropdownHandler}>
+    const dropdownMenu = <div className={styles['dropdown']} onClick={() => setDropdownClick(true)} tabIndex="0">
         <Link to="/my-profile" onClick={closeDropdownHandler}>My Profile</Link>
         <Link to="/my-causes" onClick={closeDropdownHandler}>My Causes</Link>
         <Link to="/logout" onClick={closeDropdownHandler}>Sign out</Link>
@@ -55,7 +59,7 @@ export const Header = () => {
                             <ul className={styles['logged-ul']}>
                                 <li><Link to="/create-cause">Create Cause</Link></li>
                                 <li><Link to="/joinedCauses">Joined Causes</Link></li>
-                                <div>
+                                <div onBlur={onBlurDropdownHandler} tabIndex="0" >
                                     <li className={styles['profile']}>
                                         <button
                                             type="button"
