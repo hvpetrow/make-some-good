@@ -77,7 +77,7 @@ export const Header = () => {
                                             <img
                                                 className={styles['profile-img']}
                                                 src={photoURL}
-                                                alt="profilePicture"
+                                                alt="profilPicture"
                                             />
                                         </button>
                                     </li>
