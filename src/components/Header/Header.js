@@ -64,7 +64,7 @@ export const Header = () => {
                             <ul className={styles['logged-ul']}>
                                 <li><Link to="/create-cause">Create Cause</Link></li>
                                 <li><Link to="/joinedCauses">Joined Causes</Link></li>
-                                <div ref={menuRef} tabIndex="0" >
+                                <div ref={menuRef} >
                                     <li className={styles['profile']}>
                                         <button
                                             type="button"
