@@ -2,36 +2,43 @@ import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 export const Header = () => {
-    const [dropdownClick, setDropdownClick] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const { currentUser, photoURL } = useAuth();
+
+    let menuRef = useRef();
+
+    useEffect(() => {
+        let handler = (event) => {
+            if (!menuRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handler);
+
+        return () => {
+            document.removeEventListener("mousedown", handler);
+        };
+    }, []);
 
     if (currentUser) {
         console.log("Log from header " + currentUser.email);
     }
 
     const dropdownHandler = () => {
-        setDropdownClick(!dropdownClick);
-
-        setTimeout(() => {
-            setDropdownClick(false);
-        }, 5000)
-    }
-
-    const onBlurDropdownHandler = (e) => {
-
-        console.log(e.currentTarget);
-
-        setDropdownClick(false);
+        setIsOpen(isOpen => !isOpen);
     }
 
     const closeDropdownHandler = () => {
-        setDropdownClick(false);
+        setIsOpen(false);
     }
 
-    const dropdownMenu = <div className={styles['dropdown']} onClick={() => setDropdownClick(true)} tabIndex="0">
-        <Link to="/my-profile" onClick={closeDropdownHandler}>My Profile</Link>
+    const dropdownMenu = <div className={styles['dropdown']}>
+        <Link to="/my-profile" onClick={closeDropdownHandler} >My Profile</Link>
         <Link to="/my-causes" onClick={closeDropdownHandler}>My Causes</Link>
         <Link to="/logout" onClick={closeDropdownHandler}>Sign out</Link>
     </div>;
@@ -59,7 +66,7 @@ export const Header = () => {
                             <ul className={styles['logged-ul']}>
                                 <li><Link to="/create-cause">Create Cause</Link></li>
                                 <li><Link to="/joinedCauses">Joined Causes</Link></li>
-                                <div onBlur={onBlurDropdownHandler} tabIndex="0" >
+                                <div ref={menuRef} tabIndex="0" >
                                     <li className={styles['profile']}>
                                         <button
                                             type="button"
@@ -67,7 +74,7 @@ export const Header = () => {
                                             id="user-menu-button"
                                             aria-expanded="false"
                                             aria-haspopup="true"
-                                            onClick={dropdownHandler}
+                                            onClick={(dropdownHandler)}
                                         >
                                             <img
                                                 className={styles['profile-img']}
@@ -76,7 +83,7 @@ export const Header = () => {
                                             />
                                         </button>
                                     </li>
-                                    {dropdownClick && dropdownMenu}
+                                    {isOpen && dropdownMenu}
                                 </div>
                             </ul>
                         </div>
