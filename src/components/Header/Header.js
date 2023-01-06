@@ -46,7 +46,6 @@ export const Header = () => {
     return (
         <header>
             <nav>
-                {/*LEFT SIDE */}
                 <div className="left-side">
                     <ul>
                         <li><Link to="/">Home</Link></li>
@@ -55,7 +54,6 @@ export const Header = () => {
                         <li><Link to="/donate">Donate</Link></li>
                     </ul>
                 </div>
-                {/*RIGHT SIDE */}
                 <div className="right-side">
                     {!currentUser
                         ? <ul className='unlogged-ul'>
