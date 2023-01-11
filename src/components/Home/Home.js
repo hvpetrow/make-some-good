@@ -8,6 +8,7 @@ import { getAll } from "../../services/crudService";
 import { Spinner } from "../../shared/Spinner";
 import { CardTemplate } from "./CardTemplate";
 import 'react-toastify/dist/ReactToastify.css';
+import { getLatestCauses } from '../../services/causesService';
 
 
 
@@ -26,22 +27,7 @@ export const Home = () => {
 
     useEffect(() => {
         try {
-            getAll(orderedQuery)
-                .then(docs => {
-                    let arr = [];
-                    docs.forEach((doc) => {
-                        let fields = doc.data();
-
-                        arr.push({
-                            id: doc.id,
-                            fields: fields
-                        });
-                    });
-
-                    setCauses(arr);
-                }).then(() => {
-                    setIsLoading(false);
-                });
+            getLatestCauses(orderedQuery, setCauses, setIsLoading, () => null);
         } catch (error) {
             console.log(error);
         }
