@@ -25,10 +25,6 @@ export const Header = () => {
         };
     }, []);
 
-    if (currentUser) {
-        console.log("Log from header " + currentUser.email);
-    }
-
     const dropdownHandler = () => {
         setIsOpen(isOpen => !isOpen);
     }
