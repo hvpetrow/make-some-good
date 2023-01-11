@@ -10,6 +10,7 @@ import { getAll } from "../../../services/crudService";
 import { BackToTheTopButton } from "../../../shared/BackToTheTopButton";
 import { Spinner } from "../../../shared/Spinner";
 import { CardTemplate } from "../../Home/CardTemplate";
+import { loadThreeMyCauses } from '../../../services/causesService';
 
 
 
@@ -54,33 +55,7 @@ export const Catalog = () => {
         const nextOrderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), startAfter(latestDoc), limit(3));
 
         try {
-            getAll(nextOrderedQuery)
-                .then(docs => {
-                    if (docs.empty) {
-                        setClickable(false);
-                        toast.warning('There are no more causes!');
-                        return;
-                    }
-                    let arr = [];
-
-                    docs.forEach((doc) => {
-                        let fields = doc.data();
-
-                        arr.push({
-                            id: doc.id,
-                            fields: fields
-                        });
-                    });
-
-                    setCauses(oldArr => [
-                        ...oldArr,
-                        ...arr
-                    ]);
-
-                    setLatestDoc(docs.docs[docs.docs.length - 1]);
-                }).then(() => {
-                    setIsLoading(false);
-                });
+            loadThreeMyCauses(nextOrderedQuery, setCauses, setLatestDoc, setIsLoading, setClickable, toast);
         } catch (error) {
             console.log(error);
         }
