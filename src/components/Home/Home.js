@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCausesContext } from "../../contexts/CauseContext";
 import { db } from "../../firebase";
-import { getAll } from "../../services/crudService";
 import { Spinner } from "../../shared/Spinner";
 import { CardTemplate } from "./CardTemplate";
 import 'react-toastify/dist/ReactToastify.css';

@@ -1,12 +1,9 @@
 import styles from './Catalog.module.css';
-
 import { collection, limit, orderBy, query, startAfter } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
 import { useCausesContext } from "../../../contexts/CauseContext";
 import { db } from "../../../firebase";
-import { getAll } from "../../../services/crudService";
 import { BackToTheTopButton } from "../../../shared/BackToTheTopButton";
 import { Spinner } from "../../../shared/Spinner";
 import { CardTemplate } from "../../Home/CardTemplate";
