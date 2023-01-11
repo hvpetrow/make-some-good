@@ -10,12 +10,9 @@ import { getAll } from "../../../services/crudService";
 import { BackToTheTopButton } from "../../../shared/BackToTheTopButton";
 import { Spinner } from "../../../shared/Spinner";
 import { CardTemplate } from "../../Home/CardTemplate";
-import { loadThreeMyCauses } from '../../../services/causesService';
-
-
+import { getLatestCauses, loadThreeCauses } from '../../../services/causesService';
 
 const causesCollectionRef = collection(db, "causes");
-
 
 export const Catalog = () => {
     const { causes, setCauses } = useCausesContext();
@@ -27,7 +24,7 @@ export const Catalog = () => {
 
     useEffect(() => {
         try {
-            loadThreeMyCauses(startingOrderedQuery, setCauses, setLatestDoc, setIsLoading);
+            getLatestCauses(startingOrderedQuery, setCauses, setIsLoading, setLatestDoc);
         } catch (error) {
             console.log(error);
         }
@@ -37,7 +34,7 @@ export const Catalog = () => {
         const nextOrderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), startAfter(latestDoc), limit(3));
 
         try {
-            loadThreeMyCauses(nextOrderedQuery, setCauses, setLatestDoc, setIsLoading, setClickable, toast);
+            loadThreeCauses(nextOrderedQuery, setCauses, setLatestDoc, setIsLoading, setClickable, toast);
         } catch (error) {
             console.log(error);
         }

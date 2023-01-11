@@ -8,7 +8,7 @@ import { db } from '../../../firebase';
 import { getAll } from '../../../services/crudService';
 import { Spinner } from '../../../shared/Spinner';
 import { CardTemplate } from '../../Home/CardTemplate';
-import { loadThreeMyCauses } from '../../../services/causesService';
+import { loadThreeCauses } from '../../../services/causesService';
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -54,7 +54,7 @@ export const JoinedCauses = () => {
         const nextOrderedQuery = query(causesCollectionRef, where("participants", "array-contains", currentUser.uid), orderBy('createdAt', 'desc'), startAfter(latestDoc), limit(3));
 
         try {
-            loadThreeMyCauses(nextOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
+            loadThreeCauses(nextOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
         } catch (error) {
             console.log(error);
         }

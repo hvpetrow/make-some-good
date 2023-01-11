@@ -9,7 +9,7 @@ import { CardTemplate } from "../../Home/CardTemplate";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Spinner } from "../../../shared/Spinner";
-import { loadThreeMyCauses } from "../../../services/causesService";
+import { loadThreeCauses } from "../../../services/causesService";
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -24,7 +24,7 @@ export const MyCauses = () => {
 
     useEffect(() => {
         try {
-            loadThreeMyCauses(startingOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
+            loadThreeCauses(startingOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
         } catch (error) {
             console.log(error);
         }
@@ -34,7 +34,7 @@ export const MyCauses = () => {
         const nextOrderedQuery = query(causesCollectionRef, where("creator", "==", currentUser.uid), orderBy("createdAt", 'desc'), startAfter(latestDoc), limit(3));
 
         try {
-            loadThreeMyCauses(nextOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
+            loadThreeCauses(nextOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
         } catch (error) {
             console.log(error);
         }

@@ -28,7 +28,7 @@ export const deleteCause = async (id) => {
     return deleteDoc(causeDoc);
 }
 
-export function loadThreeMyCauses(orderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast) {
+export function loadThreeCauses(orderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast) {
     getAll(orderedQuery)
         .then(docs => {
             if (docs.empty) {
@@ -62,4 +62,26 @@ export function loadThreeMyCauses(orderedQuery, setMyCauses, setLatestDoc, setIs
         }).catch((error) => {
             console.log(error);
         })
+}
+
+export function getLatestCauses(query, setCauses, setIsLoading, setLatestDoc) {
+    getAll(query)
+        .then(docs => {
+            let arr = [];
+
+            docs.forEach((doc) => {
+                let fields = doc.data();
+                console.log(doc.data());
+
+                arr.push({
+                    id: doc.id,
+                    fields: fields
+                });
+            });
+
+            setCauses(arr);
+            setLatestDoc(docs.docs[docs.docs.length - 1]);
+        }).then(() => {
+            setIsLoading(false);
+        });
 }
