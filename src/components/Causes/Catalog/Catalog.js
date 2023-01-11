@@ -27,25 +27,7 @@ export const Catalog = () => {
 
     useEffect(() => {
         try {
-            getAll(startingOrderedQuery)
-                .then(docs => {
-                    let arr = [];
-
-                    docs.forEach((doc) => {
-                        let fields = doc.data();
-                        console.log(doc.data());
-
-                        arr.push({
-                            id: doc.id,
-                            fields: fields
-                        });
-                    });
-
-                    setCauses(arr);
-                    setLatestDoc(docs.docs[docs.docs.length - 1]);
-                }).then(() => {
-                    setIsLoading(false);
-                });
+            loadThreeMyCauses(startingOrderedQuery, setCauses, setLatestDoc, setIsLoading);
         } catch (error) {
             console.log(error);
         }
