@@ -5,10 +5,9 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
-import { getAll } from '../../../services/crudService';
 import { Spinner } from '../../../shared/Spinner';
 import { CardTemplate } from '../../Home/CardTemplate';
-import { loadThreeCauses } from '../../../services/causesService';
+import { getLatestCauses, loadThreeCauses } from '../../../services/causesService';
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -18,43 +17,24 @@ export const JoinedCauses = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [clickable, setClickable] = useState(true);
-    const [myCauses, setMyCauses] = useState([]);
+    const [myCauses, setCauses] = useState([]);
     const [latestDoc, setLatestDoc] = useState(0);
 
     const startingOrderedQuery = query(causesCollectionRef, where("participants", "array-contains", currentUser.uid), orderBy("createdAt", 'desc'), limit(3));
 
     useEffect(() => {
         try {
-            getAll(startingOrderedQuery)
-                .then(docs => {
-                    let arr = [];
-
-                    docs.forEach((doc) => {
-                        let fields = doc.data();
-
-                        arr.push({
-                            id: doc.id,
-                            fields: fields
-                        });
-
-                    });
-
-                    setMyCauses(arr);
-                    setLatestDoc(docs.docs[docs.docs.length - 1]);
-                }).then(() => {
-                    setIsLoading(false);
-                });
+            getLatestCauses(startingOrderedQuery, setCauses, setIsLoading, setLatestDoc);
         } catch (error) {
             console.log(error);
         }
-
     }, []);
 
     const loadMoreClickHandler = async (e) => {
         const nextOrderedQuery = query(causesCollectionRef, where("participants", "array-contains", currentUser.uid), orderBy('createdAt', 'desc'), startAfter(latestDoc), limit(3));
 
         try {
-            loadThreeCauses(nextOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
+            loadThreeCauses(nextOrderedQuery, setCauses, setLatestDoc, setIsLoading, setClickable, toast);
         } catch (error) {
             console.log(error);
         }
