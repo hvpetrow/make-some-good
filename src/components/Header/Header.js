@@ -2,28 +2,29 @@ import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import { useRef } from 'react';
+import { useClickOutside } from '../../utils/utils';
 
 export const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { currentUser, photoURL } = useAuth();
 
-    let menuRef = useRef();
+    let menuRef = useClickOutside(() => {
+        setIsOpen(false);
+    });
 
-    useEffect(() => {
-        let handler = (event) => {
-            if (!menuRef.current.contains(event.target)) {
-                setIsOpen(false);
-            }
-        }
+    // useEffect(() => {
+    //     let handler = (event) => {
+    //         if (!menuRef.current.contains(event.target)) {
+    //             setIsOpen(false);
+    //         }
+    //     }
 
-        document.addEventListener("mousedown", handler);
+    //     document.addEventListener("mousedown", handler);
 
-        return () => {
-            document.removeEventListener("mousedown", handler);
-        };
-    }, []);
+    //     return () => {
+    //         document.removeEventListener("mousedown", handler);
+    //     };
+    // }, []);
 
     const dropdownHandler = () => {
         setIsOpen(isOpen => !isOpen);
