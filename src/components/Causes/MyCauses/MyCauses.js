@@ -9,7 +9,7 @@ import { CardTemplate } from "../../Home/CardTemplate";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Spinner } from "../../../shared/Spinner";
-import { loadThreeCauses } from "../../../services/causesService";
+import { getLatestCauses, loadThreeCauses } from "../../../services/causesService";
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -24,7 +24,7 @@ export const MyCauses = () => {
 
     useEffect(() => {
         try {
-            loadThreeCauses(startingOrderedQuery, setMyCauses, setLatestDoc, setIsLoading, setClickable, toast);
+            getLatestCauses(startingOrderedQuery, setMyCauses, setIsLoading, setLatestDoc);
         } catch (error) {
             console.log(error);
         }
