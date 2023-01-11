@@ -71,7 +71,6 @@ export function getLatestCauses(query, setCauses, setIsLoading, setLatestDoc) {
 
             docs.forEach((doc) => {
                 let fields = doc.data();
-                console.log(doc.data());
 
                 arr.push({
                     id: doc.id,
