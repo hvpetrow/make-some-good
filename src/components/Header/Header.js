@@ -5,17 +5,18 @@ import { useState } from 'react';
 import { useClickOutside } from '../../utils/utils';
 
 export const Header = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+    const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
     const { currentUser, photoURL } = useAuth();
 
     let menuRef = useClickOutside(() => {
-        setIsOpen(false);
+        setIsProfileMenuOpen(false);
     });
 
     // useEffect(() => {
     //     let handler = (event) => {
     //         if (!menuRef.current.contains(event.target)) {
-    //             setIsOpen(false);
+    //             setIsProfileMenuOpen(false);
     //         }
     //     }
 
@@ -26,13 +27,25 @@ export const Header = () => {
     //     };
     // }, []);
 
-    const dropdownHandler = () => {
-        setIsOpen(isOpen => !isOpen);
+    const dropdownHandler = (e) => {
+        if (e.currentTarget.id === 'mobileMenuBtn') {
+            setIsProfileMenuOpen(isProfileMenuOpen => !isProfileMenuOpen);
+        } else if (e.currentTarget.id === 'profileMenuBtn') {
+            setIsMainMenuOpen(isMainMenuOpen => !isMainMenuOpen);
+        }
     }
 
-    const closeDropdownHandler = () => {
-        setIsOpen(false);
+
+    const closeDropdownHandler = (e) => {
+        if (e.currentTarget.id === 'mobileMenuBtn') {
+            setIsProfileMenuOpen(false);
+        } else if (e.currentTarget.id === 'profileMenuBtn') {
+            setIsMainMenuOpen(false);
+        }
     }
+
+
+
 
     const profileDropdownMenu = <div className={styles['dropdown']}>
         <Link to="/my-profile" onClick={closeDropdownHandler} >My Profile</Link>
@@ -40,7 +53,7 @@ export const Header = () => {
         <Link to="/logout" onClick={closeDropdownHandler}>Sign out</Link>
     </div>;
 
-    const mainDropdownMenu = <div className={styles['dropdown']}>
+    const mainDropdownMenu = <div className={styles['main-dropdown']}>
         <Link to="/" onClick={closeDropdownHandler} >Home</Link>
         <Link to="/catalog" onClick={closeDropdownHandler}>Causes</Link>
         <Link to="/search" onClick={closeDropdownHandler}>Search</Link>
@@ -51,9 +64,11 @@ export const Header = () => {
         {/* Mobile menu button*/}
         <button
             type="button"
+            id='mobileMenuBtn'
             className={styles['mobile-menu-btn']}
             aria-controls="mobile-menu"
             aria-expanded="false"
+            onClick={(dropdownHandler)}
         >
             <svg
                 className="block h-6 w-6"
@@ -90,6 +105,7 @@ export const Header = () => {
                 />
             </svg>
         </button>
+        {isMainMenuOpen && mainDropdownMenu}
     </div>
 
     return (
@@ -119,7 +135,7 @@ export const Header = () => {
                                         <button
                                             type="button"
                                             className={styles['profile-btn']}
-                                            id="user-menu-button"
+                                            id="profileMenuBtn"
                                             aria-expanded="false"
                                             aria-haspopup="true"
                                             onClick={(dropdownHandler)}
@@ -131,7 +147,7 @@ export const Header = () => {
                                             />
                                         </button>
                                     </li>
-                                    {isOpen && profileDropdownMenu}
+                                    {isProfileMenuOpen && profileDropdownMenu}
                                 </div>
                             </ul>
                         </div>
