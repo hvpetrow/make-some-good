@@ -9,13 +9,19 @@ export const Header = () => {
     const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
     const { currentUser, photoURL } = useAuth();
 
-    let menuRef = useClickOutside(() => {
+    let profileMenuRef = useClickOutside(() => {
         setIsProfileMenuOpen(false);
     });
 
+    let mainMenuRef = useClickOutside(() => {
+        setIsMainMenuOpen(false);
+    });
+
+
+
     // useEffect(() => {
     //     let handler = (event) => {
-    //         if (!menuRef.current.contains(event.target)) {
+    //         if (!profileMenuRef.current.contains(event.target)) {
     //             setIsProfileMenuOpen(false);
     //         }
     //     }
@@ -29,18 +35,18 @@ export const Header = () => {
 
     const dropdownHandler = (e) => {
         if (e.currentTarget.id === 'mobileMenuBtn') {
-            setIsProfileMenuOpen(isProfileMenuOpen => !isProfileMenuOpen);
-        } else if (e.currentTarget.id === 'profileMenuBtn') {
             setIsMainMenuOpen(isMainMenuOpen => !isMainMenuOpen);
+        } else if (e.currentTarget.id === 'profileMenuBtn') {
+            setIsProfileMenuOpen(isProfileMenuOpen => !isProfileMenuOpen);
         }
     }
 
 
     const closeDropdownHandler = (e) => {
         if (e.currentTarget.id === 'mobileMenuBtn') {
-            setIsProfileMenuOpen(false);
-        } else if (e.currentTarget.id === 'profileMenuBtn') {
             setIsMainMenuOpen(false);
+        } else if (e.currentTarget.id === 'profileMenuBtn') {
+            setIsProfileMenuOpen(false);
         }
     }
 
@@ -60,7 +66,7 @@ export const Header = () => {
         <Link to="/donate" onClick={closeDropdownHandler}>Donate</Link>
     </div>;
 
-    const mobileMenu = <div className={styles['mobile-menu']}>
+    const mobileMenu = <div ref={mainMenuRef} className={styles['mobile-menu']}>
         {/* Mobile menu button*/}
         <button
             type="button"
@@ -130,7 +136,7 @@ export const Header = () => {
                             <ul className={styles['logged-ul']}>
                                 <li className={styles['nav-link']}><Link to="/create-cause">Create Cause</Link></li>
                                 <li className={styles['nav-link']}><Link to="/joinedCauses">Joined Causes</Link></li>
-                                <div ref={menuRef} >
+                                <div ref={profileMenuRef} >
                                     <li className={styles['profile']}>
                                         <button
                                             type="button"
