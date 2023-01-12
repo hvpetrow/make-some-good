@@ -5,3 +5,20 @@
 html {
     font-family: "Roboto", sans-serif;
 }
+
+body {
+    min-height: 100%;
+    padding-bottom: 80px;
+    max-width: 2480px;
+    margin: 0px auto;
+}
+
+label {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+    body {
+        max-width: 400px;
+    }
+}
