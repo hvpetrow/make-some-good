@@ -26,3 +26,13 @@
 .footer-link:hover {
     color: rgb(85, 128, 248);
 }
+
+@media screen and (max-width: 450px) {
+    .footer-content {
+        font-size: 15px;
+    }
+
+    .footer-link {
+        font-size: 14px;
+    }
+}
