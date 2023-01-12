@@ -1,5 +1,8 @@
+import './variables.css';
+
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+
 
 import { Footer } from './components/Footer/Footer';
 import { ForgotPassword } from './components/ForgotPassword/ForgotPassword';
