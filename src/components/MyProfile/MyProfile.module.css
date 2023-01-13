@@ -212,4 +212,18 @@
         font-size: 15px;
         text-align: center;
     }
+
+    #my-profile .user-info .user-names {
+        color: #374151;
+        font-size: 32px;
+        line-height: 2.5rem;
+        font-weight: 500;
+    }
+
+    #my-profile .user-info .user-country {
+        margin-top: 0.75rem;
+        font-size: 15px;
+        color: #4b5563;
+        font-weight: 300;
+    }
 }
