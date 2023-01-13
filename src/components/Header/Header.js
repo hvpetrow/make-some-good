@@ -41,29 +41,22 @@ export const Header = () => {
         }
     }
 
-
     const closeDropdownHandler = (e) => {
-        if (e.currentTarget.id === 'mobileMenuBtn') {
-            setIsMainMenuOpen(false);
-        } else if (e.currentTarget.id === 'profileMenuBtn') {
-            setIsProfileMenuOpen(false);
-        }
+        setIsMainMenuOpen(false);
+        setIsProfileMenuOpen(false);
     }
 
-
-
-
     const profileDropdownMenu = <div className={styles['dropdown']}>
-        <Link to="/my-profile" onClick={closeDropdownHandler} >My Profile</Link>
-        <Link to="/my-causes" onClick={closeDropdownHandler}>My Causes</Link>
-        <Link to="/logout" onClick={closeDropdownHandler}>Sign out</Link>
+        <Link to="/my-profile" onClick={(closeDropdownHandler)} >My Profile</Link>
+        <Link to="/my-causes" onClick={(closeDropdownHandler)}>My Causes</Link>
+        <Link to="/logout" onClick={(closeDropdownHandler)}>Sign out</Link>
     </div>;
 
     const mainDropdownMenu = <div className={styles['main-dropdown']}>
-        <Link to="/" onClick={closeDropdownHandler} >Home</Link>
-        <Link to="/catalog" onClick={closeDropdownHandler}>Causes</Link>
-        <Link to="/search" onClick={closeDropdownHandler}>Search</Link>
-        <Link to="/donate" onClick={closeDropdownHandler}>Donate</Link>
+        <Link to="/" onClick={(closeDropdownHandler)} >Home</Link>
+        <Link to="/catalog" onClick={(closeDropdownHandler)}>Causes</Link>
+        <Link to="/search" onClick={(closeDropdownHandler)}>Search</Link>
+        <Link to="/donate" onClick={(closeDropdownHandler)}>Donate</Link>
     </div>;
 
     const mobileMenu = <div ref={mainMenuRef} className={styles['mobile-menu']}>

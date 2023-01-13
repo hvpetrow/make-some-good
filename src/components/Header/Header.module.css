@@ -50,6 +50,7 @@ a {
     font-weight: bold;
     letter-spacing: 0.18em;
 }
+
 a:hover {
     color: rgb(85, 128, 248);
     transition-property: color, background-color, border-color,
