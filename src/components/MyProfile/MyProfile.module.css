@@ -151,3 +151,65 @@
     margin-top: 2rem;
     color: #6b7280;
 }
+
+@media screen and (max-width: 450px) {
+    #my-profile .causes-ctn {
+        gap: 16px;
+    }
+
+    #my-profile .img-ctn .img {
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #e0e7ff;
+        height: 10.5rem;
+        border-radius: 9999px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    #my-profile .upload-ctn {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        gap: 32px;
+        margin-left: 18px;
+    }
+
+    #my-profile .upload-ctn .upload-btn {
+        margin-left: 0px;
+        font-size: 12px;
+        background-color: #60a5fa;
+        color: #ffffff;
+        text-transform: uppercase;
+        border-radius: 0.5rem;
+        height: 80px;
+        width: 130px;
+    }
+
+    #my-profile .upload-ctn .upload-label {
+        margin-bottom: 2rem;
+        color: #374151;
+        font-size: 16px;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    #my-profile .upload-ctn .upload-desc {
+        margin-top: 0.25rem;
+        color: #6b7280;
+        font-size: 12px;
+        line-height: 1.25rem;
+    }
+
+    #my-profile .change-password-btn {
+        padding: 1rem;
+        margin: 7rem auto;
+        background-color: #374151;
+        color: #ffffff;
+        border-radius: 0.5rem;
+        width: 60%;
+        font-size: 15px;
+        text-align: center;
+    }
+}
