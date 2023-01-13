@@ -39,7 +39,7 @@ export const Catalog = () => {
 
     return (
         <section className={styles['catalog']}>
-            <h1 className={styles['catalog-title']}>Make some good</h1>
+            <h1 className={styles['catalog-title']}>Catalogue</h1>
             {isLoading
                 ? (<Spinner />)
                 : (<>
