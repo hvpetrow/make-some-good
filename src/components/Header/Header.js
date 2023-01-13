@@ -49,11 +49,13 @@ export const Header = () => {
     const profileDropdownMenu = <div className={styles['dropdown']}>
         <Link to="/my-profile" onClick={(closeDropdownHandler)} >My Profile</Link>
         <Link to="/my-causes" onClick={(closeDropdownHandler)}>My Causes</Link>
+        <Link to="/joinedCauses" onClick={(closeDropdownHandler)}>Joined Causes</Link>
         <Link to="/logout" onClick={(closeDropdownHandler)}>Sign out</Link>
     </div>;
 
     const mainDropdownMenu = <div className={styles['main-dropdown']}>
         <Link to="/" onClick={(closeDropdownHandler)} >Home</Link>
+        <Link to="/create-cause" onClick={(closeDropdownHandler)}>Create Cause</Link>
         <Link to="/catalog" onClick={(closeDropdownHandler)}>Causes</Link>
         <Link to="/search" onClick={(closeDropdownHandler)}>Search</Link>
         <Link to="/donate" onClick={(closeDropdownHandler)}>Donate</Link>
@@ -128,7 +130,6 @@ export const Header = () => {
                         : <div className="logged-in">
                             <ul className={styles['logged-ul']}>
                                 <li className={styles['nav-link']}><Link to="/create-cause">Create Cause</Link></li>
-                                <li className={styles['nav-link']}><Link to="/joinedCauses">Joined Causes</Link></li>
                                 <div ref={profileMenuRef} >
                                     <li className={styles['profile']}>
                                         <button
@@ -153,6 +154,6 @@ export const Header = () => {
                     }
                 </div>
             </nav>
-        </header>
+        </header >
     );
 }

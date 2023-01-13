@@ -181,6 +181,10 @@ a:hover {
         display: none;
     }
 
+    nav .visible-link {
+        display: inline-block;
+    }
+
     a {
         padding: 12px 5px 12px 5px;
     }
