@@ -1,3 +1,4 @@
+import styles from './BackToTheTopButton.module.css';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 
@@ -25,7 +26,7 @@ export const BackToTheTopButton = (props) => {
     return (
         <>
             <button id="to-top-button" onClick={handleScrollUp} title="Go To Top"
-                className={showGoTop ? "block fixed mb-16 z-90 bottom-8 right-8 border-0 w-16 h-16 rounded-full drop-shadow-md bg-indigo-500 text-white text-3xl font-bold" : ""}>&uarr;</button>
+                className={showGoTop ? `${styles['backToTheTopBtn']}` : ""}>&uarr;</button>
         </>
 
     )
