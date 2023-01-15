@@ -44,7 +44,8 @@
     margin-right: auto;
     background-color: #e0e7ff;
     height: 12rem;
-    border-radius: 9999px;
+    width: 12rem;
+    border-radius: 100%;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
@@ -119,4 +120,27 @@
     justify-content: center;
     align-items: center;
     gap: 100px;
+}
+
+@media screen and (max-width: 450px) {
+    #foreign-profile .img-ctn {
+        bottom: 78px;
+    }
+
+    #foreign-profile .img-ctn .img {
+        width: 10.88rem;
+        height: 10.88rem;
+    }
+
+    #foreign-profile .user-info .user-names {
+        font-size: 2.1rem;
+    }
+
+    #foreign-profile .user-info .user-country {
+        font-size: 14px;
+    }
+
+    #foreign-profile .btn {
+        width: 70%;
+    }
 }

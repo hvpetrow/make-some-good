@@ -1,7 +1,6 @@
 .create-cause-ctn {
     padding: 2rem;
-    height: 80%;
-    max-width: 50%;
+    width: 35%;
     margin: 80px auto 150px auto;
     box-shadow: inset 5px 5px 5px #0003, inset -5px -5px 15px #ffffff1a,
         5px 5px 15px #0000004d, -5px -5px 15px #ffffff1a;
@@ -19,10 +18,7 @@
 
 .form-input {
     display: block;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0.5rem 1rem;
     margin: 0;
     background-clip: padding-box;
     background-color: #ffffff;
@@ -49,10 +45,7 @@
 
 .form-desc {
     display: block;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0.75rem 1rem;
     margin-bottom: 0.75rem;
     background-color: #ffffff;
     color: #374151;
@@ -89,10 +82,7 @@
 .submit-btn {
     width: 50%;
     display: inline-block;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
+    padding: 0.75rem 1.75rem;
     background-color: #2563eb;
     color: #ffffff;
     font-size: 0.875rem;
@@ -127,4 +117,14 @@
     width: 100%;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
         0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+@media screen and (max-width: 450px) {
+    .title {
+        font-size: var(--mainTitle-fs-sm);
+    }
+
+    .create-cause-ctn {
+        width: 85%;
+    }
 }
