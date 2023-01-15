@@ -54,8 +54,10 @@ export const Header = () => {
     </div>;
 
     const mainDropdownMenu = <div className={styles['main-dropdown']}>
+        {currentUser &&
+            <Link to="/create-cause" onClick={(closeDropdownHandler)}>Create Cause</Link>
+        }
         <Link to="/" onClick={(closeDropdownHandler)} >Home</Link>
-        <Link to="/create-cause" onClick={(closeDropdownHandler)}>Create Cause</Link>
         <Link to="/catalog" onClick={(closeDropdownHandler)}>Causes</Link>
         <Link to="/search" onClick={(closeDropdownHandler)}>Search</Link>
         <Link to="/donate" onClick={(closeDropdownHandler)}>Donate</Link>
@@ -121,11 +123,11 @@ export const Header = () => {
                         {mobileMenu}
                     </ul>
                 </div>
-                <div className="right-side">
+                <div className={styles['right-side']}>
                     {!currentUser
-                        ? <ul className='unlogged-ul'>
-                            <li className={styles['nav-link']}><Link to="/login" aria-current="page">Log In</Link></li>
-                            <li className={styles['nav-link']}><Link to="/register" aria-current="page">Sign Up</Link></li>
+                        ? <ul className={styles['unlogged-ul']}>
+                            <li className={`${styles['nav-link']} ${styles['visible-link']}`}><Link to="/login" className={styles['mobile-nav-link']} aria-current="page">Log In</Link></li>
+                            <li className={`${styles['nav-link']} ${styles['visible-link']}`}><Link to="/register" className={styles['mobile-nav-link']} aria-current="page">Sign Up</Link></li>
                         </ul>
                         : <div className="logged-in">
                             <ul className={styles['logged-ul']}>

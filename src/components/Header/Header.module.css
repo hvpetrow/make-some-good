@@ -175,6 +175,11 @@ a:hover {
         justify-content: space-between;
     }
 
+    nav .unlogged-ul {
+        display: flex;
+        gap: 16px;
+    }
+
     nav .nav-link {
         margin-right: 0px;
         margin-left: 0px;
@@ -193,6 +198,16 @@ a:hover {
         display: flex;
         margin-left: 1rem;
         padding: 0.5rem;
+    }
+
+    .mobile-nav-link {
+        padding: 8px 2px 8px 2px;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+    }
+
+    .right-side {
+        margin-right: 1rem;
     }
 
     .profile {
