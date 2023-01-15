@@ -211,7 +211,10 @@ a:hover {
     }
 
     .profile {
-        margin-right: 1rem;
         padding: 0.5rem;
+    }
+
+    .dropdown {
+        width: 11rem;
     }
 }

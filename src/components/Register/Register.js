@@ -258,7 +258,7 @@ export const Register = () => {
                             onChange={changeHandler}
                             onBlur={(e) => passwordValidator(e)}
                         />
-                        <span className={styles['password-icon']} onClick={showPasswordHandler}>
+                        <span className={(!errors.password && hasTouched.password) ? styles['password-icon-error'] : styles['password-icon']} onClick={showPasswordHandler}>
                             {showPassword
                                 ? <FontAwesomeIcon icon={faEye} />
                                 : <FontAwesomeIcon icon={faEyeSlash} />
@@ -282,7 +282,7 @@ export const Register = () => {
                             onBlur={(e) => rePassValidator(e)}
                         />
 
-                        <span className={styles['password-icon']} onClick={showRepeatPasswordHandler}>
+                        <span className={(!errors.password && hasTouched.password) ? styles['repass-icon-error'] : styles['password-icon']} onClick={showRepeatPasswordHandler}>
                             {showRepeatPassword
                                 ? <FontAwesomeIcon icon={faEye} />
                                 : <FontAwesomeIcon icon={faEyeSlash} />

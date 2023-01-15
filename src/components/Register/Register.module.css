@@ -186,6 +186,18 @@
     bottom: 12px;
 }
 
+#register .password-icon-error {
+    position: absolute;
+    right: 8px;
+    bottom: 64px;
+}
+
+#register .repass-icon-error {
+    position: absolute;
+    right: 8px;
+    bottom: 39px;
+}
+
 @media screen and (max-width: 450px) {
     #register .img-ctn {
         display: none;
