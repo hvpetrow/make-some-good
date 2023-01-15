@@ -185,3 +185,35 @@
     right: 8px;
     bottom: 12px;
 }
+
+@media screen and (max-width: 450px) {
+    #register .img-ctn {
+        display: none;
+    }
+
+    #register .title {
+        font-size: var(--mainTitle-fs-sm);
+    }
+
+    #register .content-ctn {
+        width: 95%;
+    }
+
+    #register .label {
+        font-size: 1.1rem;
+    }
+
+    #register .link {
+        text-transform: none;
+    }
+
+    #register .log-link-ctn {
+        flex-direction: column;
+    }
+
+    #register .login-link {
+        text-align: center;
+        letter-spacing: 0.08em;
+        font-size: 15px;
+    }
+}
