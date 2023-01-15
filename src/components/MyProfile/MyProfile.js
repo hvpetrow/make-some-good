@@ -15,6 +15,8 @@ import { getOne } from "../../services/crudService";
 const usersCollectionRef = collection(db, 'users');
 
 export const MyProfile = () => {
+    document.title = 'My Profile';
+
     const [userInfo, setUserInfo] = useState({
         firstName: '',
         lastName: '',

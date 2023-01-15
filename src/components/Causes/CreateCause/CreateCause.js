@@ -14,6 +14,8 @@ import { add } from '../../../services/crudService';
 const causesCollectionRef = collection(db, 'causes');
 
 export const CreateCause = () => {
+    document.title = 'Create';
+
     const navigate = useNavigate();
     const { currentUser } = useAuth();
 

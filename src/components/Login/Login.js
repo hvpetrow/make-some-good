@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../contexts/AuthContext";
 
 export const Login = () => {
+    document.title = 'Login';
+
     const navigate = useNavigate();
     const [values, setValues] = useState({
         email: '',

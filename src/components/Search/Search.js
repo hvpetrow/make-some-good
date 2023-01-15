@@ -24,6 +24,8 @@ export const Search = () => {
     const causesCollectionRef = collection(db, "causes");
 
     useEffect(() => {
+        document.title = 'Search';
+
         try {
             getAll(causesCollectionRef)
                 .then(docs => {

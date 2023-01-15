@@ -23,6 +23,7 @@ export const MyCauses = () => {
     const startingOrderedQuery = query(causesCollectionRef, where("creator", "==", currentUser.uid), orderBy("createdAt", 'desc'), limit(3));
 
     useEffect(() => {
+        document.title = 'My Causes';
         try {
             getLatestCauses(startingOrderedQuery, setMyCauses, setIsLoading, setLatestDoc);
         } catch (error) {

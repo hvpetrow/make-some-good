@@ -3,6 +3,8 @@ import styles from './Donate.module.css';
 import React, { useState } from 'react'
 
 export const Donate = () => {
+    document.title = 'Donate';
+
     const [clicked, setClicked] = useState(false);
 
     const bankAccount = (

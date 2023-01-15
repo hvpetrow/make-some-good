@@ -27,6 +27,8 @@ export const Details = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        document.title = 'Details | Make Some Good';
+
         try {
             getOneCause(causeId)
                 .then(doc => {

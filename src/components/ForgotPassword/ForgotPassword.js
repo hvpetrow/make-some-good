@@ -6,6 +6,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import { toast } from 'react-toastify';
 
 export const ForgotPassword = () => {
+    document.title = 'Forgot Password';
+
     const navigate = useNavigate();
 
     const [values, setValues] = useState({

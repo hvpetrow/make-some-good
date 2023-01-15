@@ -41,7 +41,12 @@ export const ForeignProfile = () => {
 
         setForeignUserCauses(filterForeignUserCauses(userId));
         setUserJoinedCauses(filterUserJoinedCauses(userId));
+
     }, [userId]);
+
+    if (!isLoading) {
+        document.title = `Profile/${userInfo.firstName} ${userInfo.lastName}`;
+    }
 
     console.log(userInfo);
 

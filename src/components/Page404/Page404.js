@@ -3,6 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const Page404 = () => {
+    document.title = 'Page Error 404';
+
     return (
         <section className={styles['page-not-found']}>
             <h1>404</h1>

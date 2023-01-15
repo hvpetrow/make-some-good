@@ -10,6 +10,8 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 
 export const ChangePassword = () => {
+    document.title = 'ChangePassword';
+
     const [values, setValues] = useState({
         newPassword: '',
         repass: '',

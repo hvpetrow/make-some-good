@@ -11,6 +11,8 @@ import { useAuth } from '../../contexts/AuthContext'
 import userValidation from '../../validation/userValidation';
 
 export const Register = () => {
+    document.title = 'Register';
+
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);

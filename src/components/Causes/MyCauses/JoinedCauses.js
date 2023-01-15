@@ -23,6 +23,8 @@ export const JoinedCauses = () => {
     const startingOrderedQuery = query(causesCollectionRef, where("participants", "array-contains", currentUser.uid), orderBy("createdAt", 'desc'), limit(3));
 
     useEffect(() => {
+        document.title = 'Joined Causes';
+
         try {
             getLatestCauses(startingOrderedQuery, setCauses, setIsLoading, setLatestDoc);
         } catch (error) {
