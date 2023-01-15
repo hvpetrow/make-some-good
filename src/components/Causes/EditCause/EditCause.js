@@ -19,6 +19,8 @@ export const EditCause = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        document.title = 'Edit';
+
         try {
             getOneCause(causeId)
                 .then(doc => {

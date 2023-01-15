@@ -25,6 +25,8 @@ export const Home = () => {
     }
 
     useEffect(() => {
+        document.title = 'Make Some Good';
+
         try {
             getLatestCauses(orderedQuery, setCauses, setIsLoading, () => null);
         } catch (error) {

@@ -20,6 +20,8 @@ export const Catalog = () => {
     const startingOrderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), limit(3));
 
     useEffect(() => {
+        document.title = 'Catalog';
+
         try {
             getLatestCauses(startingOrderedQuery, setCauses, setIsLoading, setLatestDoc);
         } catch (error) {
@@ -39,7 +41,7 @@ export const Catalog = () => {
 
     return (
         <section className={styles['catalog']}>
-            <h1 className={styles['catalog-title']}>Catalogue</h1>
+            <h1 className={styles['catalog-title']}>Catalog</h1>
             {isLoading
                 ? (<Spinner />)
                 : (<>

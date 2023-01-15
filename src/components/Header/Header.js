@@ -58,7 +58,7 @@ export const Header = () => {
             <Link to="/create-cause" onClick={(closeDropdownHandler)}>Create Cause</Link>
         }
         <Link to="/" onClick={(closeDropdownHandler)} >Home</Link>
-        <Link to="/catalog" onClick={(closeDropdownHandler)}>Causes</Link>
+        <Link to="/catalog" onClick={(closeDropdownHandler)}>Catalog</Link>
         <Link to="/search" onClick={(closeDropdownHandler)}>Search</Link>
         <Link to="/donate" onClick={(closeDropdownHandler)}>Donate</Link>
     </div>;
