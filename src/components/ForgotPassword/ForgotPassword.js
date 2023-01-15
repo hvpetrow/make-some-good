@@ -42,7 +42,7 @@ export const ForgotPassword = () => {
     return (
         <section id={styles['forgot-password']}>
             <h2 className={styles['title']}>Password Reset</h2>
-            <form onSubmit={submitHandler} >
+            <form className={styles['forgotPass-form']} onSubmit={submitHandler} >
                 <label htmlFor="inputEmail" className={styles['label']}>Email address</label>
                 <div className={styles['input-ctn']}>
                     <input

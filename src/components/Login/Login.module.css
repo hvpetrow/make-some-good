@@ -171,3 +171,31 @@
     display: inline-block;
     color: #2563eb;
 }
+
+@media screen and (max-width: 450px) {
+    .create-cause-ctn {
+        max-width: 90%;
+        margin-top: 150px;
+        border-radius: 16px;
+    }
+
+    #login .img-ctn {
+        display: none;
+    }
+
+    #login .content-ctn {
+        width: 70%;
+    }
+
+    #login .content-ctn .title {
+        font-size: var(--mainTitle-fs-sm);
+    }
+
+    #login .label {
+        font-size: 1.1rem;
+    }
+
+    #login .input-ctn {
+        margin-bottom: 1.5rem;
+    }
+}
