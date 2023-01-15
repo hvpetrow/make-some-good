@@ -172,7 +172,7 @@ export const Details = () => {
                             </p>
                             <div className={`${styles['content-elem']} ${styles['content-elem-creator']}`}>
                                 <p className="flex items-center">
-                                    <span className={styles['content-title']}>
+                                    <span className={`${styles['content-title']} ${styles['padding-top1']}`}>
                                         Creator:
                                     </span>
                                 </p>
