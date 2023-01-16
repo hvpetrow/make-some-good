@@ -74,7 +74,7 @@ export const Header = () => {
             onClick={(dropdownHandler)}
         >
             <svg
-                className="block h-6 w-6"
+                className={styles['dropdownMenu-svg']}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -93,7 +93,7 @@ export const Header = () => {
         Menu open: "block", Menu closed: "hidden"
       */}
             <svg
-                className="hidden h-6 w-6"
+                className='hidden'
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"

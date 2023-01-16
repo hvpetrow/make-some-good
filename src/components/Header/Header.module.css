@@ -169,6 +169,12 @@ a:hover {
     font-size: 14px;
 }
 
+.dropdownMenu-svg {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 @media screen and (max-width: 450px) {
     nav {
         max-width: 450px;
@@ -216,5 +222,65 @@ a:hover {
 
     .dropdown {
         width: 11rem;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    nav {
+        max-width: 900px;
+        justify-content: space-between;
+    }
+
+    nav .unlogged-ul {
+        display: flex;
+        gap: 16px;
+    }
+
+    nav .nav-link {
+        margin-right: 0px;
+        margin-left: 0px;
+        display: none;
+    }
+
+    nav .visible-link {
+        display: inline-block;
+    }
+
+    a {
+        padding: 12px 5px 12px 5px;
+    }
+
+    .mobile-menu {
+        display: flex;
+        margin-left: 1rem;
+        padding: 1.2rem;
+    }
+
+    .mobile-nav-link {
+        padding: 8px 2px 8px 2px;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+    }
+
+    .right-side {
+        margin-right: 1.2rem;
+    }
+
+    .profile {
+        padding: 1rem;
+    }
+
+    .profile-img {
+        width: 4.8rem;
+        height: 4.3rem;
+    }
+
+    .dropdown {
+        width: 11rem;
+    }
+
+    .dropdownMenu-svg {
+        width: 3.1rem;
+        height: 3rem;
     }
 }
