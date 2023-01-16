@@ -143,3 +143,21 @@
         font-size: 21px;
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .home-title {
+        font-size: var(--mainTitle-fs-md);
+    }
+
+    .home-quote {
+        font-size: 28px;
+    }
+
+    .home-quote-author {
+        font-size: 20px;
+    }
+
+    .latest-topics-title {
+        font-size: 28px;
+    }
+}
