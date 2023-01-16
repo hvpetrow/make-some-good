@@ -252,7 +252,9 @@ a:hover {
     }
 
     a {
-        padding: 12px 5px 12px 5px;
+        padding: 14px 7px 14px 7px;
+        font-size: 18px;
+        letter-spacing: 0.12em;
     }
 
     .mobile-menu {
@@ -289,7 +291,13 @@ a:hover {
         height: 3rem;
     }
 
-    .hidden {
-        display: none;
+    .main-dropdown {
+        left: 38px;
+        top: 75px;
+    }
+
+    .dropdown {
+        right: 20px;
+        top: 75px;
     }
 }
