@@ -107,3 +107,10 @@
         width: 380px;
     }
 }
+
+@media screen and (max-width: 900px) {
+    #donate {
+        right: 23%;
+        top: 45%;
+    }
+}

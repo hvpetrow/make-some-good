@@ -86,3 +86,9 @@
         font-size: var(--mainTitle-fs-sm);
     }
 }
+
+@media screen and (max-width: 900px) {
+    .catalog-title {
+        font-size: var(--mainTitle-fs-md);
+    }
+}

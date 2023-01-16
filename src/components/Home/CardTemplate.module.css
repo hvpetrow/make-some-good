@@ -104,3 +104,9 @@
         height: 200px;
     }
 }
+
+@media screen and (max-width: 900px) {
+    .card-cont {
+        max-width: 364px;
+    }
+}
