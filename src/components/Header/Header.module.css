@@ -173,6 +173,11 @@ a:hover {
     display: block;
     width: 1.5rem;
     height: 1.5rem;
+    color: #9ca3af;
+}
+
+.hidden {
+    display: none;
 }
 
 @media screen and (max-width: 450px) {
@@ -282,5 +287,9 @@ a:hover {
     .dropdownMenu-svg {
         width: 3.1rem;
         height: 3rem;
+    }
+
+    .hidden {
+        display: none;
     }
 }
