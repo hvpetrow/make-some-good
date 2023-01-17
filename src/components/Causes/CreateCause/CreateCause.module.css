@@ -127,3 +127,11 @@
         border-radius: 16px;
     }
 }
+
+@media screen and (max-width: 900px) {
+    .create-cause-ctn {
+        max-width: 63%;
+        margin-top: 150px;
+        border-radius: 16px;
+    }
+}

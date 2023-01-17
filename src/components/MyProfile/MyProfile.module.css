@@ -224,3 +224,43 @@
         font-weight: 300;
     }
 }
+
+@media screen and (max-width: 900px) {
+    #my-profile .change-password-btn {
+        margin: 7rem auto;
+        width: 43%;
+    }
+
+    #my-profile .upload-ctn {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        margin-left: 18px;
+    }
+
+    #my-profile .upload-ctn .upload-btn {
+        margin-left: 0px;
+        background-color: #60a5fa;
+        color: #ffffff;
+        text-transform: uppercase;
+        border-radius: 0.5rem;
+        height: 80px;
+        width: 198px;
+    }
+
+    #my-profile .upload-ctn .upload-label {
+        margin-bottom: 2rem;
+        color: #374151;
+        font-size: 16px;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    #my-profile .upload-ctn .upload-desc {
+        margin-top: 0.25rem;
+        color: #6b7280;
+        line-height: 1.25rem;
+    }
+}
