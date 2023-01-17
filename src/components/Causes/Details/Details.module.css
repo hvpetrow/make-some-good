@@ -165,7 +165,7 @@
     color: #9c428c;
 }
 
-.btns.ctn .cancel-ctn {
+.btns.ctn .cancel-btn {
     color: #ada02b;
 }
 
@@ -188,7 +188,8 @@
     }
 
     .btns-ctn .remove-btn,
-    .btns-ctn .join-btn {
+    .btns-ctn .join-btn,
+    .btns.ctn .cancel-btn {
         width: 150px;
     }
 
@@ -211,6 +212,57 @@
 
     .details-content-container {
         gap: 8px;
+    }
+
+    .padding-top1 {
+        padding-top: 1px;
+    }
+
+    .cancel-btn {
+        color: #ada02b;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #details {
+        max-width: 730px;
+        margin-top: 150px;
+        border-radius: 16px;
+    }
+
+    .down-part-ctn .btns-ctn {
+        display: flex;
+        background-color: #f9fafb;
+        flex-direction: column;
+        gap: 18px;
+        margin: 1rem auto;
+        color: #64748b;
+    }
+
+    .btns-ctn .remove-btn,
+    .btns-ctn .join-btn,
+    .cancel-btn {
+        width: 250px;
+    }
+
+    .content-elem-creator {
+        gap: 0px;
+    }
+
+    .creator-img {
+        display: none;
+    }
+
+    .details-img {
+        height: 100%;
+    }
+
+    .details-content-container {
+        gap: 8px;
+    }
+
+    .cancel-btn {
+        color: #ada02b;
     }
 
     .padding-top1 {

@@ -128,3 +128,9 @@
         width: 85%;
     }
 }
+
+@media screen and (max-width: 900px) {
+    .create-cause-ctn {
+        width: 70%;
+    }
+}

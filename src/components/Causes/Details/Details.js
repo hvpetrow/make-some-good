@@ -15,6 +15,7 @@ import { getOne } from '../../../services/crudService';
 
 const usersCollectionRef = collection(db, 'users');
 
+
 export const Details = () => {
     const [cause, setCause] = useState('');
     const [creator, setCreator] = useState('');

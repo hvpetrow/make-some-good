@@ -264,9 +264,8 @@ a:hover {
     }
 
     .mobile-nav-link {
-        padding: 8px 2px 8px 2px;
-        font-size: 14px;
-        letter-spacing: 0.08em;
+        font-size: 20px;
+        margin-right: 18px;
     }
 
     .right-side {
