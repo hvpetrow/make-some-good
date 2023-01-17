@@ -229,3 +229,17 @@
         font-size: 15px;
     }
 }
+
+@media screen and (max-width: 900px) {
+    #register .img-ctn {
+        display: none;
+    }
+
+    #register .content-ctn {
+        width: 63%;
+    }
+
+    #register .link {
+        text-transform: none;
+    }
+}

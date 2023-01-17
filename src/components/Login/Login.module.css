@@ -199,3 +199,19 @@
         margin-bottom: 1.5rem;
     }
 }
+
+@media screen and (max-width: 900px) {
+    .create-cause-ctn {
+        max-width: 90%;
+        margin-top: 150px;
+        border-radius: 16px;
+    }
+
+    #login .img-ctn {
+        display: none;
+    }
+
+    #login .content-ctn {
+        width: 50%;
+    }
+}
