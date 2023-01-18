@@ -6,12 +6,23 @@
     gap: 100px;
     margin-top: 100px;
     padding-bottom: 200px;
+    position: relative;
+}
+
+.hero-img {
+}
+
+.hero-img img {
+    width: 100%;
 }
 
 .home-title {
+    position: absolute;
+    top: 5vh;
+    left: 50%;
+    transform: translate(-50%);
     font-size: 4.1rem;
-    margin: 0 auto;
-    position: relative;
+    /* position: relative; */
     font-weight: 700;
     line-height: 1.1;
     text-transform: uppercase;
@@ -72,6 +83,19 @@
     justify-content: center;
     align-items: center;
     gap: 100px;
+}
+
+.carousel-container {
+    padding: 12px 24px;
+    margin: 0 auto;
+    width: 60%;
+    background-color: #fff;
+    transition-property: background-color, border-color, color, fill, stroke,
+        opacity, box-shadow, transform;
+    transition-duration: 500ms;
+    border-radius: 0.5rem;
+    box-shadow: inset 5px 5px 5px #0003, inset -5px -5px 15px #ffffff1a,
+        5px 5px 15px #0000004d, -5px -5px 15px #ffffff1a;
 }
 
 .load-more-btn-cont {

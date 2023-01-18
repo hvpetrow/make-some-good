@@ -9,6 +9,9 @@ import { CardTemplate } from "./CardTemplate";
 import 'react-toastify/dist/ReactToastify.css';
 import { getLatestCauses } from '../../services/causesService';
 
+import Carousel from 'react-material-ui-carousel';
+import { Paper, Button } from '@mui/material';
+import { CarouselItem } from './CarouselItem';
 
 
 
@@ -37,15 +40,35 @@ export const Home = () => {
     return (
         <>
             <div className={styles['home']}>
+                <div className={styles['hero-img']}>
+                    <img src={require('../../../src/assets/hero.png')} alt="" />
+                </div>
                 <h1 className={styles['home-title']}>Make Some Good</h1>
                 <h1 className={styles['home-quote']}>“No one has ever become poor by giving.”</h1>
                 <h1 className={styles['home-quote-author']}>― Anne Frank</h1>
                 <h2 className={styles['latest-topics-title']}>Latest Causes</h2>
+                {isLoading
+                    ? (<Spinner />)
+                    : causes.length !== 0 &&
+                    <div className={styles['carousel-container']}>
+                        < Carousel >
+                            {causes.map((c) => <CarouselItem key={c.id} fields={c.fields} />)}
+                        </Carousel>
+                    </div>}
                 <div className={styles['home-container']}>
                     {isLoading
                         ? (<Spinner />)
                         : causes.length !== 0
-                            ? (causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />))
+                            ?
+                            <>
+
+
+                                {/* {causes.map(c => <CardTemplate key={c.id} id={c.id} cause={c.fields} />)} */}
+
+
+                            </>
+
+
                             : (<h3 className="no-articles">No articles yet</h3>)
                     }
                 </div>
