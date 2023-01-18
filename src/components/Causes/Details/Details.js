@@ -58,50 +58,6 @@ export const Details = () => {
                 })
         }
     }, [cause.creator]);
-    // useEffect(() => {
-    //     try {
-    //         getOneCause(causeId)
-    //             .then(doc => {
-    //                 setCause(doc.data());
-    //                 setDocId(doc.id);
-    //             });
-
-    //         if (cause.creator) {
-    //             getOne(usersCollectionRef, cause.creator)
-    //                 .then(doc => {
-    //                     setCreator(doc.data());
-    //                 });
-    //         }
-
-    //         setIsLoading(false);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }, [causeId, cause.creator]);
-
-    // useEffect(() => {
-    //     if (cause?.participants?.length > 0) {
-    //         const foundedParticipant = cause.participants.find(c => currentUser.uid === c);
-    //         if (foundedParticipant) {
-    //             setIsParticipant(true);
-    //         }
-    //     }
-
-    // }, [cause.participants]);
-
-
-    // useEffect(() => {
-    //     if (cause?.creator) {
-
-    //         getProfilePicture(cause.creator)
-    //             .then(url => setProfilePicture(url))
-    //             .catch(error => {
-    //                 console.log(error);
-    //             })
-    //     }
-    // }, [cause.creator])
-
-
 
     const joinHandler = async () => {
         const currentCauseRef = doc(db, "causes", docId);
