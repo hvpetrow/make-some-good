@@ -15,17 +15,17 @@ import { getOne } from '../../../services/crudService';
 
 const usersCollectionRef = collection(db, 'users');
 
-
 export const Details = () => {
     const [cause, setCause] = useState('');
     const [creator, setCreator] = useState('');
     const [docId, setDocId] = useState(null);
-    const [profilePicture, setProfilePicture] = useState("https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png");
     const [isParticipant, setIsParticipant] = useState(false);
+    const [profilePicture, setProfilePicture] = useState("https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png");
     const { currentUser, getProfilePicture } = useAuth();
     const { causeId } = useParams();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(() => {
         document.title = 'Details | Make Some Good';
@@ -35,11 +35,13 @@ export const Details = () => {
                 .then(doc => {
                     setCause(doc.data());
                     setDocId(doc.id);
+                }).then(() => {
+                    setIsParticipant(cause?.participants?.some(participant => participant === currentUser.uid));
                 });
         } catch (error) {
             console.log(error);
         }
-    }, [causeId, cause.creator]);
+    }, [causeId, cause.creator, isParticipant]);
 
     useEffect(() => {
         if (cause?.creator) {
@@ -139,9 +141,6 @@ export const Details = () => {
         }
     }
 
-    console.log(cause);
-    console.log(creator);
-
     return (
         <section id={styles['details']}>
             {!isLoading && <div>
@@ -227,8 +226,8 @@ export const Details = () => {
                                     </ Link>
                                 </>
                             }
-                            {!isParticipant
-                                ? currentUser.uid !== cause.creator &&
+                            {currentUser.uid !== cause.creator &&
+                                !isParticipant ?
                                 (< button onClick={joinHandler} className={`${styles['join-btn']} ${styles['btn']}`}>
                                     <div className="mr-2">
                                         <svg
