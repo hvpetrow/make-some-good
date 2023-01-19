@@ -54,10 +54,10 @@ export const CreateCause = () => {
         }));
     }
 
-    const { title, purpose, place, date, imgUrl, description } = hasTouched;
+    const { title, purpose, place, date, description } = hasTouched;
 
     let required;
-    if (title && purpose && place && date && imgUrl && description) {
+    if (title && purpose && place && date && description) {
         required = true;
     }
 
@@ -119,8 +119,11 @@ export const CreateCause = () => {
                             onChange={changeHandler}
                             onBlur={(e) => titleValidator(e, setHasTouched, setErrors, values)}
                         />
-                        {(!errors.title && hasTouched.title) && (
-                            <p className={styles['alert']}>Title is not valid!!</p>
+                        {(values.title === '' && hasTouched.title) && (
+                            <p className={styles['alert']}>Title is required!!</p>
+                        )}
+                        {(!errors.title && hasTouched.title && values.title !== '') && (
+                            <p className={styles['alert']}>Title must be between 3 and 28 symbols!!</p>
                         )}
                     </div>
                     <div className="mb-6">
@@ -134,8 +137,11 @@ export const CreateCause = () => {
                             onChange={changeHandler}
                             onBlur={(e) => purposeValidator(e, setHasTouched, setErrors, values)}
                         />
-                        {(!errors.purpose && hasTouched.purpose) && (
-                            <p className={styles['alert']}>Purpose is not valid!!</p>
+                        {(values.purpose === '' && hasTouched.purpose) && (
+                            <p className={styles['alert']}>Purpose is required!!</p>
+                        )}
+                        {(!errors.purpose && hasTouched.purpose && values.purpose !== '') && (
+                            <p className={styles['alert']}>Purpose must be between 2 and 30 symbols!!</p>
                         )}
                     </div>
                     <div className="mb-6">
@@ -149,8 +155,11 @@ export const CreateCause = () => {
                             onChange={changeHandler}
                             onBlur={(e) => placeValidator(e, setHasTouched, setErrors, values)}
                         />
-                        {(!errors.place && hasTouched.place) && (
-                            <p className={styles['alert']}>Place is not valid!!</p>
+                        {(values.place === '' && hasTouched.place) && (
+                            <p className={styles['alert']}>Place is required!!</p>
+                        )}
+                        {(!errors.place && hasTouched.place && values.place !== '') && (
+                            <p className={styles['alert']}>Place must be between 2 and 28 symbols!!</p>
                         )}
                     </div>
                     <div className="mb-6">
@@ -164,7 +173,10 @@ export const CreateCause = () => {
                             onChange={changeHandler}
                             onBlur={(e) => dateValidator(e, setHasTouched, setErrors, values)}
                         />
-                        {(!errors.date && hasTouched.date) && (
+                        {(values.date === '' && hasTouched.date) && (
+                            <p className={styles['alert']}>Date is required!!</p>
+                        )}
+                        {(!errors.date && hasTouched.date && values.date !== '') && (
                             <p className={styles['alert']}>Date is not valid!!</p>
                         )}
                     </div>
@@ -179,7 +191,7 @@ export const CreateCause = () => {
                             onChange={changeHandler}
                             onBlur={(e) => urlValidator(e, setHasTouched, setErrors, values)}
                         />
-                        {(!errors.imgUrl && hasTouched.imgUrl) && (
+                        {(!errors.imgUrl && hasTouched.imgUrl && values.imgUrl !== '') && (
                             <p className={styles['alert']}>Image url is not valid!!</p>
                         )}
                     </div>
@@ -202,8 +214,11 @@ export const CreateCause = () => {
                                 onBlur={(e) => descriptionValidator(e, setHasTouched, setErrors, values)}
 
                             />
-                            {(!errors.description && hasTouched.description) && (
-                                <p className={styles['alert']}>Description is not valid!!</p>
+                            {(values.description === '' && hasTouched.description) && (
+                                <p className={styles['alert']}>Date is required!!</p>
+                            )}
+                            {(!errors.description && hasTouched.description && values.description !== '') && (
+                                <p className={styles['alert']}>Description must be between 5 and 800 symbols!!</p>
                             )}
                         </div>
                     </div>
@@ -214,7 +229,7 @@ export const CreateCause = () => {
                             className={styles['submit-btn']}
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
-                            disabled={!isFormValid}
+                            disabled={!isFormValid && !isLoading}
                         >
                             Submit
                         </button>

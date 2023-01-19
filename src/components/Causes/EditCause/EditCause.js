@@ -132,11 +132,6 @@ export const EditCause = () => {
                             />
                         </div>
                     </div>
-
-                    <div className="show_info text-sm mb-4 w-max text-red-400" >
-                        {/* <p>{error}</p> */}
-                    </div>
-
                     {/* Submit button */}
                     <div className={styles['btn-container']}>
                         <button
