@@ -40,12 +40,12 @@ export const Home = () => {
     return (
         <>
             <div className={styles['home']}>
-                <div className={styles['hero-img']}>
+                <div className={styles['hero']}>
                     <img src={require('../../../src/assets/hero.png')} alt="" />
+                    <h1 className={styles['home-title']}>Make Some Good</h1>
+                    <h1 className={styles['home-quote']}>“No one has ever become poor by giving.”</h1>
+                    <h1 className={styles['home-quote-author']}>― Anne Frank</h1>
                 </div>
-                <h1 className={styles['home-title']}>Make Some Good</h1>
-                <h1 className={styles['home-quote']}>“No one has ever become poor by giving.”</h1>
-                <h1 className={styles['home-quote-author']}>― Anne Frank</h1>
                 <h2 className={styles['latest-topics-title']}>Latest Causes</h2>
                 {isLoading
                     ? (<Spinner />)

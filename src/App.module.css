@@ -11,8 +11,8 @@ label {
     cursor: pointer;
 }
 
-@media screen and (max-width: 1000px) {
+/* @media screen and (max-width: 1000px) {
     body {
         max-width: 350px;
     }
-}
+} */

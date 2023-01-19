@@ -120,6 +120,14 @@
         0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
+.alert {
+    margin-top: 0.25rem;
+    margin-left: 0.25rem;
+    color: #ef4444;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+}
+
 @media screen and (max-width: 450px) {
     .create-cause-ctn {
         max-width: 85%;
