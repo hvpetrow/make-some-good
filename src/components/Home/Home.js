@@ -37,6 +37,7 @@ export const Home = () => {
         }
     }, []);
 
+
     return (
         <>
             <div className={styles['home']}>
@@ -52,7 +53,7 @@ export const Home = () => {
                     : causes.length !== 0 &&
                     <div className={styles['carousel-container']}>
                         < Carousel >
-                            {causes.map((c) => <CarouselItem key={c.id} fields={c.fields} />)}
+                            {causes.map((c) => <CarouselItem key={c.id} id={c.id} fields={c.fields} />)}
                         </Carousel>
                     </div>}
                 <div className={styles['home-container']}>
