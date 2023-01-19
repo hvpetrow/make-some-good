@@ -12,6 +12,7 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
 import { getOneCause } from '../../../services/causesService'
 import { getOne } from '../../../services/crudService';
+import { Spinner } from '../../../shared/Spinner';
 
 const usersCollectionRef = collection(db, 'users');
 
@@ -99,7 +100,7 @@ export const Details = () => {
 
     return (
         <section id={styles['details']}>
-            {!isLoading && <div>
+            {!isLoading && <div className={styles['details-ctn']}>
                 <div className={styles['details-card-container']}>
                     <div className={styles['details-grid']}>
                         <div className={styles['details-img-container']}>
@@ -220,6 +221,7 @@ export const Details = () => {
                 </div>
             </div>
             }
+            {isLoading && (<Spinner />)}
         </section >
     )
 }
