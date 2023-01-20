@@ -9,6 +9,8 @@ import styles from './Register.module.css';
 
 import { useAuth } from '../../contexts/AuthContext'
 import userValidation from '../../validation/userValidation';
+import useInput from '../../hooks/useInput';
+
 
 export const Register = () => {
     document.title = 'Register';
@@ -17,28 +19,41 @@ export const Register = () => {
     const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-    const [hasTouched, setHasTouched] = useState({
-        email: false,
-        password: false,
-        repass: false,
-        firstName: false,
-        lastName: false,
-        country: false,
-        terms: false
-    });
-
-    const [values, setValues] = useState({
-        email: '',
-        password: '',
-        repass: '',
-        firstName: '',
-        lastName: '',
-        country: '',
-    });
-
     const [tac, setTac] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const { signUp, currentUser, setUserAdditionalInfo } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
+    // const [hasTouched, setHasTouched] = useState({
+    //     email: false,
+    //     password: false,
+    //     repass: false,
+    //     firstName: false,
+    //     lastName: false,
+    //     country: false,
+    //     terms: false
+    // });
+
+    // const [values, setValues] = useState({
+    //     email: '',
+    //     password: '',
+    //     repass: '',
+    //     firstName: '',
+    //     lastName: '',
+    //     country: '',
+    // });
+
+    const emailInput = useInput(userValidation.emailIsValid);
+    const firstNameInput = useInput(userValidation.nameIsLength);
+    const lastNameInput = useInput(userValidation.nameIsLength);
+    const countryInput = useInput(userValidation.countryIsLength);
+    const passwordInput = useInput(userValidation.passwordIsLength);
+    const repeatPasswordInput = useInput(userValidation.isEqual.bind(null, passwordInput.value));
+
+    const inputFieldsIsValid = firstNameInput.fieldIsValid
+        && lastNameInput.fieldIsValid
+        && emailInput.fieldIsValid
+        && countryInput.fieldIsValid
+        && passwordInput.fieldIsValid
+        && repeatPasswordInput.fieldIsValid;
 
     const showPasswordHandler = () => {
         setShowPassword(state => !state);
@@ -47,61 +62,6 @@ export const Register = () => {
     const showRepeatPasswordHandler = () => {
         setShowRepeatPassword(state => !state);
     };
-
-    const emailValidator = (e) => {
-        setHasTouched((state) => ({
-            ...state,
-            [e.target.name]: true
-        }));
-
-        setErrors((state) => ({
-            ...state,
-            [e.target.name]: userValidation.emailIsValid(values[e.target.name])
-        }));
-    };
-
-    const nameValidator = (e) => {
-        setHasTouched((state) => ({
-            ...state,
-            [e.target.name]: true
-        }));
-
-        setErrors((state) => ({
-            ...state,
-            [e.target.name]: userValidation.nameIsLength(values[e.target.name])
-        }));
-    };
-
-    const passwordValidator = (e) => {
-        setHasTouched((state) => ({
-            ...state,
-            [e.target.name]: true
-        }));
-
-        setErrors((state) => ({
-            ...state,
-            [e.target.name]: userValidation.passwordIsLength(values[e.target.name])
-        }));
-    };
-
-    const rePassValidator = (e) => {
-        setHasTouched((state) => ({
-            ...state,
-            [e.target.name]: true
-        }));
-
-        setErrors((state) => ({
-            ...state,
-            [e.target.name]: userValidation.isEqual(values.password, values[e.target.name])
-        }));
-    };
-
-    const changeHandler = (e) => {
-        setValues((oldValues) => ({
-            ...oldValues,
-            [e.target.name]: e.target.value
-        }));
-    }
 
     const tacChangeHandler = (e) => {
         setTac(e.target.checked);
@@ -114,50 +74,35 @@ export const Register = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
 
-        if (password !== repass) {
-            setErrors((state) => ({
-                ...state,
-                repass: false
-            }))
-
+        if (passwordInput.value !== repeatPasswordInput.value) {
+            toast.error("Passwords don't match!!");
             return;
         }
 
-        if (!isFormValid) {
-            toast.error('Failed to create an account');
-            return;
-        }
+        // if (!inputFieldsIsValid) {
+        //     toast.error('Failed to create an account');
+        //     return;
+        // }
 
         try {
             setIsLoading(true);
-            const { user } = await signUp(values.email, values.password);
+            const { user } = await signUp(emailInput.value, passwordInput.value);
             const additionalUserData = {
-                firstName: values.firstName,
-                lastName: values.lastName,
-                country: values.country
+                firstName: firstNameInput.value,
+                lastName: lastNameInput.value,
+                country: countryInput.value
             }
 
             const settedUserWithAdditionalData = await setUserAdditionalInfo(additionalUserData, user.uid)
             toast.success('Successfully Registered!');
             navigate('/');
         } catch (error) {
-            toast.error('Failed to create an account');
+            toast.error('Email already exist!');
         }
 
         setIsLoading(false);
     }
 
-    const { email, firstName, lastName, country, password, repass } = hasTouched;
-
-    let required;
-    if (email && firstName && lastName && country && password && repass) {
-        required = true;
-    }
-
-    const isFormValid = required && tac && Object.values(errors).every(x => x === true);
-    console.log(errors);
-    console.log(required);
-    console.log('isFormValid' + isFormValid);
     return (
 
         <section id={styles['register']}>
@@ -179,17 +124,15 @@ export const Register = () => {
                             type="email"
                             name="email"
                             id="email"
-                            className={styles['input']}
+                            className={`${styles['input']} ${emailInput.hasError && styles['error-input-field']}`}
                             placeholder="user@gmail.com"
                             required
-                            value={values.email}
-                            onChange={changeHandler}
-                            onBlur={(e) => emailValidator(e)}
+                            value={emailInput.value}
+                            onChange={emailInput.onChange}
+                            onBlur={emailInput.onBlur}
                         />
 
-                        {(!errors.email && hasTouched.email) && (
-                            <p className={styles['alert']}>Email is not valid!!</p>
-                        )}
+                        {emailInput.hasError && <p className={styles['alert']}>Email is not valid!!</p>}
                     </div>
                     {/* First Name input */}
                     <div className={styles['input-ctn']}>
@@ -198,17 +141,15 @@ export const Register = () => {
                             type="text"
                             name="firstName"
                             id="firstName"
-                            className={styles['input']}
+                            className={`${styles['input']} ${firstNameInput.hasError && styles['error-input-field']}`}
                             placeholder="Max"
                             required
-                            value={values.displayName}
-                            onChange={changeHandler}
-                            onBlur={(e) => nameValidator(e)}
+                            value={firstNameInput.value}
+                            onChange={firstNameInput.onChange}
+                            onBlur={firstNameInput.onBlur}
                         />
 
-                        {(!errors.firstName && hasTouched.firstName) && (
-                            <p className={styles['alert']}>First Name must be at least 2 characters long!!</p>
-                        )}
+                        {firstNameInput.hasError && <p className={styles['alert']}>First Name must be at least 2 characters long!!</p>}
                     </div>
                     {/* Last Name input */}
                     <div className={styles['input-ctn']}>
@@ -217,16 +158,14 @@ export const Register = () => {
                             type="text"
                             name="lastName"
                             id="lastName"
-                            className={styles['input']}
+                            className={`${styles['input']} ${lastNameInput.hasError && styles['error-input-field']}`}
                             placeholder="Mustermann"
                             required
-                            value={values.displayName}
-                            onChange={changeHandler}
-                            onBlur={(e) => nameValidator(e)}
+                            value={lastNameInput.value}
+                            onChange={lastNameInput.onChange}
+                            onBlur={lastNameInput.onBlur}
                         />
-                        {(!errors.lastName && hasTouched.lastName) && (
-                            <p className={styles['alert']}>Last Name must be at least 2 characters long!!</p>
-                        )}
+                        {lastNameInput.hasError && <p className={styles['alert']}>Last Name must be at least 2 characters long!!</p>}
                     </div>
                     {/* Country input */}
                     <div className={styles['input-ctn']}>
@@ -235,16 +174,14 @@ export const Register = () => {
                             type="text"
                             name="country"
                             id="country"
-                            className={styles['input']}
+                            className={`${styles['input']} ${countryInput.hasError && styles['error-input-field']}`}
                             placeholder="Germany"
                             required
-                            value={values.country}
-                            onChange={changeHandler}
-                            onBlur={(e) => nameValidator(e)}
+                            value={countryInput.value}
+                            onChange={countryInput.onChange}
+                            onBlur={countryInput.onBlur}
                         />
-                        {(!errors.country && hasTouched.country) && (
-                            <p className={styles['alert']}>Country is not valid!!</p>
-                        )}
+                        {countryInput.hasError && <p className={styles['alert']}>Country is not valid!!</p>}
                     </div>
                     {/* Password input */}
                     <div className={styles['input-ctn']}>
@@ -253,20 +190,20 @@ export const Register = () => {
                             type={showPassword ? 'text' : 'password'}
                             name="password"
                             id="password"
-                            className={styles['input']}
+                            className={`${styles['input']} ${passwordInput.hasError && styles['error-input-field']}`}
                             placeholder="******"
                             required
-                            value={values.password}
-                            onChange={changeHandler}
-                            onBlur={(e) => passwordValidator(e)}
+                            value={passwordInput.value}
+                            onChange={passwordInput.onChange}
+                            onBlur={passwordInput.onBlur}
                         />
-                        <span className={(!errors.password && hasTouched.password) ? styles['password-icon-error'] : styles['password-icon']} onClick={showPasswordHandler}>
+                        <span className={passwordInput.hasError ? styles['password-icon-error'] : styles['password-icon']} onClick={showPasswordHandler}>
                             {showPassword
                                 ? <FontAwesomeIcon icon={faEye} />
                                 : <FontAwesomeIcon icon={faEyeSlash} />
                             }
                         </span>
-                        {(!errors.password && hasTouched.password) && (
+                        {passwordInput.hasError && (
                             <p className={styles['alert']}>Password must be at least 6 characters long!!</p>
                         )}
                     </div>
@@ -276,21 +213,21 @@ export const Register = () => {
                             type={showRepeatPassword ? 'text' : 'password'}
                             name="repass"
                             id="repass"
-                            className={styles['input']}
+                            className={`${styles['input']} ${repeatPasswordInput.hasError && styles['error-input-field']}`}
                             placeholder="******"
                             required
-                            value={values.repass}
-                            onChange={changeHandler}
-                            onBlur={(e) => rePassValidator(e)}
+                            value={repeatPasswordInput.value}
+                            onChange={repeatPasswordInput.onChange}
+                            onBlur={repeatPasswordInput.onBlur}
                         />
 
-                        <span className={(!errors.password && hasTouched.password) ? styles['repass-icon-error'] : styles['password-icon']} onClick={showRepeatPasswordHandler}>
+                        <span className={repeatPasswordInput.hasError ? styles['repass-icon-error'] : styles['password-icon']} onClick={showRepeatPasswordHandler}>
                             {showRepeatPassword
                                 ? <FontAwesomeIcon icon={faEye} />
                                 : <FontAwesomeIcon icon={faEyeSlash} />
                             }
                         </span>
-                        {(!errors.repass && hasTouched.repass) && (
+                        {repeatPasswordInput.hasError && (
                             <p className={styles['alert']}>Passwords do not match!!</p>
                         )}
                     </div>
@@ -317,7 +254,7 @@ export const Register = () => {
 
                     {/* Submit button */}
                     <button
-                        disabled={!isFormValid}
+                        disabled={!inputFieldsIsValid}
                         type="submit"
                         className={styles['btn']}
                         data-mdb-ripple="true"

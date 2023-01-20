@@ -11,6 +11,8 @@ const nameIsLength = (value) => validator.isLength(value, { min: 2 });
 
 const textIsLength = (value) => validator.isLength(value, { min: 10 });
 
+const countryIsLength = (value) => validator.isLength(value, { min: 2, max: 28 });
+
 const isEqual = (pass, rePass) => validator.equals(pass, rePass);
 
 const isEmpty = (value) => !(validator.isEmpty(value));
@@ -22,7 +24,8 @@ const userValidation = {
     nameIsLength,
     textIsLength,
     isEqual,
-    isEmpty
+    isEmpty,
+    countryIsLength
 };
 
 
