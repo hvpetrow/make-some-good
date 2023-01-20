@@ -83,7 +83,7 @@
     /* TODO */
     font-family: Georgia, "Times New Roman", Times, serif;
     position: absolute;
-    top: 60%;
+    top: 65%;
     left: 50%;
     transform: translateX(-50%);
 }

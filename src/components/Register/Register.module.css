@@ -5,14 +5,15 @@
     margin-top: 3.5rem;
     margin-bottom: 5rem;
     display: flex;
-    color: #1f2937;
     flex-wrap: wrap;
+    color: #1f2937;
     justify-content: center;
+    gap: 7rem;
     align-items: center;
 }
 
 #register .img-ctn {
-    width: 50%;
+    width: 38%;
     height: 100%;
     margin-bottom: 12rem;
 }
@@ -23,7 +24,7 @@
 }
 
 #register .content-ctn {
-    width: 25%;
+    width: 36%;
 }
 
 #register .title {
@@ -248,6 +249,20 @@
 
     #register .content-ctn {
         width: 63%;
+    }
+
+    #register .link {
+        text-transform: none;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    #register .img-ctn {
+        display: none;
+    }
+
+    #register .content-ctn {
+        width: 38%;
     }
 
     #register .link {

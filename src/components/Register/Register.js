@@ -16,30 +16,10 @@ export const Register = () => {
     document.title = 'Register';
 
     const navigate = useNavigate();
-    const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-    const [tac, setTac] = useState(false);
     const { signUp, currentUser, setUserAdditionalInfo } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
-    // const [hasTouched, setHasTouched] = useState({
-    //     email: false,
-    //     password: false,
-    //     repass: false,
-    //     firstName: false,
-    //     lastName: false,
-    //     country: false,
-    //     terms: false
-    // });
-
-    // const [values, setValues] = useState({
-    //     email: '',
-    //     password: '',
-    //     repass: '',
-    //     firstName: '',
-    //     lastName: '',
-    //     country: '',
-    // });
 
     const emailInput = useInput(userValidation.emailIsValid);
     const firstNameInput = useInput(userValidation.nameIsLength);
@@ -63,14 +43,6 @@ export const Register = () => {
         setShowRepeatPassword(state => !state);
     };
 
-    const tacChangeHandler = (e) => {
-        setTac(e.target.checked);
-        setErrors((state) => ({
-            ...state,
-            [e.target.name]: e.target.checked
-        }));
-    }
-
     const submitHandler = async (e) => {
         e.preventDefault();
 
@@ -78,11 +50,6 @@ export const Register = () => {
             toast.error("Passwords don't match!!");
             return;
         }
-
-        // if (!inputFieldsIsValid) {
-        //     toast.error('Failed to create an account');
-        //     return;
-        // }
 
         try {
             setIsLoading(true);
@@ -231,30 +198,9 @@ export const Register = () => {
                             <p className={styles['alert']}>Passwords do not match!!</p>
                         )}
                     </div>
-                    {/* Terms and Conditions */}
-                    <div className={styles['tac-ctn']}>
-                        <input
-                            id="terms"
-                            aria-describedby="terms"
-                            type="checkbox"
-                            name="terms"
-                            className={styles['tac-input']}
-                            required
-                            value={tac}
-                            onChange={tacChangeHandler}
-                        />
-                        <span>I accept the</span>
-                        <Link
-                            className={styles['link']}
-                            to="/tac"
-                        >
-                            Terms and Conditions
-                        </Link>
-                    </div>
-
                     {/* Submit button */}
                     <button
-                        disabled={!inputFieldsIsValid}
+                        disabled={!inputFieldsIsValid || isLoading}
                         type="submit"
                         className={styles['btn']}
                         data-mdb-ripple="true"
