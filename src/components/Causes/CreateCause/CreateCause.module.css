@@ -44,6 +44,16 @@
     outline: 0;
 }
 
+.error-input-field {
+    border: 1px solid #ff525b !important;
+    animation: shake 200ms ease-in-out 0ms 2;
+}
+
+.error-input-field:focus {
+    border: 1px solid #ff525b !important;
+    animation: shake 200ms ease-in-out 0ms 2;
+}
+
 .form-desc {
     display: block;
     padding: 0.75rem 1rem;

@@ -181,7 +181,6 @@ export const CreateCause = () => {
                             name="imgUrl"
                             className={`${styles['form-input']} ${titleInput.hasError && styles['error-input-field']}`}
                             placeholder="Example: https://pixlr.eu/makeSomeGood.png"
-                            // required
                             value={imgUrlInput.value}
                             onChange={imgUrlInput.onChange}
                             onBlur={imgUrlInput.onBlur}
