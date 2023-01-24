@@ -20,6 +20,7 @@
 
 .carousel-img {
     margin: 0 auto;
+    cursor: pointer;
     /* width: 500px;
     height: 300px; */
     /* TODO: make the size */
