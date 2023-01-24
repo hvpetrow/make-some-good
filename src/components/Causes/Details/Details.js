@@ -135,8 +135,8 @@ export const Details = () => {
                                         Creator:
                                     </span>
                                 </p>
-                                <Link className={styles['content-profile-link']} to={`/foreignProfile/${cause.creator}`}>{creator?.firstName} {creator.lastName}</Link>
-                                <Link className={styles['content-profile-link']} to={`/foreignProfile/${cause.creator}`}>
+                                <Link className={styles['content-profile-link']} to={cause.creator === currentUser.uid ? `/my-profile` : `/foreignProfile/${cause.creator}`}>{creator?.firstName} {creator.lastName}</Link>
+                                <Link className={styles['content-profile-link']} to={cause.creator === currentUser.uid ? `/my-profile` : `/foreignProfile/${cause.creator}`}>
                                     <img src={profilePicture} className={styles['creator-img']} alt="profileImg"></img>
                                 </Link>
                             </div>
