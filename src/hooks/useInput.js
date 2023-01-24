@@ -24,6 +24,7 @@ const useInput = (validation) => {
         setValue,
         fieldIsValid,
         hasError,
+        hasTouched,
         onChange,
         onBlur,
         fieldReset
