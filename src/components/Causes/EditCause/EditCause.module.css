@@ -75,6 +75,24 @@
     text-transform: uppercase;
 }
 
+.alert {
+    margin-top: 0.25rem;
+    margin-left: 0.25rem;
+    color: #ef4444;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+}
+
+.error-input-field {
+    border: 1px solid #ff525b !important;
+    animation: shake 200ms ease-in-out 0ms 2;
+}
+
+.error-input-field:focus {
+    border: 1px solid #ff525b !important;
+    animation: shake 200ms ease-in-out 0ms 2;
+}
+
 .btn-container {
     text-align: center;
 }

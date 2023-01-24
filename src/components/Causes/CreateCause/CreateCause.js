@@ -24,36 +24,6 @@ export const CreateCause = () => {
     const { currentUser } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
-
-
-    // let [values, setValues] = useState({
-    //     title: '',
-    //     purpose: '',
-    //     place: '',
-    //     date: '',
-    //     imgUrl: '',
-    //     description: '',
-    //     participants: [
-
-    //     ],
-    //     creator: currentUser.uid
-    // });
-
-    // const changeHandler = (e) => {
-    //     setValues((oldValues) => ({
-    //         ...oldValues,
-    //         [e.target.name]: e.target.value
-    //     }));
-    // }
-    // const { title, purpose, place, date, description } = hasTouched;
-
-    // let required;
-    // if (title && purpose && place && date && description) {
-    //     required = true;
-    // }
-
-    // const isFormValid = required && Object.values(errors).every(x => x === true);
-
     const titleInput = useInput(causeValidation.titleIsLength);
     const purposeInput = useInput(causeValidation.purposeIsLength);
     const placeInput = useInput(causeValidation.placeIsLength);
@@ -137,7 +107,7 @@ export const CreateCause = () => {
                         <input
                             type="text"
                             name="purpose"
-                            className={`${styles['form-input']} ${titleInput.hasError && styles['error-input-field']}`}
+                            className={`${styles['form-input']} ${purposeInput.hasError && styles['error-input-field']}`}
                             placeholder="Purpose"
                             required
                             value={purposeInput.value}
@@ -151,7 +121,7 @@ export const CreateCause = () => {
                         <input
                             type="text"
                             name="place"
-                            className={`${styles['form-input']} ${titleInput.hasError && styles['error-input-field']}`}
+                            className={`${styles['form-input']} ${placeInput.hasError && styles['error-input-field']}`}
                             placeholder="Place"
                             required
                             value={placeInput.value}
@@ -165,7 +135,7 @@ export const CreateCause = () => {
                         <input
                             type="text"
                             name="date"
-                            className={`${styles['form-input']} ${titleInput.hasError && styles['error-input-field']}`}
+                            className={`${styles['form-input']} ${dateInput.hasError && styles['error-input-field']}`}
                             placeholder="in format DD/MM/YYYY"
                             required
                             value={dateInput.value}
@@ -179,7 +149,7 @@ export const CreateCause = () => {
                         <input
                             type="text"
                             name="imgUrl"
-                            className={`${styles['form-input']} ${titleInput.hasError && styles['error-input-field']}`}
+                            className={`${styles['form-input']} ${imgUrlInput.hasError && styles['error-input-field']}`}
                             placeholder="Example: https://pixlr.eu/makeSomeGood.png"
                             value={imgUrlInput.value}
                             onChange={imgUrlInput.onChange}
@@ -197,7 +167,7 @@ export const CreateCause = () => {
                                 Description
                             </label>
                             <textarea
-                                className={`${styles['form-input']} ${titleInput.hasError && styles['error-input-field']}`}
+                                className={`${styles['form-input']} ${descriptionInput.hasError && styles['error-input-field']}`}
                                 id="description"
                                 name="description"
                                 placeholder="Description"
