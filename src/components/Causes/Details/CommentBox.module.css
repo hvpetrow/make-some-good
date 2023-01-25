@@ -1,0 +1,102 @@
+#comments {
+    margin-top: 3em;
+    left: 50%;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.comments_h2 {
+    text-align: center;
+    font-size: 32px;
+}
+
+.comments-info {
+    color: #fff;
+    height: 200px auto;
+    margin: 50px auto;
+    display: flex;
+    max-width: 950px;
+    background: -webkit-linear-gradient(to right, #383838, #c33030);
+    background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(#222121),
+        to(rgb(#383838))
+    );
+    background: -webkit-linear-gradient(left, #222121, #383838);
+    background: -o-linear-gradient(left, #222121, #383838);
+    background: linear-gradient(to right, #222121, #383838);
+    -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    margin-bottom: 8em;
+    /* border: 3px solid #ef816c; */
+    box-shadow: 0 15px 30px 1px #303030;
+}
+
+.noBullet {
+    list-style-type: none;
+    padding: 0;
+    width: 950px;
+    text-align: center;
+}
+
+.inputFields {
+    margin: 18px 0;
+    padding: 10px;
+    width: 270px;
+    border: 1px solid #e66045;
+    background: rgba(20, 20, 20, 0.342);
+    color: white;
+    border-radius: 10px;
+    outline: none;
+}
+
+textarea {
+    margin-top: 40px;
+    resize: none;
+    height: 70px;
+    width: 450px !important;
+    font-size: 16px;
+}
+
+#post-btn {
+    border: 1px solid #e66045;
+    background: rgba(20, 20, 20, 0.6);
+    font-size: 18px;
+    color: white;
+    margin-bottom: 20px;
+    padding: 10px 43px;
+    cursor: pointer;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+#post-btn:hover:enabled {
+    border: 3px solid #e66045;
+    background: black;
+    font-size: 20px;
+}
+
+#post-btn:disabled {
+    opacity: 0.5;
+}
+
+/* end-comments */
+
+@keyframes animateC {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes animate {
+    0% {
+        transform: rotate(45deg);
+    }
+    100% {
+        transform: rotate(405deg);
+    }
+}

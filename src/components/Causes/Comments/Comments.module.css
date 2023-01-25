@@ -1,0 +1,78 @@
+.comment-content {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .comment {
+    width: 670px;
+    border: 2px solid #fff;
+    border-right: none;
+    border-bottom: none;
+    background: rgba(20, 20, 20, 0.342);
+    color: white;
+    outline: none;
+    border-radius: 28px;
+    word-wrap: break-word;
+    padding: 10px 10px 5px 10px;
+  }
+  
+  .owner {
+    text-align: center;
+  }
+  
+  .owner-info {
+    padding: 10px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    background: #933627;
+    color: white;
+    outline: none;
+    border-radius: 25px;
+    width: 148px;
+    word-wrap: break-word;
+    margin-top: 45px;
+    margin-left: 20px;
+    font-size: 16px;
+  }
+  
+  .timestamp {
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #e66045;
+  }
+  
+  .delete-btn {
+    float: right;
+    font-size: 12px;
+    margin-right: 10px;
+    margin-bottom: 7px;
+    margin-left: 670px;
+    position: relative;
+    bottom: 50px;
+    padding: 8px;
+    border: 2px solid white;
+    cursor: pointer;
+    background: #d13746;
+    color: white;
+    outline: none;
+    border-radius: 8px;
+  }
+  
+  .delete-btn:hover {
+    background: #ac1020;
+    font-size: 13px;
+  }
+  
+  .likes-no {
+    float: right;
+    margin-left: 670px;
+    font-size: 14px;
+    color: #e00808;
+    width: 65px;
+    margin-bottom: 3px;
+  }

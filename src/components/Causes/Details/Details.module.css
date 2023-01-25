@@ -172,6 +172,55 @@
     color: #ada02b;
 }
 
+/* comments btn */
+
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.comments_btn {
+    display: block;
+    width: 250px;
+    height: 60px;
+    line-height: 50px;
+    font-size: 30px;
+    font-family: serif;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    border: 3px solid #383838;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all 0.35s;
+    cursor: pointer;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.comments_btn span {
+    position: relative;
+    z-index: 2;
+}
+
+.comments_btn:hover:enabled {
+    background-image: url("https://scottyzen.sirv.com/Images/v/button.png");
+    /* background-image: url("/client/src/assets/button.webp"); */
+    background-size: 100% 100%;
+    color: #0e0e0f;
+    animation: spring 300ms ease-out;
+    text-shadow: 0 -1px 0 #474646;
+    font-weight: bolder;
+    border: 2px solid;
+}
+
+.comments_btn:active {
+    transform: translateY(4px);
+}
+
 /* grid-area: auto; */
 
 @media screen and (max-width: 450px) {
