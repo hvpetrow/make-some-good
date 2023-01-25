@@ -2,21 +2,26 @@ import styles from './Comments.module.css';
 
 import React from 'react'
 
-export const Comments = () => {
+export const Comments = ({ id, comment, currentUserId }) => {
     return (
         <li>
             <div className={styles["owner-info"]}>
-                <span className={styles["owner"]}>name</span>
+                <span className={styles["owner"]}>{comment.ownerEmail}</span>
             </div>
             <div className={styles["comment-content"]}>
                 <div className={styles["comment"]}>
                     <p>
-                        content
+                        {comment.content}
                     </p>
                     <div className={styles["right-side"]}>
                         {/* if owner */}
-                        <button className={styles["delete-btn"]}>Delete</button>
-                        <span className={styles["timestamp"]}>date</span>
+                        {(comment.ownerdId === currentUserId) &&
+                            <div className="buttons">
+                                <button className={styles["delete-btn"]}>Delete</button>
+                                <button className={styles["edit-btn"]}>Edit</button>
+                            </div>
+                        }
+                        <span className={styles["timestamp"]}>{comment.createdAt}</span>
                     </div>
                 </div>
             </div >

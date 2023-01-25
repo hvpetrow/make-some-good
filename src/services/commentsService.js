@@ -9,7 +9,7 @@ export const getAllComments = async () => {
 
 export const getCommentsByCauseId = async (causeId) => {
     // const result = {};
-    const q = query(this.commentRef, where("topicId", "==", causeId), orderBy('createdAt', 'desc'));
+    const q = query(commentsCollectionRef, where("causeId", "==", causeId), orderBy('createdAt', 'desc'));
     return getDocs(q);
     // querySnapshot.forEach((doc) => {
     //   const id = doc.id;

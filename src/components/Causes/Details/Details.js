@@ -49,6 +49,7 @@ export const Details = () => {
     }, [causeId, cause.creator, isParticipant]);
 
     useEffect(() => {
+        console.log(causeId);
         if (cause?.creator) {
             const promises = [getProfilePicture(cause.creator), getOne(usersCollectionRef, cause.creator), getCommentsByCauseId(causeId)];
 
@@ -61,6 +62,7 @@ export const Details = () => {
                     console.log(error);
                 }).finally(() => {
                     setIsLoading(false);
+
                 })
         }
     }, [cause.creator]);
@@ -69,6 +71,7 @@ export const Details = () => {
         let arr = [];
         commentsDocs.forEach((doc) => {
             let fields = doc.data();
+            console.log(fields);
 
             arr.push({
                 id: doc.id,
@@ -77,6 +80,8 @@ export const Details = () => {
         });
 
         setComments(arr);
+        console.log(comments);
+
     }
 
     const joinHandler = async () => {
@@ -250,7 +255,7 @@ export const Details = () => {
             <button onClick={toggleComments} className={styles['comments_btn']}>
                 <span> Comments(count)</span>
             </button>
-            <CommentBox comments={comments} isShowedComments={isShowedComments} storeComments={storeComments} />
+            <CommentBox comments={comments} isShowedComments={isShowedComments} setIsShowedComments={setIsShowedComments} storeComments={storeComments} currentUser={currentUser} causeId={causeId} />
         </>
     )
 }
