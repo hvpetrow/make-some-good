@@ -250,7 +250,7 @@ export const Details = () => {
             <button onClick={toggleComments} className={styles['comments_btn']}>
                 <span> Comments(count)</span>
             </button>
-            <CommentBox comments={comments} isShowedComments={isShowedComments} />
+            <CommentBox comments={comments} isShowedComments={isShowedComments} storeComments={storeComments} />
         </>
     )
 }

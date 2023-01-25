@@ -1,8 +1,15 @@
 import React from 'react'
 
 import styles from './CommentBox.module.css';
+import { useInput } from '@mui/base';
 
-export default function CommentBox({ comments, isShowedComments }) {
+export default function CommentBox({ comments, isShowedComments, storeComments }) {
+    const contentInput = useInput()
+
+    const postComment = async () => {
+
+    }
+
     return (
         <section id={styles["comments"]}>
             <div className={styles["comments-info"]}>

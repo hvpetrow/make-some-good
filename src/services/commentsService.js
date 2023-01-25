@@ -19,7 +19,7 @@ export const getCommentsByCauseId = async (causeId) => {
     // return result;
 }
 
-export const postComment = async (newComment) => {
+export const addComment = async (newComment) => {
     return addDoc(commentsCollectionRef, newComment);
 }
 
