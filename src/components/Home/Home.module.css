@@ -196,6 +196,7 @@
 @media screen and (max-width: 900px) {
     .home-title {
         font-size: 41px;
+        top: -3vh;
     }
 
     .home-quote {
