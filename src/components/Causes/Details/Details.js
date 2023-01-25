@@ -14,11 +14,13 @@ import { getOneCause } from '../../../services/causesService'
 import { getOne } from '../../../services/crudService';
 import { Spinner } from '../../../shared/Spinner';
 import CommentBox from './CommentBox';
+import { getCommentsByCauseId } from '../../../services/commentsService';
 
 const usersCollectionRef = collection(db, 'users');
 
 export const Details = () => {
     const [cause, setCause] = useState('');
+    const [comments, setComments] = useState('');
     const [creator, setCreator] = useState('');
     const [docId, setDocId] = useState(null);
     const [isParticipant, setIsParticipant] = useState(false);
@@ -26,6 +28,7 @@ export const Details = () => {
     const { currentUser, getProfilePicture } = useAuth();
     const { causeId } = useParams();
     const navigate = useNavigate();
+    const [isShowedComments, setIsShowedComments] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -47,12 +50,13 @@ export const Details = () => {
 
     useEffect(() => {
         if (cause?.creator) {
-            const promises = [getProfilePicture(cause.creator), getOne(usersCollectionRef, cause.creator)];
+            const promises = [getProfilePicture(cause.creator), getOne(usersCollectionRef, cause.creator), getCommentsByCauseId(causeId)];
 
             Promise.all(promises)
-                .then(([url, userDoc]) => {
+                .then(([url, userDoc, commentsDocs]) => {
                     setCreator(userDoc.data());
                     setProfilePicture(url);
+                    storeComments(commentsDocs);
                 }).catch((error) => {
                     console.log(error);
                 }).finally(() => {
@@ -60,6 +64,20 @@ export const Details = () => {
                 })
         }
     }, [cause.creator]);
+
+    const storeComments = (commentsDocs) => {
+        let arr = [];
+        commentsDocs.forEach((doc) => {
+            let fields = doc.data();
+
+            arr.push({
+                id: doc.id,
+                fields: fields
+            });
+        });
+
+        setComments(arr);
+    }
 
     const joinHandler = async () => {
         const currentCauseRef = doc(db, "causes", docId);
@@ -97,6 +115,10 @@ export const Details = () => {
         if (yes) {
             navigate(`/delete/${causeId}`);
         }
+    }
+
+    const toggleComments = () => {
+        setIsShowedComments(state => !state);
     }
 
     return (
@@ -225,12 +247,10 @@ export const Details = () => {
                 }
                 {isLoading && (<Spinner />)}
             </section >
-            <button className={styles['comments_btn']}>
+            <button onClick={toggleComments} className={styles['comments_btn']}>
                 <span> Comments(count)</span>
             </button>
-            <CommentBox>
-
-            </CommentBox>
+            <CommentBox comments={comments} isShowedComments={isShowedComments} />
         </>
     )
 }
