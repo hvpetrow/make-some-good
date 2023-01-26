@@ -49,7 +49,6 @@ export default function CommentBox({ comments, isShowedComments, setIsShowedComm
         <section id={styles["comments"]}>
             <div className={styles["comments-info"]}>
                 <ul className={styles["noBullet"]}>
-                    {/* if showedcomments */}
                     {(isShowedComments && !isLoading) &&
                         (comments.map(c => <Comments key={c.id} id={c.id} comment={c.fields} currentUserId={currentUser.uid} />))
                     }
@@ -77,7 +76,6 @@ export default function CommentBox({ comments, isShowedComments, setIsShowedComm
                             </button>
                         </li>
                     </>
-                    {/* comments.map... */}
                 </ul >
             </div >
         </section >

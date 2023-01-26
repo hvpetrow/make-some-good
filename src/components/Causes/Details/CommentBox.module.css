@@ -12,7 +12,6 @@
 
 .comments-info {
     color: #fff;
-    height: 200px auto;
     margin: 50px auto;
     display: flex;
     max-width: 950px;
@@ -24,14 +23,13 @@
         from(#222121),
         to(rgb(#383838))
     );
-    background: -webkit-linear-gradient(left, #222121, #383838);
-    background: -o-linear-gradient(left, #222121, #383838);
-    background: linear-gradient(to right, #222121, #383838);
-    -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    background: -webkit-linear-gradient(left, #343e48, #383838);
+    background: -o-linear-gradient(left, #343e48, #383838);
+    background: linear-gradient(to right, #343e48, #383838);
+    -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     margin-bottom: 8em;
-    /* border: 3px solid #ef816c; */
+    border: 3px solid #265a73;
     box-shadow: 0 15px 30px 1px #303030;
 }
 
@@ -46,7 +44,7 @@
     margin: 18px 0;
     padding: 10px;
     width: 270px;
-    border: 1px solid #e66045;
+    border: 1px solid #0387c7;
     background: rgba(20, 20, 20, 0.342);
     color: white;
     border-radius: 10px;
@@ -62,7 +60,7 @@ textarea {
 }
 
 #post-btn {
-    border: 1px solid #e66045;
+    border: 1px solid #0387c7;
     background: rgba(20, 20, 20, 0.6);
     font-size: 18px;
     color: white;
@@ -73,7 +71,7 @@ textarea {
     border-radius: 20px;
 }
 #post-btn:hover:enabled {
-    border: 3px solid #e66045;
+    border: 3px solid #0387c7;
     background: black;
     font-size: 20px;
 }

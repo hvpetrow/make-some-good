@@ -3,9 +3,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .comment {
+    position: relative;
+}
+
+.comment {
     width: 670px;
     border: 2px solid #fff;
     border-right: none;
@@ -14,20 +15,21 @@
     color: white;
     outline: none;
     border-radius: 28px;
+    position: relative;
     word-wrap: break-word;
     padding: 10px 10px 5px 10px;
-  }
-  
-  .owner {
+}
+
+.owner {
     text-align: center;
-  }
-  
-  .owner-info {
+}
+
+.owner-info {
     padding: 10px;
     border: 2px solid white;
     border-top: none;
     border-left: none;
-    background: #933627;
+    background: #1e545b;
     color: white;
     outline: none;
     border-radius: 25px;
@@ -36,24 +38,28 @@
     margin-top: 45px;
     margin-left: 20px;
     font-size: 16px;
-  }
-  
-  .timestamp {
+}
+
+.timestamp {
     float: right;
     margin-top: 5px;
     margin-right: 10px;
     font-size: 14px;
     color: #e66045;
-  }
-  
-  .delete-btn {
-    float: right;
+}
+
+.buttons {
+    position: absolute;
+    display: flex;
+    gap: 12px;
+}
+
+.delete-btn,
+.edit-btn {
     font-size: 12px;
-    margin-right: 10px;
-    margin-bottom: 7px;
-    margin-left: 670px;
-    position: relative;
-    bottom: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 70px;
     padding: 8px;
     border: 2px solid white;
     cursor: pointer;
@@ -61,18 +67,25 @@
     color: white;
     outline: none;
     border-radius: 8px;
-  }
-  
-  .delete-btn:hover {
+}
+
+.delete-btn:hover {
     background: #ac1020;
-    font-size: 13px;
-  }
-  
-  .likes-no {
+}
+
+.edit-btn {
+    background-color: #0387c7;
+}
+
+.edit-btn:hover {
+    background-color: #095c86;
+}
+
+.likes-no {
     float: right;
     margin-left: 670px;
     font-size: 14px;
     color: #e00808;
     width: 65px;
     margin-bottom: 3px;
-  }
+}

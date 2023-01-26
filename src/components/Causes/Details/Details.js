@@ -253,7 +253,7 @@ export const Details = () => {
                 {isLoading && (<Spinner />)}
             </section >
             <button onClick={toggleComments} className={styles['comments_btn']}>
-                <span> Comments(count)</span>
+                <span> Comments({comments.length})</span>
             </button>
             <CommentBox comments={comments} isShowedComments={isShowedComments} setIsShowedComments={setIsShowedComments} storeComments={storeComments} currentUser={currentUser} causeId={causeId} />
         </>
