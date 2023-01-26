@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { deleteCause } from '../../../services/causesService';

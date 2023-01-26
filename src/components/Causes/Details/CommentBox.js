@@ -50,7 +50,7 @@ export default function CommentBox({ comments, isShowedComments, setIsShowedComm
             <div className={styles["comments-info"]}>
                 <ul className={styles["noBullet"]}>
                     {(isShowedComments && !isLoading) &&
-                        (comments.map(c => <Comments key={c.id} id={c.id} comment={c.fields} currentUserId={currentUser.uid} />))
+                        (comments.map(c => <Comments key={c.id} id={c.id} comment={c.fields} currentUserId={currentUser.uid} getCommentsByCauseId={getCommentsByCauseId} causeId={causeId} storeComments={storeComments} />))
                     }
                     <>
                         <li>
@@ -79,5 +79,5 @@ export default function CommentBox({ comments, isShowedComments, setIsShowedComm
                 </ul >
             </div >
         </section >
-    )
+    );
 }

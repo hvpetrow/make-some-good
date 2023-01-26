@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import yesno from "yesno-dialog"
+import yesno from "yesno-dialog";
 
 import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
@@ -62,10 +62,9 @@ export const Details = () => {
                     console.log(error);
                 }).finally(() => {
                     setIsLoading(false);
-
-                })
+                });
         }
-    }, [cause.creator]);
+    }, [cause.creator, comments.length]);
 
     const storeComments = (commentsDocs) => {
         let arr = [];
