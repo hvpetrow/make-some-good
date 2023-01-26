@@ -15,13 +15,13 @@ export const Comments = ({ id, comment, currentUserId }) => {
                     </p>
                     <div className={styles["right-side"]}>
                         {/* if owner */}
-                        {(comment.ownerdId === currentUserId) &&
+                        {(comment.ownerId === currentUserId) &&
                             <div className="buttons">
                                 <button className={styles["delete-btn"]}>Delete</button>
                                 <button className={styles["edit-btn"]}>Edit</button>
                             </div>
                         }
-                        <span className={styles["timestamp"]}>{comment.createdAt}</span>
+                        <span className={styles["timestamp"]}>{id}</span>
                     </div>
                 </div>
             </div >
