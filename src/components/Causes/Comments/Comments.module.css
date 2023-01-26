@@ -89,3 +89,11 @@
     width: 65px;
     margin-bottom: 3px;
 }
+
+.edit-comment_input {
+    background: rgba(20, 20, 20, 0.342);
+    text-align: center;
+    color: white;
+    border: 1px solid #0387c7;
+    border-radius: 10px;
+}

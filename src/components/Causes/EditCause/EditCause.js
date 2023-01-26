@@ -97,6 +97,7 @@ export const EditCause = () => {
         setIsLoading(false);
     }
 
+
     return (
         <section id="create-cause" className={styles['create-cause']}>
             <div className={styles['create-cause-ctn']}>
