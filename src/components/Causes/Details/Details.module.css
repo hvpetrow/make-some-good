@@ -7,9 +7,8 @@
     border-radius: 15px;
     transition: 0.5s;
     max-width: 880px;
-    margin: 7rem auto;
-    margin-bottom: 14rem;
-    margin-top: 100px;
+    margin: 5rem auto;
+    margin-top: 110px;
 }
 
 .details-card-container {
@@ -183,7 +182,7 @@
 
 .comments_btn {
     display: block;
-    width: 250px;
+    width: 240px;
     height: 60px;
     line-height: 50px;
     font-size: 30px;
@@ -191,14 +190,12 @@
     font-weight: bold;
     text-decoration: none;
     color: #333;
-    border: 3px solid #343e48;
     letter-spacing: 2px;
     text-align: center;
     position: relative;
     transition: all 0.35s;
     cursor: pointer;
     margin: 0 auto;
-    border-radius: 5px;
 }
 
 .comments_btn span {
@@ -207,21 +204,15 @@
 }
 
 .comments_btn:hover:enabled {
-    background-image: url("https://scottyzen.sirv.com/Images/v/button.png");
+    background-image: url("https://www.citypng.com/public/uploads/preview/blue-glossy-web-button-free-png-11637044426ezpbd2juzh.png");
+    background-position: center;
     /* background-image: url("/client/src/assets/button.webp"); */
-    background-size: 100% 100%;
-    color: #0e0e0f;
-    animation: spring 300ms ease-out;
+    background-size: 112%;
+    color: #fff;
+    animation: spring 200ms ease-out;
     text-shadow: 0 -1px 0 #474646;
     font-weight: bolder;
-    border: 2px solid;
 }
-
-.comments_btn:active {
-    transform: translateY(4px);
-}
-
-/* grid-area: auto; */
 
 @media screen and (max-width: 450px) {
     #details {
