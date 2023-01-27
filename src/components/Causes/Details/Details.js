@@ -14,7 +14,7 @@ import { getOneCause } from '../../../services/causesService'
 import { getOne } from '../../../services/crudService';
 import { Spinner } from '../../../shared/Spinner';
 import CommentBox from './CommentBox';
-import { getCommentsByCauseId } from '../../../services/commentsService';
+import { getCommentsByCauseId, deleteComment } from '../../../services/commentsService';
 
 const usersCollectionRef = collection(db, 'users');
 
@@ -116,7 +116,14 @@ export const Details = () => {
 
     const removeHandler = async () => {
         const yes = await yesno({ bodyText: "Are you sure to delete this cause?" });
+
         if (yes) {
+            try {
+                comments.forEach(async (comment) => await deleteComment(comment.id));
+            } catch (error) {
+                console.log(error);
+            }
+
             navigate(`/delete/${causeId}`);
         }
     }
@@ -127,8 +134,8 @@ export const Details = () => {
 
     return (
         <>
-            <section id={styles['details']}>
-                {!isLoading && <div className={styles['details-ctn']}>
+            {!isLoading && <section id={styles['details']}>
+                <div className={styles['details-ctn']}>
                     <div className={styles['details-card-container']}>
                         <div className={styles['details-grid']}>
                             <div className={styles['details-img-container']}>
@@ -248,13 +255,12 @@ export const Details = () => {
                         }
                     </div>
                 </div>
-                }
-                {isLoading && (<Spinner />)}
-            </section >
-            <button onClick={toggleComments} className={styles['comments_btn']}>
-                Comments({comments.length})
-            </button>
-            <CommentBox comments={comments} isShowedComments={isShowedComments} setIsShowedComments={setIsShowedComments} storeComments={storeComments} currentUser={currentUser} causeId={causeId} />
+                <button onClick={toggleComments} className={styles['comments_btn']}>
+                    Comments({comments.length})
+                </button>
+                <CommentBox comments={comments} isShowedComments={isShowedComments} setIsShowedComments={setIsShowedComments} storeComments={storeComments} currentUser={currentUser} causeId={causeId} />
+            </section >}
+            {isLoading && (<Spinner />)}
         </>
     )
 }
