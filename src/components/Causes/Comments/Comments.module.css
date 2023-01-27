@@ -17,7 +17,7 @@
     border-radius: 28px;
     position: relative;
     word-wrap: break-word;
-    padding: 10px 10px 5px 10px;
+    padding: 20px 20px 5px 20px;
 }
 
 .owner {
@@ -55,7 +55,8 @@
 }
 
 .delete-btn,
-.edit-btn {
+.edit-btn,
+.cancel-btn {
     font-size: 12px;
     text-transform: uppercase;
     font-weight: bold;
@@ -81,6 +82,14 @@
     background-color: #095c86;
 }
 
+.cancel-btn {
+    background-color: #b99b40;
+}
+
+.cancel-btn:hover {
+    background-color: #725d1e;
+}
+
 .likes-no {
     float: right;
     margin-left: 670px;
@@ -95,5 +104,8 @@
     text-align: center;
     color: white;
     border: 1px solid #0387c7;
+    width: 50%;
+    max-width: 70%;
+    resize: auto;
     border-radius: 10px;
 }

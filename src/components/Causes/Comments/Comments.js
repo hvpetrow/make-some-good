@@ -47,8 +47,12 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
             commentInput.setValue(comment.content);
 
         }
-        console.log(comment);
 
+        console.log(comment);
+    }
+
+    const cancelEdit = () => {
+        setIsEdited(false);
     }
 
 
@@ -90,7 +94,7 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
                         !isEdited ? <p>
                         {comment.content}
                     </p>
-                        : <input
+                        : <textarea
                             type="text"
                             name="comment"
                             className={`${styles['edit-comment_input']} ${commentInput.hasError && styles['error-input-field']}`}
@@ -110,6 +114,7 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
                         </div>
                             : <div className={styles["buttons"]}>
                                 <button onClick={updateHandler} className={styles["edit-btn"]} disabled={!commentInput.fieldIsValid || isLoading}>Post</button>
+                                <button onClick={cancelEdit} className={styles["cancel-btn"]}>Cancel</button>
                             </div>
                         }
                         <span className={styles["timestamp"]}>{created}</span>

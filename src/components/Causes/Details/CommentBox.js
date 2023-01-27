@@ -46,7 +46,7 @@ export default function CommentBox({ comments, isShowedComments, setIsShowedComm
     console.log(comments);
 
     return (
-        <section id={styles["comments"]}>
+        <section id={styles["comments-box"]}>
             <div className={styles["comments-info"]}>
                 <ul className={styles["noBullet"]}>
                     {(isShowedComments && !isLoading) &&

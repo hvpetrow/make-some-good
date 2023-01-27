@@ -1,4 +1,4 @@
-#comments {
+#comments-box {
     margin-top: 3em;
     left: 50%;
     text-align: center;
@@ -49,9 +49,6 @@
     color: white;
     border-radius: 10px;
     outline: none;
-}
-
-textarea {
     margin-top: 40px;
     resize: none;
     height: 70px;
