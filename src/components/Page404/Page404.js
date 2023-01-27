@@ -16,6 +16,19 @@ export const Page404 = () => {
                     Go Home
                 </span>
             </Link>
+            <div className={styles.frame} >
+                <div className={styles.modal}>
+                    <div className={`${styles['post-container']} ${styles['post-container-with-form']}`} >
+                        <button
+                            type='button'
+                            className={`${styles['btn-icon']}`}
+                        >
+                            <span className={styles['icon-message']}></span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
         </section>
     )
 }

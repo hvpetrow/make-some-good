@@ -9,9 +9,7 @@ import { CardTemplate } from "./CardTemplate";
 import 'react-toastify/dist/ReactToastify.css';
 import { getLatestCauses } from '../../services/causesService';
 
-import Carousel from 'react-material-ui-carousel';
-import { Paper, Button } from '@mui/material';
-import { CarouselItem } from './CarouselItem';
+import Slider from '../../shared/Slider';
 
 
 
@@ -37,6 +35,7 @@ export const Home = () => {
         }
     }, []);
 
+    const imgs = causes.map(c => c.fields.imgUrl);
 
     return (
         <div className={styles['home']}>
@@ -51,9 +50,7 @@ export const Home = () => {
                 ? (<Spinner />)
                 : causes.length !== 0
                     ? <div className={styles['carousel-container']}>
-                        < Carousel >
-                            {causes.map((c) => <CarouselItem key={c.id} id={c.id} fields={c.fields} />)}
-                        </Carousel>
+                        <Slider thumbnail={''} imgs={imgs} />
                     </div>
                     : (<h3 className="no-articles">No articles yet</h3>)}
         </div>

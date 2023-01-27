@@ -1,0 +1,13 @@
+.thumbnail {
+    display: flex;
+    cursor: pointer;
+}
+
+.thumbnail img {
+    object-fit: cover;
+}
+
+.active {
+    transform: scale(1.2);
+    transform: all 300ms;
+}
