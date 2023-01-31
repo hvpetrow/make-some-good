@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, updateEmail, updatePassword, updateProfile } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, increment, decrement, setDoc, updateDoc, FieldValue } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useEffect } from 'react'
 import { useState } from 'react';
@@ -10,6 +10,7 @@ const AuthContext = React.createContext();
 
 export function useAuth() {
     return useContext(AuthContext);
+
 }
 
 export const AuthProvider = ({ children }) => {
@@ -56,8 +57,20 @@ export const AuthProvider = ({ children }) => {
         return setDoc(doc(db, "users", uid), {
             firstName: data.firstName,
             lastName: data.lastName,
-            country: data.country
+            country: data.country,
+            causes: data.causes
         });
+    }
+
+    async function incrementUserCauses(uid) {
+        const userDoc = doc(db, 'users', uid);
+        console.log(userDoc);
+        return updateDoc(userDoc, { causes: increment(1) });
+    }
+
+    function decrementUserCauses(uid) {
+        const userDoc = doc(db, 'users', uid);
+        return updateDoc(userDoc, { causes: increment(-1) });
     }
 
     async function uploadProfilePicture(file, currentUser, setLoading) {
@@ -89,6 +102,8 @@ export const AuthProvider = ({ children }) => {
         updateEmailForCurrentUser,
         updatePasswordForCurrentUser,
         setUserAdditionalInfo,
+        incrementUserCauses,
+        decrementUserCauses,
         uploadProfilePicture,
         getProfilePicture
     }

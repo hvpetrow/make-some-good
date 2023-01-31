@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../../../contexts/AuthContext';
 import { db } from '../../../firebase';
 import { add } from '../../../services/crudService';
-import { dateValidator, descriptionValidator, placeValidator, purposeValidator, titleValidator, urlValidator } from '../../../validation/validators';
 import useInput from '../../../hooks/useInput';
 import causeValidation from '../../../validation/causeValidation';
 
@@ -21,7 +20,7 @@ export const CreateCause = () => {
 
     const navigate = useNavigate();
 
-    const { currentUser } = useAuth();
+    const { currentUser, incrementUserCauses } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
     const titleInput = useInput(causeValidation.titleIsLength);
@@ -72,6 +71,8 @@ export const CreateCause = () => {
             const updateTimestamp = await updateDoc(addedDoc, {
                 createdAt: serverTimestamp()
             });
+
+            await incrementUserCauses(currentUser.uid);
 
             toast.success('Successfully Created Cause!');
             navigate('/');

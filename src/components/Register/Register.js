@@ -57,7 +57,8 @@ export const Register = () => {
             const additionalUserData = {
                 firstName: firstNameInput.value,
                 lastName: lastNameInput.value,
-                country: countryInput.value
+                country: countryInput.value,
+                causes: 0
             }
 
             const settedUserWithAdditionalData = await setUserAdditionalInfo(additionalUserData, user.uid)
