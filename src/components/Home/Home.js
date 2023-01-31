@@ -5,11 +5,11 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useCausesContext } from "../../contexts/CauseContext";
 import { db } from "../../firebase";
 import { Spinner } from "../../shared/Spinner";
-import { CardTemplate } from "./CardTemplate";
 import 'react-toastify/dist/ReactToastify.css';
 import { getLatestCauses } from '../../services/causesService';
 
 import Slider from '../../shared/Slider';
+import { HeroOfMonth } from './HeroOfMonth/HeroOfMonth';
 
 
 
@@ -50,9 +50,15 @@ export const Home = () => {
                 ? (<Spinner />)
                 : causes.length !== 0
                     ? <div className={styles['carousel-container']}>
-                        <Slider thumbnail={''} imgs={imgs} />
+                        <Slider thumbnail={''} imgs={imgs} causes={causes} />
                     </div>
                     : (<h3 className="no-articles">No articles yet</h3>)}
+            <article className='hero-of-month'>
+                <div className={styles.discount}>
+                    HERO OF THE MONTH
+                </div>
+                <HeroOfMonth />
+            </article>
         </div>
     );
 }

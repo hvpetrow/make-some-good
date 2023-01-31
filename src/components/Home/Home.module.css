@@ -111,14 +111,14 @@
 }
 
 .carousel-container {
-    padding: 24px 24px;
+    padding: 36px;
     margin: 0 auto;
-    width: 50%;
-    background-color: #fff;
+    width: 70%;
+    background-color: rgb(28, 14, 219);
     transition-property: background-color, border-color, color, fill, stroke,
         opacity, box-shadow, transform;
     transition-duration: 500ms;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     box-shadow: inset 5px 5px 5px #0003, inset -5px -5px 15px #ffffff1a,
         5px 5px 15px #0000004d, -5px -5px 15px #ffffff1a;
 }
@@ -175,6 +175,19 @@
         0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
+.discount {
+    background-color: var(--aqua-solid);
+    padding: 1rem;
+    margin: 5rem;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    outline: 2px solid var(--aqua-solid);
+    outline-offset: 0.5rem;
+    color: #3f4c58;
+    text-align: center;
+}
+
 @media screen and (max-width: 1250px) {
     .home-title {
         font-size: 47px;
@@ -189,7 +202,7 @@
     }
 
     .latest-topics-title {
-        font-size: 28px;
+        font-size: 36px;
     }
 }
 
