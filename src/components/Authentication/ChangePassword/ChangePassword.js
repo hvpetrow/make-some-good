@@ -3,8 +3,8 @@ import styles from './ChangePassword.module.css';
 import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext'
-import userValidation from '../../validation/userValidation';
+import { useAuth } from '../../../contexts/AuthContext'
+import userValidation from '../../../validation/userValidation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
@@ -99,7 +99,7 @@ export const ChangePassword = () => {
         <section id={styles['change-password']}>
             <div className={styles['img-ctn']}>
                 <img
-                    src={require("../../assets/settings.jpg")}
+                    src={require("../../../assets/settings.jpg")}
                     className={styles['img']}
                     alt="loginImg"
                 />
