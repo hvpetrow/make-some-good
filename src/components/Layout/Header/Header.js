@@ -1,8 +1,8 @@
 import styles from './Header.module.css';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../../contexts/AuthContext';
 import { useState } from 'react';
-import { useClickOutside } from '../../utils/utils';
+import { useClickOutside } from '../../../utils/utils';
 
 export const Header = () => {
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -16,22 +16,6 @@ export const Header = () => {
     let mainMenuRef = useClickOutside(() => {
         setIsMainMenuOpen(false);
     });
-
-
-
-    // useEffect(() => {
-    //     let handler = (event) => {
-    //         if (!profileMenuRef.current.contains(event.target)) {
-    //             setIsProfileMenuOpen(false);
-    //         }
-    //     }
-
-    //     document.addEventListener("mousedown", handler);
-
-    //     return () => {
-    //         document.removeEventListener("mousedown", handler);
-    //     };
-    // }, []);
 
     const dropdownHandler = (e) => {
         if (e.currentTarget.id === 'mobileMenuBtn') {

@@ -4,14 +4,14 @@ import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 
-import { Footer } from './components/Footer/Footer';
+import { Footer } from './components/Layout/Footer/Footer';
 import { ForgotPassword } from './components/ForgotPassword/ForgotPassword';
-import { Header } from './components/Header/Header';
+import { Header } from './components/Layout/Header/Header';
 import { Home } from './components/Home/Home';
-import { Login } from './components/Login/Login';
+import { Login } from './components/Authentication/Login/Login';
 import { Logout } from './components/Logout/Logout';
 import { MyProfile } from './components/MyProfile/MyProfile';
-import { Register } from './components/Register/Register';
+import { Register } from './components/Authentication/Register/Register';
 import { ChangePassword } from './components/ChangePassword/ChangePassword';
 import { AuthProvider } from './contexts/AuthContext';
 import { CauseProvider } from './contexts/CauseContext';

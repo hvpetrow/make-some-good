@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import styles from './Register.module.css';
 
-import { useAuth } from '../../contexts/AuthContext'
-import userValidation from '../../validation/userValidation';
-import useInput from '../../hooks/useInput';
+import { useAuth } from '../../../contexts/AuthContext'
+import userValidation from '../../../validation/userValidation';
+import useInput from '../../../hooks/useInput';
 
 
 export const Register = () => {
@@ -76,7 +76,7 @@ export const Register = () => {
         <section id={styles['register']}>
             <div className={styles['img-ctn']}>
                 <img
-                    src={require("../../assets/register.jpg")}
+                    src={require("../../../assets/register.jpg")}
                     className={styles['img']}
                     alt="registerImg"
                 />
