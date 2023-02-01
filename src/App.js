@@ -10,7 +10,7 @@ import { Header } from './components/Layout/Header/Header';
 import { Home } from './components/Home/Home';
 import { Login } from './components/Authentication/Login/Login';
 import { Logout } from './components/Logout/Logout';
-import { MyProfile } from './components/MyProfile/MyProfile';
+import { MyProfile } from './components/User/MyProfile/MyProfile';
 import { Register } from './components/Authentication/Register/Register';
 import { ChangePassword } from './components/Authentication/ChangePassword/ChangePassword';
 import { AuthProvider } from './contexts/AuthContext';
@@ -21,14 +21,14 @@ import { CreateCause } from './components/Causes/CreateCause/CreateCause';
 import { Catalog } from './components/Causes/Catalog/Catalog';
 import { MyCauses } from './components/Causes/MyCauses/MyCreatedCauses/MyCauses';
 import { Search } from './components/Search/Search';
-import { Donate } from './components/Donate/Donate';
+import { Donate } from './components/Pages/Donate/Donate';
 import { Details } from './components/Causes/Details/Details';
 import { EditCause } from './components/Causes/EditCause/EditCause';
 import { RemoveCause } from './components/Causes/RemoveCause/RemoveCause';
 import { OwnerGuard } from './guards/OwnerGuard';
-import { Page404 } from './components/Page404/Page404';
+import { Page404 } from './components/Pages/Page404/Page404';
 import { JoinedCauses } from './components/Causes/MyCauses/JoinedCauses/JoinedCauses';
-import { ForeignProfile } from './components/ForeignProfile/ForeignProfile';
+import { ForeignProfile } from './components/User/ForeignProfile/ForeignProfile';
 
 function App() {
     return (

@@ -3,12 +3,12 @@ import styles from './ForeignProfile.module.css';
 import { collection } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext';
-import { useCausesContext } from '../../contexts/CauseContext';
-import { db } from '../../firebase';
-import { getOne } from '../../services/crudService';
-import { Spinner } from '../../shared/Spinner';
-import { CardTemplate } from '../Home/CardTemplate/CardTemplate';
+import { useAuth } from '../../../contexts/AuthContext';
+import { useCausesContext } from '../../../contexts/CauseContext';
+import { db } from '../../../firebase';
+import { getOne } from '../../../services/crudService';
+import { Spinner } from '../../../shared/Spinner';
+import { CardTemplate } from '../../Home/CardTemplate/CardTemplate';
 
 const usersCollectionRef = collection(db, 'users');
 

@@ -7,10 +7,10 @@ import { Link } from "react-router-dom"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useAuth } from "../../contexts/AuthContext"
-import { useCausesContext } from "../../contexts/CauseContext";
-import { db } from "../../firebase";
-import { getOne } from "../../services/crudService";
+import { useAuth } from "../../../contexts/AuthContext"
+import { useCausesContext } from "../../../contexts/CauseContext";
+import { db } from "../../../firebase";
+import { getOne } from "../../../services/crudService";
 
 const usersCollectionRef = collection(db, 'users');
 
