@@ -6,7 +6,7 @@ import { useCausesContext } from "../../../contexts/CauseContext";
 import { db } from "../../../firebase";
 import { BackToTheTopButton } from "../../../shared/BackToTheTopButton";
 import { Spinner } from "../../../shared/Spinner";
-import { CardTemplate } from "../../Home/CardTemplate";
+import { CardTemplate } from "../../Home/CardTemplate/CardTemplate";
 import { getLatestCauses, loadThreeCauses } from '../../../services/causesService';
 
 const causesCollectionRef = collection(db, "causes");

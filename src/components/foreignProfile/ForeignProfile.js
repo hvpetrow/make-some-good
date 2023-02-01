@@ -8,7 +8,7 @@ import { useCausesContext } from '../../contexts/CauseContext';
 import { db } from '../../firebase';
 import { getOne } from '../../services/crudService';
 import { Spinner } from '../../shared/Spinner';
-import { CardTemplate } from '../Home/CardTemplate';
+import { CardTemplate } from '../Home/CardTemplate/CardTemplate';
 
 const usersCollectionRef = collection(db, 'users');
 

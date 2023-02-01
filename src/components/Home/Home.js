@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getLatestCauses } from '../../services/causesService';
 
 import Slider from '../../shared/Slider';
-import { HeroOfMonth } from './HeroOfMonth/HeroOfMonth';
 import { getAll } from '../../services/crudService';
 
 

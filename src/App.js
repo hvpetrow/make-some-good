@@ -19,7 +19,7 @@ import { AuthenticatedGuard } from './guards/AuthenticatedGuard';
 import { UnAuthenticatedGuard } from './guards/UnAuthenticatedGuard';
 import { CreateCause } from './components/Causes/CreateCause/CreateCause';
 import { Catalog } from './components/Causes/Catalog/Catalog';
-import { MyCauses } from './components/Causes/MyCauses/MyCauses';
+import { MyCauses } from './components/Causes/MyCauses/MyCreatedCauses/MyCauses';
 import { Search } from './components/Search/Search';
 import { Donate } from './components/Donate/Donate';
 import { Details } from './components/Causes/Details/Details';
@@ -27,7 +27,7 @@ import { EditCause } from './components/Causes/EditCause/EditCause';
 import { RemoveCause } from './components/Causes/RemoveCause/RemoveCause';
 import { OwnerGuard } from './guards/OwnerGuard';
 import { Page404 } from './components/Page404/Page404';
-import { JoinedCauses } from './components/Causes/MyCauses/JoinedCauses';
+import { JoinedCauses } from './components/Causes/MyCauses/JoinedCauses/JoinedCauses';
 import { ForeignProfile } from './components/ForeignProfile/ForeignProfile';
 
 function App() {

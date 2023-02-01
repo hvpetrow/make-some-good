@@ -3,7 +3,7 @@ import styles from './Search.module.css';
 import React, { useState } from 'react'
 import { useCausesContext } from '../../contexts/CauseContext';
 import { Spinner } from '../../shared/Spinner';
-import { CardTemplate } from '../Home/CardTemplate';
+import { CardTemplate } from '../Home/CardTemplate/CardTemplate';
 import { SearchElement } from './SearchElement'
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
