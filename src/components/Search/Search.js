@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { getAll } from '../../services/crudService';
 import { collection } from 'firebase/firestore';
 import { db } from '../../firebase';
+import { BackToTheTopButton } from '../../shared/BackToTheTopButton';
 
 
 
@@ -80,6 +81,10 @@ export const Search = () => {
                             : (<h3 className={styles['no-articles']}>No matches for your search.</h3>)
                 }
             </div>
+
+            {filteredCauses.length !== 0 &&
+                <BackToTheTopButton />
+            }
         </section>
     )
 }

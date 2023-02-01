@@ -8,6 +8,7 @@ import { db } from '../../../../firebase';
 import { Spinner } from '../../../../shared/Spinner';
 import { CardTemplate } from '../../../Home/CardTemplate/CardTemplate';
 import { getLatestCauses, loadThreeCauses } from '../../../../services/causesService';
+import { BackToTheTopButton } from '../../../../shared/BackToTheTopButton';
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -60,6 +61,9 @@ export const JoinedCauses = () => {
                         data-mdb-ripple-color="light"
                         onClick={loadMoreClickHandler}>load more</button>
                 </div>
+            }
+            {myCauses.length !== 0 &&
+                <BackToTheTopButton />
             }
         </section>
     );

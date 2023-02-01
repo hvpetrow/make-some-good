@@ -64,7 +64,10 @@ export const Catalog = () => {
                         </div>
                     }
 
-                    <BackToTheTopButton />
+                    {causes.length !== 0 &&
+                        <BackToTheTopButton />
+
+                    }
                 </>)
             }
         </section>

@@ -10,6 +10,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Spinner } from "../../../../shared/Spinner";
 import { getLatestCauses, loadThreeCauses } from "../../../../services/causesService";
+import { BackToTheTopButton } from '../../../../shared/BackToTheTopButton';
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -59,6 +60,11 @@ export const MyCauses = () => {
                         data-mdb-ripple-color="light"
                         onClick={loadMoreClickHandler}>load more</button>
                 </div>
+            }
+
+            {myCauses.length !== 0 &&
+
+                <BackToTheTopButton />
             }
         </section>
     );

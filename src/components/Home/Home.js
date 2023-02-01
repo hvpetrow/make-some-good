@@ -10,6 +10,7 @@ import { getLatestCauses } from '../../services/causesService';
 
 import Slider from '../../shared/Slider';
 import { getAll } from '../../services/crudService';
+import { BackToTheTopButton } from '../../shared/BackToTheTopButton';
 
 
 
@@ -87,8 +88,9 @@ export const Home = () => {
                         <Slider thumbnail={''} imgs={users} users={users} />
                     </div>
                 }
-                {/* <HeroOfMonth /> */}
             </article>
+
+            <BackToTheTopButton />
         </div>
     );
 }
