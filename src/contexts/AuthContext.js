@@ -64,7 +64,6 @@ export const AuthProvider = ({ children }) => {
 
     async function incrementUserCauses(uid) {
         const userDoc = doc(db, 'users', uid);
-        console.log(userDoc);
         return updateDoc(userDoc, { causes: increment(1) });
     }
 

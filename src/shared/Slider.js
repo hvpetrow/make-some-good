@@ -5,14 +5,13 @@ import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import Thumbnail from './Thumbnail/Thumbnail';
 import styles from './Slider.module.css';
 import { CardTemplate } from '../components/Home/CardTemplate';
+import { HeroOfMonth } from '../components/Home/HeroOfMonth/HeroOfMonth';
 
 
-const Slideshow = ({ thumbnail, imgs, causes }) => {
+const Slideshow = ({ thumbnail, imgs, causes, users }) => {
     const [index, setIndex] = useState(0);
-
-    console.log(imgs);
-
-
+    console.log(causes);
+    console.log(users);
     useEffect(() => {
         setIndex(0);
     }, []);
@@ -40,7 +39,12 @@ const Slideshow = ({ thumbnail, imgs, causes }) => {
     return (
         <div className={styles.slideshow}>
             {/* <img className={styles.mainImg} src={imgs[index]} alt='causeImg' /> */}
-            <CardTemplate key={causes[index].id} id={causes[index].id} cause={causes[index].fields} />
+            {causes &&
+                <CardTemplate key={causes[index].id} id={causes[index].id} cause={causes[index].fields} />
+            }
+            {users &&
+                <HeroOfMonth key={users[index].id} userData={users[index].fields} />
+            }
             <div className={styles.actions}>
                 <button onClick={prev}><FontAwesomeIcon icon={faAngleLeft} /></button>
                 <button onClick={next}><FontAwesomeIcon icon={faAngleRight} /></button>

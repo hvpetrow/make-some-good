@@ -10,16 +10,23 @@ import { getLatestCauses } from '../../services/causesService';
 
 import Slider from '../../shared/Slider';
 import { HeroOfMonth } from './HeroOfMonth/HeroOfMonth';
+import { getAll } from '../../services/crudService';
 
 
 
 export const Home = () => {
     const { currentUser } = useAuth();
     const { causes, setCauses } = useCausesContext();
+    const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isUsersLoading, setIsUsersLoading] = useState(true);
+
 
     const causesCollectionRef = collection(db, "causes");
     const orderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), limit(3));
+    const usersCollectionRef = collection(db, 'users');
+    const usersWithMostCausesCollQuery = query(usersCollectionRef, orderBy('causes', 'desc'), limit(3));
+
 
     if (currentUser) {
         console.log("CurrentUserId", currentUser.uid);
@@ -28,8 +35,26 @@ export const Home = () => {
     useEffect(() => {
         document.title = 'Make Some Good';
 
+
+
         try {
             getLatestCauses(orderedQuery, setCauses, setIsLoading, () => null);
+
+            getAll(usersWithMostCausesCollQuery)
+                .then(usersDocs => {
+                    let arr = [];
+                    usersDocs.forEach(doc => {
+                        let fields = doc.data();
+                        arr.push({
+                            id: doc.id,
+                            fields: fields
+                        });
+                    });
+
+                    setUsers(arr);
+                }).finally(() => {
+                    setIsUsersLoading(false);
+                });
         } catch (error) {
             console.log(error);
         }
@@ -54,10 +79,16 @@ export const Home = () => {
                     </div>
                     : (<h3 className="no-articles">No articles yet</h3>)}
             <article className='hero-of-month'>
-                <div className={styles.discount}>
-                    HERO OF THE MONTH
-                </div>
-                <HeroOfMonth />
+                <h2 className={styles.discount}>
+                    HEROES OF THE MONTH
+                </h2>
+                {isUsersLoading
+                    ? <Spinner />
+                    : <div className={styles['carousel-container']}>
+                        <Slider thumbnail={''} imgs={users} users={users} />
+                    </div>
+                }
+                {/* <HeroOfMonth /> */}
             </article>
         </div>
     );
