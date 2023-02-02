@@ -43,7 +43,7 @@ const Slideshow = ({ thumbnail, imgs, causes, users }) => {
                 <CardTemplate key={causes[index].id} id={causes[index].id} cause={causes[index].fields} />
             }
             {users &&
-                <HeroOfMonth key={users[index].id} userData={users[index].fields} />
+                <HeroOfMonth key={users[index].id} userId={users[index].id} userData={users[index].fields} />
             }
             <div className={styles.actions}>
                 <button onClick={prev}><FontAwesomeIcon icon={faAngleLeft} /></button>

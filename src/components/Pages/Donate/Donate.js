@@ -43,9 +43,9 @@ export const Donate = () => {
                         We're currently working on
                     </h4>
                     <div className={styles['p-ctn']}>
-                        <p >The next cryptocurrency</p>
+                        <p >Making some good</p>
                         <p >Amazing software!</p>
-                        <p >Blockchain technology</p>
+                        <p >Inovative technologies</p>
                     </div>
                 </div>
                 {clicked && bankAccount}
