@@ -130,7 +130,6 @@ export const Details = () => {
                 console.log(error);
             }
 
-            toast.warning('Removed Cause!');
             navigate(`/delete/${causeId}`);
         }
     }
