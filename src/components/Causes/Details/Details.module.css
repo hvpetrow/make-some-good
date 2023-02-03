@@ -171,6 +171,11 @@
     color: #ada02b;
 }
 
+.btns-ctn .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 /* comments btn */
 
 .wrapper {

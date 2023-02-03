@@ -9,7 +9,7 @@ import { ForgotPassword } from './components/Authentication/ForgotPassword/Forgo
 import { Header } from './components/Layout/Header/Header';
 import { Home } from './components/Home/Home';
 import { Login } from './components/Authentication/Login/Login';
-import { Logout } from './components/Logout/Logout';
+import { Logout } from './components/Authentication/Logout/Logout';
 import { MyProfile } from './components/User/MyProfile/MyProfile';
 import { Register } from './components/Authentication/Register/Register';
 import { ChangePassword } from './components/Authentication/ChangePassword/ChangePassword';

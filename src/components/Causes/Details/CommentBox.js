@@ -43,8 +43,6 @@ export default function CommentBox({ comments, isShowedComments, setIsShowedComm
         setIsLoading(false);
     }
 
-    console.log(comments);
-
     return (
         <section id={styles["comments-box"]}>
             <div className={styles["comments-info"]}>

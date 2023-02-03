@@ -17,6 +17,16 @@ label {
     cursor: pointer;
 }
 
+.jsyesnodialog__dialog__body {
+    color: red;
+}
+
+div.jsyesnodialog__dialog__footer
+    > button.jsyesnodialog__dialog__button.jsyesnodialog__dialog__yes {
+    background-color: rgb(248, 59, 59);
+    border-color: rgb(202, 6, 6);
+}
+
 :disabled {
     cursor: not-allowed;
 }

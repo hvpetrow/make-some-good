@@ -30,12 +30,15 @@ export const Details = () => {
     const navigate = useNavigate();
     const [isShowedComments, setIsShowedComments] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isButtonLoading, setIsButtonLoading] = useState('');
+    const [isCauseLoading, setIsCauseLoading] = useState(false);
 
 
     useEffect(() => {
         document.title = 'Details | Make Some Good';
 
         try {
+            setIsCauseLoading(true);
             getOneCause(causeId)
                 .then(doc => {
                     setCause(doc.data());
@@ -46,10 +49,11 @@ export const Details = () => {
         } catch (error) {
             console.log(error);
         }
-    }, [causeId, cause.creator, isParticipant]);
+
+        setIsCauseLoading(false);
+    }, [causeId, cause.creator]);
 
     useEffect(() => {
-        console.log(causeId);
         if (cause?.creator) {
             const promises = [getProfilePicture(cause.creator), getOne(usersCollectionRef, cause.creator), getCommentsByCauseId(causeId)];
 
@@ -85,31 +89,35 @@ export const Details = () => {
         const currentCauseRef = doc(db, "causes", docId);
 
         try {
+            setIsButtonLoading(true);
             await updateDoc(currentCauseRef, {
                 participants: arrayUnion(currentUser.uid)
             });
             toast.success('Successfully Joined Cause!');
             setIsParticipant(true);
-            //TODO: is Participant logic update
-
+            setIsButtonLoading(false);
         } catch (error) {
             console.log(error);
         }
+
     }
 
     const cancelCauseHandler = async () => {
         const currentCauseRef = doc(db, "causes", docId);
 
         try {
+            setIsButtonLoading(true);
             await updateDoc(currentCauseRef, {
                 participants: arrayRemove(currentUser.uid)
             });
-            toast.success('Successfully Canceled Cause!');
-            setIsParticipant(false);
+            toast.warning('Successfully Canceled Cause!');
 
+            setIsParticipant(false);
+            setIsButtonLoading(false);
         } catch (error) {
             console.log(error);
         }
+
     }
 
     const removeHandler = async () => {
@@ -122,6 +130,7 @@ export const Details = () => {
                 console.log(error);
             }
 
+            toast.warning('Removed Cause!');
             navigate(`/delete/${causeId}`);
         }
     }
@@ -130,9 +139,12 @@ export const Details = () => {
         setIsShowedComments(state => !state);
     }
 
+    console.log(isParticipant);
+
     return (
+
         <>
-            {!isLoading && <section id={styles['details']}>
+            {!isLoading && !isCauseLoading && <section id={styles['details']}>
                 <div className={styles['details-ctn']}>
                     <div className={styles['details-card-container']}>
                         <div className={styles['details-grid']}>
@@ -216,40 +228,43 @@ export const Details = () => {
                                         </ Link>
                                     </>
                                 }
-                                {((currentUser.uid !== cause.creator) && isParticipant)
-                                    && (< button onClick={joinHandler} className={`${styles['join-btn']} ${styles['btn']}`}>
-                                        <div className="mr-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                height="20px"
-                                                viewBox="0 0 24 24"
-                                                width="20px"
-                                                fill="#9c428c"
-                                            >
-                                                <path d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                                            </svg>
-                                        </div>
-                                        Join
-                                    </button>)
-                                }
 
-                                {((currentUser.uid !== cause.creator) && !isParticipant) &&
-                                    <button onClick={cancelCauseHandler} className={`${styles['cancel-btn']} ${styles['btn']}`}>
-                                        <div className="mr-2">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                height="20px"
-                                                viewBox="0 0 24 24"
-                                                width="20px"
-                                                fill="#ada02b"
-                                            >
-                                                <path d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-                                            </svg>
-                                        </div>
-                                        Cancel Cause
-                                    </button>
+                                {currentUser.uid !== cause.creator &&
+                                    <>
+                                        {!isParticipant && !isButtonLoading
+                                            ? < button onClick={joinHandler} disabled={isButtonLoading} className={`${styles['join-btn']} ${styles['btn']}`}>
+                                                <div className="mr-2">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        height="20px"
+                                                        viewBox="0 0 24 24"
+                                                        width="20px"
+                                                        fill="#9c428c"
+                                                    >
+                                                        <path d="M0 0h24v24H0z" fill="none" />
+                                                        <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                                                    </svg>
+                                                </div>
+                                                Join
+                                            </button>
+
+                                            : <button onClick={cancelCauseHandler} className={`${styles['cancel-btn']} ${styles['btn']}`} disabled={isButtonLoading}>
+                                                <div className="mr-2">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        height="20px"
+                                                        viewBox="0 0 24 24"
+                                                        width="20px"
+                                                        fill="#ada02b"
+                                                    >
+                                                        <path d="M0 0h24v24H0z" fill="none" />
+                                                        <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                                                    </svg>
+                                                </div>
+                                                Cancel Cause
+                                            </button>
+                                        }
+                                    </>
                                 }
                             </div>
                         }
