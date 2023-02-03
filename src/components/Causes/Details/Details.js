@@ -130,9 +130,6 @@ export const Details = () => {
         setIsShowedComments(state => !state);
     }
 
-    console.log(!isParticipant);
-
-
     return (
         <>
             {!isLoading && <section id={styles['details']}>
