@@ -131,7 +131,7 @@ export const Details = () => {
     }
 
     console.log(!isParticipant);
-    console.log(currentUser.uid !== cause.creator);
+
 
     return (
         <>
