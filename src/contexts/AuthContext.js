@@ -10,7 +10,6 @@ const AuthContext = React.createContext();
 
 export function useAuth() {
     return useContext(AuthContext);
-
 }
 
 export const AuthProvider = ({ children }) => {
