@@ -79,8 +79,6 @@ export const Details = () => {
         });
 
         setComments(arr);
-        console.log(comments);
-
     }
 
     const joinHandler = async () => {
@@ -131,6 +129,9 @@ export const Details = () => {
     const toggleComments = () => {
         setIsShowedComments(state => !state);
     }
+
+    console.log(!isParticipant);
+    console.log(currentUser.uid !== cause.creator);
 
     return (
         <>
@@ -218,9 +219,8 @@ export const Details = () => {
                                         </ Link>
                                     </>
                                 }
-                                {currentUser.uid !== cause.creator &&
-                                    !isParticipant ?
-                                    (< button onClick={joinHandler} className={`${styles['join-btn']} ${styles['btn']}`}>
+                                {((currentUser.uid !== cause.creator) && isParticipant)
+                                    && (< button onClick={joinHandler} className={`${styles['join-btn']} ${styles['btn']}`}>
                                         <div className="mr-2">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -235,7 +235,10 @@ export const Details = () => {
                                         </div>
                                         Join
                                     </button>)
-                                    : <button onClick={cancelCauseHandler} className={`${styles['cancel-btn']} ${styles['btn']}`}>
+                                }
+
+                                {((currentUser.uid !== cause.creator) && !isParticipant) &&
+                                    <button onClick={cancelCauseHandler} className={`${styles['cancel-btn']} ${styles['btn']}`}>
                                         <div className="mr-2">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
