@@ -114,7 +114,7 @@
     padding: 36px;
     margin: 0 auto;
     width: 70%;
-    background-color: rgb(28, 14, 219);
+    background-color: #6366f1;
     transition-property: background-color, border-color, color, fill, stroke,
         opacity, box-shadow, transform;
     transition-duration: 500ms;
