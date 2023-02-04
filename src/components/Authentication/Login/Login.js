@@ -52,7 +52,7 @@ export const Login = () => {
                     <img
                         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
                         className={styles['img']}
-                        alt="loginImg"
+                        alt="logImg"
                     />
                 </div>
                 <div className={styles['content-ctn']}>
