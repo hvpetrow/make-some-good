@@ -29,16 +29,22 @@ export const Details = () => {
     const { causeId } = useParams();
     const navigate = useNavigate();
     const [isShowedComments, setIsShowedComments] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isButtonLoading, setIsButtonLoading] = useState('');
-    const [isCauseLoading, setIsCauseLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState({
+        isCommentsLoading: false,
+        isButtonLoading: false,
+        isCauseLoading: false,
+    });
+
 
 
     useEffect(() => {
         document.title = 'Details | Make Some Good';
 
         try {
-            setIsCauseLoading(true);
+            setIsLoading(state => ({
+                ...state,
+                isCauseLoading: true
+            }));
             getOneCause(causeId)
                 .then(doc => {
                     setCause(doc.data());
@@ -50,7 +56,10 @@ export const Details = () => {
             console.log(error);
         }
 
-        setIsCauseLoading(false);
+        setIsLoading(state => ({
+            ...state,
+            isCauseLoading: false
+        }));
     }, [causeId, cause.creator]);
 
     useEffect(() => {
@@ -59,13 +68,20 @@ export const Details = () => {
 
             Promise.all(promises)
                 .then(([url, userDoc, commentsDocs]) => {
+                    setIsLoading(state => ({
+                        ...state,
+                        isCommentsLoading: true
+                    }));
                     setCreator(userDoc.data());
                     setProfilePicture(url);
                     storeComments(commentsDocs);
                 }).catch((error) => {
                     console.log(error);
                 }).finally(() => {
-                    setIsLoading(false);
+                    setIsLoading(state => ({
+                        ...state,
+                        isCommentsLoading: false
+                    }));
                 });
         }
     }, [cause.creator, comments.length]);
@@ -89,16 +105,25 @@ export const Details = () => {
         const currentCauseRef = doc(db, "causes", docId);
 
         try {
-            setIsButtonLoading(true);
+            setIsLoading(state => ({
+                ...state,
+                isButtonLoading: true
+            }));
+
             await updateDoc(currentCauseRef, {
                 participants: arrayUnion(currentUser.uid)
             });
+
             toast.success('Successfully Joined Cause!');
             setIsParticipant(true);
-            setIsButtonLoading(false);
         } catch (error) {
             console.log(error);
         }
+
+        setIsLoading(state => ({
+            ...state,
+            isButtonLoading: false
+        }));
 
     }
 
@@ -106,14 +131,20 @@ export const Details = () => {
         const currentCauseRef = doc(db, "causes", docId);
 
         try {
-            setIsButtonLoading(true);
+            setIsLoading(state => ({
+                ...state,
+                isButtonLoading: true
+            }));
             await updateDoc(currentCauseRef, {
                 participants: arrayRemove(currentUser.uid)
             });
             toast.warning('Successfully Canceled Cause!');
 
             setIsParticipant(false);
-            setIsButtonLoading(false);
+            setIsLoading(state => ({
+                ...state,
+                isButtonLoading: false
+            }));
         } catch (error) {
             console.log(error);
         }
@@ -143,7 +174,7 @@ export const Details = () => {
     return (
 
         <>
-            {!isLoading && !isCauseLoading && <section id={styles['details']}>
+            {!isLoading.isCommentsLoading && !isLoading.isCauseLoading && <section id={styles['details']}>
                 <div className={styles['details-ctn']}>
                     <div className={styles['details-card-container']}>
                         <div className={styles['details-grid']}>
@@ -230,8 +261,8 @@ export const Details = () => {
 
                                 {currentUser.uid !== cause.creator &&
                                     <>
-                                        {!isParticipant && !isButtonLoading
-                                            ? < button onClick={joinHandler} disabled={isButtonLoading} className={`${styles['join-btn']} ${styles['btn']}`}>
+                                        {!isParticipant && !isLoading.isButtonLoading
+                                            ? < button onClick={joinHandler} disabled={isLoading.isButtonLoading} className={`${styles['join-btn']} ${styles['btn']}`}>
                                                 <div className="mr-2">
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -247,7 +278,7 @@ export const Details = () => {
                                                 Join
                                             </button>
 
-                                            : <button onClick={cancelCauseHandler} className={`${styles['cancel-btn']} ${styles['btn']}`} disabled={isButtonLoading}>
+                                            : <button onClick={cancelCauseHandler} className={`${styles['cancel-btn']} ${styles['btn']}`} disabled={isLoading.isButtonLoading}>
                                                 <div className="mr-2">
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +305,7 @@ export const Details = () => {
                 </button>
                 <CommentBox comments={comments} isShowedComments={isShowedComments} setIsShowedComments={setIsShowedComments} storeComments={storeComments} currentUser={currentUser} causeId={causeId} />
             </section >}
-            {isLoading && (<Spinner />)}
+            {isLoading.isCommentsLoading && (<Spinner />)}
         </>
     )
 }
