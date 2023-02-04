@@ -107,7 +107,7 @@ export const Login = () => {
                             </span>
                             <Link
                                 to="/register"
-                                className={styles['link', 'link-span']}
+                                className={`${styles['link']} ${styles['link-span']}`}
                             >
                                 Sign Up
                             </Link>
