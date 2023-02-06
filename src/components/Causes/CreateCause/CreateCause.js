@@ -91,9 +91,16 @@ export const CreateCause = () => {
                 <h2 className={styles['title']}>Create Cause</h2>
                 <form onSubmit={submitHandler}>
                     <div className="mb-6">
+                        <label
+                            className={styles['label']}
+                            htmlFor="title"
+                        >
+                            Title
+                        </label>
                         <input
                             type="text"
                             name="title"
+                            id='title'
                             className={`${styles['form-input']} ${titleInput.hasError && styles['error-input-field']}`}
                             placeholder="Title"
                             required
@@ -105,9 +112,16 @@ export const CreateCause = () => {
                         {(titleInput.hasError && titleInput.value !== '') && <p className={styles['alert']}>Title must be between 3 and 28 symbols!!</p>}
                     </div>
                     <div className="mb-6">
+                        <label
+                            className={styles['label']}
+                            htmlFor="purpose"
+                        >
+                            Purpose
+                        </label>
                         <input
                             type="text"
                             name="purpose"
+                            id='purpose'
                             className={`${styles['form-input']} ${purposeInput.hasError && styles['error-input-field']}`}
                             placeholder="Purpose"
                             required
@@ -119,9 +133,16 @@ export const CreateCause = () => {
                         {(purposeInput.hasError && purposeInput.value !== '') && <p className={styles['alert']}>Purpose must be between 2 and 30 symbols!!</p>}
                     </div>
                     <div className="mb-6">
+                        <label
+                            className={styles['label']}
+                            htmlFor="place"
+                        >
+                            Place
+                        </label>
                         <input
                             type="text"
                             name="place"
+                            id='place'
                             className={`${styles['form-input']} ${placeInput.hasError && styles['error-input-field']}`}
                             placeholder="Place"
                             required
@@ -133,9 +154,16 @@ export const CreateCause = () => {
                         {(placeInput.hasError && placeInput.value !== '') && <p className={styles['alert']}>Place must be between 2 and 28 symbols!!</p>}
                     </div>
                     <div className="mb-6">
+                        <label
+                            className={styles['label']}
+                            htmlFor="date"
+                        >
+                            Date
+                        </label>
                         <input
                             type="text"
                             name="date"
+                            id='date'
                             className={`${styles['form-input']} ${dateInput.hasError && styles['error-input-field']}`}
                             placeholder="in format DD/MM/YYYY"
                             required
@@ -147,9 +175,16 @@ export const CreateCause = () => {
                         {(dateInput.hasError && dateInput.value !== '') && <p className={styles['alert']}>Date is not valid!!</p>}
                     </div>
                     <div className="mb-6">
+                        <label
+                            className={styles['label']}
+                            htmlFor="imgUrl"
+                        >
+                            img-Url
+                        </label>
                         <input
                             type="text"
                             name="imgUrl"
+                            id='imgUrl'
                             className={`${styles['form-input']} ${imgUrlInput.hasError && styles['error-input-field']}`}
                             placeholder="Example: https://pixlr.eu/makeSomeGood.png"
                             value={imgUrlInput.value}
