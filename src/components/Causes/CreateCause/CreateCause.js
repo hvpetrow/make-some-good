@@ -95,7 +95,7 @@ export const CreateCause = () => {
                             className={styles['label']}
                             htmlFor="title"
                         >
-                            Title
+                            Title:
                         </label>
                         <input
                             type="text"
@@ -116,7 +116,7 @@ export const CreateCause = () => {
                             className={styles['label']}
                             htmlFor="purpose"
                         >
-                            Purpose
+                            Purpose:
                         </label>
                         <input
                             type="text"
@@ -137,7 +137,7 @@ export const CreateCause = () => {
                             className={styles['label']}
                             htmlFor="place"
                         >
-                            Place
+                            Place:
                         </label>
                         <input
                             type="text"
@@ -158,7 +158,7 @@ export const CreateCause = () => {
                             className={styles['label']}
                             htmlFor="date"
                         >
-                            Date
+                            Date:
                         </label>
                         <input
                             type="text"
@@ -179,7 +179,7 @@ export const CreateCause = () => {
                             className={styles['label']}
                             htmlFor="imgUrl"
                         >
-                            img-Url
+                            img-Url:
                         </label>
                         <input
                             type="text"
@@ -200,7 +200,7 @@ export const CreateCause = () => {
                                 className={styles['label']}
                                 htmlFor="description"
                             >
-                                Description
+                                Description:
                             </label>
                             <textarea
                                 className={`${styles['form-input']} ${descriptionInput.hasError && styles['error-input-field']}`}
