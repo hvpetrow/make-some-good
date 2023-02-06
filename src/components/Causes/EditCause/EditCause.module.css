@@ -16,6 +16,10 @@
     text-align: center;
 }
 
+.input-ctn {
+    margin-bottom: 1.5rem;
+}
+
 .form-input {
     display: block;
     padding: 0.5rem 1rem;
