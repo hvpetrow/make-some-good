@@ -58,7 +58,7 @@ export const Login = () => {
                 <div className={styles['content-ctn']}>
                     <h2 className={styles['title']}>Login</h2>
                     <form id='login-form' onSubmit={submitHandler} >
-                        <label htmlFor="inputEmail" className={styles['label']}>Email address</label>
+                        <label htmlFor="inputEmail" className={styles['label']}>Email address:</label>
                         <div className={styles['input-ctn']}>
                             <input
                                 name="email"
@@ -71,7 +71,7 @@ export const Login = () => {
                                 onChange={changeHandler}
                             />
                         </div>
-                        <label htmlFor="inputPassword" className={styles['label']}>Password</label>
+                        <label htmlFor="inputPassword" className={styles['label']}>Password:</label>
                         <div className={styles['input-ctn']}>
                             <input
                                 name="password"
