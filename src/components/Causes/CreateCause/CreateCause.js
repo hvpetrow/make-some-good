@@ -90,7 +90,7 @@ export const CreateCause = () => {
             <div className={styles['create-cause-ctn']}>
                 <h2 className={styles['title']}>Create Cause</h2>
                 <form onSubmit={submitHandler}>
-                    <div className="mb-6">
+                    <div className={styles['input-ctn']}>
                         <label
                             className={styles['label']}
                             htmlFor="title"
@@ -111,7 +111,7 @@ export const CreateCause = () => {
                         {(titleInput.value === '' && titleInput.hasTouched) && <p className={styles['alert']}>Title is required!!</p>}
                         {(titleInput.hasError && titleInput.value !== '') && <p className={styles['alert']}>Title must be between 3 and 28 symbols!!</p>}
                     </div>
-                    <div className="mb-6">
+                    <div className={styles['input-ctn']}>
                         <label
                             className={styles['label']}
                             htmlFor="purpose"
@@ -132,7 +132,7 @@ export const CreateCause = () => {
                         {(purposeInput.value === '' && purposeInput.hasTouched) && <p className={styles['alert']}>Purpose is required!!</p>}
                         {(purposeInput.hasError && purposeInput.value !== '') && <p className={styles['alert']}>Purpose must be between 2 and 30 symbols!!</p>}
                     </div>
-                    <div className="mb-6">
+                    <div className={styles['input-ctn']}>
                         <label
                             className={styles['label']}
                             htmlFor="place"
@@ -153,7 +153,7 @@ export const CreateCause = () => {
                         {(placeInput.value === '' && placeInput.hasTouched) && <p className={styles['alert']}>Place is required!!</p>}
                         {(placeInput.hasError && placeInput.value !== '') && <p className={styles['alert']}>Place must be between 2 and 28 symbols!!</p>}
                     </div>
-                    <div className="mb-6">
+                    <div className={styles['input-ctn']}>
                         <label
                             className={styles['label']}
                             htmlFor="date"
@@ -174,7 +174,7 @@ export const CreateCause = () => {
                         {(dateInput.value === '' && dateInput.hasTouched) && <p className={styles['alert']}>Date is required!!</p>}
                         {(dateInput.hasError && dateInput.value !== '') && <p className={styles['alert']}>Date is not valid!!</p>}
                     </div>
-                    <div className="mb-6">
+                    <div className={styles['input-ctn']}>
                         <label
                             className={styles['label']}
                             htmlFor="imgUrl"
