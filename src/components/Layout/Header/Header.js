@@ -8,7 +8,7 @@ export const Header = () => {
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
     const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
     const { currentUser, photoURL } = useAuth();
-    console.log("eeerrrmmm");
+
     let profileMenuRef = useClickOutside(() => {
         setIsProfileMenuOpen(false);
     });

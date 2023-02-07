@@ -3,11 +3,12 @@ import styles from './Comments.module.css';
 import yesno from "yesno-dialog";
 
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { deleteComment, updateComment } from '../../../services/commentsService';
 import useInput from '../../../hooks/useInput';
 import commentValidation from '../../../validation/commentValidation';
 import { useEffect } from 'react';
+import { useCallback } from 'react';
 
 export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, causeId, storeComments }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +16,12 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
     const created = convertTimestamp(comment.createdAt);
 
     const commentInput = useInput(commentValidation.contentIsLength);
+
+    const commentInputRef = useCallback(node => {
+        if (node) {
+            node.focus();
+        }
+    }, []);
 
     useEffect(() => {
 
@@ -41,14 +48,13 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
         }
     }
 
-    const setEdit = async () => {
+    const setEdit = () => {
         setIsEdited(true);
+
         if (comment) {
             commentInput.setValue(comment.content);
 
         }
-
-        console.log(comment);
     }
 
     const cancelEdit = () => {
@@ -64,7 +70,6 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
                 content: commentInput.value
             }
 
-            console.log(editedComment);
 
             await updateComment(id, editedComment);
 
@@ -81,7 +86,6 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
         setIsLoading(false);
 
     }
-    console.log(commentInput);
 
     return (
         <li>
@@ -97,12 +101,15 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
                         : <textarea
                             type="text"
                             name="comment"
+                            id='comment'
                             className={`${styles['edit-comment_input']} ${commentInput.hasError && styles['error-input-field']}`}
                             placeholder="Comment"
+                            ref={commentInputRef}
                             required
                             value={commentInput.value}
                             onChange={commentInput.onChange}
                             onBlur={commentInput.onBlur}
+                            onFocus={(e) => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                         />
                     }
                     {(commentInput.hasError && isEdited) && <p className={styles['alert']}>Comment must be between 2 and 300 characters!!</p>}
