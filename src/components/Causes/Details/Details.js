@@ -90,7 +90,6 @@ export const Details = () => {
         let arr = [];
         commentsDocs.forEach((doc) => {
             let fields = doc.data();
-            console.log(fields);
 
             arr.push({
                 id: doc.id,
@@ -168,8 +167,6 @@ export const Details = () => {
     const toggleComments = () => {
         setIsShowedComments(state => !state);
     }
-
-    console.log(isParticipant);
 
     return (
 

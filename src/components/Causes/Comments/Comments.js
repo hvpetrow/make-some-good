@@ -30,7 +30,6 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
     const deleteHandler = async () => {
         const confirm = await yesno({ bodyText: "Are you sure to delete this comment?" });
 
-
         if (confirm) {
             try {
                 setIsLoading(true);
