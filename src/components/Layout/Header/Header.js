@@ -9,6 +9,8 @@ export const Header = () => {
     const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
     const { currentUser, photoURL } = useAuth();
 
+    console.log(currentUser?.email);
+
     let profileMenuRef = useClickOutside(() => {
         setIsProfileMenuOpen(false);
     });

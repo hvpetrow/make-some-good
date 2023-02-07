@@ -14,6 +14,7 @@ const usersCollectionRef = collection(db, 'users');
 
 export const ForeignProfile = () => {
     const [userInfo, setUserInfo] = useState('');
+
     const [profilePicture, setProfilePicture] = useState("https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png");
     const { getProfilePicture } = useAuth();
     const { filterForeignUserCauses, filterUserJoinedCauses } = useCausesContext();

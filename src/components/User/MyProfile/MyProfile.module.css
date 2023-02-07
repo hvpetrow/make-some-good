@@ -109,6 +109,26 @@
         0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
+#my-profile .user-info {
+    padding-bottom: 3rem;
+    margin-top: 5rem;
+    text-align: center;
+    border-bottom-width: 1px;
+}
+
+#my-profile .user-info .user-names {
+    color: #374151;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 500;
+}
+
+#my-profile .user-info .user-country {
+    margin-top: 0.75rem;
+    color: #4b5563;
+    font-weight: 300;
+}
+
 #my-profile .change-password-btn {
     padding: 1rem;
     margin: 5rem auto;

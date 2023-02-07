@@ -11,38 +11,43 @@ import { useAuth } from "../../../contexts/AuthContext"
 import { useCausesContext } from "../../../contexts/CauseContext";
 import { db } from "../../../firebase";
 import { getOne } from "../../../services/crudService";
+import { Spinner } from '../../../shared/Spinner';
 
 const usersCollectionRef = collection(db, 'users');
 
 export const MyProfile = () => {
     document.title = 'My Profile';
 
-    const [userInfo, setUserInfo] = useState({
-        firstName: '',
-        lastName: '',
-        city: '',
-        country: ''
-    });
-
+    const [userInfo, setUserInfo] = useState('');
     const [currentUserCauses, setCurrentUserCauses] = useState();
     const [currentUserJoinedCauses, setCurrentUserJoinedCauses] = useState();
     const [photo, setPhoto] = useState(null);
     const [active, setActive] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
     const { filterCurrentUserCauses, filterUserJoinedCauses } = useCausesContext();
 
     useEffect(() => {
-        getOne(usersCollectionRef, currentUser.uid)
-            .then(docSnap => {
-                setUserInfo(docSnap.data());
-            }).catch(err => {
-                console.log(err);
-            });
+        console.log(currentUser.uid);
+        if (currentUser.uid) {
+            getOne(usersCollectionRef, currentUser.uid)
+                .then((doc) => {
+                    setUserInfo(doc.data());
+                    console.log(doc.id);
+                }).catch(err => {
+                    console.log(err);
+                }).finally(() => {
+                    setIsLoading(false);
+                    console.log(userInfo);
+                });
+        }
+    }, [currentUser.uid]);
 
+    useEffect(() => {
         setCurrentUserCauses(filterCurrentUserCauses());
         setCurrentUserJoinedCauses(filterUserJoinedCauses(currentUser.uid));
     }, [currentUser.uid]);
+
 
     useEffect(() => {
         if (currentUser?.photoURL) {
@@ -83,71 +88,74 @@ export const MyProfile = () => {
         console.log(currentUser + "submitted profile picture ");
         refreshPage();
     }
-
-    console.log(currentUserCauses);
-    console.log(currentUserJoinedCauses);
+    console.log(userInfo);
 
     return (
-        <section id={styles['my-profile']}>
-            <div className={styles['content-ctn']}>
-                <div className={styles['causes-ctn']}>
-                    <div>
-                        <p className={styles['causes-count']}>{currentUserCauses?.length}</p>
-                        <p className={styles['causes-title']}>My Causes</p>
+        < section id={styles['my-profile']} >
+            {!isLoading
+                ? <>
+                    <div className={styles['content-ctn']}>
+                        <div className={styles['causes-ctn']}>
+                            <div>
+                                <p className={styles['causes-count']}>{currentUserCauses?.length}</p>
+                                <p className={styles['causes-title']}>My Causes</p>
+                            </div>
+                            <div>
+                                <p className={styles['causes-count']}>{currentUserJoinedCauses?.length}</p>
+                                <p className={styles['causes-title']}>Joined Causes</p>
+                            </div>
+                        </div>
+                        <div className={styles['center']}>
+                            <div className={styles['img-ctn']}>
+                                <img
+                                    src={photoURL}
+                                    className={styles['img']}
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    alt="profileImg"
+                                >
+                                </img>
+                            </div>
+                        </div>
+                        <div className={styles['upload-ctn']}>
+                            <div>
+                                <label
+                                    className={styles['upload-label']}
+                                    htmlFor="file_input"
+                                >
+                                    Upload file
+                                </label>
+                                <input
+                                    className={styles['upload-input']}
+                                    aria-describedby="file_input_help"
+                                    id="file_input"
+                                    type="file"
+                                    onChange={browseHandler}
+                                />
+                                <p
+                                    className={styles['upload-desc']}
+                                    id="file_input_help"
+                                >
+                                    PNG,JPG (MAX. 1MB and 800x600)
+                                </p>
+                            </div>
+                            <button to="/" disabled={active || isLoading} onClick={submitHandler} className={styles['upload-btn']}>
+                                Upload Profile Picture
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <p className={styles['causes-count']}>{currentUserJoinedCauses?.length}</p>
-                        <p className={styles['causes-title']}>Joined Causes</p>
+                    <div className={styles['user-info']}>
+                        <h1 className={styles['user-names']}>
+                            {userInfo?.firstName} {userInfo?.lastName}
+                        </h1>
+                        <p className={styles['user-country']}>{userInfo?.country}</p>
                     </div>
-                </div>
-                <div className={styles['center']}>
-                    <div className={styles['img-ctn']}>
-                        <img
-                            src={photoURL}
-                            className={styles['img']}
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                            alt="profileImg"
-                        >
-                        </img>
-                    </div>
-                </div>
-                <div className={styles['upload-ctn']}>
-                    <div>
-                        <label
-                            className={styles['upload-label']}
-                            htmlFor="file_input"
-                        >
-                            Upload file
-                        </label>
-                        <input
-                            className={styles['upload-input']}
-                            aria-describedby="file_input_help"
-                            id="file_input"
-                            type="file"
-                            onChange={browseHandler}
-                        />
-                        <p
-                            className={styles['upload-desc']}
-                            id="file_input_help"
-                        >
-                            PNG,JPG (MAX. 1MB and 800x600)
-                        </p>
-                    </div>
-                    <button to="/" disabled={active || isLoading} onClick={submitHandler} className={styles['upload-btn']}>
-                        Upload Profile Picture
-                    </button>
-                </div>
-            </div>
-            <Link to="/change-password" className={styles['change-password-btn']}>
-                Change Your Password
-            </Link>
-            <div className={styles['user-info']}>
-                <h1 className={styles['user-names']}>
-                    {userInfo?.firstName} {userInfo?.lastName}
-                </h1>
-                <p className={styles['user-country']}>{userInfo?.country}</p>
-            </div>
-        </section>
+                    <Link to="/change-password" className={styles['change-password-btn']}>
+                        Change Your Password
+                    </Link>
+                </>
+                : <Spinner />
+            }
+        </section >
     )
 }

@@ -45,6 +45,7 @@ export const Details = () => {
                 ...state,
                 isCauseLoading: true
             }));
+
             getOneCause(causeId)
                 .then(doc => {
                     setCause(doc.data());
@@ -60,7 +61,7 @@ export const Details = () => {
             ...state,
             isCauseLoading: false
         }));
-    }, [causeId, cause.creator]);
+    }, [causeId, cause.creator, cause?.participants, currentUser.uid]);
 
     useEffect(() => {
         if (cause?.creator) {
