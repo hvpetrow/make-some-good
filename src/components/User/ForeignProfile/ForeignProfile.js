@@ -23,8 +23,6 @@ export const ForeignProfile = () => {
     const [isClicked, setIsClicked] = useState(false);
     const [foreignUserCauses, setForeignUserCauses] = useState([]);
     const [userJoinedCauses, setUserJoinedCauses] = useState([]);
-
-
     const { userId } = useParams();
 
     useEffect(() => {
@@ -48,8 +46,6 @@ export const ForeignProfile = () => {
     if (!isLoading) {
         document.title = `Profile/${userInfo.firstName} ${userInfo.lastName}`;
     }
-
-    console.log(userInfo);
 
     return (
         <section id={styles['foreign-profile']}>

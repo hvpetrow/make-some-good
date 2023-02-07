@@ -88,7 +88,6 @@ export const MyProfile = () => {
         console.log(currentUser + "submitted profile picture ");
         refreshPage();
     }
-    console.log(userInfo);
 
     return (
         < section id={styles['my-profile']} >

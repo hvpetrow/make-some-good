@@ -35,8 +35,6 @@ export const Details = () => {
         isCauseLoading: false,
     });
 
-
-
     useEffect(() => {
         document.title = 'Details | Make Some Good';
 
@@ -61,7 +59,7 @@ export const Details = () => {
             ...state,
             isCauseLoading: false
         }));
-    }, [causeId, cause.creator, cause?.participants, currentUser.uid]);
+    }, [causeId, cause.creator, currentUser.uid]);
 
     useEffect(() => {
         if (cause?.creator) {

@@ -21,12 +21,10 @@ export const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isUsersLoading, setIsUsersLoading] = useState(true);
 
-
     const causesCollectionRef = collection(db, "causes");
     const orderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), limit(3));
     const usersCollectionRef = collection(db, 'users');
     const usersWithMostCausesCollQuery = query(usersCollectionRef, orderBy('causes', 'desc'), limit(3));
-
 
     if (currentUser) {
         console.log("CurrentUserId", currentUser.uid);
