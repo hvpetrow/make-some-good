@@ -3,7 +3,7 @@ import styles from './Comments.module.css';
 import yesno from "yesno-dialog";
 
 
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { deleteComment, updateComment } from '../../../services/commentsService';
 import useInput from '../../../hooks/useInput';
 import commentValidation from '../../../validation/commentValidation';

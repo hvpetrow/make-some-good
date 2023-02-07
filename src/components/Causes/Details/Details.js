@@ -85,7 +85,7 @@ export const Details = () => {
                     }));
                 });
         }
-    }, [cause.creator, comments.length]);
+    }, [cause.creator, comments.length, causeId, getProfilePicture]);
 
     const storeComments = (commentsDocs) => {
         let arr = [];

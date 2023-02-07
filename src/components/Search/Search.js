@@ -50,6 +50,7 @@ export const Search = () => {
         }
     }, []);
 
+
     const onSearchChange = (e) => {
         setSearch(e.target.value);
     }
