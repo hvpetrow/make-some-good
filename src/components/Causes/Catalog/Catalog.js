@@ -8,6 +8,7 @@ import { BackToTheTopButton } from "../../../shared/BackToTheTopButton";
 import { Spinner } from "../../../shared/Spinner";
 import { CardTemplate } from "../../Home/CardTemplate/CardTemplate";
 import { getLatestCauses, loadThreeCauses } from '../../../services/causesService';
+import React from 'react';
 
 const causesCollectionRef = collection(db, "causes");
 

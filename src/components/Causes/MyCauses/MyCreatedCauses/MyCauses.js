@@ -14,7 +14,7 @@ import { BackToTheTopButton } from '../../../../shared/BackToTheTopButton';
 
 const causesCollectionRef = collection(db, "causes");
 
-export const MyCauses = () => {
+const MyCauses = () => {
     const { currentUser } = useAuth();
     const [isLoading, setIsLoading] = useState(true);
     const [clickable, setClickable] = useState(true);
@@ -69,3 +69,5 @@ export const MyCauses = () => {
         </section>
     );
 }
+
+export default MyCauses;

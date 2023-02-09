@@ -13,7 +13,7 @@ import { BackToTheTopButton } from '../../../../shared/BackToTheTopButton';
 const causesCollectionRef = collection(db, "causes");
 
 
-export const JoinedCauses = () => {
+const JoinedCauses = () => {
     const { currentUser } = useAuth();
 
     const [isLoading, setIsLoading] = useState(true);
@@ -68,3 +68,5 @@ export const JoinedCauses = () => {
         </section>
     );
 }
+
+export default JoinedCauses;

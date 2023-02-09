@@ -18,7 +18,7 @@ import { getCommentsByCauseId, deleteComment } from '../../../services/commentsS
 
 const usersCollectionRef = collection(db, 'users');
 
-export const Details = () => {
+const Details = () => {
     const [cause, setCause] = useState('');
     const [comments, setComments] = useState('');
     const [creator, setCreator] = useState('');
@@ -305,3 +305,5 @@ export const Details = () => {
         </>
     )
 }
+
+export default Details;

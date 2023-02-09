@@ -15,7 +15,7 @@ import { Spinner } from '../../../shared/Spinner';
 
 const usersCollectionRef = collection(db, 'users');
 
-export const MyProfile = () => {
+const MyProfile = () => {
     document.title = 'My Profile';
 
     const [userInfo, setUserInfo] = useState('');
@@ -158,3 +158,5 @@ export const MyProfile = () => {
         </section >
     )
 }
+
+export default MyProfile;
