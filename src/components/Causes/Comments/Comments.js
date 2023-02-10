@@ -7,7 +7,6 @@ import React, { useState } from 'react'
 import { deleteComment, updateComment } from '../../../services/commentsService';
 import useInput from '../../../hooks/useInput';
 import commentValidation from '../../../validation/commentValidation';
-import { useEffect } from 'react';
 import { useCallback } from 'react';
 
 export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, causeId, storeComments }) => {
