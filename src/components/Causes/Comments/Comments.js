@@ -12,9 +12,8 @@ import { useCallback } from 'react';
 export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, causeId, storeComments }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isEdited, setIsEdited] = useState(false);
-    const created = convertTimestamp(comment.createdAt);
-
     const commentInput = useInput(commentValidation.contentIsLength);
+    const created = convertTimestamp(comment.createdAt);
 
     const commentInputRef = useCallback(node => {
         if (node) {
@@ -47,7 +46,6 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
 
         if (comment) {
             commentInput.setValue(comment.content);
-
         }
     }
 
@@ -78,7 +76,6 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
         }
 
         setIsLoading(false);
-
     }
 
     return (
