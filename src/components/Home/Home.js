@@ -27,14 +27,11 @@ export const Home = () => {
     const usersWithMostCausesCollQuery = query(usersCollectionRef, orderBy('causes', 'desc'), limit(3));
 
     if (currentUser) {
-        console.log("CurrentUserId", currentUser.uid);
+        console.log("currUserId", currentUser.uid);
     }
 
     useEffect(() => {
         document.title = 'Make Some Good';
-
-
-
         try {
             getLatestCauses(orderedQuery, setCauses, setIsLoading, () => null);
 
