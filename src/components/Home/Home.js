@@ -63,10 +63,15 @@ export const Home = () => {
     return (
         <div className={styles['home']}>
             <div className={styles['hero']}>
-                <img src={require('../../../src/assets/hero.png')} alt="" />
+                <img src={require('../../../src/assets/hero.png')} alt="homeBackground" />
                 <h1 className={styles['home-title']}>Make Some Good</h1>
-                <h1 className={styles['home-quote']}>“No one has ever become poor by giving.”</h1>
-                <h1 className={styles['home-quote-author']}>― Anne Frank</h1>
+                {!isLoading ?
+                    <>
+                        <h1 className={styles['home-quote']}>“No one has ever become poor by giving.”</h1>
+                        <h1 className={styles['home-quote-author']}>― Anne Frank</h1>
+                    </>
+                    : <Spinner />
+                }
             </div>
             <h2 className={styles['latest-topics-title']}>Latest Causes</h2>
             {isLoading
@@ -90,5 +95,7 @@ export const Home = () => {
 
             <BackToTheTopButton />
         </div>
+
+
     );
 }
