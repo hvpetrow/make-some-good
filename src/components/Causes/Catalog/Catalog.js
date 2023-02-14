@@ -31,6 +31,7 @@ export const Catalog = () => {
     }, []);
 
     const loadMoreClickHandler = async (e) => {
+
         const nextOrderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), startAfter(latestDoc), limit(3));
 
         try {
