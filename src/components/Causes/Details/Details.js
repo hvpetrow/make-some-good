@@ -15,6 +15,7 @@ import { getOne } from '../../../services/crudService';
 import { Spinner } from '../../../shared/Spinner';
 import CommentBox from './CommentBox';
 import { getCommentsByCauseId, deleteComment } from '../../../services/commentsService';
+import useTitle from '../../../hooks/useTitle';
 
 const usersCollectionRef = collection(db, 'users');
 
@@ -34,6 +35,8 @@ const Details = () => {
         isButtonLoading: false,
         isCauseLoading: false,
     });
+
+    useTitle('Details | Make Some Good');
 
     useEffect(() => {
         document.title = 'Details | Make Some Good';

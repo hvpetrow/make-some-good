@@ -1,11 +1,11 @@
+import useTitle from '../../../hooks/useTitle';
 import styles from './Donate.module.css';
 
 import React, { useState } from 'react'
 
 export const Donate = () => {
-    document.title = 'Donate';
-
     const [clicked, setClicked] = useState(false);
+    useTitle('Donate');
 
     const bankAccount = (
         <div className="bg-gray-300 rounded-lg">

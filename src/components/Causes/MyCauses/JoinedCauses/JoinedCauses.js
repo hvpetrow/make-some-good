@@ -9,6 +9,7 @@ import { Spinner } from '../../../../shared/Spinner';
 import { CardTemplate } from '../../../Home/CardTemplate/CardTemplate';
 import { getLatestCauses, loadThreeCauses } from '../../../../services/causesService';
 import { BackToTheTopButton } from '../../../../shared/BackToTheTopButton';
+import useTitle from '../../../../hooks/useTitle';
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -21,11 +22,11 @@ const JoinedCauses = () => {
     const [myCauses, setCauses] = useState([]);
     const [latestDoc, setLatestDoc] = useState(0);
 
+    useTitle('Joined Causes');
+
     const startingOrderedQuery = query(causesCollectionRef, where("participants", "array-contains", currentUser.uid), orderBy("createdAt", 'desc'), limit(3));
 
     useEffect(() => {
-        document.title = 'Joined Causes';
-
         try {
             getLatestCauses(startingOrderedQuery, setCauses, setIsLoading, setLatestDoc);
         } catch (error) {

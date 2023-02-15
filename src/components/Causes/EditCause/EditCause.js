@@ -11,6 +11,7 @@ import { db } from '../../../firebase';
 import { getOneCause } from '../../../services/causesService';
 import useInput from '../../../hooks/useInput';
 import causeValidation from '../../../validation/causeValidation';
+import useTitle from '../../../hooks/useTitle';
 
 export const EditCause = () => {
     const { causeId } = useParams();
@@ -19,6 +20,8 @@ export const EditCause = () => {
     const [cause, setCause] = useState('');
     const [docId, setDocId] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+
+    useTitle('Edit');
 
     const titleInput = useInput(causeValidation.titleIsLength, cause?.title);
     console.log(titleInput.value);
@@ -37,8 +40,6 @@ export const EditCause = () => {
 
 
     useEffect(() => {
-        document.title = 'Edit';
-
         try {
             getOneCause(causeId)
                 .then(doc => {

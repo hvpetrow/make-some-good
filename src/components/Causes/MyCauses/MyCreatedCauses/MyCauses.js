@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { Spinner } from "../../../../shared/Spinner";
 import { getLatestCauses, loadThreeCauses } from "../../../../services/causesService";
 import { BackToTheTopButton } from '../../../../shared/BackToTheTopButton';
+import useTitle from '../../../../hooks/useTitle';
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -21,10 +22,11 @@ const MyCauses = () => {
     const [myCauses, setMyCauses] = useState([]);
     const [latestDoc, setLatestDoc] = useState(0);
 
+    useTitle('My Causes');
+
     const startingOrderedQuery = query(causesCollectionRef, where("creator", "==", currentUser.uid), orderBy("createdAt", 'desc'), limit(3));
 
     useEffect(() => {
-        document.title = 'My Causes';
         try {
             getLatestCauses(startingOrderedQuery, setMyCauses, setIsLoading, setLatestDoc);
         } catch (error) {

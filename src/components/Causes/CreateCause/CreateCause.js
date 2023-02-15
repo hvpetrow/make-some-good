@@ -11,13 +11,12 @@ import { db } from '../../../firebase';
 import { add } from '../../../services/crudService';
 import useInput from '../../../hooks/useInput';
 import causeValidation from '../../../validation/causeValidation';
+import useTitle from '../../../hooks/useTitle';
 
 
 const causesCollectionRef = collection(db, 'causes');
 
 export const CreateCause = () => {
-    document.title = 'Create';
-
     const navigate = useNavigate();
 
     const { currentUser, incrementUserCauses } = useAuth();
@@ -29,6 +28,8 @@ export const CreateCause = () => {
     const dateInput = useInput(causeValidation.dateIsValid);
     const imgUrlInput = useInput(causeValidation.urlIsValid);
     const descriptionInput = useInput(causeValidation.descriptionIsLength);
+
+    useTitle('Create');
 
     const inputFieldsIsValid = titleInput.fieldIsValid
         && purposeInput.fieldIsValid

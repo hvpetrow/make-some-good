@@ -1,9 +1,10 @@
 import styles from './Page404.module.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useTitle from '../../../hooks/useTitle';
 
 export const Page404 = () => {
-    document.title = 'Page Error 404';
+    useTitle('Page Error 404');
 
     return (
         <section className={styles['page-not-found']}>

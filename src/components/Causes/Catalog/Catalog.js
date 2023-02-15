@@ -9,6 +9,7 @@ import { Spinner } from "../../../shared/Spinner";
 import { CardTemplate } from "../../Home/CardTemplate/CardTemplate";
 import { getLatestCauses, loadThreeCauses } from '../../../services/causesService';
 import React from 'react';
+import useTitle from '../../../hooks/useTitle';
 
 const causesCollectionRef = collection(db, "causes");
 
@@ -18,11 +19,11 @@ export const Catalog = () => {
     const [latestDoc, setLatestDoc] = useState(0);
     const [clickable, setClickable] = useState(true);
 
+    useTitle('Catalog');
+
     const startingOrderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), limit(3));
 
     useEffect(() => {
-        document.title = 'Catalog';
-
         try {
             getLatestCauses(startingOrderedQuery, setCauses, setIsLoading, setLatestDoc);
         } catch (error) {

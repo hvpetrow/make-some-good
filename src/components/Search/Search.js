@@ -11,6 +11,7 @@ import { getAll } from '../../services/crudService';
 import { collection } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { BackToTheTopButton } from '../../shared/BackToTheTopButton';
+import useTitle from '../../hooks/useTitle';
 
 
 
@@ -24,9 +25,9 @@ export const Search = () => {
 
     const causesCollectionRef = collection(db, "causes");
 
-    useEffect(() => {
-        document.title = 'Search';
+    useTitle('Search');
 
+    useEffect(() => {
         try {
             getAll(causesCollectionRef)
                 .then(docs => {

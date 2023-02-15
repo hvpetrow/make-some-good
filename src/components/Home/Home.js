@@ -11,6 +11,7 @@ import { getLatestCauses } from '../../services/causesService';
 import Slider from '../../shared/Slider';
 import { getAll } from '../../services/crudService';
 import { BackToTheTopButton } from '../../shared/BackToTheTopButton';
+import useTitle from '../../hooks/useTitle';
 
 
 
@@ -20,6 +21,8 @@ export const Home = () => {
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isUsersLoading, setIsUsersLoading] = useState(true);
+
+    useTitle('Make Some Good');
 
     const causesCollectionRef = collection(db, "causes");
     const orderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), limit(3));
@@ -31,7 +34,6 @@ export const Home = () => {
     }
 
     useEffect(() => {
-        document.title = 'Make Some Good';
         try {
             getLatestCauses(orderedQuery, setCauses, setIsLoading, () => null);
 

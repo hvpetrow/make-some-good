@@ -12,12 +12,11 @@ import { useCausesContext } from "../../../contexts/CauseContext";
 import { db } from "../../../firebase";
 import { getOne } from "../../../services/crudService";
 import { Spinner } from '../../../shared/Spinner';
+import useTitle from '../../../hooks/useTitle';
 
 const usersCollectionRef = collection(db, 'users');
 
 const MyProfile = () => {
-    document.title = 'My Profile';
-
     const [userInfo, setUserInfo] = useState('');
     const [currentUserCauses, setCurrentUserCauses] = useState();
     const [currentUserJoinedCauses, setCurrentUserJoinedCauses] = useState();
@@ -26,6 +25,7 @@ const MyProfile = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
     const { filterCurrentUserCauses, filterUserJoinedCauses } = useCausesContext();
+    useTitle('My Profile');
 
     useEffect(() => {
         console.log(currentUser.uid);
