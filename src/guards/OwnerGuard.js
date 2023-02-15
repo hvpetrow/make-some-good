@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Navigate, Outlet, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../contexts/AuthContext"
-import { useCausesContext } from "../contexts/CauseContext";
 import { getOneCause } from "../services/causesService";
 
 export const OwnerGuard = ({ children }) => {
@@ -13,20 +12,21 @@ export const OwnerGuard = ({ children }) => {
 
     useEffect(() => {
         getOneCause(causeId)
-            .then(doc => { 
+            .then(doc => {
                 console.log(doc);
                 console.log(doc.data());
                 setCause(doc.data())
-             })
-            }, []);
-            
-            if (cause) {
-                if (currentUser.uid !== cause.creator) {
-                    toast.error("Forbidden! You are not creator of the cause!");
-                    return <Navigate to='/' />
-                }else{
+            })
+    }, []);
 
-                    return children ? children : <Outlet />
-                }     
-            }
+    if (cause) {
+        if (currentUser.uid !== cause.creator) {
+            toast.error("Forbidden! You are not creator of the cause!");
+            document.title = 'Make Some Good';
+            return <Navigate to='/' />
+        } else {
+
+            return children ? children : <Outlet />
+        }
+    }
 }
