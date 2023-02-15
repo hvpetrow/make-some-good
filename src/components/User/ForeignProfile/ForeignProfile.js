@@ -9,6 +9,7 @@ import { db } from '../../../firebase';
 import { getOne } from '../../../services/crudService';
 import { Spinner } from '../../../shared/Spinner';
 import { CardTemplate } from '../../Home/CardTemplate/CardTemplate';
+import useTitle from '../../../hooks/useTitle';
 
 const usersCollectionRef = collection(db, 'users');
 
@@ -24,6 +25,7 @@ const ForeignProfile = () => {
     const [foreignUserCauses, setForeignUserCauses] = useState([]);
     const [userJoinedCauses, setUserJoinedCauses] = useState([]);
     const { userId } = useParams();
+    useTitle(`Profile/${userInfo.firstName} ${userInfo.lastName}`);
 
     useEffect(() => {
         const promises = [getProfilePicture(userId), getOne(usersCollectionRef, userId)];
@@ -42,10 +44,6 @@ const ForeignProfile = () => {
         setUserJoinedCauses(filterUserJoinedCauses(userId));
 
     }, [userId]);
-
-    if (!isLoading) {
-        document.title = `Profile/${userInfo.firstName} ${userInfo.lastName}`;
-    }
 
     return (
         <section id={styles['foreign-profile']}>

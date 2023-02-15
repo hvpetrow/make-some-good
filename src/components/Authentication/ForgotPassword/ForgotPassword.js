@@ -1,9 +1,10 @@
 import styles from './ForgotPassword.module.css';
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import { toast } from 'react-toastify';
+import useTitle from '../../../hooks/useTitle';
 
 export const ForgotPassword = () => {
     const [values, setValues] = useState({
@@ -13,9 +14,7 @@ export const ForgotPassword = () => {
     const { resetPassword } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        document.title = 'Forgot Password';
-    }, []);
+    useTitle('Forgot Password');
 
     const changeHandler = (e) => {
         setValues((oldValues) => ({

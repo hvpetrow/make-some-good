@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { } from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,6 +10,7 @@ import styles from './Register.module.css';
 import { useAuth } from '../../../contexts/AuthContext'
 import userValidation from '../../../validation/userValidation';
 import useInput from '../../../hooks/useInput';
+import useTitle from '../../../hooks/useTitle';
 
 
 export const Register = () => {
@@ -27,9 +28,7 @@ export const Register = () => {
     const passwordInput = useInput(userValidation.passwordIsLength);
     const repeatPasswordInput = useInput(userValidation.isEqual.bind(null, passwordInput.value));
 
-    useEffect(() => {
-        document.title = 'Register';
-    }, []);
+    useTitle('Register');
 
     const inputFieldsIsValid = firstNameInput.fieldIsValid
         && lastNameInput.fieldIsValid
