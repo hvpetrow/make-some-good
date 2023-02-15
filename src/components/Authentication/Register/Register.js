@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -13,7 +13,6 @@ import useInput from '../../../hooks/useInput';
 
 
 export const Register = () => {
-    document.title = 'Register';
 
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
@@ -27,6 +26,10 @@ export const Register = () => {
     const countryInput = useInput(userValidation.countryIsLength);
     const passwordInput = useInput(userValidation.passwordIsLength);
     const repeatPasswordInput = useInput(userValidation.isEqual.bind(null, passwordInput.value));
+
+    useEffect(() => {
+        document.title = 'Register';
+    }, []);
 
     const inputFieldsIsValid = firstNameInput.fieldIsValid
         && lastNameInput.fieldIsValid

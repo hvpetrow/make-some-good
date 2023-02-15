@@ -1,6 +1,6 @@
 import styles from './Login.module.css';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,8 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../../contexts/AuthContext";
 
 export const Login = () => {
-    document.title = 'Login';
-
     const navigate = useNavigate();
     const [values, setValues] = useState({
         email: '',
@@ -17,6 +15,10 @@ export const Login = () => {
     });
     const { logIn } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        document.title = 'Login';
+    }, []);
 
     const changeHandler = (e) => {
         setValues((oldValues) => ({

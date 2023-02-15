@@ -1,21 +1,21 @@
 import styles from './ForgotPassword.module.css';
 
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import { toast } from 'react-toastify';
 
 export const ForgotPassword = () => {
-    document.title = 'Forgot Password';
-
-    const navigate = useNavigate();
-
     const [values, setValues] = useState({
         email: '',
     });
 
     const { resetPassword } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        document.title = 'Forgot Password';
+    }, []);
 
     const changeHandler = (e) => {
         setValues((oldValues) => ({

@@ -1,6 +1,6 @@
 import styles from './ChangePassword.module.css';
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext'
@@ -10,8 +10,6 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 
 export const ChangePassword = () => {
-    document.title = 'ChangePassword';
-
     const [values, setValues] = useState({
         newPassword: '',
         repass: '',
@@ -31,6 +29,10 @@ export const ChangePassword = () => {
 
     const navigate = useNavigate();
     const { logout, updatePasswordForCurrentUser } = useAuth();
+
+    useEffect(() => {
+        document.title = 'ChangePassword';
+    }, []);
 
     const changeHandler = (e) => {
         setValues((oldValues) => ({
