@@ -7,7 +7,7 @@ import { useClickOutside } from '../../../utils/utils';
 export const Header = () => {
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
     const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
-    const { currentUser, photoURL } = useAuth();
+    const { currentUser, defaultPhotoURL } = useAuth();
 
     console.log(currentUser?.email);
 
@@ -130,7 +130,7 @@ export const Header = () => {
                                         >
                                             <img
                                                 className={styles['profile-img']}
-                                                src={photoURL}
+                                                src={currentUser.photoURL || defaultPhotoURL}
                                                 alt="profilPicture"
                                             />
                                         </button>

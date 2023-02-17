@@ -23,19 +23,22 @@ const MyProfile = () => {
     const [photo, setPhoto] = useState(null);
     const [active, setActive] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
-    const { currentUser, uploadProfilePicture, defaultPhotoURL } = useAuth();
+    const { currentUser, uploadProfilePicture, photoURL, setPhotoURL } = useAuth();
     const { filterCurrentUserCauses, filterUserJoinedCauses } = useCausesContext();
     useTitle('My Profile');
 
     useEffect(() => {
+        console.log(currentUser.uid);
         if (currentUser.uid) {
             getOne(usersCollectionRef, currentUser.uid)
                 .then((doc) => {
                     setUserInfo(doc.data());
+                    console.log(doc.id);
                 }).catch(err => {
                     console.log(err);
                 }).finally(() => {
                     setIsLoading(false);
+                    console.log(userInfo);
                 });
         }
     }, [currentUser.uid]);
@@ -44,6 +47,18 @@ const MyProfile = () => {
         setCurrentUserCauses(filterCurrentUserCauses());
         setCurrentUserJoinedCauses(filterUserJoinedCauses(currentUser.uid));
     }, [currentUser.uid]);
+
+
+    useEffect(() => {
+        if (currentUser?.photoURL) {
+            setPhotoURL(currentUser.photoURL);
+        }
+
+    }, [currentUser.photoURL, photoURL, currentUser])
+
+    function refreshPage() {
+        window.location.reload();
+    }
 
     const browseHandler = (e) => {
         if (e.target.files[0]?.size > 1048576) {
@@ -63,8 +78,6 @@ const MyProfile = () => {
         try {
             setIsLoading(true)
             await uploadProfilePicture(photo, currentUser);
-            console.log("PHOTO upload");
-            console.log(photo);
             toast.success('Successfully uploaded profile picture!');
 
         } catch (error) {
@@ -72,7 +85,8 @@ const MyProfile = () => {
         }
 
         setIsLoading(false);
-        console.log(currentUser.photoUrl + "submitted profile picture ");
+        refreshPage();
+        console.log(currentUser + "submitted profile picture ");
     }
 
     return (
@@ -93,7 +107,7 @@ const MyProfile = () => {
                         <div className={styles['center']}>
                             <div className={styles['img-ctn']}>
                                 <img
-                                    src={currentUser.photoURL || defaultPhotoURL}
+                                    src={photoURL}
                                     className={styles['img']}
                                     viewBox="0 0 20 20"
                                     fill="currentColor"

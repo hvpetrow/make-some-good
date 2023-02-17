@@ -14,7 +14,7 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
-    const [photoURL, setPhotoURL] = useState('https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png');
+    const [defaultPhotoURL, setDefaultPhotoURL] = useState('https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png');
     const [loading, setLoading] = useState(true);
 
 
@@ -76,10 +76,11 @@ export const AuthProvider = ({ children }) => {
     async function uploadProfilePicture(file, currentUser, setLoading) {
         const fileRef = ref(storage, `profilPictures/${currentUser.uid}.png`);
         const snapshot = await uploadBytes(fileRef, file);
-        const photoURL = await getDownloadURL(fileRef);
-
-        updateProfile(currentUser, { photoURL })
-        alert("uploaded file!")
+        const photo = await getDownloadURL(fileRef);
+        setDefaultPhotoURL(photo);
+        await updateProfile(currentUser, { photoURL: photo })
+        alert("uploaded file!");
+        console.log(currentUser.photoURL);
     }
 
     async function getProfilePicture(userId) {
@@ -95,8 +96,8 @@ export const AuthProvider = ({ children }) => {
 
     const value = {
         currentUser,
-        photoURL,
-        setPhotoURL,
+        defaultPhotoURL,
+        setDefaultPhotoURL,
         signUp,
         logIn,
         logout,

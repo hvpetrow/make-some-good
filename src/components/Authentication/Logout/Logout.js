@@ -6,11 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../../contexts/AuthContext";
 
 export const Logout = () => {
-    const { currentUser, logout, takePrevUser } = useAuth();
+    const { currentUser, logout } = useAuth();
     const navigate = useNavigate();
-    console.log("LOGOUT");
-    console.log(currentUser);
-    takePrevUser(currentUser);
 
     logout()
         .then(() => {
