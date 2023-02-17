@@ -37,7 +37,6 @@ export const Login = () => {
             setIsLoading(true);
             await logIn(values.email, values.password);
             toast.success('Successfully Login!');
-
             navigate('/');
         } catch (error) {
             toast.error('Wrong email or password');

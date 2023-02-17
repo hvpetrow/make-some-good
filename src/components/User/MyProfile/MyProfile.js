@@ -85,8 +85,8 @@ const MyProfile = () => {
         }
 
         setIsLoading(false);
-        console.log(currentUser + "submitted profile picture ");
         refreshPage();
+        console.log(currentUser + "submitted profile picture ");
     }
 
     return (

@@ -25,7 +25,6 @@ export const OwnerGuard = ({ children }) => {
             document.title = 'Make Some Good';
             return <Navigate to='/' />
         } else {
-
             return children ? children : <Outlet />
         }
     }

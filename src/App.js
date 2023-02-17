@@ -52,6 +52,7 @@ function App() {
                                 <Route path="/register" element={<Register />} />
                                 <Route path="/forgot-password" element={<ForgotPassword />} />
                             </Route>
+
                             <Route element={<AuthenticatedGuard />}>
                                 <Route path="/change-password" element={<ChangePassword />} />
                                 <Route path="/my-profile" element={<MyProfile />} />

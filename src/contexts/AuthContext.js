@@ -17,15 +17,17 @@ export const AuthProvider = ({ children }) => {
     const [photoURL, setPhotoURL] = useState('https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png');
     const [loading, setLoading] = useState(true);
 
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
+            console.log(user);
             setLoading(false);
             console.log("mounted authContext and setted user");
         }, []);
 
         return unsubscribe;
-    }, [])
+    }, []);
 
     function signUp(email, password) {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -89,6 +91,8 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+
+
     const value = {
         currentUser,
         photoURL,
@@ -103,7 +107,7 @@ export const AuthProvider = ({ children }) => {
         incrementUserCauses,
         decrementUserCauses,
         uploadProfilePicture,
-        getProfilePicture
+        getProfilePicture,
     }
 
     return (
