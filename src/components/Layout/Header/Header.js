@@ -8,6 +8,12 @@ export const Header = () => {
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
     const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
     const { currentUser, defaultPhotoURL } = useAuth();
+    //TO DO: HOOK TO CHANGE FOR HEADER PHOTO
+
+    // useEffect(() => {
+    //     console.log("rerendering header due to the setPhotoChanging in useEffect");
+    //     setPhotoChanged(state => !state);
+    // }, [currentUser.photoURL])
 
     console.log(currentUser?.email);
 
@@ -130,7 +136,7 @@ export const Header = () => {
                                         >
                                             <img
                                                 className={styles['profile-img']}
-                                                src={currentUser.photoURL || defaultPhotoURL}
+                                                src={defaultPhotoURL}
                                                 alt="profilPicture"
                                             />
                                         </button>

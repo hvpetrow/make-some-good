@@ -24,6 +24,7 @@ const MyProfile = () => {
     const [active, setActive] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
     const { currentUser, uploadProfilePicture, defaultPhotoURL } = useAuth();
+    console.log(defaultPhotoURL);
     const { filterCurrentUserCauses, filterUserJoinedCauses } = useCausesContext();
     useTitle('My Profile');
 
@@ -93,7 +94,7 @@ const MyProfile = () => {
                         <div className={styles['center']}>
                             <div className={styles['img-ctn']}>
                                 <img
-                                    src={currentUser.photoURL || defaultPhotoURL}
+                                    src={defaultPhotoURL}
                                     className={styles['img']}
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
