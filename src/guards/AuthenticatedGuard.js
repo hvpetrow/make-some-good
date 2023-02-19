@@ -7,7 +7,7 @@ export const AuthenticatedGuard = ({ children }) => {
     if (!currentUser) {
         toast.error("You must join in your account or register!");
         document.title = 'login';
-        return <Navigate to='/login' />
+        return <Navigate to='/login' replace />
     }
 
     return children ? children : <Outlet />
