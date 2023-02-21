@@ -9,7 +9,7 @@ export const Donate = () => {
 
     const bankAccount = (
         <div className="bg-gray-300 rounded-lg">
-            <div className="py-4 px-4">
+            <div className="bank-data py-4 px-4">
                 <div className="flex flex-col">
                     <h4 className="text-lg font-semibold mb-3">
                         Bank Account

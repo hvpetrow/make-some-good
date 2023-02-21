@@ -1,7 +1,7 @@
 import styles from './MyCauses.module.css';
 
 import { collection, limit, orderBy, query, startAfter, where } from "firebase/firestore";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 import { useAuth } from "../../../../contexts/AuthContext";
 import { db } from "../../../../firebase";
@@ -34,7 +34,7 @@ const MyCauses = () => {
         }
     }, []);
 
-    const loadMoreClickHandler = async (e) => {
+    const loadMoreClickHandler = useCallback(async (e) => {
         const nextOrderedQuery = query(causesCollectionRef, where("creator", "==", currentUser.uid), orderBy("createdAt", 'desc'), startAfter(latestDoc), limit(3));
 
         try {
@@ -42,7 +42,7 @@ const MyCauses = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    }, [currentUser.uid, latestDoc]);
 
     return (
         <section id={styles['my-causes']}>
