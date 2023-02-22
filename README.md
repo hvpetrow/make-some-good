@@ -1,6 +1,6 @@
-# armwrestlingBook
+# makeSomeGood
 
-Armwrestlingbook 2022
+Make Some Good 2022
 
 ![Printscreen-Website](https://github.com/hvpetrow/Angular/blob/main/armwrestlingbook/client/src/assets/Printscreen2.png)
 
