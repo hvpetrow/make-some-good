@@ -8,7 +8,7 @@ import { Footer } from './components/Layout/Footer/Footer';
 import { ForgotPassword } from './components/Authentication/ForgotPassword/ForgotPassword';
 import { Header } from './components/Layout/Header/Header';
 import { Home } from './components/Home/Home';
-import { Login } from './components/Authentication/Login/Login';
+import Login from './components/Authentication/Login/Login';
 import { Logout } from './components/Authentication/Logout/Logout';
 import { Register } from './components/Authentication/Register/Register';
 import { ChangePassword } from './components/Authentication/ChangePassword/ChangePassword';

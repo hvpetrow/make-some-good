@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from "../../../contexts/AuthContext";
 import useTitle from '../../../hooks/useTitle';
 
-export const Login = () => {
+const Login = () => {
     const navigate = useNavigate();
     const [values, setValues] = useState({
         email: '',
@@ -67,6 +67,7 @@ export const Login = () => {
                                 placeholder="user@gmail.com"
                                 required
                                 id="inputEmail"
+                                data-testid='email'
                                 value={values.email}
                                 onChange={changeHandler}
                             />
@@ -80,6 +81,7 @@ export const Login = () => {
                                 placeholder="******"
                                 required
                                 id="inputPassword"
+                                data-testid='password'
                                 value={values.password}
                                 onChange={changeHandler}
                             />
@@ -89,6 +91,7 @@ export const Login = () => {
                                 disabled={isLoading}
                                 type="submit"
                                 className={styles['btn']}
+                                data-testid='loginBtn'
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                             >
@@ -118,3 +121,5 @@ export const Login = () => {
         </section>
     );
 }
+
+export default Login;

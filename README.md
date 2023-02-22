@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# armwrestlingBook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Armwrestlingbook 2022
 
-## Available Scripts
+![Printscreen-Website](https://github.com/hvpetrow/Angular/blob/main/armwrestlingbook/client/src/assets/Printscreen2.png)
 
-In the project directory, you can run:
+Small forum,blog,info web app about armwrestling.
+Using Angular for front-end, Firebase as backend, css files for styling.
 
-### `npm start`
+Short info and functionalities:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Architecture
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Components:
 
-### `npm test`
+-   Authentication: auth module - contains Login, Register and MyTopics components.
+-   Contests: contest module - contains AllTopics,Comments,Create,Details,Edit,Search and TopicTemplate components.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    -   AllTopics - logic and implementation for loading all topics in app.
+    -   Create - logic,form and implementation for creation of new topic.
+    -   Edit - logic,form and implementation for editing a topic.
+    -   Details - shows details of a topic(likes,comments,additional info for the topic) and likes logic and implementation.
+    -   Comments - logic,form and implementation for additing and deleting of the comments.
+    -   Search - logic,search bar and implementation for the searching.
+    -   TopicTemplate - template of the topic.
 
-### `npm run build`
+-   Core: core module - contains Footer ,Header components and guards.
+-   Home: home module - contains Home and TopicCard components.
+-   Pages: page module - contains PageNotFound component.
+-   Shared: shared module - contains date-transform pipe.
+-   Others:
+    -   interfaces - Topic interface.
+    -   services - authService and topicService.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Visitors can see:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-   Latest topics on home page.
+-   All topics on all topics page.
+-   Also can searching topics on search page.
+-   See additional info for the topic(with hovering on the picture).
+-   Login/Register theirselves.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Registered / Logged-in Users can also:
 
-### `npm run eject`
+-   Add topics and edit/delete their topics.
+-   See all comments; add/delete their comments below each post.
+-   Like topic and cancel their likes for the topic.
+-   See their own topics(my-topics).
+-   Search topics by title.
+-   Logout theirselves.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### General Functionality
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-   Authenticate users via Firebase
+-   CRUD Topics
+-   CR\*D Comments on topics (no updating implemented)
+-   GET and display list of topics
+-   My Topics
+-   Search for keywords in Topic titles
