@@ -52,7 +52,7 @@ const Details = () => {
                     setCause(doc.data());
                     setDocId(doc.id);
                 }).then(() => {
-                    setIsParticipant(cause?.participants?.some(participant => participant === currentUser.uid));
+                    setIsParticipant(cause?.participants?.some(participant => participant === currentUser?.uid));
                 });
         } catch (error) {
             console.log(error);
@@ -299,13 +299,15 @@ const Details = () => {
                         }
                     </div>
                 </div>
-                {comments.length ?
-                    <button onClick={toggleComments} className={styles['comments_btn']}>
+                {comments
+                    ? <button onClick={toggleComments} className={styles['comments_btn']}>
                         Comments({comments.length})
                     </button>
                     : <Spinner />
                 }
+
                 <CommentBox comments={comments} isShowedComments={isShowedComments} setIsShowedComments={setIsShowedComments} storeComments={storeComments} currentUser={currentUser} causeId={causeId} />
+
             </section >}
             {isLoading.isCommentsLoading && (<Spinner />)}
         </>

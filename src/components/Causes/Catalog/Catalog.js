@@ -16,6 +16,7 @@ const causesCollectionRef = collection(db, "causes");
 export const Catalog = () => {
     const { causes, setCauses } = useCausesContext();
     const [isLoading, setIsLoading] = useState(true);
+    const [isNextButtonLoading, setIsNextButtonLoading] = useState(false);
     const [latestDoc, setLatestDoc] = useState(0);
     const [clickable, setClickable] = useState(true);
 
@@ -32,7 +33,7 @@ export const Catalog = () => {
     }, []);
 
     const loadMoreClickHandler = async (e) => {
-
+        setIsNextButtonLoading(true);
         const nextOrderedQuery = query(causesCollectionRef, orderBy('createdAt', 'desc'), startAfter(latestDoc), limit(3));
 
         try {
@@ -40,6 +41,8 @@ export const Catalog = () => {
         } catch (error) {
             console.log(error);
         }
+
+        setIsNextButtonLoading(false);
     }
 
     return (
@@ -63,13 +66,13 @@ export const Catalog = () => {
                                 data-mdb-ripple="true"
                                 data-mdb-ripple-color="light"
                                 onClick={loadMoreClickHandler}
+                                disabled={isNextButtonLoading}
                             >load more</button>
                         </div>
                     }
 
                     {causes.length !== 0 &&
                         <BackToTheTopButton />
-
                     }
                 </>)
             }

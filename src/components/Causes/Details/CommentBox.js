@@ -49,31 +49,34 @@ export default function CommentBox({ comments, isShowedComments, setIsShowedComm
                     {(isShowedComments && !isLoading) &&
                         (comments?.map(c => <Comments key={c.id} id={c.id} comment={c.fields} currentUserId={currentUser?.uid} getCommentsByCauseId={getCommentsByCauseId} causeId={causeId} storeComments={storeComments} />))
                     }
-                    {currentUser && <>
+                    <>
                         <li>
-                            <textarea
-                                id="content"
-                                className={styles["inputFields"]}
-                                name="content"
-                                placeholder="..."
-                                type="text"
-                                value={contentInput.value}
-                                onChange={contentInput.onChange}
-                                onBlur={contentInput.onBlur}
-                            ></textarea>
+                            {currentUser
+                                ? <textarea
+                                    id="content"
+                                    className={styles["inputFields"]}
+                                    name="content"
+                                    placeholder="..."
+                                    type="text"
+                                    value={contentInput.value}
+                                    onChange={contentInput.onChange}
+                                    onBlur={contentInput.onBlur}
+                                ></textarea>
+                                : <p className={styles['cannotComment']}>You must be logged in user to post a comment</p>
+                            }
                         </li>
                         {contentInput.hasError && <p className={styles['alert']}>Comment must be between 2 and 300 characters!!</p>}
                         <li id="center-btn">
                             <button
                                 onClick={postComment}
                                 id={styles["post-btn"]}
-                                disabled={!contentInput.fieldIsValid || isLoading}
+                                disabled={!contentInput.fieldIsValid || isLoading || !currentUser}
                             >
                                 Post Comment
                             </button>
                         </li>
                     </>
-                    }
+
                 </ul >
             </div >
         </section >
