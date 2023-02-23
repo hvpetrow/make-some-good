@@ -4,8 +4,8 @@ Make Some Good 2022
 
 ![Printscreen-Website](https://github.com/hvpetrow/Angular/blob/main/armwrestlingbook/client/src/assets/Printscreen2.png)
 
-Small forum,blog,info web app about armwrestling.
-Using Angular for front-end, Firebase as backend, css files for styling.
+Web app for users easily share good causes, discuss them and make good things.
+Front-end is built with HTML, CSS, React. For Back-end uses Firebase.
 
 Short info and functionalities:
 
@@ -13,47 +13,71 @@ Short info and functionalities:
 
 Components:
 
--   Authentication: auth module - contains Login, Register and MyTopics components.
--   Contests: contest module - contains AllTopics,Comments,Create,Details,Edit,Search and TopicTemplate components.
+-   Authentication: Login, Register, Logout ,ChangePassword, ForgotPassword components.
+-   Causes: Catalog, Comments, CreateCause, Details, EditCause, MyCauses(which contains JoinedCauses and MyCreatedCauses components) and RemoveCause components.
+-   Home: Home, CardTemplate, HeroOfMonth components.
+-   Layout: Footer, Header components.
+-   Pages: Donate, Page404 (static)components.
+-   Search: Search, SearchElement components.
+-   User: ForeignProfile, MyProfile components.
+-   Shared: CarouselItem, Slider, BackToTheTopButton, Spinner.
 
-    -   AllTopics - logic and implementation for loading all topics in app.
-    -   Create - logic,form and implementation for creation of new topic.
-    -   Edit - logic,form and implementation for editing a topic.
-    -   Details - shows details of a topic(likes,comments,additional info for the topic) and likes logic and implementation.
-    -   Comments - logic,form and implementation for additing and deleting of the comments.
+    -   Catalog - logic and implementation for loading all causes in app.
+    -   CreateCause - logic,form and implementation for creation of a new cause.
+    -   EditCause - logic,form and implementation for editing a cause.
+    -   Details - shows details of a cause(joins,comments,additional info for the cause), comments and joins logic and implementation.
+    -   Comments - logic,form and implementation for additing,editing and deleting of the comments.
+    -   MyCreatedCauses - logic and implementation for personally created causes of the user.
+    -   JoinedCauses - logic and implementation for personally joined causes of the user.
+    -   RemoveCause - contains logic for removing a cause.
+    -   Home - Home page which contains template for causes, carousel with latest 3 causes and heroes of the month(users with the most publications).
+
+    -   Donate - page for donating.
     -   Search - logic,search bar and implementation for the searching.
-    -   TopicTemplate - template of the topic.
+    -   ForeignProfile - profile page of another user.
+    -   MyProfile - profile page of the user.
 
--   Core: core module - contains Footer ,Header components and guards.
--   Home: home module - contains Home and TopicCard components.
--   Pages: page module - contains PageNotFound component.
--   Shared: shared module - contains date-transform pipe.
--   Others:
-    -   interfaces - Topic interface.
-    -   services - authService and topicService.
+    -   services - causesService, commentsService and crudService.
+    -   guards - AuthenticatedGuard,UnAuthenticatedGuard, OwnerGuard.
+    -   custom hooks -useChange, useInput, useTitle.
 
-Visitors can see:
+Visitors can:
 
--   Latest topics on home page.
--   All topics on all topics page.
--   Also can searching topics on search page.
--   See additional info for the topic(with hovering on the picture).
 -   Login/Register theirselves.
+-   Recover their password on the forgot password page.
+-   Latest 3 causes and heroes of the month on home page.
+-   All causes on catalog page.
+-   Also can searching causes on search page.
+-   See additional info for the cause(details).
+-   Donate on the donate Page.
+-   See another users profiles.
 
 Registered / Logged-in Users can also:
 
--   Add topics and edit/delete their topics.
--   See all comments; add/delete their comments below each post.
--   Like topic and cancel their likes for the topic.
--   See their own topics(my-topics).
--   Search topics by title.
+-   Create and edit/delete their causes.
+-   See all comments; add, edit, delete their comments below each post.
+-   Join cause and cancel their participation for the cause.
+-   See their own created and joined causes.
+-   See another users profiles and their own profiles.
+-   Search causes by title.
+-   Change their password.
 -   Logout theirselves.
 
 ### General Functionality
 
 -   Authenticate users via Firebase
--   CRUD Topics
--   CR\*D Comments on topics (no updating implemented)
--   GET and display list of topics
--   My Topics
--   Search for keywords in Topic titles
+-   CRUD Causes
+-   CRUD Comments on causes
+-   Join/Cancel Causes
+-   GET and display list of causes
+-   Latest 3 causes
+-   All causes
+-   My causes
+-   Joined causes
+-   Another user profile
+-   My profile
+-   Add, Change profile picture
+-   Change user password
+-   Recover user password
+-   Hero of month
+-   Search for title keywords and display Causes
