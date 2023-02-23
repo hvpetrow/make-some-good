@@ -2,7 +2,9 @@
 
 Make Some Good 2022
 
-![Printscreen-Website](https://github.com/hvpetrow/Angular/blob/main/armwrestlingbook/client/src/assets/Printscreen2.png)
+![Printscreen-Website](https://github.com/hvpetrow/make-some-good/blob/main/src/assets/homePageDocumentation.png)
+![Printscreen-Website](https://github.com/hvpetrow/make-some-good/blob/main/src/assets/photosForDocumentation.png)
+![Printscreen-Website](https://github.com/hvpetrow/make-some-good/blob/main/src/assets/testPhotosForDocumentation2.png)
 
 Web app for users easily share good causes, discuss them and make good things.
 Front-end is built with HTML, CSS, React. For Back-end uses Firebase.
