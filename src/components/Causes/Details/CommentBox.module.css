@@ -38,6 +38,7 @@
     list-style-type: none;
     padding: 0;
     width: 950px;
+    margin-bottom: 50px;
     text-align: center;
 }
 
@@ -95,5 +96,33 @@
     }
     100% {
         transform: rotate(405deg);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .comments-info {
+        max-width: 470px;
+    }
+
+    .noBullet {
+        max-width: 430px;
+    }
+
+    .inputFields {
+        width: 330px !important;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .comments-info {
+        max-width: 470px;
+    }
+
+    .noBullet {
+        max-width: 360px;
+    }
+
+    .inputFields {
+        width: 305px !important;
     }
 }

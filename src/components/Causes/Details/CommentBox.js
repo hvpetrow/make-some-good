@@ -10,7 +10,6 @@ import { Comments } from '../Comments/Comments';
 
 export default function CommentBox({ comments, isShowedComments, setIsShowedComments, storeComments, currentUser, causeId }) {
     const [isLoading, setIsLoading] = useState(false);
-
     const contentInput = useInput(commentValidation.contentIsLength);
 
     const postComment = async () => {
@@ -48,9 +47,9 @@ export default function CommentBox({ comments, isShowedComments, setIsShowedComm
             <div className={styles["comments-info"]}>
                 <ul className={styles["noBullet"]}>
                     {(isShowedComments && !isLoading) &&
-                        (comments.map(c => <Comments key={c.id} id={c.id} comment={c.fields} currentUserId={currentUser.uid} getCommentsByCauseId={getCommentsByCauseId} causeId={causeId} storeComments={storeComments} />))
+                        (comments?.map(c => <Comments key={c.id} id={c.id} comment={c.fields} currentUserId={currentUser?.uid} getCommentsByCauseId={getCommentsByCauseId} causeId={causeId} storeComments={storeComments} />))
                     }
-                    <>
+                    {currentUser && <>
                         <li>
                             <textarea
                                 id="content"
@@ -74,6 +73,7 @@ export default function CommentBox({ comments, isShowedComments, setIsShowedComm
                             </button>
                         </li>
                     </>
+                    }
                 </ul >
             </div >
         </section >

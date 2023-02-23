@@ -62,7 +62,7 @@ const Details = () => {
             ...state,
             isCauseLoading: false
         }));
-    }, [causeId, cause.creator, currentUser.uid]);
+    }, [causeId, cause.creator, currentUser?.uid]);
 
     useEffect(() => {
         if (cause?.creator) {
@@ -173,7 +173,7 @@ const Details = () => {
     return (
 
         <>
-            {!isLoading.isCommentsLoading && !isLoading.isCauseLoading && <section id={styles['details']}>
+            {!isLoading.isCommentsLoading && !isLoading.isCauseLoading && cause && <section id={styles['details']}>
                 <div className={styles['details-ctn']}>
                     <div className={styles['details-card-container']}>
                         <div className={styles['details-grid']}>
@@ -209,8 +209,8 @@ const Details = () => {
                                             Creator:
                                         </span>
                                     </p>
-                                    <Link className={styles['content-profile-link']} to={cause.creator === currentUser.uid ? `/my-profile` : `/foreignProfile/${cause.creator}`}>{creator?.firstName} {creator.lastName}</Link>
-                                    <Link className={styles['content-profile-link']} to={cause.creator === currentUser.uid ? `/my-profile` : `/foreignProfile/${cause.creator}`}>
+                                    <Link className={styles['content-profile-link']} to={cause.creator === currentUser?.uid ? `/my-profile` : `/foreignProfile/${cause.creator}`}>{creator?.firstName} {creator.lastName}</Link>
+                                    <Link className={styles['content-profile-link']} to={cause.creator === currentUser?.uid ? `/my-profile` : `/foreignProfile/${cause.creator}`}>
                                         <img src={profilePicture} className={styles['creator-img']} alt="profileImg"></img>
                                     </Link>
                                 </div>
@@ -299,9 +299,12 @@ const Details = () => {
                         }
                     </div>
                 </div>
-                <button onClick={toggleComments} className={styles['comments_btn']}>
-                    Comments({comments.length})
-                </button>
+                {comments.length ?
+                    <button onClick={toggleComments} className={styles['comments_btn']}>
+                        Comments({comments.length})
+                    </button>
+                    : <Spinner />
+                }
                 <CommentBox comments={comments} isShowedComments={isShowedComments} setIsShowedComments={setIsShowedComments} storeComments={storeComments} currentUser={currentUser} causeId={causeId} />
             </section >}
             {isLoading.isCommentsLoading && (<Spinner />)}

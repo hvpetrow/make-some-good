@@ -181,56 +181,6 @@ a:hover {
     display: none;
 }
 
-@media screen and (max-width: 450px) {
-    nav {
-        max-width: 450px;
-        justify-content: space-between;
-    }
-
-    nav .unlogged-ul {
-        display: flex;
-        gap: 16px;
-    }
-
-    nav .nav-link {
-        margin-right: 0px;
-        margin-left: 0px;
-        display: none;
-    }
-
-    nav .visible-link {
-        display: inline-block;
-    }
-
-    a {
-        padding: 12px 5px 12px 5px;
-    }
-
-    .mobile-menu {
-        display: flex;
-        margin-left: 1rem;
-        padding: 0.5rem;
-    }
-
-    .mobile-nav-link {
-        padding: 8px 2px 8px 2px;
-        font-size: 14px;
-        letter-spacing: 0.08em;
-    }
-
-    .right-side {
-        margin-right: 1rem;
-    }
-
-    .profile {
-        padding: 0.5rem;
-    }
-
-    .dropdown {
-        width: 11rem;
-    }
-}
-
 @media screen and (max-width: 900px) {
     nav {
         max-width: 900px;
@@ -261,7 +211,6 @@ a:hover {
     .mobile-menu {
         display: flex;
         margin-left: 1rem;
-        padding: 1.2rem;
     }
 
     .mobile-nav-link {
@@ -299,5 +248,90 @@ a:hover {
     .dropdown {
         right: 20px;
         top: 75px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .profile-img {
+        width: 3.6rem;
+        height: 3.6rem;
+    }
+
+    .dropdownMenu-svg {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .mobile-nav-link {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 620px) {
+    .dropdownMenu-svg {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .mobile-nav-link {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    nav {
+        max-width: 450px;
+        justify-content: space-between;
+    }
+
+    nav .unlogged-ul {
+        display: flex;
+        gap: 16px;
+    }
+
+    nav .nav-link {
+        margin-right: 0px;
+        margin-left: 0px;
+        display: none;
+    }
+
+    nav .visible-link {
+        display: inline-block;
+    }
+
+    .profile-img {
+        width: 3.3rem;
+        height: 3.3rem;
+    }
+
+    a {
+        padding: 12px 5px 12px 5px;
+    }
+
+    .mobile-menu {
+        display: flex;
+        margin-left: 1rem;
+    }
+
+    .dropdownMenu-svg {
+        width: 2.7rem;
+        height: 2.7rem;
+    }
+
+    .mobile-nav-link {
+        font-size: 15px;
+        letter-spacing: 0.08em;
+        margin-right: unset;
+    }
+
+    .right-side {
+        margin-right: 1rem;
+    }
+
+    .profile {
+        padding: 0.5rem;
+    }
+
+    .dropdown {
+        width: 11rem;
     }
 }

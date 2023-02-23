@@ -21,7 +21,7 @@
 }
 
 #login .content-ctn {
-    width: 31%;
+    width: 20%;
 }
 
 #login .content-ctn .title {
@@ -171,6 +171,28 @@
     color: #2563eb;
 }
 
+@media screen and (max-width: 1650px) {
+    #login .content-ctn {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .create-cause-ctn {
+        max-width: 90%;
+        margin-top: 150px;
+        border-radius: 16px;
+    }
+
+    #login .img-ctn {
+        display: none;
+    }
+
+    #login .content-ctn {
+        width: 50%;
+    }
+}
+
 @media screen and (max-width: 450px) {
     .create-cause-ctn {
         max-width: 90%;
@@ -196,21 +218,5 @@
 
     #login .input-ctn {
         margin-bottom: 1.5rem;
-    }
-}
-
-@media screen and (max-width: 900px) {
-    .create-cause-ctn {
-        max-width: 90%;
-        margin-top: 150px;
-        border-radius: 16px;
-    }
-
-    #login .img-ctn {
-        display: none;
-    }
-
-    #login .content-ctn {
-        width: 50%;
     }
 }

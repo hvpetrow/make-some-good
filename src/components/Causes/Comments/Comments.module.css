@@ -61,7 +61,7 @@
     text-transform: uppercase;
     font-weight: bold;
     width: 70px;
-    padding: 8px;
+    padding: 4px 8px;
     border: 2px solid white;
     cursor: pointer;
     background: #d13746;
@@ -108,4 +108,39 @@
     max-width: 70%;
     resize: auto;
     border-radius: 10px;
+}
+
+@media screen and (max-width: 748px) {
+    .comment {
+        width: 470px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .comment {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .comment {
+        width: 300px;
+    }
+
+    .buttons {
+        gap: 10px;
+        margin-left: -1rem;
+    }
+
+    .delete-btn,
+    .edit-btn,
+    .cancel-btn {
+        font-size: 12px;
+        padding: 4px;
+    }
+
+    .timestamp {
+        font-size: 12px;
+        margin-right: -5px;
+    }
 }
