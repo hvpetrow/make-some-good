@@ -88,7 +88,7 @@ const Login = () => {
                         </div>
                         <div className={styles['btn-ctn']}>
                             <button
-                                disabled={isLoading}
+                                disabled={isLoading || values.email === '' || values.password === ''}
                                 type="submit"
                                 className={styles['btn']}
                                 data-testid='loginBtn'

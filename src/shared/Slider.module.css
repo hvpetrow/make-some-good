@@ -38,3 +38,9 @@
     border-radius: 15px;
     padding-top: 5px;
 }
+
+@media screen and (max-width: 620px) {
+    .actions button {
+        margin: -38px;
+    }
+}

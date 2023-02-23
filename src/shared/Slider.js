@@ -39,6 +39,7 @@ const Slideshow = ({ thumbnail, imgs, causes, users }) => {
     return (
         <div className={styles.slideshow}>
             {/* <img className={styles.mainImg} src={imgs[index]} alt='causeImg' /> */}
+
             {causes &&
                 <CardTemplate key={causes[index].id} id={causes[index].id} cause={causes[index].fields} />
             }

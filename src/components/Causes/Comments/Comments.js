@@ -85,32 +85,33 @@ export const Comments = ({ id, comment, currentUserId, getCommentsByCauseId, cau
             </div>
             <div className={styles["comment-content"]}>
                 <div className={styles["comment"]}>
-                    {(comment.ownerId === currentUserId) &&
-                        !isEdited ? <p>
-                        {comment.content}
-                    </p>
-                        : <textarea
-                            type="text"
-                            name="comment"
-                            id='comment'
-                            className={`${styles['edit-comment_input']} ${commentInput.hasError && styles['error-input-field']}`}
-                            placeholder="Comment"
-                            ref={commentInputRef}
-                            required
-                            value={commentInput.value}
-                            onChange={commentInput.onChange}
-                            onBlur={commentInput.onBlur}
-                            onFocus={(e) => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
-                        />
+                    {(comment.ownerId !== currentUserId)
+                        ? <p>{comment.content}</p>
+                        : !isEdited ? <p>{comment.content}</p>
+                            : <textarea
+                                type="text"
+                                name="comment"
+                                id='comment'
+                                className={`${styles['edit-comment_input']} ${commentInput.hasError && styles['error-input-field']}`}
+                                placeholder="Comment"
+                                ref={commentInputRef}
+                                required
+                                value={commentInput.value}
+                                onChange={commentInput.onChange}
+                                onBlur={() => { commentInput.onBlur(); cancelEdit() }}
+                                onFocus={(e) => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
+                            />
                     }
                     {(commentInput.hasError && isEdited) && <p className={styles['alert']}>Comment must be between 2 and 300 characters!!</p>}
                     <div className={styles["right-side"]}>
                         {(comment.ownerId === currentUserId) &&
-                            !isEdited ? <div className={styles["buttons"]}>
-                            <button onClick={setEdit} className={styles["edit-btn"]} disabled={isLoading}>Edit</button>
-                            <button onClick={deleteHandler} className={styles["delete-btn"]} disabled={isLoading}>Delete</button>
-                        </div>
-                            : <div className={styles["buttons"]}>
+                            !isEdited && <div className={styles["buttons"]}>
+                                <button onClick={setEdit} className={styles["edit-btn"]} disabled={isLoading}>Edit</button>
+                                <button onClick={deleteHandler} className={styles["delete-btn"]} disabled={isLoading}>Delete</button>
+                            </div>
+                        }
+                        {(comment.ownerId === currentUserId) &&
+                            isEdited && <div className={styles["buttons"]}>
                                 <button onClick={updateHandler} className={styles["edit-btn"]} disabled={!commentInput.fieldIsValid || isLoading}>Post</button>
                                 <button onClick={cancelEdit} className={styles["cancel-btn"]}>Cancel</button>
                             </div>
